@@ -1487,6 +1487,64 @@
 
   .tr-finta-avviso{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
     color:var(--testo2);margin:1rem 0 .2rem;padding:.5rem .65rem;background:var(--sup2);border-radius:10px}
+
+  /* ============ AULA PREMIUM — tutto in una schermata ============ */
+  .aula-corpo{height:100%;min-height:0;overflow:hidden;padding:1rem 1.1rem 1.1rem;
+    grid-template-columns:minmax(0,1fr) 410px}
+  .aula-sx{display:flex;flex-direction:column;min-height:0;height:100%}
+  .aula-player{flex:0 0 auto;width:min(100%,calc((100dvh - 21rem)*16/9));height:auto;margin:0 auto}
+  .aula-player::before{content:"";position:absolute;inset:-2px;border-radius:22px;padding:2px;
+    background:var(--anello);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.8;z-index:1}
+  .aula-board{flex:1;min-height:0;display:flex;flex-direction:column;margin-top:1rem;padding-bottom:0}
+  .aula-board::before{content:"";height:2px;border-radius:99px;background:var(--anello);
+    opacity:.55;margin-bottom:.85rem;flex:0 0 auto}
+  .bd-lista{flex:1;min-height:0;overflow:auto;margin-top:.7rem;padding:.15rem .15rem 1rem;
+    overscroll-behavior:contain}
+  .bd-hint{margin-top:.4rem}
+  @media(max-height:760px){.bd-hint{display:none}}
+  .aula-tr{height:100%;max-height:100%}
+  @media(max-width:980px){
+    .aula-corpo{height:auto;overflow:auto;grid-template-columns:1fr}
+    .aula-sx{height:auto;min-height:0}
+    .aula-player{width:100%}
+    .bd-lista{overflow:visible;min-height:0}
+    .aula-tr{height:auto;max-height:none}
+  }
+
+  /* barre di scorrimento sottili, in palette */
+  .tr-corpo::-webkit-scrollbar,.bd-lista::-webkit-scrollbar{width:7px}
+  .tr-corpo::-webkit-scrollbar-thumb,.bd-lista::-webkit-scrollbar-thumb{
+    background:var(--bordo2);border-radius:99px}
+  .tr-corpo::-webkit-scrollbar-track,.bd-lista::-webkit-scrollbar-track{background:transparent}
+  .tr-corpo,.bd-lista{scrollbar-width:thin;scrollbar-color:var(--bordo2) transparent}
+
+  /* ingresso coreografato dell'aula */
+  .st-aula.on .aula-testa{animation:auGiu .45s cubic-bezier(.2,.7,.2,1) both}
+  .st-aula.on .aula-player{animation:auSu .55s .07s cubic-bezier(.2,.7,.2,1) both}
+  .st-aula.on .aula-tr{animation:auDx .6s .13s cubic-bezier(.2,.7,.2,1) both}
+  .st-aula.on .aula-board{animation:auSu .55s .2s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes auGiu{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+  @keyframes auSu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes auDx{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+
+  /* trascrizione che invita alla selezione */
+  .tr-p{border-radius:9px;padding:.12rem .35rem;margin-left:-.35rem;transition:background .25s}
+  .tr-p:hover{background:var(--sup2)}
+  .tr-cap{color:var(--ps,var(--cielo-s))}
+
+  /* schede: vita, atterraggio, hover */
+  .bd-card{transition:transform .22s,box-shadow .22s}
+  .bd-card:hover{transform:translateY(-2px);box-shadow:var(--ombra-alta)}
+  .bd-card.atterra{animation:bdAtterra .9s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes bdAtterra{0%{opacity:0;transform:translateY(14px) scale(.985);
+      box-shadow:0 0 0 0 var(--pf,var(--menta-s))}
+    45%{opacity:1;transform:none;box-shadow:0 0 0 8px transparent}
+    100%{box-shadow:var(--ombra)}}
+  mark.ev.pulsa{animation:evPulsa .8s ease-out both}
+  @keyframes evPulsa{0%{box-shadow:0 0 0 0 var(--menta)}100%{box-shadow:0 0 0 9px transparent}}
+  .ev-float.on{animation:evPop .18s cubic-bezier(.2,.9,.3,1.35) both}
+  @keyframes evPop{from{opacity:0;transform:scale(.9) translateY(5px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -4053,7 +4111,7 @@ function auCardHTML(c,i){
   </div>`;
 }
 function auCresci(ta){ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';}
-function auRenderBoard(foco){
+function auRenderBoard(foco,nuovo){
   const lista=auEl('bd-lista');
   auEl('bd-conta').textContent=AULA.board.length?(AULA.board.length+' '+T('schede','cards')):'';
   if(!AULA.board.length){
@@ -4063,6 +4121,10 @@ function auRenderBoard(foco){
   }
   lista.innerHTML=AULA.board.map(auCardHTML).join('');
   lista.querySelectorAll('.bd-nota').forEach(auCresci);
+  if(typeof nuovo==='number'){
+    const nc=lista.querySelector('[data-bd="'+nuovo+'"]');
+    if(nc){nc.classList.add('atterra');try{nc.scrollIntoView({block:'nearest',behavior:'smooth'});}catch(e){}}
+  }
   if(typeof foco==='number'){
     const ta=lista.querySelector('[data-bd-nota="'+foco+'"]');
     if(ta){ta.focus();}
@@ -4081,6 +4143,7 @@ function apriAula(o){
     tit.textContent=l.t;
     testa.style.cssText=stCol(c.materia);
   }
+  auEl('st-aula').style.cssText=AULA.dive?stCol('dive'):stCol(AULA.corso.materia);
   auCarica();auPlayer(0);auRenderTrans();auRenderBoard();
   const trBox=auEl('aula-tr');
   const stretto=(typeof matchMedia==='function')?matchMedia('(max-width:980px)').matches:false;
@@ -4115,7 +4178,7 @@ auEl('tr-corpo').addEventListener('click',e=>{
 /* board: bottoni e note */
 auEl('bd-nota').addEventListener('click',()=>{
   AULA.board.push({tipo:'nota',testo:'',nota:''});
-  auSalva();auRenderBoard(AULA.board.length-1);
+  auSalva();auRenderBoard(AULA.board.length-1,AULA.board.length-1);
 });
 document.getElementById('bd-lista').addEventListener('input',e=>{
   const ta=e.target.closest('[data-bd-nota]');
@@ -4175,8 +4238,9 @@ auEl('ev-add').addEventListener('click',()=>{
   evPersisti(host);
   const tr=ST_TRANS[auTransKey()];
   const sec=tr&&tr.cap[+host.dataset.cap]?tr.cap[+host.dataset.cap].s:null;
+  mark.classList.add('pulsa');
   AULA.board.push({tipo:'ev',testo:evSelInfo.txt,sec:sec,nota:''});
-  auSalva();auRenderBoard();
+  auSalva();auRenderBoard(undefined,AULA.board.length-1);
   toast(T('Aggiunto alla board.','Added to your board.'));
 });
 auEl('ev-del').addEventListener('click',()=>{
