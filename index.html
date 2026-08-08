@@ -1386,6 +1386,107 @@
     background:linear-gradient(135deg,var(--cielo),var(--lavanda) 60%,var(--rosa))}
   .stsh-player .arte-p b{font-family:var(--font-display);font-weight:600;font-size:1.7rem;color:rgba(32,32,29,.78)}
   html[data-tema="scuro"] .stsh-player .arte-p b{color:rgba(230,227,220,.85)}
+
+  /* ============ AULA — ecosistema di apprendimento ============ */
+  .st-aula{position:fixed;inset:0;z-index:80;background:var(--bg);display:none;flex-direction:column}
+  .st-aula.on{display:flex}
+  .aula-testa{display:flex;align-items:center;gap:.85rem;padding:.65rem 1.1rem;
+    background:var(--vetro);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--bordo);flex:0 0 auto}
+  .aula-indietro{display:flex;align-items:center;gap:.45rem;border:1px solid var(--bordo2);
+    background:var(--sup);border-radius:99px;padding:.42rem .85rem;font-size:.8rem;font-weight:600;color:var(--testo)}
+  .aula-indietro:hover{transform:translateY(-1px)}
+  .aula-titoli{min-width:0;flex:1}
+  .aula-titoli .kick{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ps,var(--menta-s))}
+  .aula-titoli .tit{font-family:var(--font-display);font-weight:600;font-size:1.02rem;letter-spacing:-.02em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .aula-corpo{flex:1;overflow:auto;width:100%;max-width:1280px;margin:0 auto;padding:1.1rem;
+    display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:1.1rem;align-items:start}
+  @media(max-width:980px){.aula-corpo{grid-template-columns:1fr}}
+  .aula-player{aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#0D0C0A;
+    box-shadow:var(--ombra-alta);position:relative}
+  .aula-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* trascrizione — pannello a destra, chiudibile */
+  .aula-tr{background:var(--sup);border-radius:20px;box-shadow:var(--ombra);overflow:hidden;
+    position:sticky;top:0;max-height:calc(100dvh - 8.2rem);display:flex;flex-direction:column}
+  @media(max-width:980px){.aula-tr{position:static;max-height:none}}
+  .tr-testa{display:flex;align-items:center;gap:.6rem;padding:.95rem 1.15rem;border:0;
+    background:transparent;text-align:left;width:100%}
+  .tr-testa .eti{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.24em;
+    text-transform:uppercase;font-weight:700;color:var(--testo)}
+  .tr-testa .fonte{margin-left:auto;font-size:.62rem;color:var(--testo2);font-family:var(--font-mono);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:50%}
+  .tr-frec{flex:0 0 auto;transition:transform .3s;color:var(--testo2)}
+  .aula-tr.chiusa .tr-frec{transform:rotate(-90deg)}
+  .aula-tr.chiusa .tr-corpo{display:none}
+  .tr-corpo{overflow:auto;padding:0 1.2rem 1.3rem;font-family:var(--font-lettura);
+    font-size:.93rem;line-height:1.78;overscroll-behavior:contain}
+  .tr-cap{margin:1.25rem 0 .6rem;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--cielo-s);display:flex;align-items:baseline;gap:.55rem;
+    cursor:pointer;border:0;background:transparent;padding:0;text-align:left;width:100%}
+  .tr-cap:hover b{text-decoration:underline;text-underline-offset:3px}
+  .tr-cap .tt{flex:0 0 auto;opacity:.75}
+  .tr-p{margin:0 0 .9rem}
+  .tr-p::selection,.tr-p *::selection{background:var(--cielo);color:var(--testo)}
+  mark.ev{background:var(--menta);color:var(--testo);border-radius:3px;padding:0 .12em;
+    box-decoration-break:clone;-webkit-box-decoration-break:clone;cursor:pointer}
+  .tr-vuoto{padding:1.3rem 0 .4rem;color:var(--testo2);font-family:var(--font-sans);font-size:.85rem;line-height:1.7}
+  .tr-vuoto b{color:var(--testo)}
+  .tr-vuoto button{border:1px solid var(--bordo2);background:var(--sup2);border-radius:99px;
+    padding:.4rem .8rem;font-size:.78rem;font-weight:600;color:var(--testo);margin-top:.7rem}
+  .tr-vuoto button:hover{transform:translateY(-1px)}
+
+  /* evidenziatore galleggiante */
+  .ev-float{position:fixed;z-index:95;display:none;gap:.15rem;background:var(--testo);color:var(--bg);
+    border-radius:99px;padding:.3rem .45rem;box-shadow:var(--ombra-alta);align-items:center}
+  .ev-float.on{display:flex}
+  .ev-float button{border:0;background:transparent;color:inherit;display:flex;gap:.4rem;align-items:center;
+    font-size:.78rem;font-weight:700;padding:.3rem .6rem;border-radius:99px}
+  .ev-float button:hover{background:rgba(255,255,255,.14)}
+  .ev-float svg{width:.95rem;height:.95rem;fill:none;stroke:currentColor;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round}
+  .ev-float .sep{width:1px;height:1.05rem;background:currentColor;opacity:.25}
+  .ev-float #ev-del{display:none}
+  .ev-float.puo-rim #ev-del,.ev-float.puo-rim .sep{display:flex}
+  .ev-float:not(.puo-rim) .sep{display:none}
+
+  /* board */
+  .aula-board{margin-top:1.15rem;padding-bottom:2rem}
+  .bd-testa{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+  .bd-conta{font-family:var(--font-mono);font-size:.66rem;color:var(--testo2)}
+  .bd-btn{display:flex;align-items:center;gap:.4rem;border:1px solid var(--bordo2);background:var(--sup);
+    border-radius:99px;padding:.4rem .8rem;font-size:.76rem;font-weight:600;color:var(--testo)}
+  .bd-btn:hover{transform:translateY(-1px);box-shadow:var(--ombra)}
+  .bd-btn:first-of-type{margin-left:auto}
+  .bd-btn svg{width:.9rem;height:.9rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .bd-hint{font-size:.76rem;color:var(--testo2);margin:.5rem 0 0;max-width:60ch;line-height:1.6}
+  .bd-lista{margin-top:.85rem;display:flex;flex-direction:column;gap:.75rem}
+  .bd-card{background:var(--sup);border-radius:18px;box-shadow:var(--ombra);padding:.85rem 1rem .9rem;
+    border-left:3px solid var(--pf,var(--menta-s));animation:stnasce .4s cubic-bezier(.2,.7,.2,1) both}
+  .bd-capo{display:flex;align-items:center;gap:.55rem;margin-bottom:.4rem}
+  .bd-tempo{font-family:var(--font-mono);font-size:.64rem;border:0;background:var(--sup2);
+    border-radius:99px;padding:.22rem .55rem;color:var(--testo2);cursor:pointer}
+  .bd-tempo:hover{color:var(--testo)}
+  .bd-fonte{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--testo2)}
+  .bd-x{margin-left:auto;border:0;background:transparent;color:var(--testo2);font-size:.8rem;
+    width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center}
+  .bd-x:hover{background:var(--sup2);color:var(--testo)}
+  .bd-quote{font-family:var(--font-lettura);font-size:.95rem;line-height:1.6;color:var(--testo)}
+  .bd-quote::before{content:"\u201C";font-family:var(--font-display);color:var(--pf,var(--menta-s));margin-right:.15em}
+  .bd-quote::after{content:"\u201D";font-family:var(--font-display);color:var(--pf,var(--menta-s));margin-left:.12em}
+  .bd-nota{width:100%;border:0;background:var(--sup2);border-radius:12px;margin-top:.6rem;
+    padding:.6rem .75rem;font-family:var(--font-sans);font-size:.85rem;line-height:1.55;resize:none;
+    min-height:2.5rem;color:var(--testo);display:block}
+  .bd-nota:focus{outline:2px solid var(--pf,var(--menta-s));outline-offset:1px}
+  .bd-card.nota .bd-nota{margin-top:0;background:transparent;padding:.1rem 0;font-size:.92rem;min-height:3rem}
+  .bd-vuota{border:1.5px dashed var(--bordo2);border-radius:18px;padding:1.6rem 1.2rem;text-align:center;
+    color:var(--testo2);font-size:.84rem;line-height:1.65}
+  .bd-vuota .segno{font-family:var(--font-display);font-size:1.6rem;color:var(--testo2);opacity:.6}
+
+  .tr-finta-avviso{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--testo2);margin:1rem 0 .2rem;padding:.5rem .65rem;background:var(--sup2);border-radius:10px}
 </style>
 </head>
 <body>
@@ -1514,6 +1615,45 @@
 </section>
 <div class="st-velo" id="st-velo"></div>
 <div class="st-sheet" id="st-sheet" role="dialog" aria-modal="true" aria-label="Course"></div>
+
+<div class="st-aula" id="st-aula" role="dialog" aria-modal="true" aria-label="Lesson">
+  <div class="aula-testa">
+    <button class="aula-indietro" id="aula-indietro">← <span data-it="Corso" data-en="Course">Corso</span></button>
+    <div class="aula-titoli">
+      <div class="kick" id="aula-kick"></div>
+      <div class="tit" id="aula-tit"></div>
+    </div>
+    <button class="stsh-x" id="aula-x" aria-label="Close">✕</button>
+  </div>
+  <div class="aula-corpo">
+    <div class="aula-sx">
+      <div class="aula-player" id="aula-player"></div>
+      <div class="aula-board">
+        <div class="bd-testa">
+          <span class="st-eti" style="--pf:var(--menta-s);margin:0"><i></i><b data-it="La tua board" data-en="Your board">La tua board</b></span>
+          <span class="bd-conta" id="bd-conta"></span>
+          <button class="bd-btn" id="bd-nota"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-it="Nota" data-en="Note">Nota</span></button>
+          <button class="bd-btn" id="bd-stampa"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg><span data-it="Stampa / PDF" data-en="Print / PDF">Stampa / PDF</span></button>
+        </div>
+        <p class="bd-hint" data-it="Evidenzia le parole nella trascrizione e atterrano qui come schede, con lo spazio per i tuoi appunti. Puoi anche aggiungere note libere senza evidenziare nulla — tutto si salva da solo su questo dispositivo." data-en="Highlight words in the transcription and they land here as cards, each with room for your own notes. You can also add free notes without highlighting anything — everything saves itself on this device.">Evidenzia le parole nella trascrizione e atterrano qui come schede.</p>
+        <div class="bd-lista" id="bd-lista"></div>
+      </div>
+    </div>
+    <aside class="aula-tr" id="aula-tr">
+      <button class="tr-testa" id="tr-testa" aria-expanded="true">
+        <span class="eti">Transcription</span>
+        <span class="fonte" id="tr-fonte"></span>
+        <span class="tr-frec">▾</span>
+      </button>
+      <div class="tr-corpo" id="tr-corpo"></div>
+    </aside>
+  </div>
+</div>
+<div class="ev-float" id="ev-float">
+  <button id="ev-add"><svg viewBox="0 0 24 24"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4l8 8Z"/></svg><span data-it="Evidenzia" data-en="Highlight">Evidenzia</span></button>
+  <span class="sep"></span>
+  <button id="ev-del"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span data-it="Rimuovi" data-en="Remove">Rimuovi</span></button>
+</div>
 
 <!-- ============ NEWS ============ -->
 <section class="pannello" id="p-news" role="tabpanel">
@@ -3342,6 +3482,87 @@ document.addEventListener('click',e=>{
   if(!e.target.closest('#lang-box')) document.getElementById('lang-menu').hidden=true;
 });
 
+const ST_TRANS={
+ "psyc110:1": {
+  "fonte": "Open Yale Courses \u00b7 CC BY-NC-SA 3.0",
+  "cap": [
+   {
+    "t": "The Brain, the Mind and Dualism",
+    "s": 0,
+    "par": [
+     "Professor Paul Bloom: We're going to begin the class proper, Introduction to Psychology, with a discussion about the brain. And, in particular, I want to lead off the class with an idea that the Nobel Prize winning biologist, Francis Crick, described as \"The Astonishing Hypothesis.\" And The Astonishing Hypothesis is summarized like this. As he writes, The Astonishing Hypothesis is that: You, your joys and your sorrows, your memories and your ambitions, your sense of personal identity and free will are in fact no more than the behavior of a vast assembly of nerve cells and their associated molecules. As Lewis Carroll's Alice might have phrased it, \"you're nothing but a pack of neurons.\"",
+     "It is fair to describe this as astonishing. It is an odd and unnatural view and I don't actually expect people to believe it at first. It's an open question whether you'll believe it when this class comes to an end, but I'd be surprised if many of you believe it now. Most people don't. Most people, in fact, hold a different view. Most people are dualists. Now, dualism is a very different doctrine. It's a doctrine that can be found in every religion and in most philosophical systems throughout history. It was very explicit in Plato, for instance.",
+     "But the most articulate and well-known defender of dualism is the philosopher Rene Descartes, and Rene Descartes explicitly asked a question, \"Are humans merely physical machines, merely physical things?\" And he answered, \"no.\" He agreed that animals are machines. In fact, he called them \"beast machines\" and said animals, nonhuman animals are merely robots, but people are different. There's a duality of people. Like animals, we possess physical material bodies, but unlike animals, what we are is not physical. We are immaterial souls that possess physical bodies, that have physical bodies, that reside in physical bodies, that connect to physical bodies. So, this is known as dualism because the claim is, for humans at least, there are two separate things; there's our material bodies and there's our immaterial minds.",
+     "Now, Descartes made two arguments for dualism. One argument involved observations of a human action. So, Descartes lived in a fairly sophisticated time, and his time did have robots. These were not electrical robots, of course. They were robots powered by hydraulics. So, Descartes would walk around the French Royal Gardens and the French Royal Gardens were set up like a seventeenth-century Disneyland. They had these characters that would operate according to water flow and so if you stepped on a certain panel, a swordsman would jump out with a sword. If you stepped somewhere else, a bathing beauty would cover herself up behind some bushes. And Descartes said, \"Boy, these machines respond in certain ways to certain actions so machines can do certain things and, in fact,\" he says, \"our bodies work that way too. If you tap somebody on the knee, your leg will jump out. Well, maybe that's what we are.\" But Descartes said that can't be because there are things that humans do that no machine could ever do. Humans are not limited to reflexive action. Rather, humans are capable of coordinated, creative, spontaneous things. We can use language, for instance, and sometimes my use of language can be reflexive. Somebody says, \"How are you?\" And I say, \"I am fine. How are you?\" But sometimes I could say what I choose to be, \"How are you?\" \"Pretty damn good.\" I can just choose. And machines, Descartes argued, are incapable of that sort of choice. Hence, we are not mere machines.",
+     "The second argument is, of course, quite famous and this was the method. This he came to using the method of doubt. So, he started asking himself the question, \"What can I be sure of?\" And he said, \"Well, I believe there's a God, but honestly, I can't be sure there's a God. I believe I live in a rich country but maybe I've been fooled.\" He even said, \"I believe I have had friends and family but maybe I am being tricked. Maybe an evil demon, for instance, has tricked me, has deluded me into thinking I have experiences that aren't real.\" And, of course, the modern version of this is The Matrix.",
+     "The idea of The Matrix is explicitly built upon Cartesian \u2014 Descartes' worries about an evil demon. Maybe everything you're now experiencing is not real, but rather is the product of some other, perhaps malevolent, creature. Descartes, similarly, could doubt he has a body. In fact, he noticed that madmen sometimes believe they have extra limbs or they believe they're of different sizes and shapes than they really are and Descartes said, \"How do I know I'm not crazy? Crazy people don't think they're crazy so the fact that I don't think I'm crazy doesn't mean I'm not crazy. How do I know,\" Descartes said, \"I'm not dreaming right now?\" But there is one thing, Descartes concluded, that he cannot doubt, and the answer is he cannot doubt that he is himself thinking. That would be self-refuting. And so, Descartes used the method of doubt to say there's something really different about having a body that's always uncertain from having a mind. And he used this argument as a way to support dualism, as a way to support the idea that bodies and minds are separate. And so he concluded, \"I knew that I was a substance, the whole essence or nature of which is to think, and that for its existence, there is no need of any place nor does it depend on any material thing. That is to say, the soul by which I am, when I am, is entirely distinct from body.\"",
+     "Now, I said before that this is common sense and I want to illustrate the common sense nature of this in a few ways. One thing is our dualism is enmeshed in our language. So, we have a certain mode of talking about things that we own or things that are close to us \u2013 my arm, my heart, my child, my car \u2013 but we also extend that to my body and my brain. We talk about owning our brains as if we're somehow separate from them. Our dualism shows up in intuitions about personal identity. And what this means is that common sense tells us that somebody can be the same person even if their body undergoes radical and profound changes. The best examples of this are fictional. So, we have no problem understanding a movie where somebody goes to sleep as a teenager and wakes up as Jennifer Garner, as an older person. Now, nobody says, \"Oh, that's a documentary. I believe that thoroughly true\" but at the same time nobody, no adult, no teenager, no child ever leaves and says, \"I'm totally conceptually confused.\" Rather, we follow the story. We can also follow stories which involve more profound transformations as when a man dies and is reborn into the body of a child.",
+     "Now, you might have different views around \u2014 People around this room will have different views as to whether reincarnation really exists, but we can imagine it. We could imagine a person dying and then reemerging in another body. This is not Hollywood invention. One of the great short stories of the last century begins with a sentence by Franz Kafka: \"As Gregor Samsa woke one morning from uneasy dreams, he found himself transformed in his bed into a gigantic insect.\" And again, Kafka invites us to imagine waking up into a body of a cockroach and we can. This is also not modern. Hundreds of years before the birth of Christ, Homer described the fate of the companions of Odysseus who were transformed by a witch into pigs. Actually, that's not quite right. She didn't turn them into pigs. She did something worse. She stuck them in the bodies of pigs. They had the head and voice and bristles and body of swine but their minds remained unchanged as before, so they were penned there weeping. And we are invited to imagine the fate of again finding ourselves in the bodies of other creatures and, if you can imagine this, this is because you are imagining what you are as separate from the body that you reside in.",
+     "We allow for the notion that many people can occupy one body. This is a mainstay of some slapstick humor including the classic movie, All of Me \u2014 Steve Martin and Lily Tomlin \u2013 highly recommended. But many people think this sort of thing really happens. One analysis of multiple personality disorder is that you have many people inside a single body fighting it out for control. Now, we will discuss multiple personality disorder towards the end of the semester and it turns out things are a good deal more complicated than this, but still my point isn't about how it really is but how we think about it. Common sense tells us you could have more than one person inside a single body. This shows up in a different context involving exorcisms where many belief systems allow for the idea that people's behavior, particularly their evil or irrational behavior, could be because something else has taken over their bodies.",
+     "Finally, most people around the world, all religions and most people in most countries at most times, believe that people can survive the destruction of their bodies. Now, cultures differ according to the fate of the soul. Some cultures have you going to Heaven or descending to Hell. Others have you occupying another body. Still, others have you occupying an amorphous spirit world. But what they share is the idea that what you are is separable from this physical thing you carry around. And the physical thing that you carry around can be destroyed while you live on. These views are particularly common in the United States. In one survey done in Chicago a few years ago, people were asked their religion and then were asked what would happen to them when they died. Most people in the sample were Christian and about 96% of Christians said, \"When I die I'm going to go to Heaven.\" Some of the sample was Jewish. Now, Judaism is actually a religion with a less than clear story about the afterlife. Still, most of the subjects who identified themselves as Jewish said when they die they will go to Heaven. Some of the sampled denied having any religion at all \u2014 said they have no religion at all. Still, when these people were asked what would happen when they would die, most of them answered, \"I'm going to go to Heaven.\""
+    ]
+   },
+   {
+    "t": "Scientific Consensus against Dualism",
+    "s": 726,
+    "par": [
+     "So, dualism is emmeshed. A lot rests on it but, as Crick points out; the scientific consensus now is that dualism is wrong. There is no \"you\" separable or separate from your body. In particular, there is no \"you\" separable from your brain. To put it the way cognitive scientists and psychologists and neuroscientists like to put it, \"the mind is what the brain does.\" The mind reflects the workings of the brain just like computation reflects the working of a computer. Now, why would you hold such an outrageous view? Why would you reject dualism in favor of this alternative? Well, a few reasons. One reason is dualism has always had its problems. For one thing, it's a profoundly unscientific doctrine. We want to know as curious people how children learn language, what we find attractive or unattractive, and what's the basis for mental illness. And dualism simply says, \"it's all nonphysical, it's part of the ether,\" and hence fails to explain it.",
+     "More specifically, dualists like Descartes struggle to explain how a physical body connects to an immaterial soul. What's the conduit? How could this connection be made? After all, Descartes knew full well that there is such a connection. Your body obeys your commands. If you bang your toe or stub your toe you feel pain. If you drink alcohol it affects your reasoning, but he could only wave his hands as to how this physical thing in the world could connect to an immaterial mind.",
+     "Descartes, when he was alive, was reasonable enough concluding that physical objects cannot do certain things. He was reasonable enough in concluding, for instance, as he did, that there's no way a merely physical object could ever play a game of chess because such a capacity is beyond the capacity of the physical world and hence you have to extend the explanation to an immaterial soul but now we know \u2014 we have what scientists call an existence proof. We know physical objects can do complicated and interesting things. We know, for instance, machines can play chess. We know machines can manipulate symbols. We know machines have limited capacities to engage in mathematical and logical reasoning, to recognize things, to do various forms of computations, and this makes it at least possible that we are such machines. So you can no longer say, \"Look. Physical things just can't do that\" because we know physical things can do a lot and this opens up the possibility that humans are physical things, in particular, that humans are brains.",
+     "Finally, there is strong evidence that the brain is involved in mental life. Somebody who held a dualist view that said that what we do and what we decide and what we think and what we want all have nothing to do with the physical world, would be embarrassed by the fact that the brain seems to correspond in intricate and elaborate ways to our mental life. Now, this has been known for a long time. Philosophers and psychologists knew for a long time that getting smacked in the head could change your mental faculties; that diseases like syphilis could make you deranged; that chemicals like caffeine and alcohol can affect how you think. But what's new is we can now in different ways see the direct effects of mental life.",
+     "Somebody with a severe and profound loss of mental faculties \u2014 the deficit will be shown correspondingly in her brain. Studies using imaging techniques like CAT scans, PET, and fMRI, illustrate that different parts of the brain are active during different parts of mental life. For instance, the difference between seeing words, hearing words, reading words and generating words can correspond to different aspects of what part of your brain is active. To some extent, if we put you in an fMRI scanner and observed what you're doing in real time, by looking at the activity patterns in your brain we can tell whether you are thinking about music or thinking about sex. To some extent we can tell whether you're solving a moral dilemma versus something else. And this is no surprise if what we are is the workings of our physical brains, but it is extremely difficult to explain if one is a dualist.",
+     "Now, so what you have is \u2014 the scientific consensus is that all of mental life including consciousness and emotions and choice and morality are the products of brain activities. So, you would expect that when you rip open the skull and look at the brain; you'd see something glorious, you'd see \u2013 I don't know \u2013 a big, shiny thing with glass tubes and blinding lights and sparks and wonderful colors. And actually though, the brain is just disgusting. It looks like an old meat loaf. It's gray when you take it out of the head. It's called gray matter but that's just because it's out of the head. Inside the head it's bright red because it's pulsing with blood. It doesn't even taste good.",
+     "So, the question is, \"How can something like this give rise to us?\" And you have to have some sympathy for Descartes. There's another argument Descartes could have made that's a lot less subtle than the ones he did make, which is \"That thing responsible for free will and love and consciousness? Ridiculous.\" What I want to do, and what the goal of neuroscience is, is to make it less ridiculous, to try to explain how the brain works, how the brain can give rise to thought, and what I want to do today is take a first stab at this question but it's something we'll continue to discuss throughout the course as we talk about different aspects of mental life. What I want to do though now is provide a big picture. So, what I want to do is start off small, with the smallest interesting part of the brain and then get bigger and bigger and bigger \u2013 talk about how the small part of the brain, the neurons, the basic building blocks of thought, combine to other mental structures and into different subparts of the brain and finally to the whole thing."
+    ]
+   },
+   {
+    "t": "The Neuron: The Basic Building Blocks of Thought",
+    "s": 1168,
+    "par": [
+     "So, one of the discoveries of psychology is that the basic unit of the brain appears to be the neuron. The neuron is a specific sort of cell and the neuron has three major parts. Neurons actually look quite different from one another but this is a typical one. There are the dendrites \u2013 these little tentacles here. And the dendrites get signals from other neurons. Now, these signals can be either excitatory, which is that they raise the likelihood the neuron will fire, or inhibitory in that they lower the likelihood that the neuron will fire. The cell body sums it up and you could view it arithmetically. The excitatory signals are pluses, the inhibitory ones are minuses. And then if you get a certain number, plus 60 or something, the neuron will fire and it fires along the axon. The axon is much longer than the dendrites and, in fact, some axons are many feet long. There's an axon leading from your spinal cord to your big toe for instance.",
+     "Surrounding the axon is a myelin sheath, which is actually just insulation. It helps the firing work quicker. So, here are some facts about neurons. There are a lot of them \u2013 about one thousand billion of them \u2013 and each neuron can be connected to around thousands, perhaps tens of thousands, other neurons. So, it's an extraordinarily complicated computing device. Neurons come in three flavors. There are sensory neurons, which take information from the world so as you see me, for instance, there are neurons firing from your retina sending signals to your brain. There are motor neurons. If you decide to raise your hand, those are motor neurons telling the muscles what to do. And there are interneurons which connect the two. And basically, the interneurons do the thinking. They make the connection between sensation and action.",
+     "It used to be believed that neurons do not grow back once you lose them. You never get them back. This is actually not true. There are parts of the brain in which neurons can re-grow. One interesting thing about neurons is a neuron is like a gun. It either fires or it doesn't. It's all or nothing. If you squeeze the trigger of a gun really hard and really fast, it doesn't fire any faster or harder than if you just squeezed it gently. Now, this seems to be strange. Why? How could neurons be all or nothing when sensation is very graded? Degrees of pushing, degrees of heat, degrees of brightness. And the answer is, although neurons are all or nothing, there are ways to code intensity. So, one simple way to code intensity is the number of neurons firing; the more neurons the more intense. Another way to increase intensity is the frequency of firing.",
+     "Now, neurons are connected and they talk to one another and it used to be thought they were tied to one another like a computer, like you take wires and you connect wires to each other. It turns out this isn't the case. It turns out that neurons relate to one another chemically in a kind of interesting way. Between any neurons, between the axon of one neuron and the dendrite of another, there's a tiny gap. The gap could be about one ten-thousandths of a millimeter wide. This gap is known as a synapse \u2014 and what happens is when a neuron fires, an axon sends chemicals shooting through the gap. These chemicals are known as neurotransmitters and they affect the dendrites. So, neurons communicate to one another chemically. Again, the chemicals could excite the other neuron (excitatory), bring up the chances it will fire, or inhibit the other neuron (inhibitory).",
+     "Now, neurotransmitters become interesting because a lot of psychopharmacology, both of the medical sort and the recreational sort, consists of fiddling with neurotransmitters. There are two sorts of ways you could fiddle with neurotransmitters, and correspondingly two sorts of drugs. There are agonists. And what an agonist does is increases the effect of neurotransmitters, either by making more neurotransmitters or stopping the cleanup of neurotransmitters, or in some cases by faking a neurotransmitter, by mimicking its effects. Then, there are antagonists that slow down the amount of neurotransmitters, either because they destroy neurotransmitters or they make it hard to create more. Or in some cases they go to the dendrite of the neuron and they kind of put a paste over it so that the neurotransmitters can't connect. And it's through these clever ways that neurons can affect your mental life.",
+     "So, for instance, there is a drug known as Curare and Curare is an antagonist. It's a very particular sort of antagonist. It blocks motor neurons from affecting muscle fibers. What this does then is it paralyzes you because your motor neurons \u2014 You send the command to your arm to lift up. It doesn't work. You send the command to your leg to move. It doesn't work. The motor neurons are deactivated and then, because the way you breathe is through motor neurons, you then die.",
+     "There's alcohol. Alcohol is inhibitory. Now, this may be puzzling to people. It's mildly paradoxical because you may be thinking, \"alcohol is not inhibitory. On the contrary, when I drink a lot of alcohol I lose my inhibitions and become a more fun person.\" Well, the answer is it inhibits the inhibitory parts of your brain. So, you have parts of your brain, largely in the frontal lobes, that are \u2014 \"Okay. Keep your pants on. Don't hit me, buddy. Don't use bad words.\" Alcohol relaxes, shuts down those parts of the brain. If you take enough alcohol, it then goes down to inhibit the excitatory parts of your brain and then you fall on the floor and pass out.",
+     "Amphetamines increase the amount of arousal. In particular, they increase the amount of norepinephrine, a neurotransmitter that's responsible for just general arousal. And so, amphetamines include drugs like \"speed\" and \"coke.\" Prozac works on serotonin. When we discuss clinical psychology and depression we'll learn the extent to which neurotransmitter disorders are implicated in certain disorders like depression. And one problem for depression is that there's too little of a neurotransmitter known as serotonin. Prozac makes serotonin more prevalent and so to some extent might help alleviate depression. Parkinson's disease is a disease involving destruction of motor control and loss of motor control, difficulty moving. And one factor in Parkinson's is too little of a neurotransmitter known as dopamine. The drug L-DOPA increases the supply of dopamine and so there is something to alleviate, at least temporarily, the symptoms of Parkinson's.",
+     "So, you have neurons and they're clustered together and they fire and they communicate to one another. So, how does this all work to give rise to creatures who could do interesting things like talk and think? Well, again, it used to be believed that the brain is wired up like a computer, like a PC or a Mac, but we know this can't be true. It can't be true because there's two ways in which the brain is better than a computer. For one thing, the brain is highly resistant to damage. You can take a lot of brain damage and still preserve some mental functioning. To some interesting sense, there's some sort of damage resistance built in to the brain that allows different parts of the brain to take over if some parts are damaged.",
+     "A second consideration is the brain is extremely fast. Your computer works on wires and electricity but your brain uses tissue and tissue is extremely slow. The paradox then is how do you create such a fast computer with such slow stuff? And you can't. If the brain was wired up like a personal computer, it would take you four hours to recognize a face but, in fact, we could do things extremely quickly. So, the question then is how is the brain wired up? And the answer is, unlike commercially generated computers, the brain works through parallel processing, massively parallel distributed processing.",
+     "There's a whole lot of research, some of which takes place outside psychology departments and in engineering departments and computer science departments, trying to figure out how a computer can do the same things brains can do. And one way people do this is they take a hint from nature and they try to construct massively distributed networks to do aspects of reasoning. This is often known as neural networks. And people who study this often claim to be studying neural network modeling to try to build smart machines by modeling them after brains. And in the last 20 years or so, this has been a huge and vibrant area of study where people are trying to wire up machines that can do brain-like things from components that look a lot like neurons and are wired up together as neurons are. One consideration in all of this is that this is a very young field and nobody knows how to do it yet. The human brain is wired up in an extraordinarily more complicated way than any sort of simple neural network. So, the brain is a complicated system."
+    ]
+   },
+   {
+    "t": "The Different Parts of the Brain",
+    "s": 1978,
+    "par": [
+     "Now let's talk a little bit about different parts of the brain. Now, there's some things you don't actually need your brain to do. You don't need your brain for newborn sucking, limb flexation in withdrawal from pain. Your limbs will pull back even if your head is gone. Vomiting also is done without a brain. So your brain isn't needed for everything.",
+     "What does your brain do? Well, some things that your brain does involve very low-level internal structures. And these are called subcortical structures because they're below the cortex. The medulla, for instance, is responsible for heart rate and respiration. It's very deep within the brain and if it gets damaged you are likely to die. The cerebellum is responsible for body balance and muscular coordination. And to give you, again, a feeling for the complexity of these systems, the cerebellum contains approximately 30 billion neurons. The hypothalamus is responsible for feeding, hunger, thirst, and to some extent sleep.",
+     "Now, all of these parts of the brains are essential and many of them are implicated in interesting psychological processes but where the action is is the cortex. The cortex is the outer layer and the outer layer is all crumpled up. Do you ever wonder why your brain looks wrinkled? That's because it's all crumpled. If you took out somebody's cortex and flattened it out, it would be two feet square, sort of like a rug. And the cortex is where all the neat stuff takes place. Fish don't have any of that, so no offense to fish but fish don't have much of a mental life. Reptiles and birds have a little bit of it and primates have a lot and humans have a real lot. Eighty percent of the volume of our brain, about, is cortex. And the cortex can be broken up into different parts or lobes. There is the frontal lobe, easy to remember, this part in front, the parietal lobe, the occipital lobe, and the temporal lobe.",
+     "And one theme we're going to return to is \u2014 this is half the brain, the left half of the brain. On the other half, the right half, everything's duplicated with some slight and subtle differences. One really weird finding about these lobes is that they include topographical maps. They include maps of your body. It took Dr. Penfield at McGill University to show this with people. They were doing some brain surgery \u2014 you could do brain surgery while fully conscious because the brain itself has no sense organs \u2014 and he started zapping different parts, and \"boom\", parts of their body would move. More than that, when he zapped other parts of the brain, people would claim to see colors, to hear sounds, to experience touch. And through his research and other research, it was found that there are maps in the brain of the body: a map in the motor part of the brain, the motor cortex, and one in the sensory cortex.",
+     "Now, two things to notice about these maps. The first is they're topographical and what this means is that if two parts are close together on the body, they'll be close together on the brain. So, your tongue is closer to your jaw than it is to your hip in the body; so too in both the motor cortex and the somatosensory cortex. Also, you'll notice that the size of the body part represented in the brain does not correspond to the size of the body part in the real world. Rather, what determines the size in the brain is the extent to which either they have motor command over it or sensory control. So, there's a whole lot of sensory organs, for instance, focused along your tongue, and that's why that's so big, and an enormous amount on your face but your shoulder doesn't even make it on there.",
+     "Now, so, you have these maps in your head but the thing to realize is that's an important part of what goes on in your brain but less than one quarter of the cortex contains these maps or projection areas. The rest is involved in language and reasoning and moral thought and so on. So, how do we figure out what the other parts of the brain do? Well, there's all sorts of methods. Typically, these are recent imaging methods like CAT scan and PET scan and fMRI which show parts of your brain at work. If you want to know which part of your brain is responsible for language, you could put somebody into a scanner and have them do a linguistic task and then see what parts of their brain are active.",
+     "Another way to explore what the brain does is to consider what happens to people when very bad things happen to their brain. And these bad things could happen through lesions, through tumors, through strokes, through injury. And the logic is if you find somebody with damage to this part of the brain right here and that person can't recognize faces for instance, there's some reason to believe that this part of the brain is related to face recognition.",
+     "And so, from the study of brain damage we can gain some understanding of what different parts of the brain do. People study brain damage that implicates motor control such as apraxia. And what's interesting about apraxia is it's not paralysis. Somebody with apraxia can do simple movements just fine but they can't coordinate their movements. They can't do something like wave goodbye or light a cigarette. There is agnosia, a disorder which isn't blindness because the person could still see perfectly well. Their eyes are intact but rather what happens in agnosia is they lose the ability to recognize certain things. Sometimes this is described as psychic blindness. They may get visual agnosia and lose the ability to recognize objects. They may get prosopagnosia and lose the ability to recognize faces.",
+     "There are disorders of language like aphasia. The classic case was discovered by Paul Broca in 1861. A patient who had damage to part of his brain could only say one word, \"tan,\" and the person would say, \"tan, tan, tan, tan,\" and everything else was gone. There's other disorders of language such as receptive aphasia where the person could speak very fluently but the words don't make any sense and they can't understand anybody else. Other disorders that we'll discuss later on include acquired psychopathy, where damage to parts of your brain, particularly related to the frontal lobes, rob you of the ability to tell right from wrong."
+    ]
+   },
+   {
+    "t": "Mechanist Conception and the Hard Problem of Consciousness",
+    "s": 2687,
+    "par": [
+     "I want to end by talking about the two halves of the brain and ask the question, \"How many minds do you have?\" Now, if you took the brain out and held it up, it would look pretty symmetrical, but it actually is not. There are actual differences between the right hemisphere and the left hemisphere. Those of you who are right-handed, which comprises about nine out of ten people, have language in your left hemisphere. Those of you who are left-handed are more complicated. Some of you have language in your right hemisphere, some in your left hemisphere. It's complicated.",
+     "Now, the idea is that some things are duplicated. So, if you were to lose half your brain, the other half can actually do a lot but some things are more prevalent and more powerful in one part of the brain than the other. Some functions are lateralized. So, typically, language in the left \u2014 again, this is a right-handed centric thing \u2014 math and music on the right. There is a crossover: everything you see in the left visual field goes to the right side of your brain; everything in the right visual field goes to the left side of the brain, and similarly, there's a crossover in action. So, your right hemisphere controls the left side of the body. Your left hemisphere controls the right side of the body. Now, finally, the two halves are connected. They're connected by this huge web called the corpus callosum.",
+     "This illustrates certain themes concerning the lateralization of different mental capacities, some in the left hemisphere, some in the right hemisphere. But it also serves as a useful methodological development: looking at people who are incredibly unusual, such as a man who had his brain bisected so his left hemisphere and his right hemisphere don't communicate with one another \u2014 how looking at such extreme cases can provide us with some understanding of how we normally do things. And this, again, is a theme we'll return to throughout the course.",
+     "This is generally the general introduction of the brain that I wanted to provide, giving the framework for what I'll be talking about later on throughout the course. But I want to end this first real class with a bit of humility as to what psychologists know and don't know. So, the idea behind a lot of psychology \u2013 particularly a lot of neuroscience and cognitive psychology \u2013 is to treat the mind as an information processor, as an elaborate computer. And so, we study different problems like recognizing faces or language or motor control or logic. The strategy then often is to figure out what sort of program can solve these problems and then we go on to ask, \"How could this program be instantiated in the physical brain?\" This strategy is one I'm very enthusiastic about but there still remains what's sometimes called the \"hard problem\" of consciousness and this involves subjective experience.",
+     "My computer can play chess. My computer can recognize numbers. It can do math. And maybe it does it kind of the same way that I do it but my computer doesn't have feelings in the same sense. And so the question is, \"How does a thing like that give rise to consciousness and subjective experience?\" And this is a deep puzzle. And although some psychologists and philosophers think they've solved it, most of us are a lot more skeptical. Huxley points out, \"How it is that anything so remarkable as a state of consciousness comes about as a result of irritating nervous tissue, is just as unaccountable as the appearance of the Djinn when Aladdin rubs his lamp.\" It seems like magic that a fleshy lump of gray matter can give rise to these feelings.",
+     "The second bit of humility we'll end the class on is I am presenting here, and I'll be presenting throughout this semester, what you can call a mechanistic conception of mental life. I'm going to be trying to explain fundamental aspects of ourselves including questions like how do we make decisions, why do we love our children, what happens when we fall in love, and so on. Now, you might worry about how this meshes with humanist values. When we deal with one another in a legal and a moral setting, we think in terms of free will and responsibility. It might be hard to mesh this with the conception in which all actions are the result of neurochemical physical processes.",
+     "Faced with this tension, there are three possibilities. You might choose to reject the scientific conception of the mind. Many people do. You may choose to embrace dualism, reject the idea that the brain is responsible for mental life, and reject the promise of a scientific psychology. Alternatively, you might choose to embrace the scientific worldview and reject all these humanist values. And there are some philosophers and psychologists who do just that, who claim that free will and responsibility and spiritual value and intrinsic value are all illusions; they're pre-scientific notions that get washed away in modern science. Or you could try to reconcile them. You could try to figure out how to mesh your scientific view of the mind with these humanist values you might want to preserve. And this is an issue which we're going to return to throughout the course. Okay. I'll see you on Wednesday."
+    ]
+   }
+  ]
+ }
+};
 
 /* ============ STUDY (vetrina) ============
    Corsi aperti veri, incorporati da YouTube no-cookie e caricati solo al
@@ -3714,6 +3935,8 @@ function stChiudi(){
 document.getElementById('p-study').addEventListener('click',e=>{
   const salva=e.target.closest('[data-salva]');
   if(salva){e.stopPropagation();toast(T('Salvato nel tuo piano di studio','Saved to your study plan'));return;}
+  const hero=e.target.closest('.st-hero');
+  if(hero){const c=ST_CORSI[0];apriAula({corso:c,lezIdx:c.resume});return;}
   const card=e.target.closest('[data-corso]');
   if(card){stApriCorso(card.dataset.corso);return;}
   const dv=e.target.closest('[data-dive]');
@@ -3728,20 +3951,274 @@ document.getElementById('p-study').addEventListener('click',e=>{
 });
 stSheet.addEventListener('click',e=>{
   if(e.target.closest('[data-chiudi]')){stChiudi();return;}
-  if(e.target.closest('#stsh-go')){stSuona();return;}
+  if(e.target.closest('#stsh-go')){
+    if(!stStato)return;
+    if(stStato.dive)apriAula({dive:stStato.dive});
+    else apriAula({corso:stStato.corso,lezIdx:stStato.lezIdx});
+    return;
+  }
   const r=e.target.closest('[data-lez]');
   if(r&&stStato&&stStato.corso){
     stStato.lezIdx=+r.dataset.lez;stSegnaRighe();
-    stStato.playing?stSuona():stFacciata();
+    apriAula({corso:stStato.corso,lezIdx:stStato.lezIdx});
   }
 });
 stVelo.addEventListener('click',stChiudi);
-addEventListener('keydown',e=>{if(e.key==='Escape'&&stSheet.classList.contains('on'))stChiudi();});
+addEventListener('keydown',e=>{if(e.key!=='Escape')return;const au=document.getElementById('st-aula');if(au&&au.classList.contains('on')){chiudiAula();return;}if(stSheet.classList.contains('on'))stChiudi();});
 
 renderStudy();
 document.querySelectorAll('.tab-btn[data-tab="study"]').forEach(b=>b.addEventListener('click',studyReveal));
 addEventListener('hashchange',()=>{if(location.hash==='#study')studyReveal();});
 try{if(location.hash==='#study')setTimeout(studyReveal,150);}catch(err){}
+
+
+/* ============ AULA — video + trascrizione + board ============ */
+const AULA={corso:null,dive:null,lezIdx:0,board:[],ev:{},chiave:''};
+const auEl=id=>document.getElementById(id);
+const bdKey=()=>'ec_board::'+AULA.chiave;
+const evKey=()=>'ec_ev::'+AULA.chiave;
+const auMMSS=s=>{s=Math.max(0,Math.floor(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=String(s%60).padStart(2,'0');return h?h+':'+String(m).padStart(2,'0')+':'+x:m+':'+x;};
+function auSalva(){try{localStorage.setItem(bdKey(),JSON.stringify(AULA.board));}catch(e){}}
+function auSalvaEv(){try{localStorage.setItem(evKey(),JSON.stringify(AULA.ev));}catch(e){}}
+function auCarica(){
+  AULA.board=[];AULA.ev={};
+  try{const b=localStorage.getItem(bdKey());if(b)AULA.board=JSON.parse(b)||[];}catch(e){}
+  try{const v=localStorage.getItem(evKey());if(v)AULA.ev=JSON.parse(v)||{};}catch(e){}
+}
+function auEmbedBase(){
+  if(AULA.dive)return 'https://www.youtube-nocookie.com/embed/'+AULA.dive.yt+'?autoplay=1&rel=0';
+  const c=AULA.corso,l=c.lez[AULA.lezIdx];
+  return l.yt?('https://www.youtube-nocookie.com/embed/'+l.yt+'?autoplay=1&rel=0')
+    :('https://www.youtube-nocookie.com/embed/videoseries?list='+c.playlist+'&index='+l.idx+'&autoplay=1&rel=0');
+}
+function auPlayer(start){
+  auEl('aula-player').innerHTML='<iframe src="'+auEmbedBase()+(start?('&start='+Math.floor(start)):'')+
+    '" title="Player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+}
+function auSeek(sec){auPlayer(sec);}
+function auTransKey(){return AULA.dive?('d:'+AULA.dive.id):(AULA.corso.id+':'+AULA.lezIdx);}
+/* segnaposto: dove la trascrizione vera non e` ancora arrivata, lorem ipsum
+   con capitoli finti calcolati sulla durata della lezione */
+const LOREM=[
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.',
+'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.',
+'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.',
+'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.',
+'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.',
+'Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.'
+];
+const LOREM_CAP=['Lorem ipsum dolor','Consectetur adipiscing','Sed do eiusmod tempor','Ut enim ad minim'];
+function auDurSec(d){
+  const h=String(d).match(/(\d+)\s*h\s*(\d+)?/);
+  if(h)return (+h[1])*3600+((+h[2]||0))*60;
+  const m=String(d).match(/(\d+)/);
+  return m?(+m[1])*60:3000;
+}
+function trFinta(){
+  const d=AULA.dive?AULA.dive.d:AULA.corso.lez[AULA.lezIdx].d;
+  const tot=auDurSec(d);
+  let seme=0;for(const ch of AULA.chiave)seme=(seme+ch.charCodeAt(0))%LOREM.length;
+  return {finta:true,
+    cap:LOREM_CAP.map((t,i)=>({t:t,s:Math.round(tot*i/LOREM_CAP.length),
+      par:[LOREM[(seme+i*3)%LOREM.length],LOREM[(seme+i*3+1)%LOREM.length],LOREM[(seme+i*3+2)%LOREM.length]]}))};
+}
+function auRenderTrans(){
+  const box=auEl('tr-corpo');
+  let tr=(typeof ST_TRANS!=='undefined')?ST_TRANS[auTransKey()]:null;
+  const finta=!tr;
+  if(finta)tr=trFinta();
+  auEl('tr-fonte').textContent=finta?'Lorem ipsum \u00b7 placeholder':tr.fonte;
+  const avviso=finta?`<p class="tr-finta-avviso">${T('Testo segnaposto \u00b7 la trascrizione vera arriva con i dati del corso','Placeholder text \u00b7 the real transcription ships with the course data')}</p>`:'';
+  box.innerHTML=avviso+tr.cap.map((c,ci)=>
+    `<button class="tr-cap" data-sec="${c.s}"><span class="tt">${auMMSS(c.s)}</span><b>${esc(c.t)}</b></button>`+
+    c.par.map((p,pi)=>{
+      const sv=AULA.ev[ci+':'+pi];
+      return `<p class="tr-p" data-cap="${ci}" data-p="${pi}">${sv||esc(p)}</p>`;
+    }).join('')
+  ).join('');
+}
+function auCardHTML(c,i){
+  const col=c.tipo==='ev'?'--pf:var(--menta-s)':'--pf:var(--lavanda-s)';
+  const tempo=(c.tipo==='ev'&&typeof c.sec==='number')?
+    `<button class="bd-tempo" data-bd-sec="${c.sec}">${auMMSS(c.sec)}</button>`:'';
+  const fonte=c.tipo==='ev'?T('Trascrizione','Transcription'):T('Nota libera','Free note');
+  const quote=c.tipo==='ev'?`<div class="bd-quote">${esc(c.testo)}</div>`:'';
+  return `<div class="bd-card${c.tipo==='nota'?' nota':''}" style="${col}" data-bd="${i}">
+    <div class="bd-capo">${tempo}<span class="bd-fonte">${fonte}</span>
+      <button class="bd-x" data-bd-x="${i}" aria-label="${T('Elimina','Delete')}">\u2715</button></div>
+    ${quote}
+    <textarea class="bd-nota" data-bd-nota="${i}" placeholder="${c.tipo==='ev'?T('I tuoi appunti su questo passaggio\u2026','Your notes on this passage\u2026'):T('Scrivi qui il tuo appunto\u2026','Write your note here\u2026')}">${esc(c.nota||'')}</textarea>
+  </div>`;
+}
+function auCresci(ta){ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';}
+function auRenderBoard(foco){
+  const lista=auEl('bd-lista');
+  auEl('bd-conta').textContent=AULA.board.length?(AULA.board.length+' '+T('schede','cards')):'';
+  if(!AULA.board.length){
+    lista.innerHTML=`<div class="bd-vuota"><div class="segno">\u201C \u201D</div>
+      ${T('La board \u00e8 vuota. Evidenzia un passaggio della trascrizione, oppure premi \u00abNota\u00bb per un appunto libero.','The board is empty. Highlight a passage in the transcription, or press \u201CNote\u201D for a free note.')}</div>`;
+    return;
+  }
+  lista.innerHTML=AULA.board.map(auCardHTML).join('');
+  lista.querySelectorAll('.bd-nota').forEach(auCresci);
+  if(typeof foco==='number'){
+    const ta=lista.querySelector('[data-bd-nota="'+foco+'"]');
+    if(ta){ta.focus();}
+  }
+}
+function apriAula(o){
+  AULA.corso=o.corso||null;AULA.dive=o.dive||null;AULA.lezIdx=o.lezIdx||0;
+  AULA.chiave=AULA.dive?('d:'+AULA.dive.id):(AULA.corso.id+':'+AULA.lezIdx);
+  const testa=auEl('aula-kick'),tit=auEl('aula-tit');
+  if(AULA.dive){
+    testa.textContent=AULA.dive.kick;tit.textContent=AULA.dive.tit;
+    testa.style.cssText=stCol('dive');
+  }else{
+    const c=AULA.corso,l=c.lez[AULA.lezIdx];
+    testa.textContent=c.uniEti+' \u00b7 '+c.code+' \u00b7 L'+(AULA.lezIdx+1);
+    tit.textContent=l.t;
+    testa.style.cssText=stCol(c.materia);
+  }
+  auCarica();auPlayer(0);auRenderTrans();auRenderBoard();
+  const trBox=auEl('aula-tr');
+  const stretto=(typeof matchMedia==='function')?matchMedia('(max-width:980px)').matches:false;
+  trBox.classList.toggle('chiusa',stretto);
+  auEl('tr-testa').setAttribute('aria-expanded',!trBox.classList.contains('chiusa'));
+  auEl('st-aula').classList.add('on');
+  document.body.classList.add('st-blocco');
+  auEl('aula-corpo')&&(auEl('aula-corpo').scrollTop=0);
+}
+function chiudiAula(){
+  auEl('st-aula').classList.remove('on');
+  auEl('aula-player').innerHTML='';
+  auEl('ev-float').classList.remove('on');
+  if(!stSheet.classList.contains('on'))document.body.classList.remove('st-blocco');
+}
+auEl('aula-x').addEventListener('click',()=>{chiudiAula();if(stSheet.classList.contains('on'))return;});
+auEl('aula-indietro').addEventListener('click',()=>{
+  chiudiAula();
+  if(!stSheet.classList.contains('on')){
+    if(AULA.dive)stApriDive(AULA.dive.id);
+    else stApriCorso(AULA.corso.id,AULA.lezIdx);
+  }
+});
+auEl('tr-testa').addEventListener('click',()=>{
+  const t=auEl('aula-tr');t.classList.toggle('chiusa');
+  auEl('tr-testa').setAttribute('aria-expanded',!t.classList.contains('chiusa'));
+});
+auEl('tr-corpo').addEventListener('click',e=>{
+  const cap=e.target.closest('.tr-cap');
+  if(cap){auSeek(+cap.dataset.sec);return;}
+});
+/* board: bottoni e note */
+auEl('bd-nota').addEventListener('click',()=>{
+  AULA.board.push({tipo:'nota',testo:'',nota:''});
+  auSalva();auRenderBoard(AULA.board.length-1);
+});
+document.getElementById('bd-lista').addEventListener('input',e=>{
+  const ta=e.target.closest('[data-bd-nota]');
+  if(!ta)return;auCresci(ta);
+  const i=+ta.dataset.bdNota;
+  if(AULA.board[i]){AULA.board[i].nota=ta.value;auSalva();}
+});
+document.getElementById('bd-lista').addEventListener('click',e=>{
+  const x=e.target.closest('[data-bd-x]');
+  if(x){AULA.board.splice(+x.dataset.bdX,1);auSalva();auRenderBoard();return;}
+  const tm=e.target.closest('[data-bd-sec]');
+  if(tm){auSeek(+tm.dataset.bdSec);}
+});
+/* evidenziatore sulla trascrizione */
+const evFloat=auEl('ev-float');
+let evSelInfo=null;
+function evPosiziona(){
+  const sel=window.getSelection();
+  const txt=sel&&sel.toString().trim();
+  if(!txt||!sel.rangeCount){evFloat.classList.remove('on');evSelInfo=null;return;}
+  const rg=sel.getRangeAt(0);
+  const sEl=(rg.startContainer.nodeType===3?rg.startContainer.parentElement:rg.startContainer);
+  const eEl=(rg.endContainer.nodeType===3?rg.endContainer.parentElement:rg.endContainer);
+  const hostA=sEl.closest?sEl.closest('.tr-p'):null;
+  const hostB=eEl.closest?eEl.closest('.tr-p'):null;
+  if(!hostA||hostA!==hostB){evFloat.classList.remove('on');evSelInfo=null;return;}
+  const r=rg.getBoundingClientRect();
+  evFloat.style.top=Math.max(8,(r.top-46))+'px';
+  evFloat.style.left=Math.max(8,(r.left+r.width/2-70))+'px';
+  evFloat.classList.toggle('puo-rim',!!(sEl.closest&&sEl.closest('mark.ev')));
+  evFloat.classList.add('on');
+  evSelInfo={host:hostA,txt:txt};
+}
+document.addEventListener('mouseup',e=>{
+  if(evFloat.contains(e.target))return;
+  if(!auEl('st-aula').classList.contains('on'))return;
+  setTimeout(evPosiziona,10);
+});
+document.addEventListener('touchend',e=>{
+  if(evFloat.contains(e.target))return;
+  if(!auEl('st-aula').classList.contains('on'))return;
+  setTimeout(evPosiziona,120);
+},{passive:true});
+evFloat.addEventListener('mousedown',e=>e.preventDefault());
+function evPersisti(host){
+  AULA.ev[host.dataset.cap+':'+host.dataset.p]=host.innerHTML;
+  auSalvaEv();
+}
+auEl('ev-add').addEventListener('click',()=>{
+  const sel=window.getSelection();
+  if(!sel.rangeCount||!evSelInfo){evFloat.classList.remove('on');return;}
+  const rg=sel.getRangeAt(0),host=evSelInfo.host;
+  const mark=document.createElement('mark');mark.className='ev';
+  try{rg.surroundContents(mark);}
+  catch(err){toast(T('Seleziona un passaggio continuo, senza attraversare altre evidenziazioni.','Select a continuous passage, without crossing other highlights.'));return;}
+  sel.removeAllRanges();evFloat.classList.remove('on');
+  evPersisti(host);
+  const tr=ST_TRANS[auTransKey()];
+  const sec=tr&&tr.cap[+host.dataset.cap]?tr.cap[+host.dataset.cap].s:null;
+  AULA.board.push({tipo:'ev',testo:evSelInfo.txt,sec:sec,nota:''});
+  auSalva();auRenderBoard();
+  toast(T('Aggiunto alla board.','Added to your board.'));
+});
+auEl('ev-del').addEventListener('click',()=>{
+  const sel=window.getSelection();
+  if(!sel.rangeCount){evFloat.classList.remove('on');return;}
+  const n=sel.anchorNode,el=(n&&n.nodeType===3)?n.parentElement:n;
+  const mark=el&&el.closest?el.closest('mark.ev'):null;
+  if(mark){
+    const host=mark.closest('.tr-p'),par=mark.parentNode;
+    while(mark.firstChild)par.insertBefore(mark.firstChild,mark);
+    par.removeChild(mark);par.normalize();
+    if(host)evPersisti(host);
+  }
+  sel.removeAllRanges();evFloat.classList.remove('on');
+});
+/* stampa in identita` ERUA */
+auEl('bd-stampa').addEventListener('click',()=>{
+  if(!AULA.board.length){toast(T('La board \u00e8 vuota: niente da stampare.','The board is empty \u2014 nothing to print yet.'));return;}
+  const tit=auEl('aula-tit').textContent,kick=auEl('aula-kick').textContent;
+  const data=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  let h='<div style="font-family:Inter,Arial,sans-serif;color:#20201D;max-width:740px;margin:0 auto;padding:30px 24px;-webkit-print-color-adjust:exact;print-color-adjust:exact">';
+  h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#1E7A54;margin-bottom:10px">ERUA connect \u00b7 Study</div>';
+  h+='<h1 style="font-family:Fraunces,Georgia,serif;font-size:26px;font-weight:600;letter-spacing:-.02em;margin:0 0 4px">'+esc(tit)+'</h1>';
+  h+='<div style="font-size:11px;color:#7A776F;margin-bottom:14px">'+esc(kick)+' \u00b7 '+data+'</div>';
+  h+='<div style="border-top:3px double #20201D;margin-bottom:24px"></div>';
+  AULA.board.forEach(c=>{
+    h+='<div style="display:flex;gap:14px;margin-bottom:18px;page-break-inside:avoid;break-inside:avoid">';
+    h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:12px;color:#1E7A54;min-width:46px;text-align:right;padding-top:2px">'+
+      (c.tipo==='ev'&&typeof c.sec==='number'?auMMSS(c.sec):'\u270E')+'</div>';
+    h+='<div style="flex:1;border-left:3px solid '+(c.tipo==='ev'?'#A8E6C9':'#CFC4F7')+';padding:0 0 12px 14px;border-bottom:1px solid #E7E0D5">';
+    if(c.tipo==='ev')h+='<p style="font-family:\'Source Serif 4\',Georgia,serif;font-size:14px;margin:0 0 6px;line-height:1.55">\u201C'+esc(c.testo)+'\u201D</p>';
+    if(c.nota&&c.nota.trim())h+='<p style="font-size:12.5px;margin:0;line-height:1.6;white-space:pre-wrap;color:#20201D">\u21B3 '+esc(c.nota)+'</p>';
+    h+='</div></div>';
+  });
+  h+='<div style="margin-top:28px;border-top:3px double #20201D;padding-top:12px;text-align:center;font-family:Fraunces,Georgia,serif;font-style:italic;font-size:13px;color:#1E7A54">ERUA connect</div></div>';
+  const fr=document.createElement('iframe');
+  fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
+  document.body.appendChild(fr);
+  const d=fr.contentWindow.document;d.open();
+  d.write('<html><head><title>Board \u2014 ERUA connect</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600&family=JetBrains+Mono&family=Source+Serif+4&display=swap" rel="stylesheet"></head><body style="margin:0;background:#fff">'+h+'<scr'+'ipt>onload=()=>setTimeout(()=>print(),450)</scr'+'ipt></body></html>');
+  d.close();setTimeout(()=>{document.body.removeChild(fr);},10000);
+});
 
 /* avvio: l'interfaccia parte in inglese */
 document.querySelectorAll('[data-it]').forEach(el=>{ el.textContent=el.dataset.en; });
