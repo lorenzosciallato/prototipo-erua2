@@ -1375,6 +1375,17 @@
   .stsh-desc{font-family:var(--font-lettura);font-size:.92rem;line-height:1.7;color:var(--testo);
     margin-top:1rem;max-width:62ch}
   body.st-blocco{overflow:hidden}
+
+  /* copertina disegnata per corsi senza anteprima video */
+  .st-cover.arte{display:grid;place-items:center;background:linear-gradient(135deg,var(--cielo),var(--lavanda) 60%,var(--rosa))}
+  .st-cover.arte::after{background:linear-gradient(180deg,transparent 60%,rgba(18,16,12,.28))}
+  .st-cover.arte b{font-family:var(--font-display);font-weight:600;font-size:1.5rem;letter-spacing:-.02em;
+    color:rgba(32,32,29,.78);z-index:1}
+  html[data-tema="scuro"] .st-cover.arte b{color:rgba(230,227,220,.85)}
+  .stsh-player .arte-p{position:absolute;inset:0;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--cielo),var(--lavanda) 60%,var(--rosa))}
+  .stsh-player .arte-p b{font-family:var(--font-display);font-weight:600;font-size:1.7rem;color:rgba(32,32,29,.78)}
+  html[data-tema="scuro"] .stsh-player .arte-p b{color:rgba(230,227,220,.85)}
 </style>
 </head>
 <body>
@@ -3336,7 +3347,14 @@ document.addEventListener('click',e=>{
    Corsi aperti veri, incorporati da YouTube no-cookie e caricati solo al
    clic. La sezione e` una vetrina: mostra come potrebbe funzionare il
    binario didattico dei percorsi congiunti. */
-const ST_COL={psych:['--cielo','--cielo-s'],phil:['--lavanda','--lavanda-s'],dive:['--pesca','--pesca-s']};
+const ST_COL={psych:['--cielo','--cielo-s'],phil:['--lavanda','--lavanda-s'],
+  storia:['--menta','--menta-s'],neuro:['--rosa','--rosa-s'],dive:['--pesca','--pesca-s']};
+const ST_GRUPPI=[
+ {g:'psych',it:'Psicologia',en:'Psychology',sub:'Yale \u00b7 MIT'},
+ {g:'phil',it:'Filosofia',en:'Philosophy',sub:'Harvard \u00b7 Yale'},
+ {g:'storia',it:'Storia',en:'History',sub:'Yale'},
+ {g:'neuro',it:'Neuroscienze e psichiatria',en:'Neuroscience & psychiatry',sub:'Stanford \u00b7 MIT'}
+];
 const ST_CORSI=[
  {id:'psyc110',materia:'psych',uniEti:'YALE \u00b7 OPEN COURSE',
   tit:'Introduction to Psychology',code:'PSYC 110',
@@ -3353,6 +3371,36 @@ const ST_CORSI=[
    {t:'What Is It Like to Be a Baby: The Development of Thought',d:'55 min',idx:5},
    {t:'How Do We Communicate?: Language in the Brain, Mouth and the Hands',d:'57 min',idx:6}
   ]},
+ {id:'mit900',materia:'psych',uniEti:'MIT \u00b7 OPENCOURSEWARE',
+  tit:'Introduction to Psychology',code:'9.00SC',
+  prof:'John Gabrieli',profTag:'JG',
+  tot:{it:'24 lezioni \u00b7 \u224824 h',en:'24 lectures \u00b7 \u224824 h'},
+  cover:'2fbrl6WoIyo',playlist:'PL44ABC9278E2EE706',prog:0,resume:0,
+  desc:{it:'La versione MIT della psicologia generale: mente e cervello insieme, dalla percezione alla psicopatologia, con la ricerca portata in aula.',
+        en:'MIT\u2019s take on general psychology: mind and brain together, from perception to psychopathology, with current research in the room.'},
+  lez:[
+   {t:'Introduction',d:'51 min',yt:'2fbrl6WoIyo'},
+   {t:'Science and Research',d:'55 min',yt:'syXplPKQb_o'},
+   {t:'Brain I: Structure and Functions',d:'58 min',idx:3},
+   {t:'Brain II: Methods of Research',d:'57 min',yt:'-cK1og4ElKE'},
+   {t:'Vision I',d:'55 min',idx:5},
+   {t:'Vision II',d:'56 min',idx:6}
+  ]},
+ {id:'psyc123',materia:'psych',uniEti:'YALE \u00b7 OPEN COURSE',
+  tit:'The Psychology, Biology and Politics of Food',code:'PSYC 123',
+  prof:'Kelly Brownell',profTag:'KB',
+  tot:{it:'23 lezioni \u00b7 \u224828 h',en:'23 lectures \u00b7 \u224828 h'},
+  cover:null,arte:'PSYC 123',playlist:'PL3H2hBnUMZ61Zy5x3SQ-Hg20Ao2mUdv47',prog:0,resume:0,
+  desc:{it:'Perch\u00e9 mangiamo quello che mangiamo: gusto, fame, industria alimentare e politica del cibo in un corso diventato un classico di Yale.',
+        en:'Why we eat what we eat: taste, hunger, the food industry and food politics, in a course that became a Yale classic.'},
+  lez:[
+   {t:'Introduction: What We Eat, Why We Eat and the Key Role of Food in Modern Life',d:'75 min',idx:1},
+   {t:'Food Then, Food Now: Modern Food Conditions and Their Mismatch with Evolution',d:'73 min',idx:2},
+   {t:'Biology, Nutrition and Health II: What Helps Us and Hurts Us',d:'74 min',idx:4},
+   {t:'Nutrition Transition and Global Food Issues',d:'72 min',idx:8},
+   {t:'From Ancient to Modern Farming: The Green Revolution',d:'75 min',idx:9},
+   {t:'Eating Disorders and Obesity',d:'76 min',idx:13}
+  ]},
  {id:'justice',materia:'phil',uniEti:'HARVARD \u00b7 SANDEL',
   tit:'Justice: What\u2019s the Right Thing to Do?',code:'ER22',
   prof:'Michael Sandel',profTag:'MS',
@@ -3367,6 +3415,109 @@ const ST_CORSI=[
    {t:'This Land Is My Land',d:'55 min',idx:4},
    {t:'Hired Guns',d:'55 min',idx:5},
    {t:'Mind Your Motive',d:'55 min',idx:6}
+  ]},
+ {id:'phil176',materia:'phil',uniEti:'YALE \u00b7 OPEN COURSE',
+  tit:'Death',code:'PHIL 176',
+  prof:'Shelly Kagan',profTag:'SK',
+  tot:{it:'26 lezioni \u00b7 \u224821 h',en:'26 lectures \u00b7 \u224821 h'},
+  cover:'p2J7wSuFRl8',playlist:'PLEA18FAF1AD9047B0',prog:0,resume:0,
+  desc:{it:'C\u2019\u00e8 una sola certezza: moriremo. Kagan, seduto a gambe incrociate sulla cattedra, smonta cosa significhi \u2014 anima, identit\u00e0, paura della fine.',
+        en:'One thing is certain: we die. Kagan, cross-legged on his desk, takes apart what that means \u2014 souls, identity, the fear of the end.'},
+  lez:[
+   {t:'Course Introduction',d:'47 min',yt:'p2J7wSuFRl8'},
+   {t:'The Nature of Persons: Dualism vs. Physicalism',d:'50 min',idx:2},
+   {t:'Arguments for the Existence of the Soul, Part I',d:'49 min',idx:3},
+   {t:'Arguments for the Existence of the Soul, Part II',d:'48 min',idx:4},
+   {t:'Arguments for the Existence of the Soul, Part III',d:'51 min',idx:5},
+   {t:'Arguments for the Existence of the Soul, Part IV; Plato, Part I',d:'50 min',idx:6}
+  ]},
+ {id:'phil181',materia:'phil',uniEti:'YALE \u00b7 OPEN COURSE',
+  tit:'Philosophy and the Science of Human Nature',code:'PHIL 181',
+  prof:'Tamar Gendler',profTag:'TG',
+  tot:{it:'26 lezioni \u00b7 \u224820 h',en:'26 lectures \u00b7 \u224820 h'},
+  cover:'mUHYlyacMmA',playlist:'PLFBFE59E63A13E04C',prog:0,resume:0,
+  desc:{it:'Platone e Aristotele incontrano la scienza cognitiva: felicit\u00e0, morale e giustizia lette con i testi classici e gli esperimenti recenti.',
+        en:'Plato and Aristotle meet cognitive science: happiness, morality and justice read through classic texts and recent experiments.'},
+  lez:[
+   {t:'Introduction',d:'42 min',yt:'mUHYlyacMmA'},
+   {t:'The Ring of Gyges: Morality and Hypocrisy',d:'48 min',idx:2},
+   {t:'Parts of the Soul I',d:'47 min',idx:3},
+   {t:'Parts of the Soul II',d:'45 min',idx:4},
+   {t:'The Well-Ordered Soul: Happiness and Harmony',d:'46 min',yt:'q6Kkq7xULSo'},
+   {t:'The Disordered Soul: Th\u00e9mis and PTSD',d:'49 min',idx:6}
+  ]},
+ {id:'hist119',materia:'storia',uniEti:'YALE \u00b7 OPEN COURSE',
+  tit:'The Civil War and Reconstruction Era, 1845\u20131877',code:'HIST 119',
+  prof:'David Blight',profTag:'DB',
+  tot:{it:'27 lezioni \u00b7 \u224823 h',en:'27 lectures \u00b7 \u224823 h'},
+  cover:'QXXp1bHd6gI',playlist:'PLfRTOORWnfuDZOzt2esSVW6B22HQuM49d',prog:0,resume:0,
+  desc:{it:'Le cause, il corso e le conseguenze della guerra che ha rifondato gli Stati Uniti, raccontate da uno dei suoi massimi storici.',
+        en:'The causes, course and consequences of the war that remade the United States, told by one of its greatest historians.'},
+  lez:[
+   {t:'Introductions: Why Does the Civil War Era Have a Hold on American Historical Imagination?',d:'48 min',yt:'QXXp1bHd6gI'},
+   {t:'Southern Society: Slavery, King Cotton, and Antebellum America\u2019s \u201cPeculiar\u201d Region',d:'50 min',idx:2},
+   {t:'A Southern World View: The Old South and Proslavery Ideology',d:'51 min',idx:3},
+   {t:'A Northern World View: Yankee Society, Antislavery Ideology and the Abolition Movement',d:'50 min',idx:4},
+   {t:'Telling a Free Story: Fugitive Slaves and the Underground Railroad in Myth and Reality',d:'49 min',idx:5},
+   {t:'Expansion and Slavery: Legacies of the Mexican War and the Compromise of 1850',d:'52 min',idx:6}
+  ]},
+ {id:'hist202',materia:'storia',uniEti:'YALE \u00b7 OPEN COURSE',
+  tit:'European Civilization, 1648\u20131945',code:'HIST 202',
+  prof:'John Merriman',profTag:'JM',
+  tot:{it:'24 lezioni \u00b7 \u224820 h',en:'24 lectures \u00b7 \u224820 h'},
+  cover:'_IgKHHAjV8Y',playlist:'PL3A8E6CE294860A24',prog:8,resume:1,
+  desc:{it:'Dall\u2019assolutismo alle due guerre mondiali: tre secoli d\u2019Europa visti anche dal basso, tra rivoluzioni, citt\u00e0 e vita quotidiana.',
+        en:'From absolutism to the world wars: three centuries of Europe seen also from below \u2014 revolutions, cities, ordinary lives.'},
+  lez:[
+   {t:'Introduction',d:'47 min',yt:'_IgKHHAjV8Y'},
+   {t:'Absolutism and the State',d:'46 min',idx:2},
+   {t:'Dutch and British Exceptionalism',d:'49 min',idx:3},
+   {t:'Peter the Great',d:'48 min',idx:4},
+   {t:'The Enlightenment and the Public Sphere',d:'46 min',idx:5},
+   {t:'Maximilien Robespierre and the French Revolution',d:'51 min',idx:6}
+  ]},
+ {id:'ukraine',materia:'storia',uniEti:'YALE \u00b7 FALL 2022',
+  tit:'The Making of Modern Ukraine',code:'HIST 247',
+  prof:'Timothy Snyder',profTag:'TS',
+  tot:{it:'23 lezioni \u00b7 \u224819 h',en:'23 classes \u00b7 \u224819 h'},
+  cover:'bJczLlwp-d8',playlist:'PLh9mgdi4rNewfxO7LhBoz_1Mx1MaO6sw_',prog:0,resume:0,
+  desc:{it:'Il corso che Yale ha aperto al mondo nell\u2019autunno 2022: mille anni di storia ucraina per capire il presente.',
+        en:'The course Yale opened to the world in autumn 2022: a thousand years of Ukrainian history to understand the present.'},
+  lez:[
+   {t:'Ukrainian Questions Posed by Russian Invasion',d:'48 min',yt:'bJczLlwp-d8'},
+   {t:'The Genesis of Nations',d:'50 min',idx:2},
+   {t:'Geography and Ancient History',d:'49 min',idx:3},
+   {t:'Before Europe',d:'47 min',idx:4},
+   {t:'Vikings, Slavers, Lawgivers: The Kyiv State',d:'51 min',idx:5},
+   {t:'The Grand Duchy of Lithuania',d:'49 min',idx:6}
+  ]},
+ {id:'sapolsky',materia:'neuro',uniEti:'STANFORD',
+  tit:'Human Behavioral Biology',code:'HUMBIO 160',
+  prof:'Robert Sapolsky',profTag:'RS',
+  tot:{it:'25 lezioni \u00b7 \u224837 h',en:'25 lectures \u00b7 \u224837 h'},
+  cover:'NNnIGh9g6fA',playlist:'PL848F2368C90DDC3D',prog:22,resume:5,
+  desc:{it:'Il corso leggendario di Stanford: geni, ormoni e cervello per spiegare aggressivit\u00e0, amore e follia \u2014 con l\u2019ironia di Sapolsky.',
+        en:'Stanford\u2019s legendary course: genes, hormones and brains to explain aggression, love and madness \u2014 with Sapolsky\u2019s wit.'},
+  lez:[
+   {t:'Introduction to Human Behavioral Biology',d:'57 min',yt:'NNnIGh9g6fA'},
+   {t:'Behavioral Evolution',d:'1 h 37',idx:2},
+   {t:'Behavioral Evolution II',d:'1 h 29',idx:3},
+   {t:'Molecular Genetics I',d:'1 h 33',idx:4},
+   {t:'Molecular Genetics II',d:'1 h 30',idx:5},
+   {t:'Behavioral Genetics I',d:'1 h 28',idx:6}
+  ]},
+ {id:'mit913',materia:'neuro',uniEti:'MIT \u00b7 OPENCOURSEWARE',
+  tit:'The Human Brain',code:'9.13',
+  prof:'Nancy Kanwisher',profTag:'NK',
+  tot:{it:'24 lezioni \u00b7 \u224820 h',en:'24 lectures \u00b7 \u224820 h'},
+  cover:'ba-HMvDn_vU',playlist:'PLUl4u3cNGP60IKRN_pFptIBxeiMc0MCJP',prog:0,resume:0,
+  desc:{it:'Come il cervello umano vede, naviga, parla e riconosce i volti: la neuroscienza cognitiva raccontata da chi la fa.',
+        en:'How the human brain sees, navigates, speaks and recognises faces: cognitive neuroscience told by one of its leading scientists.'},
+  lez:[
+   {t:'Introduction to the Human Brain',d:'1 h 20',yt:'ba-HMvDn_vU'},
+   {t:'Neuroanatomy',d:'1 h 15',yt:'bAkuNXtgrLA'},
+   {t:'Cognitive Neuroscience Methods I',d:'1 h 12',idx:3},
+   {t:'Cognitive Neuroscience Methods II',d:'1 h 10',idx:4}
   ]}
 ];
 const ST_DIVES=[
@@ -3379,16 +3530,26 @@ const ST_DIVES=[
   sub:{it:'Patrick Winston \u00b7 la lezione-culto su come si parla in pubblico',en:'Patrick Winston \u00b7 the cult lecture on how to speak in public'},
   d:'60 min',yt:'Unzc731iCUY',
   desc:{it:'Un\u2019ora che a MIT riempiva l\u2019aula ogni gennaio per quarant\u2019anni: come aprire, come chiudere, come farsi ricordare.',
-        en:'One hour that packed the MIT lecture hall every January for forty years: how to open, how to close, how to be remembered.'}}
+        en:'One hour that packed the MIT lecture hall every January for forty years: how to open, how to close, how to be remembered.'}},
+ {id:'depress',kick:'STANFORD \u00b7 LECTURE',tit:'On Depression',
+  sub:{it:'Robert Sapolsky \u00b7 la sua lezione pi\u00f9 vista fuori da Stanford',en:'Robert Sapolsky \u00b7 his most-watched lecture outside Stanford'},
+  d:'52 min',yt:'TIcf-2AFHgw',
+  desc:{it:'La depressione spiegata come malattia biologica e come vissuto quotidiano: la lezione che ha aiutato milioni di persone a capirla.',
+        en:'Depression explained as biology and as lived experience: the lecture that helped millions understand it.'}},
+ {id:'stress',kick:'STANFORD \u00b7 TALK',tit:'Stress and Health: From Molecules to Societies',
+  sub:{it:'Robert Sapolsky \u00b7 cosa fa lo stress a corpo e societ\u00e0',en:'Robert Sapolsky \u00b7 what stress does to bodies and societies'},
+  d:'58 min',yt:'XvMQQsyPirM',
+  desc:{it:'Dai neuroni alle gerarchie sociali: perch\u00e9 lo stress cronico ci consuma e cosa dice di noi come specie.',
+        en:'From neurons to social hierarchies: why chronic stress wears us down and what it says about us as a species.'}}
 ];
 const stThumb=id=>'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg';
 function stCol(materia){const c=ST_COL[materia]||ST_COL.psych;return '--pf:var('+c[0]+');--ps:var('+c[1]+')';}
 
 function stCorsoHTML(c){
-  const l0=c.lez[c.resume]||c.lez[0];
+  const dentroCover=c.cover?`<img src="${stThumb(c.cover)}" alt="" loading="lazy">`:`<b>${esc(c.arte||c.code)}</b>`;
   return `<button class="st-card st-nasce" data-corso="${c.id}" style="${stCol(c.materia)}">
-    <span class="st-cover">
-      <img src="${stThumb(c.cover)}" alt="" loading="lazy">
+    <span class="st-cover${c.cover?'':' arte'}">
+      ${dentroCover}
       <span class="st-pill">${c.uniEti}</span>
       <span class="st-durata">${T(c.tot.it,c.tot.en)}</span>
     </span>
@@ -3435,34 +3596,41 @@ let stPronta=false,stNato=false;
 function renderStudy(){
   if(stPronta)return; stPronta=true;
   document.getElementById('st-hero-slot').innerHTML=stSkelRiga;
-  const chips=[['all',T('Tutte le materie','All subjects'),''],
-               ['psych',T('Psicologia','Psychology'),'--sf:var(--cielo);--sc:var(--cielo-s)'],
-               ['phil',T('Filosofia','Philosophy'),'--sf:var(--lavanda);--sc:var(--lavanda-s)'],
-               ['dive',T('Approfondimenti','Deep dives'),'--sf:var(--pesca);--sc:var(--pesca-s)']];
+  const chips=[['all',T('Tutte','All'),'']]
+    .concat(ST_GRUPPI.map(gr=>[gr.g,T(gr.it,gr.en),'--sf:var('+ST_COL[gr.g][0]+');--sc:var('+ST_COL[gr.g][1]+')']))
+    .concat([['dive',T('Approfondimenti','Deep dives'),'--sf:var(--pesca);--sc:var(--pesca-s)']]);
   document.getElementById('st-chips').innerHTML=chips.map(([f,t,st],i)=>
     `<button class="chip" data-f="${f}" aria-pressed="${i===0}" style="${st}">${t}</button>`).join('');
-  document.getElementById('st-gruppi').innerHTML=`
-    <div data-g="psych"><div class="st-eti" style="--pf:var(--cielo-s)"><i></i><b>${T('Psicologia','Psychology')}</b><span>\u00b7 Yale</span></div>
-      <div class="st-griglia" data-slot="psych">${stSkelCard}</div></div>
-    <div data-g="phil"><div class="st-eti" style="--pf:var(--lavanda-s)"><i></i><b>${T('Filosofia','Philosophy')}</b><span>\u00b7 Harvard</span></div>
-      <div class="st-griglia" data-slot="phil">${stSkelCard}</div></div>
+  const gruppi=ST_GRUPPI.map(gr=>{
+    const n=ST_CORSI.filter(c=>c.materia===gr.g).length;
+    return `<div data-g="${gr.g}">
+      <div class="st-eti" style="--pf:var(${ST_COL[gr.g][1]})"><i></i><b>${T(gr.it,gr.en)}</b><span>\u00b7 ${gr.sub}</span></div>
+      <div class="st-griglia" data-slot="${gr.g}">${stSkelCard.repeat(n)}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('st-gruppi').innerHTML=gruppi+`
     <div data-g="dive"><div class="st-eti" style="--pf:var(--pesca-s)"><i></i><b>${T('Approfondimenti','Deep dives')}</b><span>\u00b7 ${T('seminari e podcast','talks & podcasts')}</span></div>
-      <div data-slot="dive">${stSkelRiga+stSkelRiga}</div></div>`;
+      <div data-slot="dive">${stSkelRiga.repeat(ST_DIVES.length)}</div></div>`;
 }
 function stBarre(dentro){
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+  const raf=(typeof requestAnimationFrame==='function')?requestAnimationFrame:(f=>setTimeout(f,16));
+  raf(()=>raf(()=>{
     dentro.querySelectorAll('[data-bar]').forEach(b=>{b.style.width=b.dataset.bar+'%';});
   }));
 }
 function studyReveal(){
   if(stNato)return; stNato=true;
-  const passi=[
-    [420,()=>{const s=document.getElementById('st-hero-slot');s.innerHTML=stHeroHTML();stBarre(s);}],
-    [700,()=>{const s=document.querySelector('[data-slot="psych"]');s.innerHTML=stCorsoHTML(ST_CORSI[0]);stBarre(s);}],
-    [880,()=>{const s=document.querySelector('[data-slot="phil"]');s.innerHTML=stCorsoHTML(ST_CORSI[1]);stBarre(s);}],
-    [1120,()=>{document.querySelector('[data-slot="dive"]').innerHTML=ST_DIVES.map(stDiveHTML).join('');}]
-  ];
-  passi.forEach(([ms,fn])=>setTimeout(fn,ms));
+  setTimeout(()=>{const s=document.getElementById('st-hero-slot');s.innerHTML=stHeroHTML();stBarre(s);},380);
+  ST_GRUPPI.forEach((gr,i)=>{
+    setTimeout(()=>{
+      const s=document.querySelector('[data-slot="'+gr.g+'"]');
+      s.innerHTML=ST_CORSI.filter(c=>c.materia===gr.g).map(stCorsoHTML).join('');
+      stBarre(s);
+    },640+i*170);
+  });
+  setTimeout(()=>{
+    document.querySelector('[data-slot="dive"]').innerHTML=ST_DIVES.map(stDiveHTML).join('');
+  },640+ST_GRUPPI.length*170);
 }
 
 /* --- foglio corso --- */
@@ -3476,9 +3644,11 @@ function stFacciata(){
   const p=document.getElementById('stsh-player'); if(!p||!stStato)return;
   const {corso,dive,lezIdx}=stStato;
   const l=corso?corso.lez[lezIdx]:null;
-  const th=dive?stThumb(dive.yt):stThumb((l&&l.yt)||corso.cover);
+  const idThumb=dive?dive.yt:((l&&l.yt)||corso.cover);
   const cap=dive?dive.tit:('L'+(lezIdx+1)+' \u2014 '+l.t);
-  p.innerHTML=`<img src="${th}" alt="">
+  const sfondo=idThumb?`<img src="${stThumb(idThumb)}" alt="">`
+    :`<span class="arte-p"><b>${esc(corso.arte||corso.code)}</b></span>`;
+  p.innerHTML=`${sfondo}
     <button class="stsh-play" id="stsh-go" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></button>
     <div class="velo-t">${esc(cap)}</div>`;
   stStato.playing=false;
