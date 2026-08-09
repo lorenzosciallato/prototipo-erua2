@@ -1545,6 +1545,265 @@
   @keyframes evPulsa{0%{box-shadow:0 0 0 0 var(--menta)}100%{box-shadow:0 0 0 9px transparent}}
   .ev-float.on{animation:evPop .18s cubic-bezier(.2,.9,.3,1.35) both}
   @keyframes evPop{from{opacity:0;transform:scale(.9) translateY(5px)}to{opacity:1;transform:none}}
+
+  /* ============ LEARN v3 — vetrina a due voci ============ */
+  .st-macro{display:flex;align-items:baseline;gap:.85rem;margin:2.7rem 0 .1rem}
+  .st-macro .grande{font-family:var(--font-display);font-weight:600;font-size:1.55rem;letter-spacing:-.03em}
+  .st-macro .micro{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--testo2)}
+  .st-macro::after{content:"";flex:1;height:1.5px;border-radius:99px;background:var(--anello);opacity:.5;transform:translateY(-.35em)}
+  .st-segna{font-style:normal;font-size:.54rem;letter-spacing:.12em;border:1px dashed var(--rosa-s);
+    border-radius:99px;padding:.08rem .45rem;margin-left:.35rem;vertical-align:middle}
+  .st-presto{border:1.5px dashed var(--bordo2);border-radius:20px;padding:.85rem 1rem;display:flex;
+    gap:.9rem;align-items:center;margin-bottom:.75rem;color:var(--testo2);background:transparent}
+  .st-presto .ico{font-size:1.35rem;flex:0 0 auto}
+  .st-presto .testi{display:flex;flex-direction:column;gap:.15rem;min-width:0;flex:1}
+  .st-presto .testi b{color:var(--testo);font-size:.92rem;font-weight:600}
+  .st-presto .testi span{font-size:.78rem;line-height:1.5}
+  .presto-pill{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+    border:1px solid var(--bordo2);border-radius:99px;padding:.28rem .6rem;flex:0 0 auto}
+  /* interruttore delle vie: separato e ben visibile, sopra i chip di materia */
+  .st-vie{display:flex;gap:.25rem;padding:.28rem;background:var(--sup);border:1px solid var(--bordo);
+    border-radius:99px;box-shadow:var(--ombra);width:max-content;max-width:100%;margin:1.5rem 0 .5rem}
+  .st-vie .via{border:0;background:transparent;border-radius:99px;padding:.5rem 1.15rem;cursor:pointer;
+    font-family:var(--font-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+    color:var(--testo2);transition:background .2s,color .2s;white-space:nowrap}
+  .st-vie .via:hover{color:var(--testo)}
+  .st-vie .via[aria-pressed="true"]{background:var(--testo);color:var(--bg);box-shadow:var(--ombra)}
+  @media(max-width:560px){.st-vie .via{padding:.45rem .8rem;font-size:.6rem}}
+  .st-chips{margin-top:.4rem}
+
+  /* Catch-up! / Podcast: prima si mimetizzavano, ora si vedono */
+  .modi-mag{background:var(--sup);border:1px solid var(--bordo);box-shadow:var(--ombra);padding:.28rem}
+  .modo-mag{color:var(--testo2);font-weight:700;font-size:.7rem;padding:.5rem 1.2rem}
+  .modo-mag:not(.on):hover{color:var(--testo);background:var(--sup2)}
+  .modo-mag.on{background:var(--testo);color:var(--bg);box-shadow:var(--ombra)}
+
+  /* ============ LEARN v3 — l'aula a scomparti ============
+     Stesso sfondo del sito. Tre scomparti di vetro su una griglia: si
+     trascinano l'uno sull'altro per scambiarsi di posto, si accendono e
+     si spengono con l'occhio nel dock (come i livelli di Photoshop);
+     quando uno è spento gli altri si allargano da soli con un'animazione.
+     Il video non si deforma mai: resta 16:9 e si adagia nello scomparto. */
+  .aula-sfondo{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+  .aula-sfondo svg{position:absolute;filter:blur(46px);opacity:.5}
+  html[data-tema="scuro"] .aula-sfondo svg{opacity:.24}
+  .asf1{top:-9rem;left:-9rem;width:34rem;height:34rem;animation:vaga 24s ease-in-out infinite}
+  .asf2{top:28%;right:-11rem;width:36rem;height:36rem;animation:vaga 29s ease-in-out infinite reverse}
+  .asf3{bottom:-12rem;left:22%;width:32rem;height:32rem;animation:vaga 33s ease-in-out infinite}
+  .aula-testa{position:relative;z-index:3;gap:.7rem}
+  .aula-titoli .tit{font-size:1.12rem}
+  .aula-dock{display:flex;gap:.2rem;padding:.24rem;background:var(--sup);border:1px solid var(--bordo);
+    border-radius:99px;box-shadow:var(--ombra);flex:0 0 auto}
+  .aula-dock:empty{display:none}
+  .aula-dock .dk{display:flex;align-items:center;gap:.42rem;border:0;background:transparent;border-radius:99px;
+    padding:.36rem .72rem;font-family:var(--font-mono);font-size:.56rem;letter-spacing:.13em;
+    text-transform:uppercase;font-weight:700;color:var(--testo);cursor:pointer;transition:background .18s,color .18s}
+  .aula-dock .dk svg{width:.95rem;height:.95rem;fill:none;stroke:currentColor;stroke-width:1.7;
+    stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+  .aula-dock .dk:hover{background:var(--sup2)}
+  .aula-dock .dk.via{color:var(--testo2)}
+  .aula-dock .dk.via span{text-decoration:line-through;text-decoration-thickness:1px;opacity:.8}
+  .aula-reset{display:flex;align-items:center;gap:.4rem;border:1px solid var(--bordo2);background:var(--sup);
+    border-radius:99px;padding:.42rem .85rem;font-size:.76rem;font-weight:600;color:var(--testo);flex:0 0 auto}
+  .aula-reset:hover{transform:translateY(-1px);box-shadow:var(--ombra)}
+  .aula-reset svg{width:.85rem;height:.85rem;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .st-aula.amb-stud .aula-reset{display:none}
+
+  .aula-scrivania{position:relative;flex:1;min-height:0;z-index:1;margin:0 1rem 1rem;display:grid;gap:.9rem}
+  .aula-scrivania::after{content:"";position:absolute;inset:-1rem;pointer-events:none;z-index:-1;
+    background:radial-gradient(120% 100% at 50% 42%,transparent 62%,rgba(32,28,20,.05))}
+  html[data-tema="scuro"] .aula-scrivania::after{background:radial-gradient(120% 100% at 50% 42%,transparent 60%,rgba(0,0,0,.3))}
+  .aula-scrivania[data-slots="3"]{grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);
+    grid-template-rows:minmax(0,1.12fr) minmax(0,.88fr);grid-template-areas:"a b" "a c"}
+  .aula-scrivania[data-slots="2"]{grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);
+    grid-template-rows:minmax(0,1fr);grid-template-areas:"a b"}
+  .aula-scrivania[data-slots="1"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);grid-template-areas:"a"}
+
+  .pann{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0;border-radius:24px;overflow:hidden;
+    background:var(--vetro);backdrop-filter:blur(20px) saturate(1.18);-webkit-backdrop-filter:blur(20px) saturate(1.18);
+    border:1px solid var(--bordo2);box-shadow:var(--ombra-alta),inset 0 1px 0 rgba(255,255,255,.4)}
+  html[data-tema="scuro"] .pann{box-shadow:var(--ombra-alta),inset 0 1px 0 rgba(255,255,255,.06)}
+  .pann.via{display:none}
+  .pann.presa{opacity:.55;filter:saturate(.7)}
+  .pann.meta{transform:scale(.988)}
+  .pann.meta::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;background:var(--anello);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .aula-scrivania.trascina iframe{pointer-events:none}
+  .aula-scrivania.trascina{cursor:grabbing}
+  .pann-testa{display:flex;align-items:center;gap:.55rem;padding:.55rem .85rem;cursor:grab;user-select:none;
+    -webkit-user-select:none;touch-action:none;flex:0 0 auto;border-bottom:1px solid var(--bordo)}
+  .pann-testa:active{cursor:grabbing}
+  .pann-testa b{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:700;white-space:nowrap}
+  .pann-testa .fonte{font-size:.6rem;color:var(--testo2);font-family:var(--font-mono);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:38%}
+  .pt-punto{width:.5rem;height:.5rem;border-radius:50%;flex:0 0 auto}
+  .pt-tratto{flex:1;min-width:.5rem}
+  .pt-presa{font-size:.8rem;letter-spacing:-.24em;color:var(--testo2);opacity:.7;padding-right:.28em;flex:0 0 auto}
+  .pann-corpo{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;
+    scrollbar-width:thin;scrollbar-color:var(--bordo2) transparent}
+  .pann-corpo::-webkit-scrollbar{width:7px}
+  .pann-corpo::-webkit-scrollbar-thumb{background:var(--bordo2);border-radius:99px}
+  .scr-ghost{position:fixed;z-index:99;transform:translate(-50%,-135%);pointer-events:none;opacity:0;
+    background:var(--testo);color:var(--bg);font-family:var(--font-mono);font-size:.6rem;letter-spacing:.18em;
+    text-transform:uppercase;font-weight:700;padding:.45rem .95rem;border-radius:99px;box-shadow:var(--ombra-alta)}
+
+  /* video: proporzioni 16:9 sempre, cornice cinematografica */
+  .corpo-video{display:flex;align-items:center;justify-content:center;overflow:hidden;padding:.9rem}
+  #aula-player{position:relative;width:100%;aspect-ratio:16/9;max-height:100%;border-radius:18px;
+    overflow:hidden;background:#0D0C0A;box-shadow:0 16px 44px rgba(18,14,8,.32)}
+  #aula-player::before{content:"";position:absolute;inset:-2px;border-radius:20px;padding:2px;background:var(--anello);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.85;z-index:2}
+  #aula-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  .pann .tr-corpo{padding:.4rem 1.1rem 1.2rem}
+  .pann-testa .bd-btn{padding:.32rem .66rem;font-size:.68rem;background:var(--sup)}
+  .pann-testa .bd-btn:first-of-type{margin-left:0}
+
+  /* lavagna: la frase sottolineata, la freccia, l'appunto in linea */
+  .pann .bd-lista{margin:0;padding:.55rem 1rem 1.1rem;overflow:visible;display:block}
+  .zn-riga{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem;padding:.7rem .1rem .62rem;
+    border-bottom:1px dashed var(--bordo2);animation:stnasce .45s cubic-bezier(.2,.7,.2,1) both}
+  .zn-riga:last-child{border-bottom:0}
+  .zn-tempo{font-family:var(--font-mono);font-size:.62rem;border:0;background:var(--sup2);
+    border-radius:99px;padding:.2rem .55rem;color:var(--testo2);cursor:pointer;flex:0 0 auto}
+  .zn-tempo:hover{color:var(--testo)}
+  .zn-frase{font-family:var(--font-lettura);font-size:.95rem;line-height:1.65;min-width:0;
+    background:linear-gradient(180deg,transparent 64%,var(--menta) 64%);border-radius:2px;padding:0 .12em;
+    box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  html[data-tema="scuro"] .zn-frase{background:linear-gradient(180deg,transparent 64%,rgba(155,224,190,.34) 64%)}
+  .zn-frec{font-family:var(--font-display);font-weight:600;color:var(--ps,var(--menta-s));
+    flex:0 0 auto;font-size:1.05rem;line-height:1}
+  .zn-riga.nota .zn-frec{color:var(--lavanda-s)}
+  .zn-nota{flex:1;min-width:9ch;font-family:var(--font-sans);font-style:italic;font-size:.87rem;line-height:1.55;
+    color:var(--testo);outline:none;border-bottom:1.5px solid transparent;padding-bottom:.06rem;
+    transition:border-color .2s;overflow-wrap:anywhere}
+  .zn-nota:focus{border-bottom-color:var(--ps,var(--menta-s))}
+  .zn-nota:empty::before{content:attr(data-ph);color:var(--testo2);opacity:.85}
+  .zn-riga .bd-x{margin-left:0;align-self:center}
+  .zn-vuota{padding:1.5rem .7rem;color:var(--testo2);font-size:.84rem;line-height:1.75;text-align:center}
+  .zn-vuota .segno{display:block;font-family:var(--font-display);font-size:1.7rem;
+    color:var(--ps,var(--menta-s));opacity:.65;margin-bottom:.35rem}
+
+  /* ambiente studenti: solo il video, in scena */
+  .st-aula.amb-stud [data-pann="tr"],.st-aula.amb-stud [data-pann="board"]{display:none!important}
+  .st-aula.amb-stud .aula-scrivania{max-width:1200px;width:100%;margin-left:auto;margin-right:auto}
+  .st-aula.amb-stud .pann-testa{cursor:default}
+
+  /* ingresso coreografato */
+  .st-aula.on .pann{animation:auSu .5s cubic-bezier(.2,.7,.2,1) both}
+  .st-aula.on .pann:nth-of-type(2){animation-delay:.08s}
+  .st-aula.on .pann:nth-of-type(3){animation-delay:.16s}
+
+  /* schermi stretti: solo il video */
+  @media(max-width:980px){
+    .aula-scrivania{display:flex;flex-direction:column;margin:0;padding:.8rem;overflow:auto}
+    [data-pann="tr"],[data-pann="board"],.aula-dock,.aula-reset{display:none!important}
+    .pann{width:100%;background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;overflow:visible}
+    .pann-testa{display:none}
+    .corpo-video{padding:0;overflow:visible}
+    #aula-player{width:100%!important;height:auto!important;aspect-ratio:16/9;max-height:none}
+  }
+
+  /* ============ LEARN v4 ============ */
+  /* Due vie come linguette grandi: tutt'altro registro rispetto ai chip */
+  .st-vie{background:transparent;border:0;box-shadow:none;border-radius:0;padding:0;gap:1.9rem;
+    width:100%;max-width:100%;margin:2.1rem 0 1.1rem;border-bottom:1.5px solid var(--bordo)}
+  .st-vie .via{font-family:var(--font-display);font-size:1.45rem;font-weight:600;letter-spacing:-.02em;
+    text-transform:none;color:var(--testo2);background:transparent;border-radius:0;
+    padding:.2rem .1rem .8rem;position:relative;transition:color .2s}
+  .st-vie .via:hover{color:var(--testo);background:transparent}
+  .st-vie .via[aria-pressed="true"]{background:transparent;color:var(--testo);box-shadow:none}
+  .st-vie .via[aria-pressed="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-1.5px;
+    height:3.5px;border-radius:99px;background:var(--anello)}
+  @media(max-width:560px){.st-vie{gap:1.2rem}.st-vie .via{font-size:1.12rem;padding-bottom:.6rem}}
+  .stc-eti{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--testo2);margin-right:.55rem;align-self:center}
+  .st-chips{margin-top:.15rem}
+
+  /* Foglio del corso: lezioni a sinistra, player a destra, frecce di pagina */
+  .st-sheet{width:min(1020px,100%)}
+  .stsh-corpo{display:grid;grid-template-columns:minmax(250px,320px) minmax(0,1fr);gap:1.5rem;
+    align-items:start;margin-top:.3rem}
+  .stsh-sx,.stsh-dx{min-width:0}
+  .stsh-eti{margin-top:.3rem}
+  .stsh-eti b{color:var(--testo);font-size:.74rem;letter-spacing:.08em}
+  .stsh-r.gen .t{color:var(--testo2);font-weight:450}
+  .stsh-r.gen .n{opacity:.5}
+  .stsh-pag{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-top:.75rem}
+  .pg-fr{width:2.25rem;height:2.25rem;border-radius:50%;border:1.5px solid var(--bordo2);background:var(--sup);
+    color:var(--testo);font-size:1.2rem;line-height:1;display:grid;place-items:center;cursor:pointer;
+    transition:transform .18s,border-color .18s,box-shadow .18s}
+  .pg-fr:hover:not(:disabled){transform:translateY(-1px);box-shadow:var(--ombra);border-color:var(--ps,var(--menta-s))}
+  .pg-fr:disabled{opacity:.28;cursor:default}
+  .pg-n{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.14em;color:var(--testo2)}
+  @media(max-width:760px){
+    .stsh-corpo{grid-template-columns:minmax(0,1fr);gap:1rem}
+    .stsh-dx{order:-1}
+    .stsh-dx .stsh-desc{display:none}
+  }
+
+  /* Comandi del video: −30 −10 +10 +30 */
+  .aula-comandi{display:flex;justify-content:center;gap:.45rem;padding:.1rem .8rem .8rem;flex:0 0 auto}
+  .aula-comandi.via{display:none}
+  .aula-comandi .cm{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.06em;font-weight:700;
+    border:1.5px solid var(--bordo2);background:var(--sup);color:var(--testo);border-radius:99px;
+    padding:.42rem .85rem;cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s}
+  .aula-comandi .cm:hover{transform:translateY(-1px);border-color:var(--ps,var(--menta-s));box-shadow:var(--ombra)}
+  .aula-comandi .cm:active{transform:translateY(0) scale(.97)}
+  @media(max-width:980px){.aula-comandi{padding:.65rem 0 .1rem}}
+
+  /* Karaoke sulla trascrizione */
+  .tr-cap{position:relative}
+  .tr-cap .tr-onda{display:none;width:.55rem;height:.55rem;border-radius:50%;margin-left:.55rem;
+    background:var(--ps,var(--menta-s));vertical-align:middle}
+  .tr-cap.ora b{color:var(--ps,var(--menta-s))}
+  .tr-cap.ora .tr-onda{display:inline-block;animation:znpuls 1.15s ease-in-out infinite}
+  .tr-p{border-left:3px solid transparent;padding-left:.7rem;margin-left:-.7rem;border-radius:4px;
+    transition:background .45s,border-color .45s}
+  .tr-p.ora{border-left-color:var(--ps,var(--menta-s));
+    background:linear-gradient(90deg,rgba(168,230,201,.30),transparent 72%)}
+  html[data-tema="scuro"] .tr-p.ora{background:linear-gradient(90deg,rgba(155,224,190,.13),transparent 72%)}
+  @keyframes znpuls{0%,100%{transform:scale(.72);opacity:.55}50%{transform:scale(1.12);opacity:1}}
+
+  /* Il foglio: carta a righe con margine dorato, sempre scrivibile */
+  .corpo-board{display:flex;flex-direction:column;overflow:hidden}
+  .bd-hint{flex:0 0 auto;font-size:.7rem;color:var(--testo2);line-height:1.55;padding:.55rem .95rem .15rem}
+  .bd-foglio{flex:1;min-height:0;overflow:auto;outline:none;white-space:pre-wrap;overflow-wrap:anywhere;
+    padding:.35rem 1rem 1.3rem 1.5rem;
+    font-family:var(--font-lettura);font-size:.93rem;line-height:2.1em;color:var(--testo);
+    caret-color:var(--ps,var(--menta-s));
+    background:
+      linear-gradient(90deg,transparent 0 .8rem,rgba(200,169,110,.55) .8rem calc(.8rem + 1.5px),transparent calc(.8rem + 1.5px)),
+      repeating-linear-gradient(180deg,transparent 0 calc(2.1em - 1px),var(--bordo) calc(2.1em - 1px) 2.1em);
+    background-attachment:local,local;
+    scrollbar-width:thin;scrollbar-color:var(--bordo2) transparent;overscroll-behavior:contain}
+  html[data-tema="scuro"] .bd-foglio{background:
+      linear-gradient(90deg,transparent 0 .8rem,rgba(200,169,110,.3) .8rem calc(.8rem + 1.5px),transparent calc(.8rem + 1.5px)),
+      repeating-linear-gradient(180deg,transparent 0 calc(2.1em - 1px),var(--bordo) calc(2.1em - 1px) 2.1em);
+    background-attachment:local,local}
+  .bd-foglio::-webkit-scrollbar{width:7px}
+  .bd-foglio::-webkit-scrollbar-thumb{background:var(--bordo2);border-radius:99px}
+  .bd-foglio .zn-txt{min-height:2.1em}
+  .bd-foglio .zn-riga{display:block;flex-wrap:nowrap;gap:0;padding:0;border-bottom:0;animation:stnasce .45s cubic-bezier(.2,.7,.2,1) both}
+  .zn-ev{display:inline;background:transparent;user-select:none;-webkit-user-select:none}
+  .bd-foglio .zn-tempo{font-family:var(--font-mono);font-size:.58rem;border:0;background:var(--sup2);
+    border-radius:99px;padding:.14rem .5rem;color:var(--testo2);margin-right:.45rem;cursor:pointer;
+    vertical-align:baseline}
+  .bd-foglio .zn-tempo:hover{color:var(--testo)}
+  .bd-foglio .zn-frase{font-family:var(--font-lettura);font-size:.93rem;line-height:inherit;
+    background:linear-gradient(180deg,transparent 62%,var(--menta) 62%);padding:0 .12em;border-radius:2px;
+    box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  html[data-tema="scuro"] .bd-foglio .zn-frase{background:linear-gradient(180deg,transparent 62%,rgba(155,224,190,.34) 62%)}
+  .zn-x{border:0;background:transparent;color:var(--testo2);font-size:.62rem;padding:0 .1rem;
+    margin:0 .12rem 0 .3rem;cursor:pointer;vertical-align:baseline;opacity:.5;transition:opacity .2s,color .2s}
+  .zn-riga:hover .zn-x{opacity:1}
+  .zn-x:hover{color:var(--rosa-s)}
+  .bd-foglio .zn-frec{font-family:var(--font-display);font-weight:600;font-size:1.02em;
+    color:var(--ps,var(--menta-s));margin:0 .42rem 0 .15rem}
+
 </style>
 </head>
 <body>
@@ -1610,7 +1869,7 @@
   </button>
   <button class="tab-btn" role="tab" data-tab="study" aria-selected="false">
     <svg viewBox="0 0 24 24"><path d="M3 9.2 12 5l9 4.2-9 4.2z"/><path d="M6.8 11.4v3.9c0 1.5 2.3 2.7 5.2 2.7s5.2-1.2 5.2-2.7v-3.9"/><path d="M21 9.2v5.2"/></svg>
-    <span data-it="Study" data-en="Study">Study</span>
+    <span data-it="Learn" data-en="Learn">Learn</span>
   </button>
   <button class="tab-btn" role="tab" data-tab="chat" aria-selected="false">
     <svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>
@@ -1658,53 +1917,65 @@
 <!-- ============ STUDY (vetrina) ============ -->
 <section class="pannello" id="p-study" role="tabpanel">
   <div class="intesta">
-    <span class="display">Study</span>
-    <p class="st-sotto" data-it="Le lezioni dei percorsi congiunti dell&#39;alleanza, aperte a tutti gli 8 atenei. Un posto solo per seguire, riprendere e approfondire." data-en="Lessons for the alliance&#39;s joint programmes, open to all 8 universities. One place to follow, resume and go deeper.">Le lezioni dei percorsi congiunti dell&#39;alleanza, aperte a tutti gli 8 atenei. Un posto solo per seguire, riprendere e approfondire.</p>
+    <span class="display">Learn</span>
+    <p class="st-sotto" data-it="Le lezioni dei docenti e le voci degli studenti degli 8 atenei. Un posto solo per seguire, riprendere e immergersi." data-en="Lessons from the professors, voices from the students, across the 8 universities. One place to follow, resume and dive in.">Le lezioni dei docenti e le voci degli studenti degli 8 atenei. Un posto solo per seguire, riprendere e immergersi.</p>
   </div>
   <div class="opp-testa">
-    <span class="demo-mini" data-it="Vetrina · come potrebbe essere la sezione, con corsi aperti veri" data-en="Showcase · how the section could look, using real open courses">Vetrina · come potrebbe essere la sezione, con corsi aperti veri</span>
+    <span class="demo-mini" data-it="Vetrina · corsi aperti veri dai docenti, segnaposto per l’area studenti" data-en="Showcase · real open courses from professors, placeholders for the student area">Vetrina · corsi aperti veri dai docenti, segnaposto per l’area studenti</span>
   </div>
 
   <div id="st-hero-slot"></div>
+  <div class="st-vie" id="st-vie" role="group" aria-label="Areas"></div>
   <div class="st-chips" id="st-chips" role="group" aria-label="Subjects"></div>
   <div id="st-gruppi"></div>
 
-  <p class="st-note" data-it="Contenuti aperti incorporati da YouTube (dominio no-cookie, caricati solo al clic): «Introduction to Psychology» — Open Yale Courses, licenza CC BY-NC-SA; «Justice» — canale ufficiale del corso di M. Sandel, Harvard; «How to Speak» — MIT OpenCourseWare, CC BY-NC-SA; ERUA Podcast — canale ufficiale ERUA. Progressi e piani di studio sono di esempio." data-en="Open content embedded from YouTube (no-cookie domain, loaded only on click): &#8220;Introduction to Psychology&#8221; — Open Yale Courses, CC BY-NC-SA; &#8220;Justice&#8221; — official channel of M. Sandel&#39;s Harvard course; &#8220;How to Speak&#8221; — MIT OpenCourseWare, CC BY-NC-SA; ERUA Podcast — official ERUA channel. Progress and study plans are sample data.">Contenuti aperti incorporati da YouTube.</p>
+  <p class="st-note" data-it="Contenuti aperti incorporati da YouTube (dominio no-cookie, caricati solo al clic): «Introduction to Psychology» — Open Yale Courses, licenza CC BY-NC-SA; «Justice» — canale ufficiale del corso di M. Sandel, Harvard; «How to Speak» — MIT OpenCourseWare, CC BY-NC-SA; ERUA Podcast — canale ufficiale ERUA, qui usato come video segnaposto dell’area From Students. Progressi, piani di studio e la chat della study room sono di esempio. La disposizione della scrivania e le tue note restano solo su questo dispositivo." data-en="Open content embedded from YouTube (no-cookie domain, loaded only on click): “Introduction to Psychology” — Open Yale Courses, CC BY-NC-SA; “Justice” — official channel of M. Sandel’s Harvard course; “How to Speak” — MIT OpenCourseWare, CC BY-NC-SA; ERUA Podcast — official ERUA channel, used here as the placeholder video for the From Students area. Progress, study plans and the study-room chat are sample data. Desk layout and your notes stay on this device only.">Contenuti aperti incorporati da YouTube.</p>
 </section>
 <div class="st-velo" id="st-velo"></div>
 <div class="st-sheet" id="st-sheet" role="dialog" aria-modal="true" aria-label="Course"></div>
 
 <div class="st-aula" id="st-aula" role="dialog" aria-modal="true" aria-label="Lesson">
+  <div class="aula-sfondo" aria-hidden="true">
+    <svg class="asf1" viewBox="0 0 200 200"><ellipse cx="100" cy="100" rx="100" ry="88" fill="var(--menta)"/></svg>
+    <svg class="asf2" viewBox="0 0 200 200"><ellipse cx="100" cy="100" rx="92" ry="100" fill="var(--lavanda)"/></svg>
+    <svg class="asf3" viewBox="0 0 200 200"><ellipse cx="100" cy="100" rx="100" ry="94" fill="var(--pesca)"/></svg>
+  </div>
   <div class="aula-testa">
-    <button class="aula-indietro" id="aula-indietro">← <span data-it="Corso" data-en="Course">Corso</span></button>
+    <button class="aula-indietro" id="aula-indietro">← <span data-it="Indietro" data-en="Back">Indietro</span></button>
     <div class="aula-titoli">
       <div class="kick" id="aula-kick"></div>
       <div class="tit" id="aula-tit"></div>
     </div>
+    <div class="aula-dock" id="aula-dock" role="group" aria-label="Compartments"></div>
+    <button class="aula-reset" id="aula-reset"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.9-6.6"/><path d="M3 4v5h5"/></svg><span data-it="Riordina" data-en="Tidy up">Riordina</span></button>
     <button class="stsh-x" id="aula-x" aria-label="Close">✕</button>
   </div>
-  <div class="aula-corpo">
-    <div class="aula-sx">
-      <div class="aula-player" id="aula-player"></div>
-      <div class="aula-board">
-        <div class="bd-testa">
-          <span class="st-eti" style="--pf:var(--menta-s);margin:0"><i></i><b data-it="La tua board" data-en="Your board">La tua board</b></span>
-          <span class="bd-conta" id="bd-conta"></span>
-          <button class="bd-btn" id="bd-nota"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-it="Nota" data-en="Note">Nota</span></button>
-          <button class="bd-btn" id="bd-stampa"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg><span data-it="Stampa / PDF" data-en="Print / PDF">Stampa / PDF</span></button>
-        </div>
-        <p class="bd-hint" data-it="Evidenzia le parole nella trascrizione e atterrano qui come schede, con lo spazio per i tuoi appunti. Puoi anche aggiungere note libere senza evidenziare nulla — tutto si salva da solo su questo dispositivo." data-en="Highlight words in the transcription and they land here as cards, each with room for your own notes. You can also add free notes without highlighting anything — everything saves itself on this device.">Evidenzia le parole nella trascrizione e atterrano qui come schede.</p>
-        <div class="bd-lista" id="bd-lista"></div>
+  <div class="aula-scrivania" id="aula-scrivania" data-slots="3">
+    <section class="pann" data-pann="video" aria-label="Video">
+      <header class="pann-testa"><span class="pt-punto" style="background:var(--ps,var(--cielo-s))"></span><b data-it="Lezione" data-en="Lesson">Lezione</b><span class="pt-tratto" aria-hidden="true"></span><span class="pt-presa" aria-hidden="true">⋮⋮</span></header>
+      <div class="pann-corpo corpo-video"><div id="aula-player"></div></div>
+      <div class="aula-comandi" id="aula-comandi" role="group" aria-label="Skip">
+        <button class="cm" data-salto="-30" title="−30 s">−30s</button>
+        <button class="cm" data-salto="-10" title="−10 s">−10s</button>
+        <button class="cm" data-salto="10" title="+10 s">+10s</button>
+        <button class="cm" data-salto="30" title="+30 s">+30s</button>
       </div>
-    </div>
-    <aside class="aula-tr" id="aula-tr">
-      <button class="tr-testa" id="tr-testa" aria-expanded="true">
-        <span class="eti">Transcription</span>
-        <span class="fonte" id="tr-fonte"></span>
-        <span class="tr-frec">▾</span>
-      </button>
-      <div class="tr-corpo" id="tr-corpo"></div>
-    </aside>
+    </section>
+    <section class="pann" data-pann="tr" id="aula-tr" aria-label="Transcription">
+      <header class="pann-testa" id="tr-testa"><span class="pt-punto" style="background:var(--lavanda-s)"></span><b>Transcription</b><span class="fonte" id="tr-fonte"></span><span class="pt-tratto" aria-hidden="true"></span>
+        <button class="bd-btn" id="tr-stampa"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg><span data-it="Stampa" data-en="Print">Stampa</span></button>
+        <span class="pt-presa" aria-hidden="true">⋮⋮</span></header>
+      <div class="pann-corpo tr-corpo" id="tr-corpo"></div>
+    </section>
+    <section class="pann" data-pann="board" aria-label="Board">
+      <header class="pann-testa"><span class="pt-punto" style="background:var(--menta-s)"></span><b>Board</b><span class="bd-conta" id="bd-conta"></span><span class="pt-tratto" aria-hidden="true"></span>
+        <button class="bd-btn" id="bd-stampa"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg><span data-it="Stampa / PDF" data-en="Print / PDF">Stampa / PDF</span></button>
+        <span class="pt-presa" aria-hidden="true">⋮⋮</span></header>
+      <div class="pann-corpo corpo-board">
+        <div class="bd-hint" data-it="Scrivi liberamente, come su un bloc notes: si salva da solo. Le sottolineature dalla trascrizione atterrano qui a capo, con la freccia per il tuo appunto." data-en="Write freely, like on a notepad: it saves itself. Highlights from the transcription land here on a new line, with the arrow for your note.">Scrivi liberamente, come su un bloc notes: si salva da solo. Le sottolineature dalla trascrizione atterrano qui a capo, con la freccia per il tuo appunto.</div>
+        <div class="bd-foglio" id="bd-foglio" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="false" aria-label="Board"></div>
+      </div>
+    </section>
   </div>
 </div>
 <div class="ev-float" id="ev-float">
@@ -3627,7 +3898,7 @@ const ST_TRANS={
    clic. La sezione e` una vetrina: mostra come potrebbe funzionare il
    binario didattico dei percorsi congiunti. */
 const ST_COL={psych:['--cielo','--cielo-s'],phil:['--lavanda','--lavanda-s'],
-  storia:['--menta','--menta-s'],neuro:['--rosa','--rosa-s'],dive:['--pesca','--pesca-s']};
+  storia:['--menta','--menta-s'],neuro:['--rosa','--rosa-s'],dive:['--pesca','--pesca-s'],stud:['--rosa','--rosa-s']};
 const ST_GRUPPI=[
  {g:'psych',it:'Psicologia',en:'Psychology',sub:'Yale \u00b7 MIT'},
  {g:'phil',it:'Filosofia',en:'Philosophy',sub:'Harvard \u00b7 Yale'},
@@ -3800,11 +4071,6 @@ const ST_CORSI=[
   ]}
 ];
 const ST_DIVES=[
- {id:'erua7',kick:'ERUA PODCAST \u00b7 EP. 7',tit:'Redefining Europe from the Edges',
-  sub:{it:'John McCourt \u00b7 rettore UniMC e presidente del board ERUA',en:'John McCourt \u00b7 UniMC rector and chair of the ERUA board'},
-  d:'28 min',yt:'d5VIynCvDXs',
-  desc:{it:'Cosa pu\u00f2 diventare un\u2019universit\u00e0 costruita ai margini d\u2019Europa: riforma, lauree congiunte e la voce degli studenti.',
-        en:'What a university built at the edges of Europe can become: reform, joint degrees and the students\u2019 voice.'}},
  {id:'speak',kick:'MIT OPENCOURSEWARE',tit:'How to Speak',
   sub:{it:'Patrick Winston \u00b7 la lezione-culto su come si parla in pubblico',en:'Patrick Winston \u00b7 the cult lecture on how to speak in public'},
   d:'60 min',yt:'Unzc731iCUY',
@@ -3820,6 +4086,23 @@ const ST_DIVES=[
   d:'58 min',yt:'XvMQQsyPirM',
   desc:{it:'Dai neuroni alle gerarchie sociali: perch\u00e9 lo stress cronico ci consuma e cosa dice di noi come specie.',
         en:'From neurons to social hierarchies: why chronic stress wears us down and what it says about us as a species.'}}
+];
+/* ============ LEARN · FROM STUDENTS — segnaposto ============
+   Un solo video vero (ERUA Podcast, canale ufficiale, già attribuito nella
+   nota a fondo sezione) usato come segnaposto dell’area studenti, più due
+   caselle «in arrivo». Nessun contenuto studentesco reale esiste ancora. */
+const ST_STUD=[
+ {id:'erua7',stud:true,kick:'ERUA PODCAST \u00b7 EP. 7',tit:'Redefining Europe from the Edges',
+  sub:{it:'John McCourt \u00b7 rettore UniMC e presidente del board ERUA',en:'John McCourt \u00b7 UniMC rector and chair of the ERUA board'},
+  d:'28 min',yt:'d5VIynCvDXs',
+  desc:{it:'Cosa pu\u00f2 diventare un\u2019universit\u00e0 costruita ai margini d\u2019Europa: riforma, lauree congiunte e la voce degli studenti.',
+        en:'What a university built at the edges of Europe can become: reform, joint degrees and the students\u2019 voice.'}}
+];
+const ST_STUD_PROSSIMI=[
+ {ico:'\u{1F393}',t:{it:'Corsi peer-to-peer',en:'Peer-to-peer courses'},
+  d:{it:'Studenti che insegnano a studenti: metodi, lingue, ripassi prima degli esami.',en:'Students teaching students: methods, languages, pre-exam reviews.'}},
+ {ico:'\u{1F680}',t:{it:'Iniziative studentesche',en:'Student initiatives'},
+  d:{it:'Associazioni, progetti e chiamate aperte fra gli 8 atenei.',en:'Associations, projects and open calls across the 8 universities.'}}
 ];
 const stThumb=id=>'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg';
 function stCol(materia){const c=ST_COL[materia]||ST_COL.psych;return '--pf:var('+c[0]+');--ps:var('+c[1]+')';}
@@ -3861,7 +4144,7 @@ function stHeroHTML(){
     <span class="q"><img src="${stThumb(l.yt||c.cover)}" alt=""><svg viewBox="0 0 24 24"><path d="M10 8.5l6 3.5-6 3.5z"/><circle cx="12" cy="12" r="9"/></svg></span>
     <span class="testi">
       <span class="kick">${T('Continua a imparare','Continue learning')}</span>
-      <span class="tit">${esc(c.tit)} \u00b7 L${c.resume+1} \u2014 ${esc(l.t)}</span>
+      <span class="tit">${esc(c.tit)} \u00b7 L${stResumeIdx(c)+1} \u2014 ${esc(l.t)}</span>
       <span class="dove">${T('Interrotta a 12:40 \u00b7 ancora ','Paused at 12:40 \u00b7 ')}${l.d}${T(' in tutto',' total')}</span>
       <span class="st-bar" style="--pf:var(--cielo-s)"><i data-bar="${c.prog}"></i></span>
     </span>
@@ -3878,8 +4161,10 @@ function renderStudy(){
   const chips=[['all',T('Tutte','All'),'']]
     .concat(ST_GRUPPI.map(gr=>[gr.g,T(gr.it,gr.en),'--sf:var('+ST_COL[gr.g][0]+');--sc:var('+ST_COL[gr.g][1]+')']))
     .concat([['dive',T('Approfondimenti','Deep dives'),'--sf:var(--pesca);--sc:var(--pesca-s)']]);
-  document.getElementById('st-chips').innerHTML=chips.map(([f,t,st],i)=>
+  document.getElementById('st-chips').innerHTML=`<span class="stc-eti">${T('Materie','Subjects')}</span>`+chips.map(([f,t,st],i)=>
     `<button class="chip" data-f="${f}" aria-pressed="${i===0}" style="${st}">${t}</button>`).join('');
+  document.getElementById('st-vie').innerHTML=[['prof','From Professors'],['stud','From Students']]
+    .map(([v,x],i)=>`<button class="via" data-via="${v}" aria-pressed="${i===0}">${x}</button>`).join('');
   const gruppi=ST_GRUPPI.map(gr=>{
     const n=ST_CORSI.filter(c=>c.materia===gr.g).length;
     return `<div data-g="${gr.g}">
@@ -3888,8 +4173,10 @@ function renderStudy(){
     </div>`;
   }).join('');
   document.getElementById('st-gruppi').innerHTML=gruppi+`
-    <div data-g="dive"><div class="st-eti" style="--pf:var(--pesca-s)"><i></i><b>${T('Approfondimenti','Deep dives')}</b><span>\u00b7 ${T('seminari e podcast','talks & podcasts')}</span></div>
-      <div data-slot="dive">${stSkelRiga.repeat(ST_DIVES.length)}</div></div>`;
+    <div data-g="dive"><div class="st-eti" style="--pf:var(--pesca-s)"><i></i><b>${T('Approfondimenti','Deep dives')}</b><span>\u00b7 ${T('seminari e lezioni scelte','talks & picked lectures')}</span></div>
+      <div data-slot="dive">${stSkelRiga.repeat(ST_DIVES.length)}</div></div>`
+    +`<div data-g="stud"><div data-slot="stud">${stSkelRiga.repeat(ST_STUD.length+ST_STUD_PROSSIMI.length)}</div></div>`;
+  if(typeof ST_VIA!=='undefined'&&ST_VIA)stFiltra();
 }
 function stBarre(dentro){
   const raf=(typeof requestAnimationFrame==='function')?requestAnimationFrame:(f=>setTimeout(f,16));
@@ -3909,6 +4196,8 @@ function studyReveal(){
   });
   setTimeout(()=>{
     document.querySelector('[data-slot="dive"]').innerHTML=ST_DIVES.map(stDiveHTML).join('');
+    const sl=document.querySelector('[data-slot="stud"]');
+    if(sl)sl.innerHTML=ST_STUD.map(stStudHTML).join('')+ST_STUD_PROSSIMI.map(stPrestoHTML).join('');
   },640+ST_GRUPPI.length*170);
 }
 
@@ -3922,46 +4211,110 @@ function stEmbedSrc(c,l){
 function stFacciata(){
   const p=document.getElementById('stsh-player'); if(!p||!stStato)return;
   const {corso,dive,lezIdx}=stStato;
-  const l=corso?corso.lez[lezIdx]:null;
+  const l=corso?stLezDi(corso,lezIdx):null;
   const idThumb=dive?dive.yt:((l&&l.yt)||corso.cover);
-  const cap=dive?dive.tit:('L'+(lezIdx+1)+' \u2014 '+l.t);
-  const sfondo=idThumb?`<img src="${stThumb(idThumb)}" alt="">`
-    :`<span class="arte-p"><b>${esc(corso.arte||corso.code)}</b></span>`;
+  const cap=dive?dive.tit:('L'+(lezIdx+1)+' — '+l.t);
+  const arte=`<span class="arte-p"><b>${esc(dive?'ERUA':(corso.arte||corso.code))}</b></span>`;
+  const sfondo=idThumb?`<img src="${stThumb(idThumb)}" alt="">`:arte;
   p.innerHTML=`${sfondo}
     <button class="stsh-play" id="stsh-go" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></button>
     <div class="velo-t">${esc(cap)}</div>`;
+  const img=p.querySelector('img');
+  if(img)img.addEventListener('error',()=>{try{img.outerHTML=arte;}catch(e){}},{once:true});
   stStato.playing=false;
 }
 function stSuona(){
   const p=document.getElementById('stsh-player'); if(!p||!stStato)return;
   const {corso,dive,lezIdx}=stStato;
-  const src=dive?('https://www.youtube-nocookie.com/embed/'+dive.yt+'?autoplay=1&rel=0'):stEmbedSrc(corso,corso.lez[lezIdx]);
+  const src=dive?('https://www.youtube-nocookie.com/embed/'+dive.yt+'?autoplay=1&rel=0'):stEmbedSrc(corso,stLezDi(corso,lezIdx));
   p.innerHTML=`<iframe src="${src}" title="Player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
   stStato.playing=true;
 }
+/* --- elenco completo delle lezioni: le 6 nominate + le altre generate
+       dalla playlist (si aprono col numero d'ordine, titolo generico) --- */
+function stLezTotN(c){
+  const m=String(c.tot.it).match(/\d+/);
+  const dichiarate=m?+m[0]:c.lez.length;
+  const massimo=Math.max.apply(null,c.lez.map((l,i)=>l.idx||i+1));
+  return Math.max(dichiarate,massimo);
+}
+function stLezFull(c){
+  if(c._full)return c._full;
+  const mappa={};
+  c.lez.forEach((l,i)=>{mappa[l.idx||i+1]=l;});
+  const out=[];
+  const tot=stLezTotN(c);
+  for(let n=1;n<=tot;n++){
+    const l=mappa[n];
+    out.push(l?{t:l.t,d:l.d,yt:l.yt,idx:l.idx||n}
+              :{t:T('Lezione','Lecture')+' '+n,d:'',idx:n,gen:true});
+  }
+  c._full=out;
+  return out;
+}
+function stLezDi(c,i){
+  const f=stLezFull(c);
+  return f[Math.min(Math.max(i||0,0),f.length-1)];
+}
+function stResumeIdx(c){
+  const l=c.lez[c.resume];
+  return ((l&&l.idx)||c.resume+1)-1;
+}
 function stSegnaRighe(){
-  stSheet.querySelectorAll('.stsh-r').forEach((r,i)=>r.classList.toggle('on',i===stStato.lezIdx));
+  stSheet.querySelectorAll('.stsh-r').forEach(r=>r.classList.toggle('on',+r.dataset.lez===stStato.lezIdx));
+}
+const ST_PAG=7;
+function stRenderLez(){
+  const c=stStato.corso,full=stLezFull(c);
+  const pagine=Math.max(1,Math.ceil(full.length/ST_PAG));
+  stStato.pag=Math.min(Math.max(stStato.pag||0,0),pagine-1);
+  const da=stStato.pag*ST_PAG;
+  const el=document.getElementById('stsh-lez');if(!el)return;
+  el.innerHTML=full.slice(da,da+ST_PAG).map((l,k)=>{
+    const i=da+k;
+    return `<button class="stsh-r${l.gen?' gen':''}" data-lez="${i}" style="${stCol(c.materia)}">
+      <span class="n">L${i+1}</span><span class="t">${esc(l.t)}</span>
+      <span class="d">${l.d||''}</span><svg viewBox="0 0 24 24"><path d="M10 8.5l6 3.5-6 3.5z"/><circle cx="12" cy="12" r="9"/></svg>
+    </button>`;
+  }).join('');
+  const pg=document.getElementById('stsh-pag');
+  if(pg){
+    pg.style.display=pagine>1?'':'none';
+    pg.querySelector('.pg-n').textContent=(stStato.pag+1)+' / '+pagine;
+    pg.querySelector('[data-pg="-1"]').disabled=(stStato.pag===0);
+    pg.querySelector('[data-pg="1"]').disabled=(stStato.pag>=pagine-1);
+  }
+  stSegnaRighe();
 }
 function stApriCorso(id,lezIdx){
   const c=ST_CORSI.find(x=>x.id===id); if(!c)return;
-  stStato={corso:c,lezIdx:(typeof lezIdx==='number'?lezIdx:c.resume),playing:false};
+  const via=(typeof lezIdx==='number')?lezIdx:stResumeIdx(c);
+  stStato={corso:c,lezIdx:via,pag:Math.floor(via/ST_PAG),playing:false};
   stSheet.innerHTML=`<div class="presa"></div>
     <div class="stsh-testa" style="${stCol(c.materia)}">
       <div style="min-width:0">
-        <div class="kick">${c.uniEti} \u00b7 ${c.code}</div>
+        <div class="kick">${c.uniEti} · ${c.code}</div>
         <div class="tit">${esc(c.tit)}</div>
-        <div class="sub">${esc('Prof. '+c.prof)} \u00b7 ${T(c.tot.it,c.tot.en)}</div>
+        <div class="sub">${esc('Prof. '+c.prof)} · ${T(c.tot.it,c.tot.en)}</div>
       </div>
-      <button class="stsh-x" data-chiudi aria-label="${T('Chiudi','Close')}">\u2715</button>
+      <button class="stsh-x" data-chiudi aria-label="${T('Chiudi','Close')}">✕</button>
     </div>
-    <div class="stsh-player" id="stsh-player"></div>
-    <div class="stsh-eti">${T('Lezioni','Lessons')}</div>
-    <div class="stsh-lez">${c.lez.map((l,i)=>`
-      <button class="stsh-r" data-lez="${i}" style="${stCol(c.materia)}">
-        <span class="n">L${i+1}</span><span class="t">${esc(l.t)}</span>
-        <span class="d">${l.d}</span><svg viewBox="0 0 24 24"><path d="M10 8.5l6 3.5-6 3.5z"/><circle cx="12" cy="12" r="9"/></svg>
-      </button>`).join('')}</div>
-    <p class="stsh-desc">${T(c.desc.it,c.desc.en)}</p>`;
+    <div class="stsh-corpo">
+      <aside class="stsh-sx" style="${stCol(c.materia)}">
+        <div class="stsh-eti">${T('Lezioni','Lessons')} · <b>${stLezFull(c).length}</b></div>
+        <div class="stsh-lez" id="stsh-lez"></div>
+        <div class="stsh-pag" id="stsh-pag">
+          <button class="pg-fr" data-pg="-1" aria-label="${T('Precedenti','Previous')}">‹</button>
+          <span class="pg-n"></span>
+          <button class="pg-fr" data-pg="1" aria-label="${T('Successive','Next')}">›</button>
+        </div>
+      </aside>
+      <div class="stsh-dx">
+        <div class="stsh-player" id="stsh-player"></div>
+        <p class="stsh-desc">${T(c.desc.it,c.desc.en)}</p>
+      </div>
+    </div>`;
+  stRenderLez();
   stMostra();
 }
 function stApriDive(id){
@@ -3994,18 +4347,17 @@ document.getElementById('p-study').addEventListener('click',e=>{
   const salva=e.target.closest('[data-salva]');
   if(salva){e.stopPropagation();toast(T('Salvato nel tuo piano di studio','Saved to your study plan'));return;}
   const hero=e.target.closest('.st-hero');
-  if(hero){const c=ST_CORSI[0];apriAula({corso:c,lezIdx:c.resume});return;}
+  if(hero){const c=ST_CORSI[0];apriAula({corso:c,lezIdx:stResumeIdx(c)});return;}
   const card=e.target.closest('[data-corso]');
   if(card){stApriCorso(card.dataset.corso);return;}
   const dv=e.target.closest('[data-dive]');
   if(dv){stApriDive(dv.dataset.dive);return;}
+  const sx=e.target.closest('[data-stud]');
+  if(sx){const v=ST_STUD.find(x=>x.id===sx.dataset.stud);if(v)apriAula({dive:v});return;}
   const ch=e.target.closest('.chip[data-f]');
-  if(ch){
-    document.querySelectorAll('#st-chips .chip').forEach(b=>b.setAttribute('aria-pressed',b===ch));
-    const f=ch.dataset.f;
-    document.querySelectorAll('#st-gruppi [data-g]').forEach(g=>{
-      g.style.display=(f==='all'||g.dataset.g===f)?'':'none';});
-  }
+  if(ch){ST_MAT=ch.dataset.f;stFiltra();return;}
+  const vb=e.target.closest('#st-vie .via');
+  if(vb){ST_VIA=vb.dataset.via;ST_MAT='all';stFiltra();return;}
 });
 stSheet.addEventListener('click',e=>{
   if(e.target.closest('[data-chiudi]')){stChiudi();return;}
@@ -4013,6 +4365,12 @@ stSheet.addEventListener('click',e=>{
     if(!stStato)return;
     if(stStato.dive)apriAula({dive:stStato.dive});
     else apriAula({corso:stStato.corso,lezIdx:stStato.lezIdx});
+    return;
+  }
+  const pg=e.target.closest('[data-pg]');
+  if(pg&&stStato&&stStato.corso){
+    stStato.pag=(stStato.pag||0)+(+pg.dataset.pg);
+    stRenderLez();
     return;
   }
   const r=e.target.closest('[data-lez]');
@@ -4040,20 +4398,131 @@ function auSalva(){try{localStorage.setItem(bdKey(),JSON.stringify(AULA.board));
 function auSalvaEv(){try{localStorage.setItem(evKey(),JSON.stringify(AULA.ev));}catch(e){}}
 function auCarica(){
   AULA.board=[];AULA.ev={};
-  try{const b=localStorage.getItem(bdKey());if(b)AULA.board=JSON.parse(b)||[];}catch(e){}
+  try{const b=localStorage.getItem(bdKey());if(b)AULA.board=auMigra(JSON.parse(b)||[]);}catch(e){}
   try{const v=localStorage.getItem(evKey());if(v)AULA.ev=JSON.parse(v)||{};}catch(e){}
 }
 function auEmbedBase(){
   if(AULA.dive)return 'https://www.youtube-nocookie.com/embed/'+AULA.dive.yt+'?autoplay=1&rel=0';
-  const c=AULA.corso,l=c.lez[AULA.lezIdx];
+  const c=AULA.corso,l=stLezDi(c,AULA.lezIdx);
   return l.yt?('https://www.youtube-nocookie.com/embed/'+l.yt+'?autoplay=1&rel=0')
     :('https://www.youtube-nocookie.com/embed/videoseries?list='+c.playlist+'&index='+l.idx+'&autoplay=1&rel=0');
 }
-function auPlayer(start){
-  auEl('aula-player').innerHTML='<iframe src="'+auEmbedBase()+(start?('&start='+Math.floor(start)):'')+
-    '" title="Player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+/* --- player con l'API ufficiale di YouTube (player sul dominio no-cookie).
+   Serve per tre cose chieste: salti ±10/±30 s, ripresa da dove eri
+   rimasto e karaoke della trascrizione. Lo script dell'API parte solo
+   quando si apre l'aula (tutto nasce dal clic, come da decisione sui
+   contenuti). Se non arriva — per esempio offline — si torna al
+   riquadro semplice e i comandi si nascondono. */
+let YT_ATTESA=null;
+function ytCarica(){
+  if(YT_ATTESA)return YT_ATTESA;
+  YT_ATTESA=new Promise(res=>{
+    if(window.YT&&window.YT.Player){res(true);return;}
+    window.onYouTubeIframeAPIReady=()=>res(true);
+    const s=document.createElement('script');
+    s.src='https://www.youtube.com/iframe_api';
+    s.addEventListener('error',()=>res(false));
+    document.head.appendChild(s);
+    setTimeout(()=>res(!!(window.YT&&window.YT.Player)),5000);
+  });
+  return YT_ATTESA;
 }
-function auSeek(sec){auPlayer(sec);}
+const riprKey=()=>'ec_riprendi::'+AULA.chiave;
+function auPlayerVia(){
+  if(AULA.timer){clearInterval(AULA.timer);AULA.timer=null;}
+  if(AULA.player){try{AULA.player.destroy&&AULA.player.destroy();}catch(e){}AULA.player=null;}
+  AULA.kcap=AULA.kpar=null;
+  const cm=auEl('aula-comandi');if(cm)cm.classList.remove('via');
+}
+function auPlayerSemplice(start){
+  const box=auEl('aula-player');if(!box)return;
+  box.innerHTML='<iframe src="'+auEmbedBase()+(start?('&start='+Math.floor(start)):'')+'" title="Player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  const cm=auEl('aula-comandi');if(cm)cm.classList.add('via');
+}
+function auPlayer(start){
+  auPlayerVia();
+  const box=auEl('aula-player');if(!box)return;
+  box.innerHTML='<div id="yt-nido"></div>';
+  const chiave=AULA.chiave;
+  ytCarica().then(ok=>{
+    if(AULA.chiave!==chiave||!document.getElementById('yt-nido'))return;
+    if(!ok){auPlayerSemplice(start);return;}
+    const vars={autoplay:1,rel:0,playsinline:1};
+    let vid;
+    if(AULA.dive)vid=AULA.dive.yt;
+    else{
+      const l=stLezDi(AULA.corso,AULA.lezIdx);
+      if(l.yt)vid=l.yt;
+      else{vars.listType='playlist';vars.list=AULA.corso.playlist;vars.index=l.idx-1;}
+    }
+    if(start)vars.start=Math.floor(start);
+    try{
+      AULA.player=new YT.Player('yt-nido',{
+        host:'https://www.youtube-nocookie.com',
+        width:'100%',height:'100%',
+        videoId:vid,playerVars:vars,
+        events:{onReady:auOrologio,onStateChange:auOrologio}
+      });
+    }catch(e){auPlayerSemplice(start);}
+  });
+}
+function auTempo(){
+  try{return (AULA.player&&AULA.player.getCurrentTime)?AULA.player.getCurrentTime():null;}
+  catch(e){return null;}
+}
+function auOrologio(){
+  if(AULA.timer)return;
+  AULA.timer=setInterval(()=>{
+    const t=auTempo();if(t==null)return;
+    if(t>15){try{localStorage.setItem(riprKey(),String(Math.floor(t)));}catch(e){}}
+    auKaraoke(t);
+  },700);
+}
+function auSeek(sec){
+  if(AULA.player&&AULA.player.seekTo){
+    try{
+      AULA.player.seekTo(sec,true);
+      try{localStorage.setItem(riprKey(),String(Math.floor(sec)));}catch(e){}
+      return;
+    }catch(e){}
+  }
+  auPlayer(sec);
+}
+/* karaoke: il capitolo e il paragrafo che il video sta attraversando si
+   illuminano e la trascrizione scorre da sola (si ferma se scorri tu). */
+function auKaraoke(t){
+  if(AULA.amb!=='prof'||!AULA.tr)return;
+  const box=auEl('tr-corpo');if(!box)return;
+  const cap=AULA.tr.cap;if(!cap||!cap.length)return;
+  let ci=0;
+  for(let i=0;i<cap.length;i++){if(t>=cap[i].s)ci=i;}
+  const fine=(ci+1<cap.length)?cap[ci+1].s:(cap[ci].s+300);
+  const np=Math.max(1,cap[ci].par.length);
+  let pi=Math.floor((t-cap[ci].s)/Math.max(1,fine-cap[ci].s)*np);
+  pi=Math.min(np-1,Math.max(0,pi));
+  if(AULA.kcap===ci&&AULA.kpar===pi)return;
+  AULA.kcap=ci;AULA.kpar=pi;
+  box.querySelectorAll('.ora').forEach(x=>x.classList.remove('ora'));
+  const capEl=box.querySelector('.tr-cap[data-ci="'+ci+'"]');
+  const parEl=box.querySelector('.tr-p[data-cap="'+ci+'"][data-p="'+pi+'"]');
+  if(capEl)capEl.classList.add('ora');
+  if(parEl){
+    parEl.classList.add('ora');
+    if(Date.now()-(AULA.scrolloMano||0)>6000){
+      AULA.scrolloAuto=Date.now();
+      try{parEl.scrollIntoView({block:'center',behavior:'smooth'});}catch(e){}
+    }
+  }
+}
+auEl('aula-comandi').addEventListener('click',e=>{
+  const b=e.target.closest('[data-salto]');if(!b)return;
+  const t=auTempo();
+  if(t==null){toast(T('I comandi si accendono appena il video parte.','Controls come alive once the video starts.'));return;}
+  auSeek(Math.max(0,t+(+b.dataset.salto)));
+});
+auEl('tr-corpo').addEventListener('scroll',()=>{
+  if(Date.now()-(AULA.scrolloAuto||0)>900)AULA.scrolloMano=Date.now();
+},{passive:true});
 function auTransKey(){return AULA.dive?('d:'+AULA.dive.id):(AULA.corso.id+':'+AULA.lezIdx);}
 /* segnaposto: dove la trascrizione vera non e` ancora arrivata, lorem ipsum
    con capitoli finti calcolati sulla durata della lezione */
@@ -4075,7 +4544,7 @@ function auDurSec(d){
   return m?(+m[1])*60:3000;
 }
 function trFinta(){
-  const d=AULA.dive?AULA.dive.d:AULA.corso.lez[AULA.lezIdx].d;
+  const d=AULA.dive?AULA.dive.d:stLezDi(AULA.corso,AULA.lezIdx).d;
   const tot=auDurSec(d);
   let seme=0;for(const ch of AULA.chiave)seme=(seme+ch.charCodeAt(0))%LOREM.length;
   return {finta:true,
@@ -4087,48 +4556,119 @@ function auRenderTrans(){
   let tr=(typeof ST_TRANS!=='undefined')?ST_TRANS[auTransKey()]:null;
   const finta=!tr;
   if(finta)tr=trFinta();
-  auEl('tr-fonte').textContent=finta?'Lorem ipsum \u00b7 placeholder':tr.fonte;
-  const avviso=finta?`<p class="tr-finta-avviso">${T('Testo segnaposto \u00b7 la trascrizione vera arriva con i dati del corso','Placeholder text \u00b7 the real transcription ships with the course data')}</p>`:'';
+  AULA.tr=tr;AULA.kcap=AULA.kpar=null;
+  auEl('tr-fonte').textContent=finta?'Lorem ipsum · placeholder':tr.fonte;
+  const avviso=finta?`<p class="tr-finta-avviso">${T('Testo segnaposto · la trascrizione vera arriva con i dati del corso','Placeholder text · the real transcription ships with the course data')}</p>`:'';
   box.innerHTML=avviso+tr.cap.map((c,ci)=>
-    `<button class="tr-cap" data-sec="${c.s}"><span class="tt">${auMMSS(c.s)}</span><b>${esc(c.t)}</b></button>`+
+    `<button class="tr-cap" data-ci="${ci}" data-sec="${c.s}"><span class="tt">${auMMSS(c.s)}</span><b>${esc(c.t)}</b><i class="tr-onda" aria-hidden="true"></i></button>`+
     c.par.map((p,pi)=>{
       const sv=AULA.ev[ci+':'+pi];
       return `<p class="tr-p" data-cap="${ci}" data-p="${pi}">${sv||esc(p)}</p>`;
     }).join('')
   ).join('');
+  box.scrollTop=0;
 }
-function auCardHTML(c,i){
-  const col=c.tipo==='ev'?'--pf:var(--menta-s)':'--pf:var(--lavanda-s)';
-  const tempo=(c.tipo==='ev'&&typeof c.sec==='number')?
-    `<button class="bd-tempo" data-bd-sec="${c.sec}">${auMMSS(c.sec)}</button>`:'';
-  const fonte=c.tipo==='ev'?T('Trascrizione','Transcription'):T('Nota libera','Free note');
-  const quote=c.tipo==='ev'?`<div class="bd-quote">${esc(c.testo)}</div>`:'';
-  return `<div class="bd-card${c.tipo==='nota'?' nota':''}" style="${col}" data-bd="${i}">
-    <div class="bd-capo">${tempo}<span class="bd-fonte">${fonte}</span>
-      <button class="bd-x" data-bd-x="${i}" aria-label="${T('Elimina','Delete')}">\u2715</button></div>
-    ${quote}
-    <textarea class="bd-nota" data-bd-nota="${i}" placeholder="${c.tipo==='ev'?T('I tuoi appunti su questo passaggio\u2026','Your notes on this passage\u2026'):T('Scrivi qui il tuo appunto\u2026','Write your note here\u2026')}">${esc(c.nota||'')}</textarea>
-  </div>`;
+/* --- il foglio: un bloc notes unico, sempre scrivibile.
+   Le sottolineature dalla trascrizione atterrano a capo come citazioni,
+   con la freccia accanto per l'appunto in linea. Tutto viene salvato e
+   ricostruito come TESTO, mai come codice (regola P3). */
+function auConta(){
+  const n=(AULA.board||[]).filter(c=>c.t==='ev').length;
+  auEl('bd-conta').textContent=n?(n+' '+T(n===1?'sottolineatura':'sottolineature',n===1?'highlight':'highlights')):'';
 }
-function auCresci(ta){ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';}
-function auRenderBoard(foco,nuovo){
-  const lista=auEl('bd-lista');
-  auEl('bd-conta').textContent=AULA.board.length?(AULA.board.length+' '+T('schede','cards')):'';
-  if(!AULA.board.length){
-    lista.innerHTML=`<div class="bd-vuota"><div class="segno">\u201C \u201D</div>
-      ${T('La board \u00e8 vuota. Evidenzia un passaggio della trascrizione, oppure premi \u00abNota\u00bb per un appunto libero.','The board is empty. Highlight a passage in the transcription, or press \u201CNote\u201D for a free note.')}</div>`;
-    return;
+function auMigra(v){
+  if(!Array.isArray(v))return [];
+  return v.map(c=>{
+    if(c&&(c.t==='ev'||c.t==='txt'))return c;
+    if(c&&c.tipo==='ev')return {t:'ev',testo:c.testo||'',sec:(typeof c.sec==='number')?c.sec:null,nota:c.nota||''};
+    if(c&&c.tipo==='nota')return {t:'txt',x:c.nota||''};
+    return {t:'txt',x:''};
+  });
+}
+function auRigaEv(testo,sec,nota){
+  const r=document.createElement('div');r.className='zn-riga';
+  const chip=document.createElement('span');chip.className='zn-ev';chip.setAttribute('contenteditable','false');
+  if(typeof sec==='number'){
+    chip.dataset.sec=String(sec);
+    const tm=document.createElement('button');tm.type='button';tm.className='zn-tempo';
+    tm.dataset.bdSec=String(sec);tm.textContent=auMMSS(sec);
+    chip.appendChild(tm);
   }
-  lista.innerHTML=AULA.board.map(auCardHTML).join('');
-  lista.querySelectorAll('.bd-nota').forEach(auCresci);
-  if(typeof nuovo==='number'){
-    const nc=lista.querySelector('[data-bd="'+nuovo+'"]');
-    if(nc){nc.classList.add('atterra');try{nc.scrollIntoView({block:'nearest',behavior:'smooth'});}catch(e){}}
+  const fr=document.createElement('span');fr.className='zn-frase';fr.textContent=testo;chip.appendChild(fr);
+  const x=document.createElement('button');x.type='button';x.className='zn-x';
+  x.setAttribute('aria-label',T('Togli dal foglio','Remove from the sheet'));x.textContent='✕';
+  chip.appendChild(x);
+  const frec=document.createElement('span');frec.className='zn-frec';frec.setAttribute('contenteditable','false');frec.textContent='→';
+  r.appendChild(chip);r.appendChild(frec);
+  r.appendChild(document.createTextNode(nota&&nota.length?nota:' '));
+  return r;
+}
+function auRenderBoard(){
+  const f=auEl('bd-foglio');if(!f)return;
+  f.innerHTML='';
+  (AULA.board||[]).forEach(c=>{
+    if(c.t==='ev'){f.appendChild(auRigaEv(c.testo,c.sec,c.nota));return;}
+    String(c.x||'').split('\n').forEach(ln=>{
+      const d=document.createElement('div');d.className='zn-txt';
+      if(ln)d.textContent=ln;else d.appendChild(document.createElement('br'));
+      f.appendChild(d);
+    });
+  });
+  if(!f.childNodes.length){
+    const d=document.createElement('div');d.className='zn-txt';
+    d.appendChild(document.createElement('br'));f.appendChild(d);
   }
-  if(typeof foco==='number'){
-    const ta=lista.querySelector('[data-bd-nota="'+foco+'"]');
-    if(ta){ta.focus();}
-  }
+  auConta();
+}
+function auSerializza(){
+  const f=auEl('bd-foglio');if(!f)return;
+  const out=[];let buf=null;
+  const chiudi=()=>{if(buf!=null){out.push({t:'txt',x:buf.join('\n')});buf=null;}};
+  const notaDi=r=>{
+    let s='';
+    r.childNodes.forEach(k=>{
+      if(k.nodeType===3)s+=k.textContent;
+      else if(k.nodeType===1&&!k.classList.contains('zn-ev')&&!k.classList.contains('zn-frec'))s+=k.textContent;
+    });
+    return s.replace(/ /g,' ').replace(/\s+$/,'').replace(/^\s+/,'');
+  };
+  f.childNodes.forEach(n=>{
+    if(n.nodeType===3){if(buf==null)buf=[];buf.push(n.textContent);return;}
+    if(n.nodeType!==1)return;
+    const eChip=n.classList&&n.classList.contains('zn-ev');
+    const chip=eChip?n:(n.querySelector?n.querySelector('.zn-ev'):null);
+    if(chip){
+      chiudi();
+      const fr=chip.querySelector('.zn-frase');
+      const ds=chip.dataset.sec;
+      out.push({t:'ev',
+        testo:fr?fr.textContent:'',
+        sec:(ds!==undefined&&ds!=='')?+ds:null,
+        nota:eChip?'':notaDi(n)});
+    }else{
+      if(buf==null)buf=[];
+      buf.push((n.textContent||'').replace(/ /g,' '));
+    }
+  });
+  chiudi();
+  AULA.board=out;
+  auSalva();auConta();
+}
+let bdRit=null;
+function auSalvaPoi(){clearTimeout(bdRit);bdRit=setTimeout(auSerializza,350);}
+function auInserisciEv(testo,sec){
+  const f=auEl('bd-foglio');if(!f)return;
+  const r=auRigaEv(testo,(typeof sec==='number')?sec:null,'');
+  f.appendChild(r);
+  auSerializza();
+  try{
+    f.focus();
+    const fine=r.lastChild;
+    const rng=document.createRange();
+    rng.setStart(fine,fine.textContent.length);rng.collapse(true);
+    const sel=window.getSelection();sel.removeAllRanges();sel.addRange(rng);
+    r.scrollIntoView({block:'nearest'});
+  }catch(e){}
 }
 function apriAula(o){
   AULA.corso=o.corso||null;AULA.dive=o.dive||null;AULA.lezIdx=o.lezIdx||0;
@@ -4138,23 +4678,29 @@ function apriAula(o){
     testa.textContent=AULA.dive.kick;tit.textContent=AULA.dive.tit;
     testa.style.cssText=stCol('dive');
   }else{
-    const c=AULA.corso,l=c.lez[AULA.lezIdx];
+    const c=AULA.corso,l=stLezDi(c,AULA.lezIdx);
     testa.textContent=c.uniEti+' \u00b7 '+c.code+' \u00b7 L'+(AULA.lezIdx+1);
     tit.textContent=l.t;
     testa.style.cssText=stCol(c.materia);
   }
-  auEl('st-aula').style.cssText=AULA.dive?stCol('dive'):stCol(AULA.corso.materia);
-  auCarica();auPlayer(0);auRenderTrans();auRenderBoard();
-  const trBox=auEl('aula-tr');
-  const stretto=(typeof matchMedia==='function')?matchMedia('(max-width:980px)').matches:false;
-  trBox.classList.toggle('chiusa',stretto);
-  auEl('tr-testa').setAttribute('aria-expanded',!trBox.classList.contains('chiusa'));
-  auEl('st-aula').classList.add('on');
+  AULA.amb=(AULA.dive&&AULA.dive.stud)?'stud':'prof';
+  const radice=auEl('st-aula');
+  radice.style.cssText=AULA.dive?stCol(AULA.dive.stud?'stud':'dive'):stCol(AULA.corso.materia);
+  radice.classList.toggle('amb-stud',AULA.amb==='stud');
+  auCarica();
+  let daDove=0;
+  try{const r=+(localStorage.getItem('ec_riprendi::'+AULA.chiave)||0);if(r>15)daDove=Math.max(0,r-3);}catch(e){}
+  auPlayer(daDove);
+  if(daDove)toast(T('Riprendi da ','Resuming from ')+auMMSS(daDove));
+  if(AULA.amb==='prof'){auRenderTrans();auRenderBoard();}
+  scrCarica();scrApplica(false);
+  radice.classList.add('on');
   document.body.classList.add('st-blocco');
   auEl('aula-corpo')&&(auEl('aula-corpo').scrollTop=0);
 }
 function chiudiAula(){
   auEl('st-aula').classList.remove('on');
+  auPlayerVia();
   auEl('aula-player').innerHTML='';
   auEl('ev-float').classList.remove('on');
   if(!stSheet.classList.contains('on'))document.body.classList.remove('st-blocco');
@@ -4167,30 +4713,45 @@ auEl('aula-indietro').addEventListener('click',()=>{
     else stApriCorso(AULA.corso.id,AULA.lezIdx);
   }
 });
-auEl('tr-testa').addEventListener('click',()=>{
-  const t=auEl('aula-tr');t.classList.toggle('chiusa');
-  auEl('tr-testa').setAttribute('aria-expanded',!t.classList.contains('chiusa'));
-});
+/* (v2) la trascrizione non si comprime più con un clic: è un pannello
+   della scrivania, si sposta dal bordo alto e si ridimensiona dall'angolo. */
 auEl('tr-corpo').addEventListener('click',e=>{
   const cap=e.target.closest('.tr-cap');
   if(cap){auSeek(+cap.dataset.sec);return;}
 });
 /* board: bottoni e note */
-auEl('bd-nota').addEventListener('click',()=>{
-  AULA.board.push({tipo:'nota',testo:'',nota:''});
-  auSalva();auRenderBoard(AULA.board.length-1,AULA.board.length-1);
+const bdFoglio=document.getElementById('bd-foglio');
+bdFoglio.addEventListener('input',auSalvaPoi);
+bdFoglio.addEventListener('blur',auSerializza);
+bdFoglio.addEventListener('paste',e=>{
+  /* si incolla solo testo: qualunque cosa arrivi resta testo (P3) */
+  e.preventDefault();
+  const s=(e.clipboardData||window.clipboardData);
+  const testo=s?String(s.getData('text')||''):'';
+  if(!testo)return;
+  try{document.execCommand('insertText',false,testo);}
+  catch(err){
+    try{
+      const sel=window.getSelection();
+      if(sel.rangeCount){const rg=sel.getRangeAt(0);rg.deleteContents();rg.insertNode(document.createTextNode(testo));}
+    }catch(e2){}
+  }
+  auSalvaPoi();
 });
-document.getElementById('bd-lista').addEventListener('input',e=>{
-  const ta=e.target.closest('[data-bd-nota]');
-  if(!ta)return;auCresci(ta);
-  const i=+ta.dataset.bdNota;
-  if(AULA.board[i]){AULA.board[i].nota=ta.value;auSalva();}
-});
-document.getElementById('bd-lista').addEventListener('click',e=>{
-  const x=e.target.closest('[data-bd-x]');
-  if(x){AULA.board.splice(+x.dataset.bdX,1);auSalva();auRenderBoard();return;}
+bdFoglio.addEventListener('click',e=>{
+  const x=e.target.closest('.zn-x');
+  if(x){
+    const riga=x.closest('.zn-riga'),chip=x.closest('.zn-ev');
+    if(chip){
+      const frec=riga?riga.querySelector('.zn-frec'):null;
+      chip.remove();if(frec)frec.remove();
+      if(riga&&!riga.textContent.trim())riga.remove();
+      auSerializza();
+    }
+    return;
+  }
   const tm=e.target.closest('[data-bd-sec]');
-  if(tm){auSeek(+tm.dataset.bdSec);}
+  if(tm){e.preventDefault();auSeek(+tm.dataset.bdSec);}
 });
 /* evidenziatore sulla trascrizione */
 const evFloat=auEl('ev-float');
@@ -4239,9 +4800,8 @@ auEl('ev-add').addEventListener('click',()=>{
   const tr=ST_TRANS[auTransKey()];
   const sec=tr&&tr.cap[+host.dataset.cap]?tr.cap[+host.dataset.cap].s:null;
   mark.classList.add('pulsa');
-  AULA.board.push({tipo:'ev',testo:evSelInfo.txt,sec:sec,nota:''});
-  auSalva();auRenderBoard(undefined,AULA.board.length-1);
-  toast(T('Aggiunto alla board.','Added to your board.'));
+  auInserisciEv(evSelInfo.txt,sec);
+  toast(T('Sul foglio: scrivi dopo la freccia.','On the sheet: write after the arrow.'));
 });
 auEl('ev-del').addEventListener('click',()=>{
   const sel=window.getSelection();
@@ -4256,32 +4816,244 @@ auEl('ev-del').addEventListener('click',()=>{
   }
   sel.removeAllRanges();evFloat.classList.remove('on');
 });
-/* stampa in identita` ERUA */
-auEl('bd-stampa').addEventListener('click',()=>{
-  if(!AULA.board.length){toast(T('La board \u00e8 vuota: niente da stampare.','The board is empty \u2014 nothing to print yet.'));return;}
+/* ============ LEARN v3 — schede studenti, scomparti che si scambiano, lavagna ============ */
+function stStudHTML(v){
+  return `<button class="st-dive st-nasce" data-stud="${v.id}">
+    <span class="q"><img src="${stThumb(v.yt)}" alt="" loading="lazy"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="testi">
+      <span class="kick" style="color:var(--rosa-s)">${v.kick} <i class="st-segna">${T('segnaposto','placeholder')}</i></span>
+      <span class="tit">${esc(v.tit)}</span>
+      <span class="sub">${T(v.sub.it,v.sub.en)}</span>
+    </span>
+    <span class="d">${v.d}</span>
+  </button>`;
+}
+function stPrestoHTML(p){
+  return `<div class="st-presto st-nasce"><span class="ico">${p.ico}</span>
+    <span class="testi"><b>${T(p.t.it,p.t.en)}</b><span>${T(p.d.it,p.d.en)}</span></span>
+    <span class="presto-pill">${T('In arrivo','Coming soon')}</span></div>`;
+}
+
+/* --- filtro della vetrina: via (chi parla) separata dalla materia --- */
+var ST_VIA='prof',ST_MAT='all';
+function stFiltra(){
+  document.querySelectorAll('#st-vie .via').forEach(b=>{
+    b.setAttribute('aria-pressed',String(b.dataset.via===ST_VIA));});
+  const chips=document.getElementById('st-chips');
+  if(chips)chips.style.display=(ST_VIA==='stud')?'none':'';
+  const eroe=document.getElementById('st-hero-slot');
+  if(eroe)eroe.style.display=(ST_VIA==='stud')?'none':'';
+  document.querySelectorAll('#st-chips .chip').forEach(b=>{
+    b.setAttribute('aria-pressed',String(b.dataset.f===ST_MAT));});
+  document.querySelectorAll('#st-gruppi [data-g]').forEach(g=>{
+    const id=g.dataset.g;let vis;
+    if(id==='stud')vis=(ST_VIA==='stud');
+    else vis=(ST_VIA==='prof')&&(ST_MAT==='all'||id===ST_MAT);
+    g.style.display=vis?'':'none';});
+}
+stFiltra();
+
+/* --- scomparti dell'aula: si scambiano di posto, si accendono e si
+       spengono con l'occhio; quando uno sparisce gli altri si allargano --- */
+const SCR_PANNS={prof:['video','tr','board'],stud:['video']};
+const SCR_NOMI={video:{it:'Lezione',en:'Lesson'},tr:{it:'Trascrizione',en:'Transcription'},board:{it:'Board',en:'Board'}};
+const SLOT_AREE={3:['a','b','c'],2:['a','b'],1:['a']};
+const scrKey=()=>'ec_aula_scomparti::'+AULA.amb;
+let SCR={ordine:[],via:[]};
+const scrStretto=()=>(typeof matchMedia==='function')&&matchMedia('(max-width:980px)').matches;
+function scrCarica(){
+  SCR={ordine:SCR_PANNS[AULA.amb].slice(),via:[]};
+  try{const s=localStorage.getItem(scrKey());
+    if(s){const j=JSON.parse(s);
+      if(j&&Array.isArray(j.ordine)){
+        const val=SCR_PANNS[AULA.amb];
+        const ord=j.ordine.filter(x=>val.includes(x));
+        val.forEach(x=>{if(!ord.includes(x))ord.push(x);});
+        SCR.ordine=ord;
+        SCR.via=(Array.isArray(j.via)?j.via:[]).filter(x=>val.includes(x));
+        if(SCR.via.length>=SCR.ordine.length)SCR.via=[];
+      }}}catch(e){}
+}
+function scrSalva(){try{localStorage.setItem(scrKey(),JSON.stringify(SCR));}catch(e){}}
+function scrFoto(){
+  const f={};
+  document.querySelectorAll('#aula-scrivania .pann:not(.via)').forEach(p=>{
+    f[p.dataset.pann]=p.getBoundingClientRect();});
+  return f;
+}
+function scrFlip(prima){
+  document.querySelectorAll('#aula-scrivania .pann:not(.via)').forEach(p=>{
+    if(typeof p.animate!=='function')return;
+    const a=prima[p.dataset.pann];if(!a)return;
+    const b=p.getBoundingClientRect();if(!b.width||!a.width)return;
+    const dx=a.left-b.left,dy=a.top-b.top,sx=a.width/b.width,sy=a.height/b.height;
+    if(Math.abs(dx)<1&&Math.abs(dy)<1&&Math.abs(sx-1)<.01&&Math.abs(sy-1)<.01)return;
+    p.style.transformOrigin='top left';
+    p.animate([{transform:`translate(${dx}px,${dy}px) scale(${sx},${sy})`},{transform:'none'}],
+      {duration:360,easing:'cubic-bezier(.2,.7,.2,1)'});
+  });
+}
+function scrApplica(anima){
+  const scr=document.getElementById('aula-scrivania');if(!scr)return;
+  const vis=SCR.ordine.filter(id=>!SCR.via.includes(id));
+  const prima=anima?scrFoto():null;
+  scr.dataset.slots=String(vis.length||1);
+  document.querySelectorAll('#aula-scrivania .pann').forEach(p=>{
+    const id=p.dataset.pann;
+    const att=SCR_PANNS[AULA.amb].includes(id)&&!SCR.via.includes(id);
+    p.classList.toggle('via',!att);
+    p.style.gridArea=att?SLOT_AREE[vis.length][vis.indexOf(id)]:'';
+  });
+  scrDock();
+  if(prima)scrFlip(prima);
+  if(typeof requestAnimationFrame==='function')requestAnimationFrame(()=>auAdatta());
+}
+const OCCHIO_ON='<svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3.2"/></svg>';
+const OCCHIO_OFF='<svg viewBox="0 0 24 24"><path d="M4 4l16 16"/><path d="M9.9 5.9A9.4 9.4 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17.6 17.6 0 0 1-3.2 3.9M6 8.3A16.6 16.6 0 0 0 2.5 12S6 18.5 12 18.5c1 0 2-.2 2.9-.5"/></svg>';
+function scrDock(){
+  const d=auEl('aula-dock');if(!d)return;
+  d.innerHTML='';
+  if(AULA.amb!=='prof')return;
+  SCR.ordine.forEach(id=>{
+    const via=SCR.via.includes(id);
+    const b=document.createElement('button');
+    b.className='dk'+(via?' via':'');
+    b.dataset.dk=id;
+    b.setAttribute('aria-pressed',String(!via));
+    b.title=via?T('Mostra','Show'):T('Nascondi','Hide');
+    b.innerHTML=via?OCCHIO_OFF:OCCHIO_ON;
+    const s=document.createElement('span');
+    s.textContent=T(SCR_NOMI[id].it,SCR_NOMI[id].en);
+    b.appendChild(s);
+    d.appendChild(b);
+  });
+}
+auEl('aula-dock').addEventListener('click',e=>{
+  const b=e.target.closest('[data-dk]');if(!b)return;
+  const id=b.dataset.dk,i=SCR.via.indexOf(id);
+  if(i>=0)SCR.via.splice(i,1);
+  else{
+    const vis=SCR.ordine.filter(x=>!SCR.via.includes(x));
+    if(vis.length<=1){toast(T('Almeno uno scomparto resta acceso.','At least one compartment stays on.'));return;}
+    SCR.via.push(id);
+  }
+  scrSalva();scrApplica(true);
+});
+auEl('aula-reset').addEventListener('click',()=>{
+  try{localStorage.removeItem(scrKey());}catch(e){}
+  scrCarica();scrApplica(true);
+  toast(T('Scomparti riordinati.','Compartments tidied up.'));
+});
+/* trascina uno scomparto sopra un altro: si scambiano di posto */
+let scrGhost=null,scrDest=null;
+const scrEl=document.getElementById('aula-scrivania');
+scrEl.addEventListener('pointerdown',e=>{
+  if(scrStretto()||AULA.amb!=='prof')return;
+  const hd=e.target.closest('.pann-testa');if(!hd)return;
+  if(e.target.closest('button'))return;
+  const p=e.target.closest('.pann');if(!p||p.classList.contains('via'))return;
+  scrDest=null;
+  p.classList.add('presa');
+  scrEl.classList.add('trascina');
+  scrGhost=document.createElement('div');
+  scrGhost.className='scr-ghost';
+  scrGhost.textContent=T(SCR_NOMI[p.dataset.pann].it,SCR_NOMI[p.dataset.pann].en);
+  document.body.appendChild(scrGhost);
+  const mv=ev=>{
+    scrGhost.style.left=ev.clientX+'px';
+    scrGhost.style.top=ev.clientY+'px';
+    scrGhost.style.opacity='1';
+    const sotto=document.elementFromPoint(ev.clientX,ev.clientY);
+    const dest=sotto?sotto.closest('#aula-scrivania .pann:not(.via)'):null;
+    if(scrDest&&scrDest!==dest)scrDest.classList.remove('meta');
+    scrDest=(dest&&dest!==p)?dest:null;
+    if(scrDest)scrDest.classList.add('meta');
+  };
+  const su=()=>{
+    removeEventListener('pointermove',mv);
+    scrEl.classList.remove('trascina');
+    p.classList.remove('presa');
+    if(scrGhost){scrGhost.remove();scrGhost=null;}
+    if(scrDest){
+      scrDest.classList.remove('meta');
+      const a=SCR.ordine.indexOf(p.dataset.pann),b=SCR.ordine.indexOf(scrDest.dataset.pann);
+      if(a>=0&&b>=0){
+        const x=SCR.ordine[a];SCR.ordine[a]=SCR.ordine[b];SCR.ordine[b]=x;
+        scrSalva();scrApplica(true);
+      }
+      scrDest=null;
+    }
+  };
+  addEventListener('pointermove',mv);
+  addEventListener('pointerup',su,{once:true});
+  e.preventDefault();
+});
+/* il video tiene sempre le proporzioni 16:9: si adagia nello scomparto */
+function auAdatta(){
+  const corpo=document.querySelector('[data-pann="video"] .corpo-video');
+  const pl=document.getElementById('aula-player');
+  if(!corpo||!pl)return;
+  if(scrStretto()){pl.style.width='';pl.style.height='';return;}
+  const r=corpo.getBoundingClientRect();
+  if(!r.width||!r.height){pl.style.width='';pl.style.height='';return;}
+  const largh=r.width-2,alt=r.height-2;
+  let w=largh,h=w*9/16;
+  if(h>alt){h=alt;w=h*16/9;}
+  pl.style.width=Math.round(w)+'px';
+  pl.style.height=Math.round(h)+'px';
+}
+if(typeof ResizeObserver!=='undefined'){
+  const cv=document.querySelector('[data-pann="video"] .corpo-video');
+  if(cv)new ResizeObserver(()=>auAdatta()).observe(cv);
+}
+addEventListener('resize',()=>auAdatta());
+
+/* stampa in identita` ERUA: un aiuto condiviso e due pulsanti */
+function auStampa(titolo,dentroHTML){
   const tit=auEl('aula-tit').textContent,kick=auEl('aula-kick').textContent;
   const data=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
   let h='<div style="font-family:Inter,Arial,sans-serif;color:#20201D;max-width:740px;margin:0 auto;padding:30px 24px;-webkit-print-color-adjust:exact;print-color-adjust:exact">';
-  h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#1E7A54;margin-bottom:10px">ERUA connect \u00b7 Study</div>';
+  h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#1E7A54;margin-bottom:10px">ERUA connect · Learn · '+esc(titolo)+'</div>';
   h+='<h1 style="font-family:Fraunces,Georgia,serif;font-size:26px;font-weight:600;letter-spacing:-.02em;margin:0 0 4px">'+esc(tit)+'</h1>';
-  h+='<div style="font-size:11px;color:#7A776F;margin-bottom:14px">'+esc(kick)+' \u00b7 '+data+'</div>';
-  h+='<div style="border-top:3px double #20201D;margin-bottom:24px"></div>';
-  AULA.board.forEach(c=>{
-    h+='<div style="display:flex;gap:14px;margin-bottom:18px;page-break-inside:avoid;break-inside:avoid">';
-    h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:12px;color:#1E7A54;min-width:46px;text-align:right;padding-top:2px">'+
-      (c.tipo==='ev'&&typeof c.sec==='number'?auMMSS(c.sec):'\u270E')+'</div>';
-    h+='<div style="flex:1;border-left:3px solid '+(c.tipo==='ev'?'#A8E6C9':'#CFC4F7')+';padding:0 0 12px 14px;border-bottom:1px solid #E7E0D5">';
-    if(c.tipo==='ev')h+='<p style="font-family:\'Source Serif 4\',Georgia,serif;font-size:14px;margin:0 0 6px;line-height:1.55">\u201C'+esc(c.testo)+'\u201D</p>';
-    if(c.nota&&c.nota.trim())h+='<p style="font-size:12.5px;margin:0;line-height:1.6;white-space:pre-wrap;color:#20201D">\u21B3 '+esc(c.nota)+'</p>';
-    h+='</div></div>';
-  });
+  h+='<div style="font-size:11px;color:#7A776F;margin-bottom:14px">'+esc(kick)+' · '+data+'</div>';
+  h+='<div style="border-top:3px double #20201D;margin-bottom:22px"></div>';
+  h+=dentroHTML;
   h+='<div style="margin-top:28px;border-top:3px double #20201D;padding-top:12px;text-align:center;font-family:Fraunces,Georgia,serif;font-style:italic;font-size:13px;color:#1E7A54">ERUA connect</div></div>';
   const fr=document.createElement('iframe');
   fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
   document.body.appendChild(fr);
   const d=fr.contentWindow.document;d.open();
-  d.write('<html><head><title>Board \u2014 ERUA connect</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600&family=JetBrains+Mono&family=Source+Serif+4&display=swap" rel="stylesheet"></head><body style="margin:0;background:#fff">'+h+'<scr'+'ipt>onload=()=>setTimeout(()=>print(),450)</scr'+'ipt></body></html>');
-  d.close();setTimeout(()=>{document.body.removeChild(fr);},10000);
+  d.write('<html><head><title>'+esc(titolo)+' — ERUA connect</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&family=Source+Serif+4:ital@0;1&display=swap" rel="stylesheet"></head><body style="margin:0;background:#fff">'+h+'<scr'+'ipt>onload=()=>setTimeout(()=>print(),450)</scr'+'ipt></body></html>');
+  d.close();setTimeout(()=>{try{document.body.removeChild(fr);}catch(e){}},15000);
+}
+auEl('bd-stampa').addEventListener('click',()=>{
+  auSerializza();
+  const pieno=(AULA.board||[]).some(c=>c.t==='ev'||(c.x&&c.x.trim()));
+  if(!pieno){toast(T('Il foglio è vuoto: niente da stampare.','The sheet is empty — nothing to print yet.'));return;}
+  let h='';
+  AULA.board.forEach(c=>{
+    if(c.t==='ev'){
+      h+='<div style="display:flex;gap:14px;margin:14px 0;page-break-inside:avoid;break-inside:avoid">';
+      h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:12px;color:#1E7A54;min-width:46px;text-align:right;padding-top:2px">'+((typeof c.sec==='number')?auMMSS(c.sec):'✎')+'</div>';
+      h+='<div style="flex:1;border-left:3px solid #A8E6C9;padding:0 0 10px 14px;border-bottom:1px solid #E7E0D5">';
+      h+='<p style="font-family:\'Source Serif 4\',Georgia,serif;font-size:14px;margin:0 0 6px;line-height:1.55">“'+esc(c.testo)+'”</p>';
+      if(c.nota&&c.nota.trim())h+='<p style="font-size:12.5px;margin:0;line-height:1.6;color:#20201D">→ '+esc(c.nota)+'</p>';
+      h+='</div></div>';
+    }else if(c.x&&c.x.trim()){
+      h+='<p style="font-size:13px;line-height:1.75;margin:10px 0;white-space:pre-wrap">'+esc(c.x)+'</p>';
+    }
+  });
+  auStampa(T('Board','Board'),h);
+});
+auEl('tr-stampa').addEventListener('click',()=>{
+  if(!AULA.tr){toast(T('Nessuna trascrizione da stampare.','No transcription to print.'));return;}
+  let h='';
+  if(AULA.tr.finta)h+='<p style="font-size:11px;color:#7A776F;font-style:italic;margin:0 0 14px">'+esc(T('Testo segnaposto: la trascrizione vera arriva con i dati del corso.','Placeholder text: the real transcription ships with the course data.'))+'</p>';
+  AULA.tr.cap.forEach(c=>{
+    h+='<h2 style="font-family:Fraunces,Georgia,serif;font-size:16px;margin:22px 0 6px;page-break-after:avoid;break-after:avoid"><span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;color:#1E7A54;margin-right:8px">'+auMMSS(c.s)+'</span>'+esc(c.t)+'</h2>';
+    c.par.forEach(p=>{h+='<p style="font-family:\'Source Serif 4\',Georgia,serif;font-size:13.5px;line-height:1.7;margin:0 0 10px;text-align:justify">'+esc(p)+'</p>';});
+  });
+  auStampa(T('Trascrizione','Transcription'),h);
 });
 
 /* avvio: l'interfaccia parte in inglese */
