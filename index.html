@@ -122,18 +122,28 @@
     border-radius:99px;font-size:.75rem;font-weight:700;padding:.32rem .75rem;color:var(--testo)}
   #lang-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6}
   #lang-btn:focus-visible{outline:2px solid var(--live);outline-offset:2px}
-  #lang-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:70;
-    background:var(--sup);border:1px solid var(--bordo2);border-radius:16px;padding:.4rem;
-    display:flex;flex-direction:column;gap:.08rem;min-width:190px;
-    max-height:min(70vh,420px);overflow-y:auto;overscroll-behavior:contain;
-    box-shadow:0 18px 40px rgba(0,0,0,.5)}
+  #lang-menu{position:absolute;right:0;top:calc(100% + .5rem);z-index:70;
+    background:var(--sup);border:1px solid var(--bordo2);border-radius:18px;padding:.5rem;
+    display:flex;flex-direction:column;gap:.1rem;min-width:214px;
+    max-height:min(70vh,440px);overflow-y:auto;overscroll-behavior:contain;
+    box-shadow:var(--ombra-alta)}
   #lang-menu[hidden]{display:none}
-  #lang-menu button{display:block;width:100%;text-align:left;font-size:.9rem;font-weight:600;
-    line-height:1.25;padding:.5rem .7rem;border-radius:10px;background:none;border:0;
-    color:var(--testo);white-space:nowrap;cursor:pointer}
+  #lang-menu button{display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+    width:100%;text-align:left;font-family:var(--font-sans);font-size:.9rem;font-weight:600;
+    line-height:1.2;padding:.55rem .7rem;border-radius:12px;background:none;border:0;
+    color:var(--testo);white-space:nowrap;cursor:pointer;transition:background .12s ease,color .12s ease}
   #lang-menu button:hover{background:var(--sup2)}
   #lang-menu button[aria-pressed="true"]{background:var(--menta);color:var(--menta-s)}
+  #lang-menu button[aria-pressed="true"]::after{content:"\2713";font-size:.8rem;font-weight:700;opacity:.85}
   #lang-menu button:focus-visible{outline:2px solid var(--live);outline-offset:-2px}
+  .lang-nota{display:flex;gap:.5rem;align-items:flex-start;margin:.05rem .3rem .35rem;
+    padding:.1rem .05rem .55rem;border-bottom:1px solid var(--bordo2)}
+  .lang-nota-badge{flex:0 0 auto;margin-top:.05rem;font-family:var(--font-mono);font-size:.56rem;
+    font-weight:700;letter-spacing:.03em;line-height:1;padding:.22rem .32rem;border-radius:6px;
+    background:var(--menta);color:var(--menta-s)}
+  .lang-nota-eyebrow{display:block;font-family:var(--font-mono);font-size:.55rem;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--testo2)}
+  .lang-nota-testo{display:block;margin-top:.15rem;font-size:.75rem;line-height:1.35;color:var(--testo2)}
   /* la barra di Google Translate non deve spostare la pagina */
   body{top:0 !important}
   .skiptranslate iframe{display:none !important}
@@ -1834,6 +1844,13 @@
         <span id="lang-label">EN</span>
       </button>
       <div id="lang-menu" hidden>
+        <div class="lang-nota" translate="no">
+          <span class="lang-nota-badge" aria-hidden="true">AI</span>
+          <div>
+            <span class="lang-nota-eyebrow">AI translation</span>
+            <span class="lang-nota-testo">Auto-generated — it may contain mistakes.</span>
+          </div>
+        </div>
         <button data-lang="en" aria-pressed="true">English</button>
         <button data-lang="it">Italiano</button>
         <button data-lang="fr">Français</button>
@@ -1858,27 +1875,27 @@
 <nav class="tabs" role="tablist" aria-label="Sezioni">
   <button class="tab-btn" role="tab" data-tab="social" aria-selected="true">
     <svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><path d="M9.6 8.4 14.4 8.4M8.2 9.6 10.6 14.6M15.8 9.6 13.4 14.6"/></svg>
-    <span>Social</span>
+    <span translate="no" data-i18n="Social">Social</span>
   </button>
   <button class="tab-btn" role="tab" data-tab="news" aria-selected="false">
     <svg viewBox="0 0 24 24"><path d="M4 4h13v16H4zM17 9h3v9a2 2 0 0 1-3 0zM7 8h7M7 12h7M7 16h5"/></svg>
-    <span data-it="News" data-en="News">News</span>
+    <span translate="no" data-i18n="News">News</span>
   </button>
   <button class="tab-btn" role="tab" data-tab="magazine" aria-selected="false">
     <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 9h16M9 9v10"/></svg>
-    <span data-it="Magazine" data-en="Magazine">Magazine</span>
+    <span translate="no" data-i18n="Magazine">Magazine</span>
   </button>
   <button class="tab-btn" role="tab" data-tab="study" aria-selected="false">
     <svg viewBox="0 0 24 24"><path d="M3 9.2 12 5l9 4.2-9 4.2z"/><path d="M6.8 11.4v3.9c0 1.5 2.3 2.7 5.2 2.7s5.2-1.2 5.2-2.7v-3.9"/><path d="M21 9.2v5.2"/></svg>
-    <span data-it="Learn" data-en="Learn">Learn</span>
+    <span translate="no" data-i18n="Learn">Learn</span>
   </button>
   <button class="tab-btn" role="tab" data-tab="chat" aria-selected="false">
     <svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>
-    <span>Chat</span>
+    <span translate="no" data-i18n="Chat">Chat</span>
   </button>
   <button class="tab-btn" role="tab" data-tab="profilo" aria-selected="false">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6"/></svg>
-    <span data-it="Profilo" data-en="Profile">Profilo</span>
+    <span translate="no" data-i18n="Profile">Profile</span>
   </button>
 </nav>
 
@@ -1895,7 +1912,7 @@
   <div class="storie" id="storie" role="group" aria-label="Filtra per ateneo"></div>
 
   <div class="barra-feed">
-    <button class="chip" id="chip-tutti" aria-pressed="true">All</button>
+    <button class="chip" id="chip-tutti" aria-pressed="true" translate="no" data-i18n="All">All</button>
     <button class="chip" id="chip-salvati" aria-pressed="false">🔖 Saved <span id="n-salvati">0</span></button>
   </div>
   <div class="griglia" id="feed-griglia"></div>
@@ -1936,13 +1953,13 @@
     <svg class="asf3" viewBox="0 0 200 200"><ellipse cx="100" cy="100" rx="100" ry="94" fill="var(--pesca)"/></svg>
   </div>
   <div class="aula-testa">
-    <button class="aula-indietro" id="aula-indietro">← <span data-it="Indietro" data-en="Back">Indietro</span></button>
+    <button class="aula-indietro" id="aula-indietro">← <span translate="no" data-i18n="Back">Back</span></button>
     <div class="aula-titoli">
       <div class="kick" id="aula-kick"></div>
       <div class="tit" id="aula-tit"></div>
     </div>
     <div class="aula-dock" id="aula-dock" role="group" aria-label="Compartments"></div>
-    <button class="aula-reset" id="aula-reset"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.9-6.6"/><path d="M3 4v5h5"/></svg><span data-it="Riordina" data-en="Tidy up">Riordina</span></button>
+    <button class="aula-reset" id="aula-reset"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.9-6.6"/><path d="M3 4v5h5"/></svg><span translate="no" data-i18n="Tidy up">Tidy up</span></button>
     <button class="aula-aiuto" id="aula-aiuto" aria-label="How this works" title="How this works">?</button>
     <button class="stsh-x" id="aula-x" aria-label="Close">✕</button>
   </div>
@@ -1959,7 +1976,7 @@
     </section>
     <section class="pann" data-pann="tr" id="aula-tr" aria-label="Transcription">
       <header class="pann-testa" id="tr-testa"><span class="pt-punto" style="background:var(--lavanda-s)"></span><b>Transcription</b><span class="fonte" id="tr-fonte"></span><span class="pt-tratto" aria-hidden="true"></span>
-        <button class="bd-btn" id="tr-stampa"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg><span data-it="Stampa" data-en="Print">Stampa</span></button>
+        <button class="bd-btn" id="tr-stampa"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg><span translate="no" data-i18n="Print">Print</span></button>
         <span class="pt-presa" aria-hidden="true">⋮⋮</span></header>
       <div class="pann-corpo tr-corpo" id="tr-corpo"></div>
     </section>
@@ -1975,22 +1992,22 @@
   </div>
   <div class="aula-tut" id="aula-tut" hidden>
     <div class="aula-tut-card" role="dialog" aria-modal="true" aria-label="How the study room works">
-      <div class="aula-tut-kick">Your study room</div>
-      <h3>Build it the way you like</h3>
+      <div class="aula-tut-kick" translate="no" data-i18n="Your study room">Your study room</div>
+      <h3 translate="no" data-i18n="Build it the way you like">Build it the way you like</h3>
       <ul class="aula-tut-lista">
         <li><span class="ic" aria-hidden="true">⇄</span><div><b>Drag to swap.</b> Grab a panel by its header and drop it onto another to switch their places.</div></li>
         <li><span class="ic" aria-hidden="true">👁</span><div><b>Show or hide.</b> Use the eyes at the top to turn a panel off — the others grow to fill the space. One panel always stays on.</div></li>
         <li><span class="ic" aria-hidden="true">✎</span><div><b>Highlight &amp; note.</b> Select any line in the transcription and hit Highlight: it drops onto the board with an arrow, ready for your own note.</div></li>
         <li><span class="ic" aria-hidden="true">✓</span><div><b>It saves itself.</b> Your layout and your notes stay on this device — close and come back, they're still here.</div></li>
       </ul>
-      <button class="aula-tut-ok" id="aula-tut-ok">Got it</button>
+      <button class="aula-tut-ok" id="aula-tut-ok" translate="no" data-i18n="Got it">Got it</button>
     </div>
   </div>
 </div>
 <div class="ev-float" id="ev-float">
-  <button id="ev-add"><svg viewBox="0 0 24 24"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4l8 8Z"/></svg><span data-it="Evidenzia" data-en="Highlight">Evidenzia</span></button>
+  <button id="ev-add"><svg viewBox="0 0 24 24"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4l8 8Z"/></svg><span translate="no" data-i18n="Highlight">Highlight</span></button>
   <span class="sep"></span>
-  <button id="ev-del"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span data-it="Rimuovi" data-en="Remove">Rimuovi</span></button>
+  <button id="ev-del"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg><span translate="no" data-i18n="Remove">Remove</span></button>
 </div>
 
 <!-- ============ NEWS ============ -->
@@ -2014,7 +2031,7 @@
   <!-- i post -->
   <div class="sc-lista" id="thread-lista"></div>
 
-  <button class="sc-piu" id="btn-apri-scrivi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span data-it="Nuovo post" data-en="New post">New post</span></button>
+  <button class="sc-piu" id="btn-apri-scrivi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span translate="no" data-i18n="New post">New post</span></button>
 
   <div class="sc-foglio" id="sc-foglio" hidden>
     <div class="sc-foglio-int">
@@ -2026,7 +2043,7 @@
       </div>
       <textarea id="board-testo" placeholder="What do you need? A teammate, a room, someone to travel with…" aria-label="New post"></textarea>
       <div class="fila sc-fila" id="chips-tag" style="padding:.7rem 0 0;margin:0"></div>
-      <button class="sc-btn" id="btn-pubblica" style="width:100%;margin-top:.8rem" data-it="Pubblica" data-en="Post">Post</button>
+      <button class="sc-btn" id="btn-pubblica" style="width:100%;margin-top:.8rem" translate="no" data-i18n="Post">Post</button>
     </div>
   </div>
 </section>
@@ -2072,7 +2089,7 @@
   <div class="amb-griglia" id="amb-griglia"></div>
 
   <div class="mega-call">
-    <span class="display" data-it="Diventa contributor" data-en="Become a contributor">Diventa contributor</span>
+    <span class="display" translate="no" data-i18n="Become a contributor">Become a contributor</span>
     <p data-it="Catch-Up cerca articoli, foto, video e audio dagli studenti di tutti gli 8 atenei. Max 1000 parole." data-en="Catch-Up wants articles, photos, videos and audio from students of all 8 universities. Max 1,000 words.">Catch-Up cerca articoli, foto, video e audio dagli studenti di tutti gli 8 atenei. Max 1000 parole.</p>
     <a href="https://erua-eui.eu/get-involved/as-a-student/student-engagement/erua-student-magazine/" data-it="Candidati" data-en="Apply">Candidati</a>
   </div>
@@ -2092,7 +2109,7 @@
   <div class="art" id="art"></div>
   <p class="suggerimento-gesti" data-it="Trascina a destra per il prossimo · a sinistra per tornare" data-en="Swipe right for the next story · left to go back">Swipe right for the next story · left to go back</p>
   <div class="art-piede">
-    <button class="art-grosso indietro" id="btn-indietro2">← <span data-it="Torna al Magazine" data-en="Back to Magazine">Back to Magazine</span></button>
+    <button class="art-grosso indietro" id="btn-indietro2">← <span translate="no" data-i18n="Back to Magazine">Back to Magazine</span></button>
     <button class="art-grosso avanti" id="btn-avanti2"></button>
   </div>
 </section>
@@ -2136,6 +2153,31 @@
 <script>
 let LANG='en';
 const T=(it,en)=>LANG==='it'?it:en;
+/* --- traduzioni proprie della UI fissa, indipendenti da Google Translate --- */
+let UILANG='en';
+const UI = {
+ "Social":{en:"Social",it:"Social",fr:"Social",de:"Social",es:"Social",bg:"Общност",pl:"Społeczność",el:"Κοινότητα",lt:"Bendruomenė",da:"Socialt",pt:"Social","zh-CN":"社区",ar:"المجتمع",hi:"सोशल",ru:"Сообщество",ja:"ソーシャル"},
+ "News":{en:"News",it:"Notizie",fr:"Actualités",de:"News",es:"Noticias",bg:"Новини",pl:"Aktualności",el:"Νέα",lt:"Naujienos",da:"Nyheder",pt:"Notícias","zh-CN":"新闻",ar:"الأخبار",hi:"समाचार",ru:"Новости",ja:"ニュース"},
+ "Magazine":{en:"Magazine",it:"Magazine",fr:"Magazine",de:"Magazin",es:"Revista",bg:"Списание",pl:"Magazyn",el:"Περιοδικό",lt:"Žurnalas",da:"Magasin",pt:"Revista","zh-CN":"杂志",ar:"المجلة",hi:"पत्रिका",ru:"Журнал",ja:"マガジン"},
+ "Learn":{en:"Learn",it:"Impara",fr:"Apprendre",de:"Lernen",es:"Aprender",bg:"Учене",pl:"Nauka",el:"Μάθηση",lt:"Mokytis",da:"Lær",pt:"Aprender","zh-CN":"学习",ar:"تعلّم",hi:"सीखें",ru:"Учёба",ja:"学ぶ"},
+ "Chat":{en:"Chat",it:"Chat",fr:"Chat",de:"Chat",es:"Chat",bg:"Чат",pl:"Czat",el:"Συνομιλία",lt:"Pokalbiai",da:"Chat",pt:"Chat","zh-CN":"聊天",ar:"الدردشة",hi:"चैट",ru:"Чат",ja:"チャット"},
+ "Profile":{en:"Profile",it:"Profilo",fr:"Profil",de:"Profil",es:"Perfil",bg:"Профил",pl:"Profil",el:"Προφίλ",lt:"Profilis",da:"Profil",pt:"Perfil","zh-CN":"个人资料",ar:"الملف الشخصي",hi:"प्रोफ़ाइल",ru:"Профиль",ja:"プロフィール"},
+ "All":{en:"All",it:"Tutti",fr:"Tout",de:"Alle",es:"Todos",bg:"Всички",pl:"Wszystko",el:"Όλα",lt:"Visi",da:"Alle",pt:"Todos","zh-CN":"全部",ar:"الكل",hi:"सभी",ru:"Все",ja:"すべて"},
+ "Back":{en:"Back",it:"Indietro",fr:"Retour",de:"Zurück",es:"Atrás",bg:"Назад",pl:"Wstecz",el:"Πίσω",lt:"Atgal",da:"Tilbage",pt:"Voltar","zh-CN":"返回",ar:"رجوع",hi:"वापस",ru:"Назад",ja:"戻る"},
+ "Tidy up":{en:"Tidy up",it:"Riordina",fr:"Ranger",de:"Aufräumen",es:"Ordenar",bg:"Подреди",pl:"Uporządkuj",el:"Τακτοποίηση",lt:"Sutvarkyti",da:"Ryd op",pt:"Organizar","zh-CN":"整理",ar:"ترتيب",hi:"व्यवस्थित करें",ru:"Прибрать",ja:"整頓"},
+ "Print":{en:"Print",it:"Stampa",fr:"Imprimer",de:"Drucken",es:"Imprimir",bg:"Печат",pl:"Drukuj",el:"Εκτύπωση",lt:"Spausdinti",da:"Udskriv",pt:"Imprimir","zh-CN":"打印",ar:"طباعة",hi:"प्रिंट करें",ru:"Печать",ja:"印刷"},
+ "Your study room":{en:"Your study room",it:"La tua study room",fr:"Votre salle d'étude",de:"Dein Lernraum",es:"Tu sala de estudio",bg:"Твоята стая за учене",pl:"Twój pokój do nauki",el:"Το δωμάτιο μελέτης σου",lt:"Tavo mokymosi kambarys",da:"Dit studierum",pt:"A tua sala de estudo","zh-CN":"你的自习室",ar:"غرفة الدراسة الخاصة بك",hi:"आपका अध्ययन कक्ष",ru:"Твоя учебная комната",ja:"あなたの学習ルーム"},
+ "Build it the way you like":{en:"Build it the way you like",it:"Costruiscila come vuoi",fr:"Aménagez-la comme vous voulez",de:"Gestalte ihn nach deinem Geschmack",es:"Constrúyela a tu gusto",bg:"Подреди я както искаш",pl:"Urządź go po swojemu",el:"Φτιάξ' το όπως θέλεις",lt:"Susikurk jį kaip nori",da:"Indret det, som du vil",pt:"Monta-a como quiseres","zh-CN":"按你喜欢的方式布置",ar:"رتّبها كما يحلو لك",hi:"इसे अपने अनुसार बनाएं",ru:"Обустрой на свой вкус",ja:"好きなように作ろう"},
+ "Got it":{en:"Got it",it:"Ho capito",fr:"J'ai compris",de:"Verstanden",es:"Entendido",bg:"Разбрах",pl:"Rozumiem",el:"Το κατάλαβα",lt:"Supratau",da:"Forstået",pt:"Entendi","zh-CN":"知道了",ar:"فهمت",hi:"समझ गया",ru:"Понятно",ja:"わかりました"},
+ "Highlight":{en:"Highlight",it:"Evidenzia",fr:"Surligner",de:"Markieren",es:"Resaltar",bg:"Маркирай",pl:"Zaznacz",el:"Επισήμανση",lt:"Paryškinti",da:"Fremhæv",pt:"Destacar","zh-CN":"高亮",ar:"تظليل",hi:"हाइलाइट करें",ru:"Выделить",ja:"ハイライト"},
+ "Remove":{en:"Remove",it:"Rimuovi",fr:"Supprimer",de:"Entfernen",es:"Quitar",bg:"Премахни",pl:"Usuń",el:"Αφαίρεση",lt:"Pašalinti",da:"Fjern",pt:"Remover","zh-CN":"移除",ar:"إزالة",hi:"हटाएं",ru:"Удалить",ja:"削除"},
+ "New post":{en:"New post",it:"Nuovo post",fr:"Nouveau post",de:"Neuer Beitrag",es:"Nueva publicación",bg:"Нова публикация",pl:"Nowy post",el:"Νέα ανάρτηση",lt:"Naujas įrašas",da:"Nyt opslag",pt:"Nova publicação","zh-CN":"新帖子",ar:"منشور جديد",hi:"नई पोस्ट",ru:"Новый пост",ja:"新規投稿"},
+ "Post":{en:"Post",it:"Pubblica",fr:"Publier",de:"Posten",es:"Publicar",bg:"Публикувай",pl:"Opublikuj",el:"Δημοσίευση",lt:"Skelbti",da:"Slå op",pt:"Publicar","zh-CN":"发布",ar:"نشر",hi:"पोस्ट करें",ru:"Опубликовать",ja:"投稿"},
+ "Become a contributor":{en:"Become a contributor",it:"Diventa contributor",fr:"Devenir contributeur",de:"Mitwirkender werden",es:"Hazte colaborador",bg:"Стани сътрудник",pl:"Zostań współtwórcą",el:"Γίνε συντελεστής",lt:"Tapk bendraautoriu",da:"Bliv bidragyder",pt:"Torna-te colaborador","zh-CN":"成为贡献者",ar:"كن مساهمًا",hi:"योगदानकर्ता बनें",ru:"Стать автором",ja:"寄稿者になる"},
+ "Back to Magazine":{en:"Back to Magazine",it:"Torna al Magazine",fr:"Retour au Magazine",de:"Zurück zum Magazin",es:"Volver a la revista",bg:"Обратно към списанието",pl:"Powrót do magazynu",el:"Πίσω στο περιοδικό",lt:"Atgal į žurnalą",da:"Tilbage til magasinet",pt:"Voltar à revista","zh-CN":"返回杂志",ar:"العودة إلى المجلة",hi:"पत्रिका पर वापस",ru:"Назад к журналу",ja:"マガジンに戻る"}
+};
+function tuiGet(k){ const e=UI[k]; if(e&&e[UILANG]) return e[UILANG]; return (e&&e.en)?e.en:k; }
+function applicaUIStatica(){ document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent=tuiGet(el.getAttribute('data-i18n')); }); }
 const ATENEI=["UNIMC","MRU","NBU","EUV","SWPS","ULPGC","UAEGEAN","UP8"];
 const CITTA={UNIMC:"Macerata",MRU:"Vilnius",NBU:"Sofia",EUV:"Frankfurt (Oder)",
              SWPS:"Warsaw",ULPGC:"Las Palmas",UAEGEAN:"Mytilene",UP8:"Saint-Denis",
@@ -3787,6 +3829,7 @@ function applicaLingua(l, tentativi){
   return false;
 }
 function traduci(l){
+  UILANG=l; applicaUIStatica();
   document.getElementById('lang-label').textContent=(l==='zh-CN'?'ZH':l.toUpperCase());
   document.querySelectorAll('#lang-menu button').forEach(b=>
     b.setAttribute('aria-pressed', b.dataset.lang===l));
@@ -4739,6 +4782,8 @@ function tutApri(){const t=auEl('aula-tut');if(t)t.hidden=false;}
 function tutChiudi(){const t=auEl('aula-tut');if(t)t.hidden=true;}
 function tutForse(){
   if(AULA.amb!=='prof')return;
+  /* su mobile il mini-tutorial non parte da solo: resta richiamabile col "?" */
+  if(window.matchMedia('(max-width:760px)').matches)return;
   tutApri();
 }
 auEl('aula-aiuto').addEventListener('click',tutApri);
@@ -5154,6 +5199,7 @@ auEl('tr-stampa').addEventListener('click',()=>{
 
 /* avvio: l'interfaccia parte in inglese */
 document.querySelectorAll('[data-it]').forEach(el=>{ el.textContent=el.dataset.en; });
+applicaUIStatica();
 renderTutto();
 let hashIniziale='social';
 try{if(location.hash)hashIniziale=location.hash.slice(1);}catch(err){}
