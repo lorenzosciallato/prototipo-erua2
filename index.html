@@ -1320,6 +1320,16 @@
     max-height:90dvh;overflow:auto;background:var(--sup);border-radius:26px 26px 0 0;box-shadow:var(--ombra-alta);
     z-index:71;transition:transform .4s cubic-bezier(.2,.75,.25,1);padding:0 1.15rem 1.4rem;overscroll-behavior:contain}
   .st-sheet.on{transform:translate(-50%,0)}
+  /* su schermi ampi non e' un pannello a scomparsa dal basso ma un vero
+     pop-up centrato, con tutti e quattro i bordi e gli angoli visibili */
+  @media(min-width:760px){
+    .st-sheet{bottom:auto;top:50%;transform:translate(-50%,-46%) scale(.98);opacity:0;
+      border-radius:26px;max-height:88dvh;padding:0 1.6rem 1.6rem;
+      transition:transform .34s cubic-bezier(.2,.75,.25,1),opacity .28s}
+    .st-sheet.on{transform:translate(-50%,-50%) scale(1);opacity:1}
+    .st-sheet .presa{display:none}
+    .st-sheet .stsh-testa{border-radius:26px 26px 0 0;padding-top:1.4rem}
+  }
   .st-sheet .presa{width:44px;height:5px;border-radius:99px;background:var(--bordo2);margin:.6rem auto .2rem}
   .stsh-testa{position:sticky;top:0;background:var(--sup);z-index:2;display:flex;align-items:flex-start;
     gap:.8rem;padding:.6rem 0 .7rem}
@@ -1903,10 +1913,6 @@
 
 <!-- ============ STUDY (vetrina) ============ -->
 <section class="pannello" id="p-study" role="tabpanel">
-  <div class="intesta">
-    <span class="display">Learn</span>
-    <p class="st-sotto" data-it="Le lezioni dei docenti e le voci degli studenti degli 8 atenei. Un posto solo per seguire, riprendere e immergersi." data-en="Lessons from the professors, voices from the students, across the 8 universities. One place to follow, resume and dive in.">Le lezioni dei docenti e le voci degli studenti degli 8 atenei. Un posto solo per seguire, riprendere e immergersi.</p>
-  </div>
   <div class="opp-testa">
     <span class="demo-mini" data-it="Vetrina · corsi aperti veri dai docenti, segnaposto per l’area studenti" data-en="Showcase · real open courses from professors, placeholders for the student area">Vetrina · corsi aperti veri dai docenti, segnaposto per l’area studenti</span>
   </div>
@@ -1987,10 +1993,6 @@
 
 <!-- ============ NEWS ============ -->
 <section class="pannello" id="p-news" role="tabpanel">
-  <div class="intesta">
-    <span class="display" data-it="News dagli atenei" data-en="News from the universities">News dagli atenei</span>
-    <p data-it="Bandi, scadenze e comunicati degli 8 atenei dell'alleanza, in un posto solo" data-en="Calls, deadlines and announcements from the 8 alliance universities, in one place">Bandi, scadenze e comunicati degli 8 atenei dell'alleanza, in un posto solo</p>
-  </div>
   <div class="opp-testa">
     <span class="demo-mini" data-it="Demo · contenuti di esempio da verificare, non un feed reale" data-en="Demo · sample content to verify, not a live feed">Demo · contenuti di esempio da verificare, non un feed reale</span>
   </div>
@@ -4731,24 +4733,18 @@ function apriAula(o){
   auEl('aula-corpo')&&(auEl('aula-corpo').scrollTop=0);
   tutForse();
 }
-/* il mini-tutorial parte una volta sola, alla primissima apertura di
-   un'aula; dopo si richiama solo col "?". Il flag sta sul dispositivo. */
-const TUT_KEY='ec_tutorial_aula_visto';
+/* il mini-tutorial parte a ogni apertura di un'aula (lato professori);
+   resta comunque richiamabile col "?" e chiudibile con "Got it". */
 function tutApri(){const t=auEl('aula-tut');if(t)t.hidden=false;}
 function tutChiudi(){const t=auEl('aula-tut');if(t)t.hidden=true;}
 function tutForse(){
   if(AULA.amb!=='prof')return;
-  let visto=false;
-  try{visto=localStorage.getItem(TUT_KEY)==='1';}catch(e){}
-  if(!visto)tutApri();
+  tutApri();
 }
 auEl('aula-aiuto').addEventListener('click',tutApri);
-auEl('aula-tut-ok').addEventListener('click',()=>{
-  try{localStorage.setItem(TUT_KEY,'1');}catch(e){}
-  tutChiudi();
-});
+auEl('aula-tut-ok').addEventListener('click',tutChiudi);
 auEl('aula-tut').addEventListener('click',e=>{
-  if(e.target===auEl('aula-tut')){try{localStorage.setItem(TUT_KEY,'1');}catch(e){}tutChiudi();}
+  if(e.target===auEl('aula-tut'))tutChiudi();
 });
 function chiudiAula(){
   auEl('st-aula').classList.remove('on');
@@ -5103,13 +5099,23 @@ addEventListener('resize',()=>auAdatta());
 function auStampa(titolo,dentroHTML){
   const tit=auEl('aula-tit').textContent,kick=auEl('aula-kick').textContent;
   const data=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  /* marchio ERUA connect: lo stesso simbolo dell'header, in SVG, cosi'
+     il PDF porta il logo del sito e non solo il testo. */
+  const marchio='<svg viewBox="0 0 1020 932" width="26" height="24" style="display:block" aria-hidden="true">'
+    +'<path d="M404 0 L440 6 L483 20 L508 32 L524 42 L553 64 L581 92 L603 122 L624 162 L634 190 L643 238 L644 272 L641 308 L627 360 L604 406 L575 444 L550 468 L520 490 L495 504 L471 514 L445 522 L408 530 L408 532 L644 932 L0 932 L0 696 L308 532 L31 530 L31 0 Z" fill="#1E7A54"/>'
+    +'<g fill="none" stroke="#1E7A54" stroke-width="62" stroke-linecap="round"><path d="M714 176a230 230 0 0 1 0 380"/><path d="M846 76a385 385 0 0 1 0 580"/></g></svg>';
+  const testata='<div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">'+marchio
+    +'<span style="line-height:1"><b style="display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:15px;letter-spacing:.02em;color:#20201D">ERUA</b>'
+    +'<i style="font-family:\'JetBrains Mono\',monospace;font-style:normal;font-size:9px;letter-spacing:.25em;color:#1E7A54">connect</i></span></div>';
   let h='<div style="font-family:Inter,Arial,sans-serif;color:#20201D;max-width:740px;margin:0 auto;padding:30px 24px;-webkit-print-color-adjust:exact;print-color-adjust:exact">';
-  h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#1E7A54;margin-bottom:10px">ERUA connect · Learn · '+esc(titolo)+'</div>';
+  h+=testata;
+  h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#1E7A54;margin-bottom:10px">Learn · '+esc(titolo)+'</div>';
   h+='<h1 style="font-family:Fraunces,Georgia,serif;font-size:26px;font-weight:600;letter-spacing:-.02em;margin:0 0 4px">'+esc(tit)+'</h1>';
   h+='<div style="font-size:11px;color:#7A776F;margin-bottom:14px">'+esc(kick)+' · '+data+'</div>';
   h+='<div style="border-top:3px double #20201D;margin-bottom:22px"></div>';
   h+=dentroHTML;
-  h+='<div style="margin-top:28px;border-top:3px double #20201D;padding-top:12px;text-align:center;font-family:Fraunces,Georgia,serif;font-style:italic;font-size:13px;color:#1E7A54">ERUA connect</div></div>';
+  h+='<div style="margin-top:28px;border-top:3px double #20201D;padding-top:14px;display:flex;align-items:center;justify-content:center;gap:8px">'+marchio
+    +'<span style="font-family:Fraunces,Georgia,serif;font-style:italic;font-size:13px;color:#1E7A54">ERUA connect</span></div></div>';
   const fr=document.createElement('iframe');
   fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
   document.body.appendChild(fr);
