@@ -1753,6 +1753,10 @@
     padding:.42rem .85rem;cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s}
   .aula-comandi .cm:hover{transform:translateY(-1px);border-color:var(--ps,var(--menta-s));box-shadow:var(--ombra)}
   .aula-comandi .cm:active{transform:translateY(0) scale(.97)}
+  .aula-comandi .cm-torna{display:flex;align-items:center;gap:.4rem;border-color:var(--lavanda-s);color:var(--lavanda-s);margin-left:.3rem}
+  .aula-comandi .cm-torna svg{width:.85rem;height:.85rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .aula-comandi .cm-torna[hidden]{display:none}
+
   @media(max-width:980px){.aula-comandi{padding:.65rem 0 .1rem}}
 
   /* Karaoke sulla trascrizione */
@@ -1959,6 +1963,7 @@
         <button class="cm" data-salto="-10" title="−10 s">−10s</button>
         <button class="cm" data-salto="10" title="+10 s">+10s</button>
         <button class="cm" data-salto="30" title="+30 s">+30s</button>
+        <button class="cm cm-torna" id="aula-torna" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg><span data-it="Torna a" data-en="Back to">Torna a</span> <b id="aula-torna-t"></b></button>
       </div>
     </section>
     <section class="pann" data-pann="tr" id="aula-tr" aria-label="Transcription">
@@ -4476,6 +4481,23 @@ function ytCarica(){
   return YT_ATTESA;
 }
 const riprKey=()=>'ec_riprendi::'+AULA.chiave;
+const tornaKey=()=>'ec_torna::'+AULA.chiave;
+function auTornaMostra(){
+  const b=auEl('aula-torna');if(!b)return;
+  let v=null;
+  try{v=localStorage.getItem(tornaKey());}catch(e){}
+  if(v===null||v===''){b.hidden=true;return;}
+  auEl('aula-torna-t').textContent=auMMSS(+v);
+  b.hidden=false;
+}
+function auTornaSalva(sec){
+  try{localStorage.setItem(tornaKey(),String(Math.floor(sec)));}catch(e){}
+  auTornaMostra();
+}
+function auTornaPulisci(){
+  try{localStorage.removeItem(tornaKey());}catch(e){}
+  auTornaMostra();
+}
 function auPlayerVia(){
   if(AULA.timer){clearInterval(AULA.timer);AULA.timer=null;}
   if(AULA.player){try{AULA.player.destroy&&AULA.player.destroy();}catch(e){}AULA.player=null;}
@@ -4740,6 +4762,7 @@ function apriAula(o){
   try{const r=+(localStorage.getItem('ec_riprendi::'+AULA.chiave)||0);if(r>15)daDove=Math.max(0,r-3);}catch(e){}
   auPlayer(daDove);
   if(daDove)toast(T('Riprendi da ','Resuming from ')+auMMSS(daDove));
+  auTornaMostra();
   if(AULA.amb==='prof'){auRenderTrans();auRenderBoard();}
   scrCarica();scrApplica(false);
   radice.classList.add('on');
@@ -4799,7 +4822,19 @@ bdFoglio.addEventListener('click',e=>{
     return;
   }
   const tm=e.target.closest('[data-bd-sec]');
-  if(tm){e.preventDefault();auSeek(+tm.dataset.bdSec);}
+  if(tm){
+    e.preventDefault();
+    const ora=auTempo();
+    if(typeof ora==='number')auTornaSalva(ora);
+    auSeek(+tm.dataset.bdSec);
+  }
+});
+auEl('aula-torna').addEventListener('click',()=>{
+  let v=null;
+  try{v=localStorage.getItem(tornaKey());}catch(e){}
+  if(v===null||v==='')return;
+  auSeek(+v);
+  auTornaPulisci();
 });
 /* evidenziatore sulla trascrizione */
 const evFloat=auEl('ev-float');
@@ -4845,8 +4880,9 @@ auEl('ev-add').addEventListener('click',()=>{
   catch(err){toast(T('Seleziona un passaggio continuo, senza attraversare altre evidenziazioni.','Select a continuous passage, without crossing other highlights.'));return;}
   sel.removeAllRanges();evFloat.classList.remove('on');
   evPersisti(host);
+  const t0=auTempo();
   const tr=ST_TRANS[auTransKey()];
-  const sec=tr&&tr.cap[+host.dataset.cap]?tr.cap[+host.dataset.cap].s:null;
+  const sec=(typeof t0==='number')?Math.floor(t0):(tr&&tr.cap[+host.dataset.cap]?tr.cap[+host.dataset.cap].s:null);
   mark.classList.add('pulsa');
   auInserisciEv(evSelInfo.txt,sec);
   toast(T('Sul foglio: scrivi dopo la freccia.','On the sheet: write after the arrow.'));
@@ -5082,7 +5118,7 @@ auEl('bd-stampa').addEventListener('click',()=>{
   AULA.board.forEach(c=>{
     if(c.t==='ev'){
       h+='<div style="display:flex;gap:14px;margin:14px 0;page-break-inside:avoid;break-inside:avoid">';
-      h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:12px;color:#1E7A54;min-width:46px;text-align:right;padding-top:2px">'+((typeof c.sec==='number')?auMMSS(c.sec):'✎')+'</div>';
+      h+='<div style="font-family:\'JetBrains Mono\',monospace;font-size:12px;color:#1E7A54;min-width:46px;text-align:right;padding-top:2px">“</div>';
       h+='<div style="flex:1;border-left:3px solid #A8E6C9;padding:0 0 10px 14px;border-bottom:1px solid #E7E0D5">';
       h+='<p style="font-family:\'Source Serif 4\',Georgia,serif;font-size:14px;margin:0 0 6px;line-height:1.55">“'+esc(c.testo)+'”</p>';
       if(c.nota&&c.nota.trim())h+='<p style="font-size:12.5px;margin:0;line-height:1.6;color:#20201D">→ '+esc(c.nota)+'</p>';
