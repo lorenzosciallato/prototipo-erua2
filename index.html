@@ -88,7 +88,7 @@
 
   /* HEADER */
   header{
-    position:sticky;top:0;z-index:40;
+    position:sticky;top:0;z-index:60;
     background:var(--vetro);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border-bottom:1px solid var(--bordo);
     display:flex;align-items:center;justify-content:space-between;gap:.7rem;padding:.7rem 1rem;
@@ -123,12 +123,16 @@
   #lang-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6}
   #lang-btn:focus-visible{outline:2px solid var(--live);outline-offset:2px}
   #lang-menu{position:absolute;right:0;top:calc(100% + .4rem);z-index:70;
-    background:var(--sup);border:1px solid var(--bordo2);border-radius:16px;padding:.5rem;
-    display:grid;grid-template-columns:repeat(4,1fr);gap:.25rem;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+    background:var(--sup);border:1px solid var(--bordo2);border-radius:16px;padding:.4rem;
+    display:flex;flex-direction:column;gap:.08rem;min-width:190px;
+    max-height:min(70vh,420px);overflow-y:auto;overscroll-behavior:contain;
+    box-shadow:0 18px 40px rgba(0,0,0,.5)}
   #lang-menu[hidden]{display:none}
-  #lang-menu button{font-size:1.15rem;line-height:1;padding:.35rem;border-radius:10px;background:none;border:0}
+  #lang-menu button{display:block;width:100%;text-align:left;font-size:.9rem;font-weight:600;
+    line-height:1.25;padding:.5rem .7rem;border-radius:10px;background:none;border:0;
+    color:var(--testo);white-space:nowrap;cursor:pointer}
   #lang-menu button:hover{background:var(--sup2)}
-  #lang-menu button[aria-pressed="true"]{background:#fff}
+  #lang-menu button[aria-pressed="true"]{background:var(--menta);color:var(--menta-s)}
   #lang-menu button:focus-visible{outline:2px solid var(--live);outline-offset:-2px}
   /* la barra di Google Translate non deve spostare la pagina */
   body{top:0 !important}
@@ -1830,22 +1834,22 @@
         <span id="lang-label">EN</span>
       </button>
       <div id="lang-menu" hidden>
-        <button data-lang="en" title="English">🇬🇧</button>
-        <button data-lang="it" title="Italiano">🇮🇹</button>
-        <button data-lang="fr" title="Français">🇫🇷</button>
-        <button data-lang="de" title="Deutsch">🇩🇪</button>
-        <button data-lang="es" title="Español">🇪🇸</button>
-        <button data-lang="bg" title="Български">🇧🇬</button>
-        <button data-lang="pl" title="Polski">🇵🇱</button>
-        <button data-lang="el" title="Ελληνικά">🇬🇷</button>
-        <button data-lang="lt" title="Lietuvių">🇱🇹</button>
-        <button data-lang="da" title="Dansk">🇩🇰</button>
-        <button data-lang="pt" title="Português">🇵🇹</button>
-        <button data-lang="zh-CN" title="中文">🇨🇳</button>
-        <button data-lang="ar" title="العربية">🇸🇦</button>
-        <button data-lang="hi" title="हिन्दी">🇮🇳</button>
-        <button data-lang="ru" title="Русский">🇷🇺</button>
-        <button data-lang="ja" title="日本語">🇯🇵</button>
+        <button data-lang="en" aria-pressed="true">English</button>
+        <button data-lang="it">Italiano</button>
+        <button data-lang="fr">Français</button>
+        <button data-lang="de">Deutsch</button>
+        <button data-lang="es">Español</button>
+        <button data-lang="bg">Български</button>
+        <button data-lang="pl">Polski</button>
+        <button data-lang="el">Ελληνικά</button>
+        <button data-lang="lt">Lietuvių</button>
+        <button data-lang="da">Dansk</button>
+        <button data-lang="pt">Português</button>
+        <button data-lang="zh-CN">中文</button>
+        <button data-lang="ar">العربية</button>
+        <button data-lang="hi">हिन्दी</button>
+        <button data-lang="ru">Русский</button>
+        <button data-lang="ja">日本語</button>
       </div>
     </div>
   </div>
@@ -1913,9 +1917,7 @@
 
 <!-- ============ STUDY (vetrina) ============ -->
 <section class="pannello" id="p-study" role="tabpanel">
-  <div class="opp-testa">
-    <span class="demo-mini" data-it="Vetrina · corsi aperti veri dai docenti, segnaposto per l’area studenti" data-en="Showcase · real open courses from professors, placeholders for the student area">Vetrina · corsi aperti veri dai docenti, segnaposto per l’area studenti</span>
-  </div>
+
 
   <div class="st-vie" id="st-vie" role="group" aria-label="Areas"></div>
   <div class="storie st-atenei" id="st-atenei" role="group" aria-label="Universities"></div>
@@ -1993,9 +1995,7 @@
 
 <!-- ============ NEWS ============ -->
 <section class="pannello" id="p-news" role="tabpanel">
-  <div class="opp-testa">
-    <span class="demo-mini" data-it="Demo · contenuti di esempio da verificare, non un feed reale" data-en="Demo · sample content to verify, not a live feed">Demo · contenuti di esempio da verificare, non un feed reale</span>
-  </div>
+
   <div class="storie" id="news-atenei" role="group" aria-label="Filter by university"></div>
   <div class="news-conta" id="news-conta"></div>
   <div class="news-lista" id="news-lista"></div>
@@ -2055,7 +2055,7 @@
     <span class="anello"><span class="avatar">UNIMC</span></span>
     <div>
       <div class="nome" id="profilo-nick">—</div>
-      <div class="sotto" data-it="UNIMC · verificato con account di ateneo (demo)" data-en="UNIMC · verified with university account (demo)">UNIMC · verificato con account di ateneo (demo)</div>
+      <div class="sotto" data-it="UNIMC · verificato con account di ateneo" data-en="UNIMC · verified with university account">UNIMC · verificato con account di ateneo</div>
     </div>
   </div>
 
@@ -3523,7 +3523,7 @@ document.addEventListener('click',e=>{
     renderThread();return;
   }
   const dm=e.target.closest('.dm');
-  if(dm){toast(T('Messaggio a '+dm.dataset.nick+' (demo)','Message to '+dm.dataset.nick+' (demo)'));return;}
+  if(dm){toast(T('Messaggio a '+dm.dataset.nick,'Message to '+dm.dataset.nick));return;}
   const commenta=e.target.closest('.commenta');
   if(commenta){toast(T('Commenti non attivi nel prototipo','Comments are off in the prototype'));return;}
   const tg=e.target.closest('[data-toggle]');
@@ -4891,7 +4891,7 @@ function stFiltra(){
   const chips=document.getElementById('st-chips');
   if(chips)chips.style.display=(ST_VIA==='stud')?'none':'';
   const atenei=document.getElementById('st-atenei');
-  if(atenei)atenei.style.display=(ST_VIA==='stud')?'none':'';
+  if(atenei)atenei.style.display='';
   document.querySelectorAll('#st-chips .chip').forEach(b=>{
     b.setAttribute('aria-pressed',String(b.dataset.f===ST_MAT));});
   document.querySelectorAll('#st-gruppi [data-g]').forEach(g=>{
