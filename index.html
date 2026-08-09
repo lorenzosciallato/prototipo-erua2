@@ -657,7 +657,7 @@
      larghi quanto la pagina, i post in colonna a partire dal bordo sinistro */
   .sc-lista{display:flex;flex-direction:column;gap:1.2rem}
   #p-social .storie{padding:.5rem .2rem 1.2rem}
-  #p-social .fila{padding:.15rem .2rem 0;margin-bottom:1.9rem;gap:1.1rem}
+  #p-social .fila{display:flex;flex-wrap:wrap;padding:.15rem .2rem 0;margin-bottom:1.9rem;gap:.6rem}
   /* rete di sicurezza: se il browser ignora gap, restano i margini */
   #p-social .fila > .chip{margin-right:.35rem}
   #p-social .fila > .chip:last-child{margin-right:0}
@@ -1465,9 +1465,6 @@
     color:var(--testo2);font-size:.84rem;line-height:1.65}
   .bd-vuota .segno{font-family:var(--font-display);font-size:1.6rem;color:var(--testo2);opacity:.6}
 
-  .tr-finta-avviso{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--testo2);margin:1rem 0 .2rem;padding:.5rem .65rem;background:var(--sup2);border-radius:10px}
-
   /* ============ AULA PREMIUM — tutto in una schermata ============ */
   .aula-corpo{height:100%;min-height:0;overflow:hidden;padding:1rem 1.1rem 1.1rem;
     grid-template-columns:minmax(0,1fr) 410px}
@@ -1588,6 +1585,32 @@
   .aula-reset:hover{transform:translateY(-1px);box-shadow:var(--ombra)}
   .aula-reset svg{width:.85rem;height:.85rem;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
   .st-aula.amb-stud .aula-reset{display:none}
+  .aula-aiuto{width:2rem;height:2rem;border-radius:50%;border:1px solid var(--bordo2);background:var(--sup);
+    color:var(--testo);font-family:var(--font-display);font-weight:600;font-size:1rem;line-height:1;
+    display:grid;place-items:center;flex:0 0 auto}
+  .aula-aiuto:hover{transform:translateY(-1px);box-shadow:var(--ombra);border-color:var(--lavanda-s);color:var(--lavanda-s)}
+  .st-aula.amb-stud .aula-aiuto{display:none}
+  /* mini-tutorial: compare una volta sola alla prima apertura, poi si
+     richiama col "?". Testo solo in inglese (deroga voluta al bilingue). */
+  .aula-tut{position:absolute;inset:0;z-index:30;display:grid;place-items:center;padding:1.2rem;
+    background:rgba(20,18,14,.44);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+    animation:tutVelo .2s ease}
+  .aula-tut[hidden]{display:none}
+  @keyframes tutVelo{from{opacity:0}to{opacity:1}}
+  .aula-tut-card{background:var(--sup);border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.4);
+    max-width:440px;width:100%;padding:1.6rem 1.6rem 1.4rem;animation:tutsu .3s cubic-bezier(.2,.7,.2,1)}
+  @keyframes tutsu{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+  .aula-tut-kick{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lavanda-s)}
+  .aula-tut-card h3{font-family:var(--font-display);font-weight:600;font-size:1.35rem;letter-spacing:-.02em;margin:.25rem 0 1rem}
+  .aula-tut-lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.85rem}
+  .aula-tut-lista li{display:flex;gap:.8rem;align-items:flex-start;font-size:.86rem;line-height:1.5;color:var(--testo2)}
+  .aula-tut-lista b{color:var(--testo);font-weight:600}
+  .aula-tut-lista .ic{flex:0 0 auto;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--sup2);
+    display:grid;place-items:center;font-size:.95rem;color:var(--testo)}
+  .aula-tut-ok{margin-top:1.3rem;width:100%;border:0;border-radius:14px;background:var(--menta-s);color:#fff;
+    font-family:var(--font-display);font-weight:600;font-size:.95rem;padding:.7rem;cursor:pointer;
+    transition:transform .15s,filter .15s}
+  .aula-tut-ok:hover{transform:translateY(-1px);filter:brightness(1.05)}
 
   .aula-scrivania{position:relative;flex:1;min-height:0;z-index:1;margin:0 1rem 1rem;display:grid;gap:.9rem}
   .aula-scrivania::after{content:"";position:absolute;inset:-1rem;pointer-events:none;z-index:-1;
@@ -1689,8 +1712,6 @@
     color:var(--testo2);margin-right:.55rem;align-self:center}
   .st-chips{margin-top:.15rem}
   .st-atenei{margin:.2rem 0 .3rem}
-  .st-atenei .anello{width:52px;height:52px}
-  .st-atenei .citta{font-size:.6rem;max-width:4.4rem}
 
   /* Foglio del corso: lezioni a sinistra, player a destra, frecce di pagina */
   .st-sheet{width:min(1020px,100%)}
@@ -1914,6 +1935,7 @@
     </div>
     <div class="aula-dock" id="aula-dock" role="group" aria-label="Compartments"></div>
     <button class="aula-reset" id="aula-reset"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.9-6.6"/><path d="M3 4v5h5"/></svg><span data-it="Riordina" data-en="Tidy up">Riordina</span></button>
+    <button class="aula-aiuto" id="aula-aiuto" aria-label="How this works" title="How this works">?</button>
     <button class="stsh-x" id="aula-x" aria-label="Close">✕</button>
   </div>
   <div class="aula-scrivania" id="aula-scrivania" data-slots="3">
@@ -1942,6 +1964,19 @@
         <div class="bd-foglio" id="bd-foglio" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="false" aria-label="Board"></div>
       </div>
     </section>
+  </div>
+  <div class="aula-tut" id="aula-tut" hidden>
+    <div class="aula-tut-card" role="dialog" aria-modal="true" aria-label="How the study room works">
+      <div class="aula-tut-kick">Your study room</div>
+      <h3>Build it the way you like</h3>
+      <ul class="aula-tut-lista">
+        <li><span class="ic" aria-hidden="true">⇄</span><div><b>Drag to swap.</b> Grab a panel by its header and drop it onto another to switch their places.</div></li>
+        <li><span class="ic" aria-hidden="true">👁</span><div><b>Show or hide.</b> Use the eyes at the top to turn a panel off — the others grow to fill the space. One panel always stays on.</div></li>
+        <li><span class="ic" aria-hidden="true">✎</span><div><b>Highlight &amp; note.</b> Select any line in the transcription and hit Highlight: it drops onto the board with an arrow, ready for your own note.</div></li>
+        <li><span class="ic" aria-hidden="true">✓</span><div><b>It saves itself.</b> Your layout and your notes stay on this device — close and come back, they're still here.</div></li>
+      </ul>
+      <button class="aula-tut-ok" id="aula-tut-ok">Got it</button>
+    </div>
   </div>
 </div>
 <div class="ev-float" id="ev-float">
@@ -4496,11 +4531,16 @@ function auTempo(){
 }
 function auOrologio(){
   if(AULA.timer)return;
+  let ultimoSalva=0;
   AULA.timer=setInterval(()=>{
     const t=auTempo();if(t==null)return;
-    if(t>15){try{localStorage.setItem(riprKey(),String(Math.floor(t)));}catch(e){}}
+    /* il punto di ripresa non serve salvarlo 4 volte al secondo:
+       basta una volta ogni ~3s, cosi' l'intervallo puo' restare
+       fitto per il karaoke senza sprecare scritture su disco. */
+    const ora=Date.now();
+    if(t>15&&ora-ultimoSalva>3000){ultimoSalva=ora;try{localStorage.setItem(riprKey(),String(Math.floor(t)));}catch(e){}}
     auKaraoke(t);
-  },700);
+  },250);
 }
 function auSeek(sec){
   if(AULA.player&&AULA.player.seekTo){
@@ -4518,11 +4558,15 @@ function auKaraoke(t){
   if(AULA.amb!=='prof'||!AULA.tr)return;
   const box=auEl('tr-corpo');if(!box)return;
   const cap=AULA.tr.cap;if(!cap||!cap.length)return;
+  /* piccolo anticipo: l'evidenziazione e lo scorrimento hanno una loro
+     latenza, quindi guardiamo mezzo secondo "avanti" cosi' il capitolo
+     si accende puntuale invece che sempre un attimo dopo. */
+  const tp=t+0.5;
   let ci=0;
-  for(let i=0;i<cap.length;i++){if(t>=cap[i].s)ci=i;}
+  for(let i=0;i<cap.length;i++){if(tp>=cap[i].s)ci=i;}
   const fine=(ci+1<cap.length)?cap[ci+1].s:(cap[ci].s+300);
   const np=Math.max(1,cap[ci].par.length);
-  let pi=Math.floor((t-cap[ci].s)/Math.max(1,fine-cap[ci].s)*np);
+  let pi=Math.floor((tp-cap[ci].s)/Math.max(1,fine-cap[ci].s)*np);
   pi=Math.min(np-1,Math.max(0,pi));
   if(AULA.kcap===ci&&AULA.kpar===pi)return;
   AULA.kcap=ci;AULA.kpar=pi;
@@ -4548,42 +4592,13 @@ auEl('tr-corpo').addEventListener('scroll',()=>{
   if(Date.now()-(AULA.scrolloAuto||0)>900)AULA.scrolloMano=Date.now();
 },{passive:true});
 function auTransKey(){return AULA.dive?('d:'+AULA.dive.id):(AULA.corso.id+':'+AULA.lezIdx);}
-/* segnaposto: dove la trascrizione vera non e` ancora arrivata, lorem ipsum
-   con capitoli finti calcolati sulla durata della lezione */
-const LOREM=[
-'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.',
-'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.',
-'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.',
-'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.',
-'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.',
-'Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.'
-];
-const LOREM_CAP=['Lorem ipsum dolor','Consectetur adipiscing','Sed do eiusmod tempor','Ut enim ad minim'];
-function auDurSec(d){
-  const h=String(d).match(/(\d+)\s*h\s*(\d+)?/);
-  if(h)return (+h[1])*3600+((+h[2]||0))*60;
-  const m=String(d).match(/(\d+)/);
-  return m?(+m[1])*60:3000;
-}
-function trFinta(){
-  const d=AULA.dive?AULA.dive.d:stLezDi(AULA.corso,AULA.lezIdx).d;
-  const tot=auDurSec(d);
-  let seme=0;for(const ch of AULA.chiave)seme=(seme+ch.charCodeAt(0))%LOREM.length;
-  return {finta:true,
-    cap:LOREM_CAP.map((t,i)=>({t:t,s:Math.round(tot*i/LOREM_CAP.length),
-      par:[LOREM[(seme+i*3)%LOREM.length],LOREM[(seme+i*3+1)%LOREM.length],LOREM[(seme+i*3+2)%LOREM.length]]}))};
-}
 function auRenderTrans(){
   const box=auEl('tr-corpo');
-  let tr=(typeof ST_TRANS!=='undefined')?ST_TRANS[auTransKey()]:null;
-  const finta=!tr;
-  if(finta)tr=trFinta();
+  const tr=(typeof ST_TRANS!=='undefined')?ST_TRANS[auTransKey()]:null;
+  if(!tr){AULA.tr=null;box.innerHTML='';return;}
   AULA.tr=tr;AULA.kcap=AULA.kpar=null;
-  auEl('tr-fonte').textContent=finta?'Lorem ipsum · placeholder':tr.fonte;
-  const avviso=finta?`<p class="tr-finta-avviso">${T('Testo segnaposto · la trascrizione vera arriva con i dati del corso','Placeholder text · the real transcription ships with the course data')}</p>`:'';
-  box.innerHTML=avviso+tr.cap.map((c,ci)=>
+  auEl('tr-fonte').textContent=tr.fonte;
+  box.innerHTML=tr.cap.map((c,ci)=>
     `<button class="tr-cap" data-ci="${ci}" data-sec="${c.s}"><span class="tt">${auMMSS(c.s)}</span><b>${esc(c.t)}</b><i class="tr-onda" aria-hidden="true"></i></button>`+
     c.par.map((p,pi)=>{
       const sv=AULA.ev[ci+':'+pi];
@@ -4709,17 +4724,38 @@ function apriAula(o){
   try{const r=+(localStorage.getItem('ec_riprendi::'+AULA.chiave)||0);if(r>15)daDove=Math.max(0,r-3);}catch(e){}
   auPlayer(daDove);
   if(daDove)toast(T('Riprendi da ','Resuming from ')+auMMSS(daDove));
-  if(AULA.amb==='prof'){auRenderTrans();auRenderBoard();}
+  if(AULA.amb==='prof'){if(auHaTrans())auRenderTrans();else{AULA.tr=null;const tb=auEl('tr-corpo');if(tb)tb.innerHTML='';}auRenderBoard();}
   scrCarica();scrApplica(false);
   radice.classList.add('on');
   document.body.classList.add('st-blocco');
   auEl('aula-corpo')&&(auEl('aula-corpo').scrollTop=0);
+  tutForse();
 }
+/* il mini-tutorial parte una volta sola, alla primissima apertura di
+   un'aula; dopo si richiama solo col "?". Il flag sta sul dispositivo. */
+const TUT_KEY='ec_tutorial_aula_visto';
+function tutApri(){const t=auEl('aula-tut');if(t)t.hidden=false;}
+function tutChiudi(){const t=auEl('aula-tut');if(t)t.hidden=true;}
+function tutForse(){
+  if(AULA.amb!=='prof')return;
+  let visto=false;
+  try{visto=localStorage.getItem(TUT_KEY)==='1';}catch(e){}
+  if(!visto)tutApri();
+}
+auEl('aula-aiuto').addEventListener('click',tutApri);
+auEl('aula-tut-ok').addEventListener('click',()=>{
+  try{localStorage.setItem(TUT_KEY,'1');}catch(e){}
+  tutChiudi();
+});
+auEl('aula-tut').addEventListener('click',e=>{
+  if(e.target===auEl('aula-tut')){try{localStorage.setItem(TUT_KEY,'1');}catch(e){}tutChiudi();}
+});
 function chiudiAula(){
   auEl('st-aula').classList.remove('on');
   auPlayerVia();
   auEl('aula-player').innerHTML='';
   auEl('ev-float').classList.remove('on');
+  tutChiudi();
   if(AULA.corso){
     const card=document.querySelector('#st-gruppi [data-corso="'+AULA.corso.id+'"]');
     if(card)card.outerHTML=stCorsoHTML(AULA.corso);
@@ -4888,17 +4924,29 @@ document.getElementById('st-atenei').addEventListener('click',e=>{
 /* --- scomparti dell'aula: si scambiano di posto, si accendono e si
        spengono con l'occhio; quando uno sparisce gli altri si allargano --- */
 const SCR_PANNS={prof:['video','tr','board'],stud:['video']};
+/* --- gli scomparti disponibili dipendono anche dalla lezione: se non
+   esiste una trascrizione vera per la lezione aperta, lo scomparto "tr"
+   non c'e' proprio (niente scheda, niente occhio nel dock). --- */
+function auHaTrans(){
+  if(AULA.dive)return false;
+  return typeof ST_TRANS!=='undefined' && !!ST_TRANS[auTransKey()];
+}
+function pannList(){
+  const base=SCR_PANNS[AULA.amb]||['video'];
+  if(AULA.amb==='prof'&&!auHaTrans())return base.filter(x=>x!=='tr');
+  return base.slice();
+}
 const SCR_NOMI={video:{it:'Lezione',en:'Lesson'},tr:{it:'Trascrizione',en:'Transcription'},board:{it:'Board',en:'Board'}};
 const SLOT_AREE={3:['a','b','c'],2:['a','b'],1:['a']};
 const scrKey=()=>'ec_aula_scomparti::'+AULA.amb;
 let SCR={ordine:[],via:[]};
 const scrStretto=()=>(typeof matchMedia==='function')&&matchMedia('(max-width:980px)').matches;
 function scrCarica(){
-  SCR={ordine:SCR_PANNS[AULA.amb].slice(),via:[]};
+  SCR={ordine:pannList().slice(),via:[]};
   try{const s=localStorage.getItem(scrKey());
     if(s){const j=JSON.parse(s);
       if(j&&Array.isArray(j.ordine)){
-        const val=SCR_PANNS[AULA.amb];
+        const val=pannList();
         const ord=j.ordine.filter(x=>val.includes(x));
         val.forEach(x=>{if(!ord.includes(x))ord.push(x);});
         SCR.ordine=ord;
@@ -4935,7 +4983,7 @@ function scrApplica(anima){
   scr.dataset.slots=String(vis.length||1);
   document.querySelectorAll('#aula-scrivania .pann').forEach(p=>{
     const id=p.dataset.pann;
-    const att=SCR_PANNS[AULA.amb].includes(id)&&!SCR.via.includes(id);
+    const att=pannList().includes(id)&&!SCR.via.includes(id);
     p.classList.toggle('via',!att);
     p.style.gridArea=att?SLOT_AREE[vis.length][vis.indexOf(id)]:'';
   });
@@ -5091,7 +5139,6 @@ auEl('bd-stampa').addEventListener('click',()=>{
 auEl('tr-stampa').addEventListener('click',()=>{
   if(!AULA.tr){toast(T('Nessuna trascrizione da stampare.','No transcription to print.'));return;}
   let h='';
-  if(AULA.tr.finta)h+='<p style="font-size:11px;color:#7A776F;font-style:italic;margin:0 0 14px">'+esc(T('Testo segnaposto: la trascrizione vera arriva con i dati del corso.','Placeholder text: the real transcription ships with the course data.'))+'</p>';
   AULA.tr.cap.forEach(c=>{
     h+='<h2 style="font-family:Fraunces,Georgia,serif;font-size:16px;margin:22px 0 6px;page-break-after:avoid;break-after:avoid"><span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;color:#1E7A54;margin-right:8px">'+auMMSS(c.s)+'</span>'+esc(c.t)+'</h2>';
     c.par.forEach(p=>{h+='<p style="font-family:\'Source Serif 4\',Georgia,serif;font-size:13.5px;line-height:1.7;margin:0 0 10px;text-align:justify">'+esc(p)+'</p>';});
