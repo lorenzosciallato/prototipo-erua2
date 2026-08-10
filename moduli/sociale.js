@@ -50,8 +50,8 @@ function commentiHTML(id){
       <div class="sc-risp">
         ${faccia(c.nick,22)}
         <div>
-          <div class="sc-risp-chi"><b>${c.nick}</b> · ${CITTA[c.uni]||c.uni} · ${c.quando}</div>
-          <p>${c.t[LANG]}</p>
+          <div class="sc-risp-chi"><b>${esc(c.nick)}</b> · ${esc(CITTA[c.uni]||c.uni)} · ${esc(c.quando)}</div>
+          <p>${esc(c.t[LANG])}</p>
         </div>
       </div>`).join('') ||
       `<p class="sc-nessuna">${T('Ancora nessuna risposta. Comincia tu.','No replies yet. Be the first.')}</p>`}
