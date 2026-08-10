@@ -145,46 +145,75 @@ export const CONFIG = {
       riconosciPuntata: /erua\s*podcast/i,
     },
 
-    /* I siti da cui arrivano le notizie.
+    /* Le fonti della sezione notizie.
 
-       Sette atenei su nove pubblicano un feed: si usa quello, perché è
-       un impegno della fonte a mantenere una forma.
+       Un ateneo puo' avere piu' di una fonte: quasi tutti tengono le
+       notizie e gli eventi in due posti diversi. `tipo` dice quale delle
+       due cose e', e il lettore lo vede come un'etichetta accanto alla
+       data.
 
-       Due non lo pubblicano, e per loro si legge l'elenco dalla pagina.
-       Le regole di lettura stanno qui, accanto alla fonte, e non dentro
-       il programma: quando quel sito verrà rifatto — e verrà rifatto —
-       si aggiusta una riga di configurazione. Sono espressioni scritte
-       come stringhe perché è configurazione, non codice. */
+       Chi pubblica un feed si legge dal feed, che e' un impegno della
+       fonte a mantenere una forma. Chi non lo pubblica si legge dalla
+       pagina, con le regole dichiarate qui accanto: quando quel sito
+       verra' rifatto — e verra' rifatto — si aggiusta una riga di
+       configurazione, non un programma. */
     notizie: [
-      { uni: 'ERUA', sito: 'https://erua-eui.eu/',
+      { uni: 'ERUA', tipo: 'notizia', sito: 'https://erua-eui.eu/',
         feed: 'https://erua-eui.eu/feed/' },
 
-      { uni: 'UNIMC', sito: 'https://www.unimc.it/it/unimc-comunica/news',
+      { uni: 'UNIMC', tipo: 'notizia', sito: 'https://www.unimc.it/it/unimc-comunica/news',
         feed: 'https://www.unimc.it/it/unimc-comunica/news/RSS' },
 
-      { uni: 'MRU', sito: 'https://www.mruni.eu/en/',
-        feed: 'https://www.mruni.eu/feed/' },
+      /* MRU: `/news/feed/` e' la sezione notizie vera; il `/feed/` del
+         sito intero da' meno voci e piu' vecchie. */
+      { uni: 'MRU', tipo: 'notizia', sito: 'https://www.mruni.eu/news/',
+        feed: 'https://www.mruni.eu/news/feed/' },
 
-      /* NBU: il feed sta a `/rss/news`, non a `/rss` — quello risponde
-         "no news found" e sembra rotto. La versione inglese esiste ma è
-         ferma al 2016: si prende la bulgara, che è viva. Il lettore vede
-         la sigla della lingua accanto al titolo, e la traduzione della
-         pagina fa il resto. */
-      { uni: 'NBU', sito: 'https://news.nbu.bg/bg/news',
+      /* NBU tiene notizie ed eventi separati.
+         Notizie: il feed e' a `/bg/rss/news`, non a `/bg/rss` — quello
+         risponde "no news found" e sembra rotto. La versione inglese
+         esiste ma e' ferma al 2016: si prende la bulgara.
+         Eventi: il feed `/bg/rss/events` e' fermo al 2015, mentre la
+         pagina e' aggiornata. Quindi qui, in via eccezionale, la pagina
+         batte il feed. */
+      { uni: 'NBU', tipo: 'notizia', sito: 'https://news.nbu.bg/bg/news',
         feed: 'https://news.nbu.bg/bg/rss/news' },
 
-      { uni: 'SWPS', sito: 'https://english.swps.pl/we-the-university/our-news-and-events/news',
+      { uni: 'NBU', tipo: 'evento', sito: 'https://news.nbu.bg/bg/events', feed: null,
+        pagina: {
+          url: 'https://news.nbu.bg/bg/events',
+          blocco: '<section class="bottom-right">[\\s\\S]*?</section>',
+          titolo: '<h2[^>]*>\\s*<a[^>]*>([\\s\\S]*?)</a>',
+          data: '<time[^>]*datetime="([^"]+)"',
+          collegamento: 'href="(https://news\\.nbu\\.bg/bg/events/[^"]+)"',
+        } },
+
+      { uni: 'SWPS', tipo: 'notizia', sito: 'https://english.swps.pl/we-the-university/our-news-and-events/news',
         feed: 'https://english.swps.pl/we-the-university/our-news-and-events/news?format=feed&type=rss' },
 
-      { uni: 'UAEGEAN', sito: 'https://www.aegean.gr/',
+      { uni: 'UAEGEAN', tipo: 'notizia', sito: 'https://www.aegean.gr/announcement',
         feed: 'https://www.aegean.gr/rss.xml' },
 
-      { uni: 'UP8', sito: 'https://www.univ-paris8.fr/-Actualites-',
+      /* Aegean: gli eventi non hanno feed, e la pagina li tiene in righe
+         `peve-item` con la data in forma leggibile dalla macchina. */
+      { uni: 'UAEGEAN', tipo: 'evento', sito: 'https://www.aegean.gr/event', feed: null,
+        pagina: {
+          url: 'https://www.aegean.gr/event',
+          blocco: '<div class="views-row[\\s\\S]*?peve-title"><a[^>]+href="[^"]+"[^>]*>[\\s\\S]*?</a>',
+          titolo: 'peve-title"><a[^>]*>([\\s\\S]*?)</a>',
+          /* gli eventi di un giorno solo usano `date-display-single`,
+             quelli su piu' giorni `date-display-start`: si prende la
+             prima data leggibile dalla macchina, qualunque sia */
+          data: 'content="(\\d{4}-\\d{2}-\\d{2})',
+          collegamento: 'peve-title"><a[^>]+href="([^"]+)"',
+        } },
+
+      { uni: 'UP8', tipo: 'notizia', sito: 'https://www.univ-paris8.fr/-Actualites-',
         feed: 'https://www.univ-paris8.fr/spip.php?page=backend' },
 
-      /* Viadrina: il vecchio feed su euv-frankfurt-o.de è morto e il
-         portale nuovo non ne dichiara. Si legge l'elenco. */
-      { uni: 'EUV',
+      /* Viadrina: il vecchio feed su euv-frankfurt-o.de e' morto e il
+         portale nuovo non ne dichiara. */
+      { uni: 'EUV', tipo: 'notizia',
         sito: 'https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html',
         feed: null,
         pagina: {
@@ -195,13 +224,12 @@ export const CONFIG = {
           collegamento: '<a[^>]+href="([^"]+)"',
         } },
 
-      /* ULPGC: nessun feed. Il loro robots.txt consente la lettura
-         automatica con dieci secondi di pausa — e noi facciamo una
-         richiesta sola per giro, quindi siamo ampiamente dentro. Il
-         filtro che risponde 403 guarda solo come ci si presenta.
-         La data sta nell'indirizzo della notizia: la si prende da lì,
-         che è uguale in tutte le lingue. */
-      { uni: 'ULPGC', sito: 'https://www.ulpgc.es/noticias', feed: null,
+      /* ULPGC: nessun feed, mai avuto. Il loro robots.txt consente la
+         lettura automatica con dieci secondi di pausa, e noi facciamo una
+         richiesta sola per giro. Si legge da `www10`, ma il collegamento
+         che diamo al lettore e' quello ufficiale. La data sta
+         nell'indirizzo: e' uguale in tutte le lingue. */
+      { uni: 'ULPGC', tipo: 'notizia', sito: 'https://www.ulpgc.es/noticias', feed: null,
         pagina: {
           url: 'https://www10.ulpgc.es/noticias',
           hostPubblico: 'www.ulpgc.es',

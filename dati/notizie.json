@@ -1,18 +1,159 @@
 {
  "versione": 1,
- "aggiornato": "2026-08-10T20:04:34.055Z",
+ "aggiornato": "2026-08-10T20:29:32.607Z",
  "fonte": "siti istituzionali degli atenei",
  "note": "Titolo, ente, estratto e collegamento alla fonte. Nessuna immagine copiata (§6.2).",
  "elementi": [
+  {
+   "u": "NBU",
+   "t": "6-та годишна среща на върха на ERUA – „Утвърждаване на постиженията, създаване на устойчивост“",
+   "d": "2026-11-18",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/6-ta-godishna-sreshta-na-vyrha-na-erua-utvyrzhdavane-na-postizheniqta-syzdavane-na-ustojchivost!97066",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/6-ta-godishna-sreshta-na-vyrha-na-erua-utvyrzhdavane-na-postizheniqta-syzdavane-na-ustojchivost!97066",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Национална конференция „Правата на детето между теорията и практиката“",
+   "d": "2026-10-28",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/nacionalna-konferenciq-pravata-na-deteto-mezhdu-teoriqta-i-praktikata!98221",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/nacionalna-konferenciq-pravata-na-deteto-mezhdu-teoriqta-i-praktikata!98221",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "CSAI 2026, XI-та международна конференция",
+   "d": "2026-09-26",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/csai-2026-xi-ta-mezhdunarodna-konferenciq!98158",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/csai-2026-xi-ta-mezhdunarodna-konferenciq!98158",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Университетска конференция „Предизвикателства и перспективи пред политическите науки: Кризи, популизъм, (пост)демокрация“",
+   "d": "2026-09-25",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/universitetska-konferenciq-predizvikatelstva-i-perspektivi-pred-politicheskite-nauki-krizi-populizym-post-demokraciq!98331",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/universitetska-konferenciq-predizvikatelstva-i-perspektivi-pred-politicheskite-nauki-krizi-populizym-post-demokraciq!98331",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Лятна школа на Изследователския център за компютърна и приложна лингвистика",
+   "d": "2026-09-24",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/lqtna-shkola-na-izsledovatelskiq-centyr-za-kompjutyrna-i-prilozhna-lingvistika!98335",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/lqtna-shkola-na-izsledovatelskiq-centyr-za-kompjutyrna-i-prilozhna-lingvistika!98335",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Заключителен галаконцерт „Ерата на Суинга“",
+   "d": "2026-09-12",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/zakljuchitelen-galakoncert-erata-na-suinga!98177",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/zakljuchitelen-galakoncert-erata-na-suinga!98177",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Самостоятелна калиграфска изложба “Ликовете на Балчик”",
+   "d": "2026-09-09",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/samostoqtelna-kaligrafska-izlozhba-likovete-na-balchik!97519",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/samostoqtelna-kaligrafska-izlozhba-likovete-na-balchik!97519",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Академия за социална справедливост и приобщаващо лидерство",
+   "d": "2026-09-03",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/akademiq-za-socialna-spravedlivost-i-priobshtavashto-liderstvo!97922",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/akademiq-za-socialna-spravedlivost-i-priobshtavashto-liderstvo!97922",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Майсторски клас на Вики Алмазиду 2026",
+   "d": "2026-09-02",
+   "s": "",
+   "l": "https://news.nbu.bg/bg/events/majstorski-klas-na-viki-almazidu-2026!98175",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/events",
+    "url": "https://news.nbu.bg/bg/events/majstorski-klas-na-viki-almazidu-2026!98175",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
   {
    "u": "ERUA",
    "t": "Take Part in the ERUA Human Rights Law Case Competition – Application Deadline Extended",
    "d": "2026-08-10",
    "s": "Calling all law students with an interest in human rights and international cooperation. The ERUA Human Rights Law Case Competition invites you to test your skills, work alongside peers from across…",
    "l": "https://erua-eui.eu/2026/08/10/take-part-in-the-erua-human-rights-law-case-competition-application-deadline-extended/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/08/10/take-part-in-the-erua-human-rights-law-case-competition-application-deadline-extended/",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "MRU",
+   "t": "MRU Aplinkos psichologijos tyrimų centro mokslininkai pristatys projekto „Elkis tvariai“ tyrimo rezultatus",
+   "d": "2026-08-10",
+   "s": "Viešoje erdvėje nuolat girdime apie ekologines katastrofas – vandens taršą pramonės atliekomis, perteklinį miškų kirtimą bei vis didėjančius nualintus žemės plotus, kuriems atsinaujinti prireiks ne…",
+   "l": "https://www.mruni.eu/news/mru-aplinkos-psichologijos-tyrimu-centro-mokslininkai-pristatys-projekto-elkis-tvariai-tyrimo-rezultatus-2/",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.mruni.eu/news/",
+    "url": "https://www.mruni.eu/news/mru-aplinkos-psichologijos-tyrimu-centro-mokslininkai-pristatys-projekto-elkis-tvariai-tyrimo-rezultatus-2/",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -23,6 +164,7 @@
    "d": "2026-08-10",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260810-infotag/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260810-infotag/index.html",
@@ -36,9 +178,24 @@
    "d": "2026-08-07",
    "s": "The Canary Islands Government and the Banco de Alimentos de Las Palmas (BALP) recently held the graduation ceremony for U-Fit (Universities for Integration through Training), an initiative launched…",
    "l": "https://erua-eui.eu/2026/08/07/u-fit-the-erua-project-opening-up-job-opportunities-for-young-migrants/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/08/07/u-fit-the-erua-project-opening-up-job-opportunities-for-young-migrants/",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "MRU",
+   "t": "Per dvejus metus – unikali globali patirtis ir soc. darbo žinios keturiose Europos šalyse, kurią suteikė ESWOCHY programa",
+   "d": "2026-08-07",
+   "s": "Rugpjūčio 3 dieną Lisabonoje, Iscte universitete, išlydėta Europos jungtinio magistro programos „Socialinis darbas su vaikais ir jaunimu” (angl. European Joint Master in Social Work with Children and…",
+   "l": "https://www.mruni.eu/news/per-dvejus-metus-unikali-globali-patirtis-ir-soc-darbo-zinios-keturiose-europos-salyse-kuria-suteikia-eswochy-programa/",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.mruni.eu/news/",
+    "url": "https://www.mruni.eu/news/per-dvejus-metus-unikali-globali-patirtis-ir-soc-darbo-zinios-keturiose-europos-salyse-kuria-suteikia-eswochy-programa/",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -49,6 +206,7 @@
    "d": "2026-08-07",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260807-sommerschule-human-rights/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260807-sommerschule-human-rights/index.html",
@@ -62,6 +220,7 @@
    "d": "2026-08-06",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/08/06/universidades-publicas-canarias-reiteran-su-rechazo-propuesta-financiacion",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/08/06/universidades-publicas-canarias-reiteran-su-rechazo-propuesta-financiacion",
@@ -75,6 +234,7 @@
    "d": "2026-08-06",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/08/06/docente-ulpgc-explica-conversation-como-siglo-oro-mujeres-ya-recibian-imagenes",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/08/06/docente-ulpgc-explica-conversation-como-siglo-oro-mujeres-ya-recibian-imagenes",
@@ -88,6 +248,7 @@
    "d": "2026-08-06",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/08/06/ulpgc-capta-fondos-cuatro-proyectos-europeos-sostenibilidad-educacion-y-energia",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/08/06/ulpgc-capta-fondos-cuatro-proyectos-europeos-sostenibilidad-educacion-y-energia",
@@ -101,6 +262,7 @@
    "d": "2026-08-05",
    "s": "Queer Connect is currently on summer break (July–September), but we’re still here for your questions, concerns and ideas – contact: marullrich@europa-uni.de. The next event will take place on…",
    "l": "https://erua-eui.eu/2026/08/05/queer-connect-monthly-queer-networking-round-for-students-initiatives-9/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/08/05/queer-connect-monthly-queer-networking-round-for-students-initiatives-9/",
@@ -114,6 +276,7 @@
    "d": "2026-08-05",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/08/05/ulpgc-examina-como-edad-influye-satisfaccion-laboral-trabajadores-del-turismo",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/08/05/ulpgc-examina-como-edad-influye-satisfaccion-laboral-trabajadores-del-turismo",
@@ -127,6 +290,7 @@
    "d": "2026-08-04",
    "s": "Call for Applications for the 2026-2027 Academic Year opens now. About the Programme The ERUA Framework for Research-Oriented Academic Mobility offers Early Career Researchers, the opportunity to…",
    "l": "https://erua-eui.eu/2026/08/04/call-for-applications-erua-long-term-research-oriented-academic-mobility-for-early-career-researchers/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/08/04/call-for-applications-erua-long-term-research-oriented-academic-mobility-for-early-career-researchers/",
@@ -140,6 +304,7 @@
    "d": "2026-08-04",
    "s": "Unimc Invites students of the European Reform University Alliance (ERUA) to participate in the Intensive Course “Whose Story Counts? Languages, Values, and the Narratives that Shape Us”. Professors…",
    "l": "https://erua-eui.eu/2026/08/04/erua-intensive-course-whose-story-counts-languages-values-and-the-narratives-that-shape-us/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/08/04/erua-intensive-course-whose-story-counts-languages-values-and-the-narratives-that-shape-us/",
@@ -153,6 +318,7 @@
    "d": "2026-08-04",
    "s": "Partecipa all'incontro informativo e invia la tua candidatura entro il 19 ottobre 2026",
    "l": "https://www.unimc.it/it/unimc-comunica/news/bando-bottom-up-fino-a-5-000-20ac-per-progetti-erua-guidati-da-studenti",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/bando-bottom-up-fino-a-5-000-20ac-per-progetti-erua-guidati-da-studenti",
@@ -166,6 +332,7 @@
    "d": "2026-08-04",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/08/04/registro-y-biblioteca-universitaria-ulpgc-se-mantienen-operativos-agosto",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/08/04/registro-y-biblioteca-universitaria-ulpgc-se-mantienen-operativos-agosto",
@@ -179,6 +346,7 @@
    "d": "2026-08-04",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/08/04/ulpgc-alcanza-81-ocupacion-plazas-nuevo-ingreso-sus-grados",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/08/04/ulpgc-alcanza-81-ocupacion-plazas-nuevo-ingreso-sus-grados",
@@ -192,6 +360,7 @@
    "d": "2026-08-03",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/08/03/ulpgc-lidera-estudio-que-cuestiona-superioridad-del-ojo-humano-comunicar-mirada",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/08/03/ulpgc-lidera-estudio-que-cuestiona-superioridad-del-ojo-humano-comunicar-mirada",
@@ -205,6 +374,7 @@
    "d": "2026-08-01",
    "s": "Fermeture du 30 juillet au 19 août 2026 inclus. L'assistance étudiants est fermée pendant la fermeture et rouvre le jeudi 20 août 2026. L'Université ferme ses portes du 30 juillet au 19 août 2026…",
    "l": "https://www.univ-paris8.fr/Fermeture-de-l-Universite-pour-la-pause-estivale-Du-30-juillet-au-19-aout-2026",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.univ-paris8.fr/-Actualites-",
     "url": "https://www.univ-paris8.fr/Fermeture-de-l-Universite-pour-la-pause-estivale-Du-30-juillet-au-19-aout-2026",
@@ -218,6 +388,7 @@
    "d": "2026-07-31",
    "s": "ERUA Student Board Representative Michalina Lorych (German-Polish Law, European University Viadrina) reflects on the ESU 3rd Conference of the Student Bodies of the Alliances, held in Malta from 1 to…",
    "l": "https://erua-eui.eu/2026/07/31/esu-3rd-conference-of-the-student-bodies-of-the-alliances/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/07/31/esu-3rd-conference-of-the-student-bodies-of-the-alliances/",
@@ -231,6 +402,7 @@
    "d": "2026-07-31",
    "s": "General registration for the SOCIN 2026 Conference is now open. Organized by SWPS University in collaboration with ERUA, the conference focuses on social innovation. Because social challenges are…",
    "l": "https://erua-eui.eu/2026/07/31/register-for-the-socin-2026-conference/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/07/31/register-for-the-socin-2026-conference/",
@@ -244,6 +416,7 @@
    "d": "2026-07-31",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/07/31/dos-docentes-ulpgc-ponen-equipos-investigacion-periodistica-como-modelos",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/07/31/dos-docentes-ulpgc-ponen-equipos-investigacion-periodistica-como-modelos",
@@ -257,9 +430,24 @@
    "d": "2026-07-30",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/07/30/financiacion-propuesta-gobierno-canarias-pone-jaque-universidades-publicas",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/07/30/financiacion-propuesta-gobierno-canarias-pone-jaque-universidades-publicas",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "MRU",
+   "t": "Dirbtinis intelektas, darbas ir žmogaus klestėjimas: prof. dr. Andriaus Bielskio tyrimas Silicio slėnyje",
+   "d": "2026-07-29",
+   "s": "Dirbtinis intelektas ir automatizacija vis sparčiau keičia darbo pobūdį. Tačiau ar technologijų pažanga iš tiesų artina visuomenę prie vadinamojo „pasaulio be darbo“? O gal svarbiau klausti, kokias…",
+   "l": "https://www.mruni.eu/news/dirbtinis-intelektas-darbas-ir-zmogaus-klestejimas-prof-dr-andriaus-bielskio-tyrimas-silicio-slenyje/",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.mruni.eu/news/",
+    "url": "https://www.mruni.eu/news/dirbtinis-intelektas-darbas-ir-zmogaus-klestejimas-prof-dr-andriaus-bielskio-tyrimas-silicio-slenyje/",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -270,6 +458,7 @@
    "d": "2026-07-29",
    "s": "Representatives of the Department of Graphic Design at SWPS University in Wrocław have been selected to exhibit their work at the 2026 Incheon World University Photography Festival, one of the…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35344-swps-university-represented-at-international-photography-festival",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35344-swps-university-represented-at-international-photography-festival",
@@ -283,6 +472,7 @@
    "d": "2026-07-29",
    "s": "In late July 2026, the Faculty of Interdisciplinary Studies at SWPS University in Krakow welcomed faculty and students from the University of Las Palmas de Gran Canaria (ULPGC), Spain. Organized…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35346-erua-seminar-countering-xenophobic-consumer-behavior",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35346-erua-seminar-countering-xenophobic-consumer-behavior",
@@ -296,6 +486,7 @@
    "d": "2026-07-29",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/07/29/consejo-gobierno-aprueba-concesion-medalla-ulpgc-universidad-laguna",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/07/29/consejo-gobierno-aprueba-concesion-medalla-ulpgc-universidad-laguna",
@@ -309,6 +500,7 @@
    "d": "2026-07-29",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/07/29/ulpgc-obtiene-ano-mas-maxima-puntuacion-transparencia",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/07/29/ulpgc-obtiene-ano-mas-maxima-puntuacion-transparencia",
@@ -322,6 +514,7 @@
    "d": "2026-07-28",
    "s": "Got a project idea? ERUA wants to fund it. ERUA is launching its fourth Bottom-Up Project Call for Students — and if you have ever had an idea for a cross-university project you wanted to make…",
    "l": "https://erua-eui.eu/2026/07/28/4th-bottom-up-project-call-for-erua-students/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/07/28/4th-bottom-up-project-call-for-erua-students/",
@@ -335,6 +528,7 @@
    "d": "2026-07-28",
    "s": "Mykolas Romeris University (MRU) is pleased to invite early career researchers (ECRs) from ERUA partner universities to participate in Young Researchers Days 2026, taking place in Vilnius, Lithuania…",
    "l": "https://erua-eui.eu/2026/07/28/open-call-mru-young-researchers-days-2026/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/07/28/open-call-mru-young-researchers-days-2026/",
@@ -348,6 +542,7 @@
    "d": "2026-07-28",
    "s": "ERUA is pleased to announce the Teacher Training Plan for the first semester of the 2026 – 2027 academic year, aimed at teaching and research staff from the eight partner universities of the ERUA…",
    "l": "https://erua-eui.eu/2026/07/28/teacher-training-plan-first-semester-2026-2027/",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://erua-eui.eu/",
     "url": "https://erua-eui.eu/2026/07/28/teacher-training-plan-first-semester-2026-2027/",
@@ -361,6 +556,7 @@
    "d": "2026-07-28",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260728-emas-zertifikat/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260728-emas-zertifikat/index.html",
@@ -374,9 +570,38 @@
    "d": "2026-07-28",
    "s": "",
    "l": "https://www.ulpgc.es/noticia/2026/07/28/luchas-canaria-y-leonesa-comparten-conocimiento-tradicion-y-futuro-encuentro",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.ulpgc.es/noticias",
     "url": "https://www.ulpgc.es/noticia/2026/07/28/luchas-canaria-y-leonesa-comparten-conocimiento-tradicion-y-futuro-encuentro",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "MRU",
+   "t": "MRU Sūduvos akademija keliasi į naujus namus Marijampolės centre",
+   "d": "2026-07-27",
+   "s": "Mykolo Romerio universiteto (MRU) Sūduvos akademija pradeda naują etapą. Akademija įsikuria naujame, moderniai įrengtame pastate pačiame Marijampolės centre, kuriame nuo šiol vyks studijos ir telksis…",
+   "l": "https://www.mruni.eu/news/mru-suduvos-akademija-keliasi-i-naujus-namus-marijampoles-centre/",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.mruni.eu/news/",
+    "url": "https://www.mruni.eu/news/mru-suduvos-akademija-keliasi-i-naujus-namus-marijampoles-centre/",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "MRU",
+   "t": "COST „BetterCare“ mokslinė stažuotė MRU: stiprinamas tarptautinis bendradarbiavimas slaugos tyrimų srityje",
+   "d": "2026-07-27",
+   "s": "2026 m. liepos 20–26 d. Mykolo Romerio universitete (MRU) vykusi COST „BetterCare“ trumpalaikė mokslinė stažuotė (Short-Term Scientific Mission, STSM) subūrė MRU ir Turkijos universitetų tyrėjus.…",
+   "l": "https://www.mruni.eu/news/cost-bettercare-moksline-stazuote-mru-stiprinamas-tarptautinis-bendradarbiavimas-slaugos-tyrimu-srityje/",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.mruni.eu/news/",
+    "url": "https://www.mruni.eu/news/cost-bettercare-moksline-stazuote-mru-stiprinamas-tarptautinis-bendradarbiavimas-slaugos-tyrimu-srityje/",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -387,9 +612,80 @@
    "d": "2026-07-27",
    "s": "The exhibition \"Nesthetization: Everyday Beauty\" showcases the results of a photography challenge completed by students from the Department of Graphic Design at SWPS University in Poland and the…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35341-nestetization-everyday-beauty-exhibition-of-artworks-by-swps-students-in-osaka",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35341-nestetization-everyday-beauty-exhibition-of-artworks-by-swps-students-in-osaka",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "La ULPGC propone un modelo energético para Gran Canaria orientado a descarbonizar el sistema eléctrico",
+   "d": "2026-07-24",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/24/ulpgc-propone-modelo-energetico-gran-canaria-orientado-descarbonizar-sistema",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/24/ulpgc-propone-modelo-energetico-gran-canaria-orientado-descarbonizar-sistema",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "La ULPGC supera los 300 artículos en la plataforma divulgativa The Conversation",
+   "d": "2026-07-24",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/24/ulpgc-supera-300-articulos-plataforma-divulgativa-conversation",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/24/ulpgc-supera-300-articulos-plataforma-divulgativa-conversation",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "Tomas de posesión: titulares, catedráticos y catedráticos vinculados de Universidad",
+   "d": "2026-07-24",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/24/tomas-posesion-titulares-catedraticos-y-catedraticos-vinculados-universidad",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/24/tomas-posesion-titulares-catedraticos-y-catedraticos-vinculados-universidad",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "MRU",
+   "t": "Prof. Davidas Schultzas: 2026 m. palankios prognozės tenka demokratams. Tačiau laimėti ir laimėti triuškinamai – tai visiškai skirtingi dalykai",
+   "d": "2026-07-23",
+   "s": "Prof. Davidas Schultzas, JAV Hamline universiteto politikos mokslų profesorius, Mykolo Romerio universiteto (MRU) vizituojantis dėstytojas ir MRU LAB Teisingumo tyrimų laboratorijos narys. Dauguma…",
+   "l": "https://www.mruni.eu/news/prof-davidas-schultzas-2026-m-palankios-prognozes-tenka-demokratams-taciau-laimeti-ir-laimeti-triuskinamai-tai-visiskai-skirtingi-dalykai/",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.mruni.eu/news/",
+    "url": "https://www.mruni.eu/news/prof-davidas-schultzas-2026-m-palankios-prognozes-tenka-demokratams-taciau-laimeti-ir-laimeti-triuskinamai-tai-visiskai-skirtingi-dalykai/",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "MRU",
+   "t": "Tarptautinė konferencija „Moterys teisėje“ suburs teisės lyderes Europoje: Lietuva minės 100 metų nuo pirmosios moters teisėjos paskyrimo",
+   "d": "2026-07-23",
+   "s": "2026 metais Lietuva minės reikšmingą teisinės istorijos sukaktį – sukaks 100 metų nuo pirmosios moters teisėjos Lietuvoje Elenos Jackevičaitės paskyrimo. Šiai progai paminėti 2026 m. spalio 16 d.…",
+   "l": "https://www.mruni.eu/news/tarptautine-konferencija-moterys-teiseje-suburs-teises-lyderes-europoje-lietuva-mines-100-metu-nuo-pirmosios-moters-teisejos-paskyrimo/",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.mruni.eu/news/",
+    "url": "https://www.mruni.eu/news/tarptautine-konferencija-moterys-teiseje-suburs-teises-lyderes-europoje-lietuva-mines-100-metu-nuo-pirmosios-moters-teisejos-paskyrimo/",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -400,6 +696,7 @@
    "d": "2026-07-23",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260723-kuna/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260723-kuna/index.html",
@@ -413,9 +710,94 @@
    "d": "2026-07-23",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260723-hearing-wortzart/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260723-hearing-wortzart/index.html",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "El Consejo Social de la ULPGC cierra un curso marcado por el impulso a la financiación universitaria",
+   "d": "2026-07-23",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/23/consejo-social-ulpgc-cierra-curso-marcado-impulso-financiacion-universitaria",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/23/consejo-social-ulpgc-cierra-curso-marcado-impulso-financiacion-universitaria",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "MRU",
+   "t": "MRU studentai kviečiami dalyvauti ERUA intensyviame meno terapijos kurse Lenkijoje",
+   "d": "2026-07-22",
+   "s": "Mykolo Romerio universiteto (MRU) bakalauro ir magistrantūros studentai kviečiami teikti paraiškas dalyvauti Europos reformų universitetų aljanso (ERUA) intensyviame kurse „The Art of Emotions…",
+   "l": "https://www.mruni.eu/news/mru-studentai-kvieciami-dalyvauti-erua-intensyviame-meno-terapijos-kurse-lenkijoje/",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.mruni.eu/news/",
+    "url": "https://www.mruni.eu/news/mru-studentai-kvieciami-dalyvauti-erua-intensyviame-meno-terapijos-kurse-lenkijoje/",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "La Colección ‘Campus’ de la ULPGC promueve un proyecto consensuado sobre el futuro del espacio universitario de Tafira",
+   "d": "2026-07-22",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/22/coleccion-campus-ulpgc-promueve-proyecto-consensuado-futuro-del-espacio",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/22/coleccion-campus-ulpgc-promueve-proyecto-consensuado-futuro-del-espacio",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "La ULPGC informa de la tercera asignación de plazas para el alumnado de nuevo ingreso",
+   "d": "2026-07-22",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/22/ulpgc-informa-tercera-asignacion-plazas-alumnado-nuevo-ingreso",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/22/ulpgc-informa-tercera-asignacion-plazas-alumnado-nuevo-ingreso",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "Tomas de posesión: Estructura de Teleformación, Escuela de Ingeniería de Telecomunicación y Electrónica, Facultad de Ciencias Jurídicas e IUNAT",
+   "d": "2026-07-22",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/22/tomas-posesion-estructura-teleformacion-escuela-ingenieria-telecomunicacion-y",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/22/tomas-posesion-estructura-teleformacion-escuela-ingenieria-telecomunicacion-y",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "La ULPGC apoya la creación de la nueva Universidad de Senegal Oriental",
+   "d": "2026-07-21",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/21/ulpgc-apoya-creacion-nueva-universidad-senegal-oriental",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/21/ulpgc-apoya-creacion-nueva-universidad-senegal-oriental",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -426,6 +808,7 @@
    "d": "2026-07-20",
    "s": "L'intervento del rettore John McCourt sul Corriere Adriatico",
    "l": "https://www.unimc.it/it/unimc-comunica/news/universita-un-laboratorio-per-immaginare-il-futuro",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/universita-un-laboratorio-per-immaginare-il-futuro",
@@ -439,6 +822,7 @@
    "d": "2026-07-20",
    "s": "The JustMOBI project, coordinated by SWPS University, has launched a new podcast series with its first two episodes. They were recorded during the JustMOBI workshops held in April at SWPS University…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35338-launch-of-justmobi-podcast-series",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35338-launch-of-justmobi-podcast-series",
@@ -452,6 +836,7 @@
    "d": "2026-07-17",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260717-lesung-wojciechowski/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260717-lesung-wojciechowski/index.html",
@@ -465,6 +850,7 @@
    "d": "2026-07-17",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260717-andrea-allerkamp/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260717-andrea-allerkamp/index.html",
@@ -478,6 +864,7 @@
    "d": "2026-07-16",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260716-schroubek-preis-wasenmueller/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260716-schroubek-preis-wasenmueller/index.html",
@@ -491,6 +878,7 @@
    "d": "2026-07-16",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260716-interview-karabati/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260716-interview-karabati/index.html",
@@ -504,6 +892,7 @@
    "d": "2026-07-15",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260715-35-jahre-viadrina/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260715-35-jahre-viadrina/index.html",
@@ -517,6 +906,7 @@
    "d": "2026-07-10",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/podcasts/viadrina-podcast-lehrgut/2026/001-was-ist-gute-lehre/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/podcasts/viadrina-podcast-lehrgut/2026/001-was-ist-gute-lehre/index.html",
@@ -530,9 +920,94 @@
    "d": "2026-07-10",
    "s": "",
    "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260710-wortbilder-seminar-blmk/index.html",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
     "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260710-wortbilder-seminar-blmk/index.html",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "EUV",
+   "t": "Viadrina-Kurznachrichten: Meldungen und Veranstaltungshinweise vom 13. bis 19. Juli 2026",
+   "d": "2026-07-09",
+   "s": "",
+   "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260709-kuna/index.html",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
+    "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260709-kuna/index.html",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "EUV",
+   "t": "Ein Historiker, der Globalgeschichte im Kleinen sichtbar macht – Prof. Dr. Klaus Weber in den Ruhestand verabschiedet",
+   "d": "2026-07-09",
+   "s": "",
+   "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260709-abschiedsvorlesung-klaus-weber/index.html",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
+    "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260709-abschiedsvorlesung-klaus-weber/index.html",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "EUV",
+   "t": "„Veränderung entsteht durch die Bereitschaft, für andere da zu sein“ – Interview mit Mohammad Arafat Intisher",
+   "d": "2026-07-09",
+   "s": "",
+   "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260709-success-story-mohammad-arafat-intisher/index.html",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
+    "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260709-success-story-mohammad-arafat-intisher/index.html",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "EUV",
+   "t": "Viadrina erhält internationale Auszeichnung für den Aufbau des KIU",
+   "d": "2026-07-09",
+   "s": "",
+   "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260709-kiu-award/index.html",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
+    "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260709-kiu-award/index.html",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "EUV",
+   "t": "30 Jahre Universitäts-Orchester Viaphoniker",
+   "d": "2026-07-08",
+   "s": "",
+   "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260708-30-jahre-viaphoniker/index.html",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
+    "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260708-30-jahre-viaphoniker/index.html",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "EUV",
+   "t": "„Im Osten wird die Demokratie gerettet“ – Anne Rabe über Erinnern, Verschweigen und gefährlichen Opportunismus",
+   "d": "2026-07-08",
+   "s": "",
+   "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260708-anne-rabe-lahusen/index.html",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
+    "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026/20260708-anne-rabe-lahusen/index.html",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -543,9 +1018,38 @@
    "d": "2026-07-07",
    "s": "What do wellbeing, creativity, and international collaboration have in common? Students from Poland, the Czech Republic, and Bulgaria set out to answer that question during Creative Wellbeing Labs…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35327-creative-wellbeing-labs-bip-workshop-at-swps-university",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35327-creative-wellbeing-labs-bip-workshop-at-swps-university",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "EUV",
+   "t": "Gemeinsamer Aufruf gegen monatelange Vollsperrung der Linie RE1",
+   "d": "2026-07-07",
+   "s": "",
+   "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260707-re1-aufruf/index.html",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
+    "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260707-re1-aufruf/index.html",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "EUV",
+   "t": "Diskussion über Freiheit als Identitätsmerkmal in Mittel- und Osteuropa",
+   "d": "2026-07-07",
+   "s": "",
+   "l": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260707-ukraine-lecture-abschluss/index.html",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html",
+    "url": "https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/2026-1/mi-20260707-ukraine-lecture-abschluss/index.html",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -556,6 +1060,7 @@
    "d": "2026-07-03",
    "s": "",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35320-experimental-exhibition-by-a-school-of-form-lecturer-at-foksal-gallery",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35320-experimental-exhibition-by-a-school-of-form-lecturer-at-foksal-gallery",
@@ -569,6 +1074,7 @@
    "d": "2026-07-02",
    "s": "Artificial intelligence is rapidly transforming the landscape of teaching and learning, and higher education institutions are feeling that pressure acutely. The question is no longer whether to adopt…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35334-future-of-ai-in-education-ai-care-workshop-at-swps-university",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35334-future-of-ai-in-education-ai-care-workshop-at-swps-university",
@@ -582,6 +1088,7 @@
    "d": "2026-07-01",
    "s": "The European Reform University Alliance (ERUA) is pleased to announce the launch of a new joint degree Master’s program: PATHS Forced Migration: Europe in a Global Context . Developed in response to…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35317-erua-launches-new-joint-degree-master-s-program-in-migration-studies",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35317-erua-launches-new-joint-degree-master-s-program-in-migration-studies",
@@ -595,6 +1102,7 @@
    "d": "2026-06-30",
    "s": "One of the goals of the European Reform University Alliance (ERUA) is to foster student entrepreneurship. A key example of these efforts was the Startup Bootcamp Heilbronn—an intensive…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35335-erua-supports-student-entrepreneurship-startup-bootcamp-heilbronn-2026",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35335-erua-supports-student-entrepreneurship-startup-bootcamp-heilbronn-2026",
@@ -608,6 +1116,7 @@
    "d": "2026-06-30",
    "s": "One Friday in June, a group of about 10 volunteers from SWPS University headed to the Vistula River to clean up its banks, a vital component of the capital's ecosystem. Sponsored by the Capital City…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35321-volunteers-from-swps-university-clean-up-vistula-riverbank",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35321-volunteers-from-swps-university-clean-up-vistula-riverbank",
@@ -621,9 +1130,24 @@
    "d": "2026-06-30",
    "s": "In recent years, the gap between traditional legal frameworks protecting human rights and the psychological factors that shape human behavior has been gradually increasing. To address this issue, in…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35324-human-rights-and-psychology-uswps-in-poznan-hosts-erua-intensive-course",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35324-human-rights-and-psychology-uswps-in-poznan-hosts-erua-intensive-course",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "10ο συνέδριο Ελληνικής Κοινωνιολογικής Εταιρείας",
+   "d": "2026-06-26",
+   "s": "",
+   "l": "https://www.aegean.gr/event/10%CE%BF-%CF%83%CF%85%CE%BD%CE%AD%CE%B4%CF%81%CE%B9%CE%BF-%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AE%CF%82-%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%B9%CE%BF%CE%BB%CE%BF%CE%B3%CE%B9%CE%BA%CE%AE%CF%82-%CE%B5%CF%84%CE%B1%CE%B9%CF%81%CE%B5%CE%AF%CE%B1%CF%82",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/10%CE%BF-%CF%83%CF%85%CE%BD%CE%AD%CE%B4%CF%81%CE%B9%CE%BF-%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AE%CF%82-%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%B9%CE%BF%CE%BB%CE%BF%CE%B3%CE%B9%CE%BA%CE%AE%CF%82-%CE%B5%CF%84%CE%B1%CE%B9%CF%81%CE%B5%CE%AF%CE%B1%CF%82",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -634,9 +1158,24 @@
    "d": "2026-06-25",
    "s": "Spring 2026 was a productive period for the JustMOBI – Digitalizing Education for an Inclusive Mobility Transition project team, coordinated by SWPS University. In April, project partners met for…",
    "l": "https://english.swps.pl/we-the-university/our-news-and-events/news/35328-justmobi-partners-gather-for-workshops-and-consortium-meeting",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://english.swps.pl/we-the-university/our-news-and-events/news",
     "url": "https://english.swps.pl/we-the-university/our-news-and-events/news/35328-justmobi-partners-gather-for-workshops-and-consortium-meeting",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "ΠΡΟΣΚΛΗΣΗ ΣΤΑ 25 ΧΡΟΝΙΑ ΜΒΑ",
+   "d": "2026-06-25",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CF%80%CF%81%CE%BF%CF%83%CE%BA%CE%BB%CE%B7%CF%83%CE%B7-%CF%83%CF%84%CE%B1-25-%CF%87%CF%81%CE%BF%CE%BD%CE%B9%CE%B1-%CE%BC%CE%B2%CE%B1",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CF%80%CF%81%CE%BF%CF%83%CE%BA%CE%BB%CE%B7%CF%83%CE%B7-%CF%83%CF%84%CE%B1-25-%CF%87%CF%81%CE%BF%CE%BD%CE%B9%CE%B1-%CE%BC%CE%B2%CE%B1",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -647,9 +1186,122 @@
    "d": "2026-06-25",
    "s": "Pour toute question ou information : https://assistance-etudiant.univ-paris8.fr/osticketdevu/index.php Retrouvez les informations concernant l'application des droits différenciés pour les étudiants…",
    "l": "https://www.univ-paris8.fr/Inscriptions-administratives-2026-2027",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.univ-paris8.fr/-Actualites-",
     "url": "https://www.univ-paris8.fr/Inscriptions-administratives-2026-2027",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "Διεθνές Συνέδριο Τουρισμού (ICOT2026) - Τουρισμός Επόμενης Γενιάς: Καινοτομία, Βιωσιμότητα και Ποικιλομορφία Ταξιδιωτών",
+   "d": "2026-06-24",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CE%B4%CE%B9%CE%B5%CE%B8%CE%BD%CE%AD%CF%82-%CF%83%CF%85%CE%BD%CE%AD%CE%B4%CF%81%CE%B9%CE%BF-%CF%84%CE%BF%CF%85%CF%81%CE%B9%CF%83%CE%BC%CE%BF%CF%8D-icot2026-%CF%84%CE%BF%CF%85%CF%81%CE%B9%CF%83%CE%BC%CF%8C%CF%82-%CE%B5%CF%80%CF%8C%CE%BC%CE%B5%CE%BD%CE%B7%CF%82-%CE%B3%CE%B5%CE%BD%CE%B9%CE%AC%CF%82-%CE%BA%CE%B1%CE%B9%CE%BD%CE%BF%CF%84%CE%BF%CE%BC%CE%AF%CE%B1-%CE%B2%CE%B9%CF%89%CF%83%CE%B9%CE%BC%CF%8C%CF%84%CE%B7%CF%84%CE%B1-%CE%BA%CE%B1%CE%B9",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CE%B4%CE%B9%CE%B5%CE%B8%CE%BD%CE%AD%CF%82-%CF%83%CF%85%CE%BD%CE%AD%CE%B4%CF%81%CE%B9%CE%BF-%CF%84%CE%BF%CF%85%CF%81%CE%B9%CF%83%CE%BC%CE%BF%CF%8D-icot2026-%CF%84%CE%BF%CF%85%CF%81%CE%B9%CF%83%CE%BC%CF%8C%CF%82-%CE%B5%CF%80%CF%8C%CE%BC%CE%B5%CE%BD%CE%B7%CF%82-%CE%B3%CE%B5%CE%BD%CE%B9%CE%AC%CF%82-%CE%BA%CE%B1%CE%B9%CE%BD%CE%BF%CF%84%CE%BF%CE%BC%CE%AF%CE%B1-%CE%B2%CE%B9%CF%89%CF%83%CE%B9%CE%BC%CF%8C%CF%84%CE%B7%CF%84%CE%B1-%CE%BA%CE%B1%CE%B9",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "Τρεις Διαστάσεις της Βιοποικιλότητας: Ιστορική Οικολογία, Προγνωστική Μοντελοποίηση, και Γεωγραφική Γονιδιωματική",
+   "d": "2026-06-09",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CF%84%CF%81%CE%B5%CE%B9%CF%82-%CE%B4%CE%B9%CE%B1%CF%83%CF%84%CE%AC%CF%83%CE%B5%CE%B9%CF%82-%CF%84%CE%B7%CF%82-%CE%B2%CE%B9%CE%BF%CF%80%CE%BF%CE%B9%CE%BA%CE%B9%CE%BB%CF%8C%CF%84%CE%B7%CF%84%CE%B1%CF%82-%CE%B9%CF%83%CF%84%CE%BF%CF%81%CE%B9%CE%BA%CE%AE-%CE%BF%CE%B9%CE%BA%CE%BF%CE%BB%CE%BF%CE%B3%CE%AF%CE%B1-%CF%80%CF%81%CE%BF%CE%B3%CE%BD%CF%89%CF%83%CF%84%CE%B9%CE%BA%CE%AE-%CE%BC%CE%BF%CE%BD%CF%84%CE%B5%CE%BB%CE%BF%CF%80%CE%BF%CE%AF%CE%B7%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CF%84%CF%81%CE%B5%CE%B9%CF%82-%CE%B4%CE%B9%CE%B1%CF%83%CF%84%CE%AC%CF%83%CE%B5%CE%B9%CF%82-%CF%84%CE%B7%CF%82-%CE%B2%CE%B9%CE%BF%CF%80%CE%BF%CE%B9%CE%BA%CE%B9%CE%BB%CF%8C%CF%84%CE%B7%CF%84%CE%B1%CF%82-%CE%B9%CF%83%CF%84%CE%BF%CF%81%CE%B9%CE%BA%CE%AE-%CE%BF%CE%B9%CE%BA%CE%BF%CE%BB%CE%BF%CE%B3%CE%AF%CE%B1-%CF%80%CF%81%CE%BF%CE%B3%CE%BD%CF%89%CF%83%CF%84%CE%B9%CE%BA%CE%AE-%CE%BC%CE%BF%CE%BD%CF%84%CE%B5%CE%BB%CE%BF%CF%80%CE%BF%CE%AF%CE%B7%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "Τελετή Καθομολόγησης Αποφοίτων και Απονομής Διπλωμάτων Μεταπτυχιακών Σπουδών και Πτυχίων του Τμήματος Επιστήμης Τροφίμων και Διατροφής της Σχολής Περιβάλλοντος",
+   "d": "2026-06-05",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CE%BA%CE%B1%CE%B9-%CE%B1%CF%80%CE%BF%CE%BD%CE%BF%CE%BC%CE%AE%CF%82-%CE%B4%CE%B9%CF%80%CE%BB%CF%89%CE%BC%CE%AC%CF%84%CF%89%CE%BD-%CE%BC%CE%B5%CF%84%CE%B1%CF%80%CF%84%CF%85%CF%87%CE%B9%CE%B1%CE%BA%CF%8E%CE%BD-%CF%83%CF%80%CE%BF%CF%85%CE%B4%CF%8E%CE%BD-%CE%BA%CE%B1%CE%B9-%CF%80%CF%84%CF%85%CF%87%CE%AF%CF%89%CE%BD-%CF%84%CE%BF%CF%85-8",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CE%BA%CE%B1%CE%B9-%CE%B1%CF%80%CE%BF%CE%BD%CE%BF%CE%BC%CE%AE%CF%82-%CE%B4%CE%B9%CF%80%CE%BB%CF%89%CE%BC%CE%AC%CF%84%CF%89%CE%BD-%CE%BC%CE%B5%CF%84%CE%B1%CF%80%CF%84%CF%85%CF%87%CE%B9%CE%B1%CE%BA%CF%8E%CE%BD-%CF%83%CF%80%CE%BF%CF%85%CE%B4%CF%8E%CE%BD-%CE%BA%CE%B1%CE%B9-%CF%80%CF%84%CF%85%CF%87%CE%AF%CF%89%CE%BD-%CF%84%CE%BF%CF%85-8",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "Τελετή Καθομολόγησης Αποφοίτων Τμήματος Γεωγραφίας,",
+   "d": "2026-06-04",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CF%84%CE%BC%CE%AE%CE%BC%CE%B1%CF%84%CE%BF%CF%82-%CE%B3%CE%B5%CF%89%CE%B3%CF%81%CE%B1%CF%86%CE%AF%CE%B1%CF%82",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CF%84%CE%BC%CE%AE%CE%BC%CE%B1%CF%84%CE%BF%CF%82-%CE%B3%CE%B5%CF%89%CE%B3%CF%81%CE%B1%CF%86%CE%AF%CE%B1%CF%82",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "Τελετή Καθομολόγησης Τμήματος Πολιτισμικής Τεχνολογίας και Επικοινωνίας",
+   "d": "2026-06-04",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CF%84%CE%BC%CE%AE%CE%BC%CE%B1%CF%84%CE%BF%CF%82-%CF%80%CE%BF%CE%BB%CE%B9%CF%84%CE%B9%CF%83%CE%BC%CE%B9%CE%BA%CE%AE%CF%82-%CF%84%CE%B5%CF%87%CE%BD%CE%BF%CE%BB%CE%BF%CE%B3%CE%AF%CE%B1%CF%82-%CE%BA%CE%B1%CE%B9-%CE%B5%CF%80%CE%B9%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%AF%CE%B1%CF%82",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CF%84%CE%BC%CE%AE%CE%BC%CE%B1%CF%84%CE%BF%CF%82-%CF%80%CE%BF%CE%BB%CE%B9%CF%84%CE%B9%CF%83%CE%BC%CE%B9%CE%BA%CE%AE%CF%82-%CF%84%CE%B5%CF%87%CE%BD%CE%BF%CE%BB%CE%BF%CE%B3%CE%AF%CE%B1%CF%82-%CE%BA%CE%B1%CE%B9-%CE%B5%CF%80%CE%B9%CE%BA%CE%BF%CE%B9%CE%BD%CF%89%CE%BD%CE%AF%CE%B1%CF%82",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "Τελετή Καθομολόγησης Αποφοίτων Τμήματος Ωκεανογραφίας και Θαλασσίων Βιοεπιστημών",
+   "d": "2026-06-03",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CF%84%CE%BC%CE%AE%CE%BC%CE%B1%CF%84%CE%BF%CF%82-%CF%89%CE%BA%CE%B5%CE%B1%CE%BD%CE%BF%CE%B3%CF%81%CE%B1%CF%86%CE%AF%CE%B1%CF%82-%CE%BA%CE%B1%CE%B9-%CE%B8%CE%B1%CE%BB%CE%B1%CF%83%CF%83%CE%AF%CF%89%CE%BD-%CE%B2%CE%B9%CE%BF%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CF%8E%CE%BD",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CF%84%CE%BC%CE%AE%CE%BC%CE%B1%CF%84%CE%BF%CF%82-%CF%89%CE%BA%CE%B5%CE%B1%CE%BD%CE%BF%CE%B3%CF%81%CE%B1%CF%86%CE%AF%CE%B1%CF%82-%CE%BA%CE%B1%CE%B9-%CE%B8%CE%B1%CE%BB%CE%B1%CF%83%CF%83%CE%AF%CF%89%CE%BD-%CE%B2%CE%B9%CE%BF%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CF%8E%CE%BD",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "Τελετή Καθομολόγησης Αποφοίτων Τμήματος Περιβάλλοντος",
+   "d": "2026-06-03",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CF%84%CE%BC%CE%AE%CE%BC%CE%B1%CF%84%CE%BF%CF%82-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%BF%CF%82",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AE-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CF%84%CE%BC%CE%AE%CE%BC%CE%B1%CF%84%CE%BF%CF%82-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%BF%CF%82",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UAEGEAN",
+   "t": "Τελετές Καθομολόγησης Αποφοίτων και Απονομής Διπλωμάτων Μεταπτυχιακών Σπουδών & Πτυχίων του Τμήματος Κοινωνιολογίας",
+   "d": "2026-06-03",
+   "s": "",
+   "l": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AD%CF%82-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CE%BA%CE%B1%CE%B9-%CE%B1%CF%80%CE%BF%CE%BD%CE%BF%CE%BC%CE%AE%CF%82-%CE%B4%CE%B9%CF%80%CE%BB%CF%89%CE%BC%CE%AC%CF%84%CF%89%CE%BD-%CE%BC%CE%B5%CF%84%CE%B1%CF%80%CF%84%CF%85%CF%87%CE%B9%CE%B1%CE%BA%CF%8E%CE%BD-%CF%83%CF%80%CE%BF%CF%85%CE%B4%CF%8E%CE%BD-%CF%80%CF%84%CF%85%CF%87%CE%AF%CF%89%CE%BD-%CF%84%CE%BF%CF%85-1",
+   "tipo": "evento",
+   "origine": {
+    "fonte": "https://www.aegean.gr/event",
+    "url": "https://www.aegean.gr/event/%CF%84%CE%B5%CE%BB%CE%B5%CF%84%CE%AD%CF%82-%CE%BA%CE%B1%CE%B8%CE%BF%CE%BC%CE%BF%CE%BB%CF%8C%CE%B3%CE%B7%CF%83%CE%B7%CF%82-%CE%B1%CF%80%CE%BF%CF%86%CE%BF%CE%AF%CF%84%CF%89%CE%BD-%CE%BA%CE%B1%CE%B9-%CE%B1%CF%80%CE%BF%CE%BD%CE%BF%CE%BC%CE%AE%CF%82-%CE%B4%CE%B9%CF%80%CE%BB%CF%89%CE%BC%CE%AC%CF%84%CF%89%CE%BD-%CE%BC%CE%B5%CF%84%CE%B1%CF%80%CF%84%CF%85%CF%87%CE%B9%CE%B1%CE%BA%CF%8E%CE%BD-%CF%83%CF%80%CE%BF%CF%85%CE%B4%CF%8E%CE%BD-%CF%80%CF%84%CF%85%CF%87%CE%AF%CF%89%CE%BD-%CF%84%CE%BF%CF%85-1",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -660,6 +1312,7 @@
    "d": "2026-05-28",
    "s": "Scadenza: 22 luglio 2026",
    "l": "https://www.unimc.it/it/unimc-comunica/news/premio-di-laurea-su-patrimonio-archeologico-e-sua-valorizzazione",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/premio-di-laurea-su-patrimonio-archeologico-e-sua-valorizzazione",
@@ -673,6 +1326,7 @@
    "d": "2026-02-24",
    "s": "Il 4 marzo 2026 a Macerata, Civitanova e Camerino",
    "l": "https://www.unimc.it/it/unimc-comunica/news/papilloma-virus-open-day-vaccinale",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/papilloma-virus-open-day-vaccinale",
@@ -686,6 +1340,7 @@
    "d": "2025-09-17",
    "s": "Gratuit et ouvert à toutes et à tous. Contact : grand8@univ-paris8.fr 01 49 40 71 88 La rentrée universitaire sera une nouvelle fois placée sous le signe de la fête, de la rencontre et de…",
    "l": "https://www.univ-paris8.fr/Grand-8-2026",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.univ-paris8.fr/-Actualites-",
     "url": "https://www.univ-paris8.fr/Grand-8-2026",
@@ -699,6 +1354,7 @@
    "d": "2025-09-05",
    "s": "Face au développement rapide de l'intelligence artificielle et aux transformations qu'elle entraîne, l'Université Paris 8 souhaite promouvoir une approche critique, responsable et éclairée de ses…",
    "l": "https://www.univ-paris8.fr/L-universite-Paris-8-se-dote-d-une-charte-et-de-guides-pour-encadrer-les-usages",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.univ-paris8.fr/-Actualites-",
     "url": "https://www.univ-paris8.fr/L-universite-Paris-8-se-dote-d-une-charte-et-de-guides-pour-encadrer-les-usages",
@@ -712,6 +1368,7 @@
    "d": "2025-09-03",
    "s": "L'Université fait évoluer l'espace Presse de son site web afin d'offrir un accès plus clair, plus intuitif et plus complet aux informations destinées aux médias. Cette refonte comprend notamment une…",
    "l": "https://www.univ-paris8.fr/L-universite-Paris-8-enrichit-l-espace-Presse-de-son-site-internet",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.univ-paris8.fr/-Actualites-",
     "url": "https://www.univ-paris8.fr/L-universite-Paris-8-enrichit-l-espace-Presse-de-son-site-internet",
@@ -725,6 +1382,7 @@
    "d": "2025-07-04",
    "s": "Candidature pour le prix de l'engagement étudiant jusqu'au dimanche 30 août 2026 inclus. Dossier de candidature à remplir sur le formulaire en ligne …",
    "l": "https://www.univ-paris8.fr/Candidatez-au-prix-de-l-engagement-etudiant",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.univ-paris8.fr/-Actualites-",
     "url": "https://www.univ-paris8.fr/Candidatez-au-prix-de-l-engagement-etudiant",
@@ -738,8 +1396,9 @@
    "d": "2025-04-07",
    "s": "Λέσβος Υπεύθυνος/η Κωνσταντίνος Ζελλερ Ιωάννης Κουτουλακης Γρηγορης Τσαουσης Τηλέφωνο 6947974765 6949583203 6941626114 Email edgeexplorers@aegean.gr",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/o%CF%81%CE%B5%CE%B9%CE%B2%CE%B1%CF%84%CE%B9%CE%BA%CE%AE-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CF%84%CE%BF%CF%85-%CF%80%CE%B1%CE%BD%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CE%AF%CE%BF%CF%85-%CE%B1%CE%B9%CE%B3%CE%B1%CE%AF%CE%BF%CF%85",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/o%CF%81%CE%B5%CE%B9%CE%B2%CE%B1%CF%84%CE%B9%CE%BA%CE%AE-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CF%84%CE%BF%CF%85-%CF%80%CE%B1%CE%BD%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CE%AF%CE%BF%CF%85-%CE%B1%CE%B9%CE%B3%CE%B1%CE%AF%CE%BF%CF%85",
     "letto": "2026-08-10",
     "generato": null
@@ -751,8 +1410,9 @@
    "d": "2025-04-07",
    "s": "Λέσβος Υπεύθυνος/η ΡαφαήλΑσπρόπουλος Τηλέφωνο 6949086286 Email aegeanpalestinesolidarity@aegean.gr",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/%CF%80%CF%81%CF%89%CF%84%CE%BF%CE%B2%CE%BF%CF%85%CE%BB%CE%AF%CE%B1-%CE%B1%CE%BB%CE%BB%CE%B7%CE%BB%CE%B5%CE%B3%CE%B3%CF%8D%CE%B7%CF%82-%CF%83%CF%84%CE%B7%CE%BD-%CF%80%CE%B1%CE%BB%CE%B1%CE%B9%CF%83%CF%84%CE%AF%CE%BD%CE%B7",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/%CF%80%CF%81%CF%89%CF%84%CE%BF%CE%B2%CE%BF%CF%85%CE%BB%CE%AF%CE%B1-%CE%B1%CE%BB%CE%BB%CE%B7%CE%BB%CE%B5%CE%B3%CE%B3%CF%8D%CE%B7%CF%82-%CF%83%CF%84%CE%B7%CE%BD-%CF%80%CE%B1%CE%BB%CE%B1%CE%B9%CF%83%CF%84%CE%AF%CE%BD%CE%B7",
     "letto": "2026-08-10",
     "generato": null
@@ -764,8 +1424,9 @@
    "d": "2025-04-07",
    "s": "Λέσβος Υπεύθυνος/η Ιωάννης Κουτσούπης Αθανασία Ζωή Μπoυλούτση Τηλέφωνο 6948710806 6946495573 Email epopa@aegean.gr",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/%CE%B5%CE%B8%CE%B5%CE%BB%CE%BF%CE%BD%CF%84%CE%B9%CE%BA%CE%AE-%CF%80%CF%81%CE%AC%CF%83%CE%B9%CE%BD%CE%B7-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CF%80%CE%B1%CE%BD%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CE%AF%CE%BF%CF%85-%CE%B1%CE%B9%CE%B3%CE%B1%CE%AF%CE%BF%CF%85",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/%CE%B5%CE%B8%CE%B5%CE%BB%CE%BF%CE%BD%CF%84%CE%B9%CE%BA%CE%AE-%CF%80%CF%81%CE%AC%CF%83%CE%B9%CE%BD%CE%B7-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CF%80%CE%B1%CE%BD%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CE%AF%CE%BF%CF%85-%CE%B1%CE%B9%CE%B3%CE%B1%CE%AF%CE%BF%CF%85",
     "letto": "2026-08-10",
     "generato": null
@@ -777,8 +1438,9 @@
    "d": "2025-04-07",
    "s": "Λέσβος Υπεύθυνος/η Ασπασία Μακρή Τηλέφωνο 6939888797 Email digitalartsteam@aegean.gr",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/digital-arts-team",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/digital-arts-team",
     "letto": "2026-08-10",
     "generato": null
@@ -790,8 +1452,9 @@
    "d": "2024-09-30",
    "s": "Ρόδος Συστάθηκε με σκοπό τη συστηματική ενασχόληση των φοιτητών/-τριών με την θεωρητική και πρακτική διάσταση της ανάπτυξης εκπαιδευτικών προγραμμάτων με μουσικό ενδιαφέρον για/σε χώρους πολιτιστικής…",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CF%81%CF%8C%CE%B4%CE%BF%CF%82/%CE%BA%CE%B1%CE%BB%CE%BB%CE%B9%CF%84%CE%B5%CF%87%CE%BD%CE%B9%CE%BA%CE%AE-%E2%80%93-%CF%80%CE%B1%CE%B9%CE%B4%CE%B1%CE%B3%CF%89%CE%B3%CE%B9%CE%BA%CE%AE-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CF%86%CE%B9%CE%BB%CE%BF%CF%80%CE%B1%CE%B9%CE%B3%CE%BC%CE%BF%CE%BD%CE%B5%CF%83",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CF%81%CF%8C%CE%B4%CE%BF%CF%82/%CE%BA%CE%B1%CE%BB%CE%BB%CE%B9%CF%84%CE%B5%CF%87%CE%BD%CE%B9%CE%BA%CE%AE-%E2%80%93-%CF%80%CE%B1%CE%B9%CE%B4%CE%B1%CE%B3%CF%89%CE%B3%CE%B9%CE%BA%CE%AE-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CF%86%CE%B9%CE%BB%CE%BF%CF%80%CE%B1%CE%B9%CE%B3%CE%BC%CE%BF%CE%BD%CE%B5%CF%83",
     "letto": "2026-08-10",
     "generato": null
@@ -803,8 +1466,9 @@
    "d": "2024-09-30",
    "s": "Ρόδος Το φωνητικό σύνολο CORPUS MUSICAE του Τμήματος Επιστημών της Προσχολικής Αγωγής και του Εκπαιδευτικού Σχεδιασμού (Τ.Ε.Π.Α.E.Σ.) συστάθηκε το 2017 και περιλαμβάνει φοιτήτριες και φοιτητές και…",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CF%81%CF%8C%CE%B4%CE%BF%CF%82/%CF%86%CF%89%CE%BD%CE%B7%CF%84%CE%B9%CE%BA%CF%8C-%CF%83%CF%8D%CE%BD%CE%BF%CE%BB%CE%BF-corpus-musicae",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CF%81%CF%8C%CE%B4%CE%BF%CF%82/%CF%86%CF%89%CE%BD%CE%B7%CF%84%CE%B9%CE%BA%CF%8C-%CF%83%CF%8D%CE%BD%CE%BF%CE%BB%CE%BF-corpus-musicae",
     "letto": "2026-08-10",
     "generato": null
@@ -816,8 +1480,9 @@
    "d": "2024-06-19",
    "s": "Ενημέρωση σχετικά με διαρροή προσωπικών δεδομένων στο σκοτεινό διαδίκτυο (Dark Web) στις 23/11/2023, ως αποτέλεσμα της κυβερνοεπίθεσης που είχε δεχτεί το Πανεπιστήμιο Αιγαίου από την ομάδα…",
    "l": "https://www.aegean.gr/announcement/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7-%CF%83%CF%87%CE%B5%CF%84%CE%B9%CE%BA%CE%AC-%CE%BC%CE%B5-%CE%B4%CE%B9%CE%B1%CF%81%CF%81%CE%BF%CE%AE-%CF%80%CF%81%CE%BF%CF%83%CF%89%CF%80%CE%B9%CE%BA%CF%8E%CE%BD-%CE%B4%CE%B5%CE%B4%CE%BF%CE%BC%CE%AD%CE%BD%CF%89%CE%BD",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/announcement/%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7-%CF%83%CF%87%CE%B5%CF%84%CE%B9%CE%BA%CE%AC-%CE%BC%CE%B5-%CE%B4%CE%B9%CE%B1%CF%81%CF%81%CE%BF%CE%AE-%CF%80%CF%81%CE%BF%CF%83%CF%89%CF%80%CE%B9%CE%BA%CF%8E%CE%BD-%CE%B4%CE%B5%CE%B4%CE%BF%CE%BC%CE%AD%CE%BD%CF%89%CE%BD",
     "letto": "2026-08-10",
     "generato": null
@@ -829,9 +1494,24 @@
    "d": "2024-05-14",
    "s": "Per chi si è iscritto come laureando entro il 30 aprile 2024",
    "l": "https://www.unimc.it/it/unimc-comunica/news/rimborso-laureandi-2023-2024",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/rimborso-laureandi-2023-2024",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "UNIMC",
+   "t": "SUMMER SCHOOL. Western culture and civilization",
+   "d": "2024-04-17",
+   "s": "Scadenza domande: 10 maggio 2024",
+   "l": "https://www.unimc.it/it/unimc-comunica/news/summer-school-western-culture-and-civilization",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://www.unimc.it/it/unimc-comunica/news",
+    "url": "https://www.unimc.it/it/unimc-comunica/news/summer-school-western-culture-and-civilization",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -842,35 +1522,24 @@
    "d": "2024-01-08",
    "s": "Λέσβος Η αστρονομική ομάδα (ιδρύθηκε το 2012 ) και αποτελεί μια μη θεσμοθετημένη ομάδα η οποία έχει ως στόχο την εμβάθυνση των γνώσεων μας στην ουρανογραφία, στην αστρονομία, στην κοσμολογία έως και…",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/%CE%B1%CF%83%CF%84%CF%81%CE%BF%CE%BD%CE%BF%CE%BC%CE%B9%CE%BA%CE%AE-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CF%80%CE%B1%CE%BD%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CE%AF%CE%BF%CF%85-%CE%B1%CE%B9%CE%B3%CE%B1%CE%AF%CE%BF%CF%85",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CE%BB%CE%AD%CF%83%CE%B2%CE%BF%CF%82/%CE%B1%CF%83%CF%84%CF%81%CE%BF%CE%BD%CE%BF%CE%BC%CE%B9%CE%BA%CE%AE-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CF%80%CE%B1%CE%BD%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CE%AF%CE%BF%CF%85-%CE%B1%CE%B9%CE%B3%CE%B1%CE%AF%CE%BF%CF%85",
     "letto": "2026-08-10",
     "generato": null
    }
   },
   {
-   "u": "MRU",
-   "t": "POL-COM Kvalifikacijos tobulinimo ir švietimo platforma bei žaidybiniai įrankiai, skirti policijos pareigūnams ir panašiems specialistams mokyti komunikacijos srityje, (Nr. 2023-1-CZ01-KA220-VET-000167148)",
-   "d": "2023-12-18",
-   "s": "Projekto Nr. 2023-1-CZ01-KA220-VET-000167148 Projekto pavadinimas: „Kvalifikacijos tobulinimo ir švietimo platforma bei žaidybiniai įrankiai, skirti policijos pareigūnams ir panašiems specialistams…",
-   "l": "https://www.mruni.eu/mokslas/pol-com-kvalifikacijos-tobulinimo-ir-svietimo-platforma-bei-zaidybiniai-irankiai-skirti-policijos-pareigunams-ir-panasiems-specialistams-mokyti-komunikacijos-srityje-nr-2023-1-cz01-ka220-vet-00016/",
+   "u": "UNIMC",
+   "t": "brochure definitiva versione digitale.pdf",
+   "d": "2023-05-23",
+   "s": "",
+   "l": "https://www.unimc.it/it/unimc-comunica/news/brochure-definitiva-versione-digitale-1.pdf/view",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.mruni.eu/en/",
-    "url": "https://www.mruni.eu/mokslas/pol-com-kvalifikacijos-tobulinimo-ir-svietimo-platforma-bei-zaidybiniai-irankiai-skirti-policijos-pareigunams-ir-panasiems-specialistams-mokyti-komunikacijos-srityje-nr-2023-1-cz01-ka220-vet-00016/",
-    "letto": "2026-08-10",
-    "generato": null
-   }
-  },
-  {
-   "u": "MRU",
-   "t": "BANDYMAS",
-   "d": "2023-05-22",
-   "s": "BANDYMAS BANDYMAS BANDYMAS BANDYMAS BANDYMAS The post BANDYMAS appeared first on MRU .",
-   "l": "https://www.mruni.eu/uncategorized-lt/bandymas/",
-   "origine": {
-    "fonte": "https://www.mruni.eu/en/",
-    "url": "https://www.mruni.eu/uncategorized-lt/bandymas/",
+    "fonte": "https://www.unimc.it/it/unimc-comunica/news",
+    "url": "https://www.unimc.it/it/unimc-comunica/news/brochure-definitiva-versione-digitale-1.pdf/view",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -881,35 +1550,10 @@
    "d": "2022-08-29",
    "s": "",
    "l": "https://www.unimc.it/it/unimc-comunica/news/autocertificazione-covid-19-test-medicina-2022_2023-2.pdf/view",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/autocertificazione-covid-19-test-medicina-2022_2023-2.pdf/view",
-    "letto": "2026-08-10",
-    "generato": null
-   }
-  },
-  {
-   "u": "MRU",
-   "t": "MRU mokslininkė dr. Daiva Penkauskienė: kritinis mąstymas ypač svarbi kompetencija aukštajame moksle",
-   "d": "2021-10-25",
-   "s": "„Dažniausiai, kritinis mąstymas, kalbant apie aukštąjį mokslą, suvokiamas kaip kognityvinių asmens gebėjimų visuma, todėl ir studijų procese į tai kreipiamas didžiausias dėmesys, bet nuostatos ir…",
-   "l": "https://www.mruni.eu/uncategorized-lt/mru-mokslininke-dr-daiva-penkauskiene-kritinis-mastymas-ypac-svarbi-kompetencija-aukstajame-moksle/",
-   "origine": {
-    "fonte": "https://www.mruni.eu/en/",
-    "url": "https://www.mruni.eu/uncategorized-lt/mru-mokslininke-dr-daiva-penkauskiene-kritinis-mastymas-ypac-svarbi-kompetencija-aukstajame-moksle/",
-    "letto": "2026-08-10",
-    "generato": null
-   }
-  },
-  {
-   "u": "MRU",
-   "t": "MRU profesorė Toma Birmontienė: visuomenės sveikata dabar suprantama ir kaip pasaulio bendruomenės gerovė",
-   "d": "2021-07-01",
-   "s": "Gerbiama profesore, mažai kas girdėję apie tokia teisės mokslų sritį kaip sveikatos teisė. Taip, išties sveikatos teisė – nišinė, bet integrali teisės sritis, apimanti ir konstitucinės…",
-   "l": "https://www.mruni.eu/university/mru-profesore-toma-birmontiene-visuomenes-sveikata-dabar-suprantama-ir-kaip-pasaulio-bendruomenes-gerove/",
-   "origine": {
-    "fonte": "https://www.mruni.eu/en/",
-    "url": "https://www.mruni.eu/university/mru-profesore-toma-birmontiene-visuomenes-sveikata-dabar-suprantama-ir-kaip-pasaulio-bendruomenes-gerove/",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -920,6 +1564,7 @@
    "d": "2021-02-03",
    "s": "Fai domanda entro il 1° marzo 2021",
    "l": "https://www.unimc.it/it/unimc-comunica/news/bonus-200020ac-per-studenti-universitari",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/bonus-200020ac-per-studenti-universitari",
@@ -928,14 +1573,15 @@
    }
   },
   {
-   "u": "MRU",
-   "t": "Autoriaus postas",
-   "d": "2020-10-09",
-   "s": "The post Autoriaus postas appeared first on MRU .",
-   "l": "https://www.mruni.eu/uncategorized-lt/autoriaus-postas/",
+   "u": "UNIMC",
+   "t": "mozione unibo Patrick Zaky.pdf",
+   "d": "2020-02-21",
+   "s": "",
+   "l": "https://www.unimc.it/it/unimc-comunica/news/mozione-unibo-patrick-zaky.pdf/view",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.mruni.eu/en/",
-    "url": "https://www.mruni.eu/uncategorized-lt/autoriaus-postas/",
+    "fonte": "https://www.unimc.it/it/unimc-comunica/news",
+    "url": "https://www.unimc.it/it/unimc-comunica/news/mozione-unibo-patrick-zaky.pdf/view",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -946,6 +1592,7 @@
    "d": "2020-02-18",
    "s": "Send your application by 31th March 2020",
    "l": "https://www.unimc.it/it/unimc-comunica/news/marie-curie-individual-fellowships-at-unimc",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/marie-curie-individual-fellowships-at-unimc",
@@ -959,6 +1606,7 @@
    "d": "2019-07-12",
    "s": "",
    "l": "https://www.unimc.it/it/unimc-comunica/news/yuan-2.jpeg/view",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/yuan-2.jpeg/view",
@@ -972,6 +1620,7 @@
    "d": "2019-07-12",
    "s": "",
    "l": "https://www.unimc.it/it/unimc-comunica/news/nuoya-4.jpg/view",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/nuoya-4.jpg/view",
@@ -985,8 +1634,9 @@
    "d": "2019-07-01",
    "s": "Χίος Η Ομάδα Ιστιοπλοΐας της Πανεπιστημιακής Μονάδας Χίου δημιουργήθηκε το Φεβρουάριο του 2019 με πρωτοβουλία φοιτητών του Τμήματος Ναυτιλίας και Επιχειρηματικών Υπηρεσιών που το αντικείμενο των…",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CF%87%CE%AF%CE%BF%CF%82/%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CE%B9%CF%83%CF%84%CE%B9%CE%BF%CF%80%CE%BB%CE%BF%CE%90%CE%B1%CF%82-%CF%80%CE%B1%CE%BD%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CE%B9%CE%B1%CE%BA%CE%AE%CF%82-%CE%BC%CE%BF%CE%BD%CE%AC%CE%B4%CE%B1%CF%82-%CF%87%CE%AF%CE%BF%CF%85",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CF%87%CE%AF%CE%BF%CF%82/%CE%BF%CE%BC%CE%AC%CE%B4%CE%B1-%CE%B9%CF%83%CF%84%CE%B9%CE%BF%CF%80%CE%BB%CE%BF%CE%90%CE%B1%CF%82-%CF%80%CE%B1%CE%BD%CE%B5%CF%80%CE%B9%CF%83%CF%84%CE%B7%CE%BC%CE%B9%CE%B1%CE%BA%CE%AE%CF%82-%CE%BC%CE%BF%CE%BD%CE%AC%CE%B4%CE%B1%CF%82-%CF%87%CE%AF%CE%BF%CF%85",
     "letto": "2026-08-10",
     "generato": null
@@ -998,8 +1648,9 @@
    "d": "2019-07-01",
    "s": "Χίος Η φοιτητική μπάντα Vinyls της Πανεπιστημιακής Μονάδας Χίου δημιουργήθηκε από το μεράκι των φοιτητών και την αγάπη τους για τη μουσική. Το συγκρότημα είναι σήμερα πενταμελές. Μέλη του, ο φοιτητής…",
    "l": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CF%87%CE%AF%CE%BF%CF%82/vinyls-%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AE-%CE%BC%CF%80%CE%AC%CE%BD%CF%84%CE%B1-%CF%87%CE%AF%CE%BF%CF%85",
+   "tipo": "notizia",
    "origine": {
-    "fonte": "https://www.aegean.gr/",
+    "fonte": "https://www.aegean.gr/announcement",
     "url": "https://www.aegean.gr/%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AD%CF%82-%CE%BF%CE%BC%CE%AC%CE%B4%CE%B5%CF%82/%CF%87%CE%AF%CE%BF%CF%82/vinyls-%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AE-%CE%BC%CF%80%CE%AC%CE%BD%CF%84%CE%B1-%CF%87%CE%AF%CE%BF%CF%85",
     "letto": "2026-08-10",
     "generato": null
@@ -1011,6 +1662,7 @@
    "d": "2019-01-17",
    "s": "Scadenza bando: 10 febbraio 2019",
    "l": "https://www.unimc.it/it/unimc-comunica/news/innovazione-sociale-borse-per-tirocini-allestero",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/innovazione-sociale-borse-per-tirocini-allestero",
@@ -1024,9 +1676,80 @@
    "d": "2019-01-11",
    "s": "Mercoledì 30 gennaio dalle 16 alle 18.30 al Dipartimento di Scienze della formazione",
    "l": "https://www.unimc.it/it/unimc-comunica/news/child-in-mind-seminario-gratuito-per-insegnanti-genitori-ed-educatori",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://www.unimc.it/it/unimc-comunica/news",
     "url": "https://www.unimc.it/it/unimc-comunica/news/child-in-mind-seminario-gratuito-per-insegnanti-genitori-ed-educatori",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Научен форум „Аграрната икономика в подкрепа на земеделието: трансфер на знания между наука и практика“",
+   "d": "2015-05-19",
+   "s": "Нов български университет съвместно с Институт по аграрна икономика(ИАИ) проведе научен форум. Събитието се проведе на 12.05.2015 г. от 10:00 до 13:00 ч. в зала 20 на Нов български университе.…",
+   "l": "https://news.nbu.bg/bg/news/nauchen-forum-agrarnata-ikonomika-v-podkrepa-na-zemedelieto-transfer-na-znaniq-mezhdu-nauka-i-praktika!150",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/news",
+    "url": "https://news.nbu.bg/bg/news/nauchen-forum-agrarnata-ikonomika-v-podkrepa-na-zemedelieto-transfer-na-znaniq-mezhdu-nauka-i-praktika!150",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Снежина Петрова с изключително представяне в Зала 1 на НДК",
+   "d": "2015-05-19",
+   "s": "От два месеца театрална София очаква какво ще се случи в голямата Зала 1 на Националния дворец на културата и ето, че то се случи &ndash; на 12 май 2015 г. - &bdquo;Квартет. Опасни връзки след края…",
+   "l": "https://news.nbu.bg/bg/news/snezhina-petrova-s-izkljuchitelno-predstavqne-v-zala-1-na-ndk!151",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/news",
+    "url": "https://news.nbu.bg/bg/news/snezhina-petrova-s-izkljuchitelno-predstavqne-v-zala-1-na-ndk!151",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Маркетинг ШАМПИОНИ",
+   "d": "2015-05-19",
+   "s": "Студентите от Нов български университет от бакалавърска програма \"Маркетинг\" са победители в Националната олимпиада по маркетинг, която се проведе на 15 май 2015 година в УНСС. В конкуренция с 13…",
+   "l": "https://news.nbu.bg/bg/news/marketing-sh-ampioni!152",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/news",
+    "url": "https://news.nbu.bg/bg/news/marketing-sh-ampioni!152",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Франкофонски център за университетско качество в НБУ",
+   "d": "2015-05-12",
+   "s": "На 11 май 2015 г. в НБУ бе открит Франкофонски център за университетско качество. На откриването присъстваха г-жа Нели Фесо, главен секретар на Университетската агенция на франкофонията и от страна…",
+   "l": "https://news.nbu.bg/bg/news/frankofonski-centyr-za-universitetsko-kachestvo-v-nbu!107",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/news",
+    "url": "https://news.nbu.bg/bg/news/frankofonski-centyr-za-universitetsko-kachestvo-v-nbu!107",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Важно за книгите с червен етикет",
+   "d": "2015-05-07",
+   "s": "На 7 май 2015 г. ще бъде преустановено заемането за дома на книга от колекция &bdquo;Единствен/последен екземпляр&ldquo; (червен етикет). С оглед на подготовката за лятната изпитна сесия през…",
+   "l": "https://news.nbu.bg/bg/news/vazhno-za-knigite-s-cherven-etiket!89",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/news",
+    "url": "https://news.nbu.bg/bg/news/vazhno-za-knigite-s-cherven-etiket!89",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -1037,6 +1760,7 @@
    "d": "2015-05-04",
    "s": "Между 22 и 26 април 2015 г. световноизвестният теоретик на постмодерността и консумативната култура проф. Майк Федърстоун от Goldsmiths, University of London беше на първото си посещение в Източна…",
    "l": "https://news.nbu.bg/bg/news/prof-majk-fedyrstoun-na-pyrvo-poseshtenie-v-iztochna-evropa!51",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/prof-majk-fedyrstoun-na-pyrvo-poseshtenie-v-iztochna-evropa!51",
@@ -1050,9 +1774,24 @@
    "d": "2015-04-27",
    "s": "Международният панаир на тренировъчните фирми е най-големият годишен форум на Мрежата на българските тренировъчни предприятия и единственото в България състезание по професии с международно участие.…",
    "l": "https://news.nbu.bg/bg/news/studenti-ot-nbu-uchastvaha-v-tf-fest-2015-mlad-predpriemach!82",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/studenti-ot-nbu-uchastvaha-v-tf-fest-2015-mlad-predpriemach!82",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "100 книги \"на свобода\"",
+   "d": "2015-04-26",
+   "s": "По случай Световния ден на книгата и авторското право, библиотеката на Нов български университет пуска &bdquo;на свобода&ldquo; 100 книги от днес до 26 април 2015 г. Желателно е взетите заглавия да…",
+   "l": "https://news.nbu.bg/bg/news/100-knigi-na-svoboda!90",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/news",
+    "url": "https://news.nbu.bg/bg/news/100-knigi-na-svoboda!90",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -1063,6 +1802,7 @@
    "d": "2015-04-17",
    "s": "В Нов български университет се проведе за тринадесети пореден път форум &ldquo;Кариери и студенти&rdquo;. Това е най-голямото кариерно събитие, което се провежда в университета. В тазгодишния форум…",
    "l": "https://news.nbu.bg/bg/news/forum-karieri-i-studenti-2015!48",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/forum-karieri-i-studenti-2015!48",
@@ -1076,6 +1816,7 @@
    "d": "2015-04-02",
    "s": "Корпус 1, Аула Организатори: департамент &bdquo;Кино, реклама и шоубизнес&ldquo; Киноклуб НБУ Държава: България Година: 1978 Времетраене: 87 минути Сценарист: Кънчо Атанасов Режисьор: Иван Андонов В…",
    "l": "https://news.nbu.bg/bg/news/pokriv!59",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/pokriv!59",
@@ -1089,6 +1830,7 @@
    "d": "2015-03-31",
    "s": "Военните действия в Украйна оставиха много хора без дом и храна. Независимо от опитите за разрешаване на кризата броят на нуждаещите се от помощ остава голям. В село Семьоновка например десетки хора…",
    "l": "https://news.nbu.bg/bg/news/kniga-na-nash-prepodavatel-izbrana-za-blagotvoritelna-kampaniq!83",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/kniga-na-nash-prepodavatel-izbrana-za-blagotvoritelna-kampaniq!83",
@@ -1102,9 +1844,24 @@
    "d": "2015-03-26",
    "s": "На 25.03.2015 г. Нов български университет взе участие в инициативата &bdquo;Мениджър за един ден&ldquo; на Джуниър Ачийвмънт България Всяка година над 1000 ученици и студенти в цялата страна имат…",
    "l": "https://news.nbu.bg/bg/news/na-25-03-2015-g-nov-bylgarski-universitet-vze-uchastie-v-iniciativata-menidzhyr-za-edin-den-na-dzhuniyr-achijvmynt-bylgariq!84",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/na-25-03-2015-g-nov-bylgarski-universitet-vze-uchastie-v-iniciativata-menidzhyr-za-edin-den-na-dzhuniyr-achijvmynt-bylgariq!84",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "„Три и половина“ - миниатюри по Дарио Фо и Франка Раме",
+   "d": "2015-03-25",
+   "s": "Текст: Стефана Пеева и Елизара Митева, студентки от програма \"Връзки с обществеността\" На 23 март 2015 г. от 18:30 в Университетския театър на Нов български университет беше представена постановката…",
+   "l": "https://news.nbu.bg/bg/news/tri-i-polovina-miniatjuri-po-dario-fo-i-franka-rame!86",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/news",
+    "url": "https://news.nbu.bg/bg/news/tri-i-polovina-miniatjuri-po-dario-fo-i-franka-rame!86",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -1115,9 +1872,24 @@
    "d": "2015-03-20",
    "s": "На 26 март (четвъртък) 2015 г. от 09.00 часа в Нов български университет ще се проведе Ден на отворените врати. Ако го посетите, можете да започнете с информационните ни дескове &ndash; фоайе Аула…",
    "l": "https://news.nbu.bg/bg/news/26-mart-2015-g-den-na-otvorenite-vrati-v-nbu!42",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/26-mart-2015-g-den-na-otvorenite-vrati-v-nbu!42",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "u": "NBU",
+   "t": "Николай Василев и Владимир Каролев за външния дълг, основни обсъждани въпроси",
+   "d": "2015-03-19",
+   "s": "На 18 март се проведе втората сбирка на Дискусионния клуб по приложна икономика. Гостите Николай Василев и Владимир Каролев обсъдиха с аудиторията въпроса за новия дълг. Ето и някои от основните…",
+   "l": "https://news.nbu.bg/bg/news/nikolaj-vasilev-i-vladimir-karolev-za-vynshniq-dylg-osnovni-obsyzhdani-vyprosi!87",
+   "tipo": "notizia",
+   "origine": {
+    "fonte": "https://news.nbu.bg/bg/news",
+    "url": "https://news.nbu.bg/bg/news/nikolaj-vasilev-i-vladimir-karolev-za-vynshniq-dylg-osnovni-obsyzhdani-vyprosi!87",
     "letto": "2026-08-10",
     "generato": null
    }
@@ -1128,6 +1900,7 @@
    "d": "2015-03-02",
    "s": "На 13 февруари 2015 г. на дипломна защита в департамент \"Масови комуникации\" получи своята бакалавърска степен 1001-ят дипломирал се студент. (До 31 декември 2014 г. департаментът са завършили 797…",
    "l": "https://news.nbu.bg/bg/news/1001-qt!26",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/1001-qt!26",
@@ -1141,6 +1914,7 @@
    "d": "2015-02-10",
    "s": "Тази седмица департамент &bdquo;Музика&ldquo; и галерията на Нов български университет организират поредица от събития, посветени на класическата музика и изпълнителското изкуство. На 2 февруари за…",
    "l": "https://news.nbu.bg/bg/news/gala-vecher-na-cheshkata-i-slovashkata-kamerna-muzika-v-galeriq-uni-art-na-nbu!16",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/gala-vecher-na-cheshkata-i-slovashkata-kamerna-muzika-v-galeriq-uni-art-na-nbu!16",
@@ -1154,6 +1928,7 @@
    "d": "2015-01-28",
    "s": "Текст: Ирена Попова-Павлова, директор на Център за кариерно развитие и обучителни ресурси на НБУ На 23 януари 2015 г. се състоя дългоочакваната дискусия с гост режисьора и продуцент Маги Халваджиян в…",
    "l": "https://news.nbu.bg/bg/news/pytqt-kym-uspeha!6",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/pytqt-kym-uspeha!6",
@@ -1167,6 +1942,7 @@
    "d": "2014-12-23",
    "s": "Юбилейният благотворителен галаконцерт &bdquo;Райна Кабаиванска представя звездите на операта&ldquo;, организиран от Нов български университет, с който на 18 декември 2014 г. бе отбелязан…",
    "l": "https://news.nbu.bg/bg/news/rajna-kabaivanska-predstavi-zvezdite-na-operata!1",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/rajna-kabaivanska-predstavi-zvezdite-na-operata!1",
@@ -1180,6 +1956,7 @@
    "d": "2014-12-16",
    "s": "Между първи и шести декември тази година в Пловдив се проведе 21-ото издание на фестивала &ldquo;Златен ритон&rdquo;. Той се организира от Националния филмов център и в рамките на една седмица…",
    "l": "https://news.nbu.bg/bg/news/kniga-na-mylchanieto-na-profesor-anri-kulev-s-3-nagradi-na-zlaten-riton-!2",
+   "tipo": "notizia",
    "origine": {
     "fonte": "https://news.nbu.bg/bg/news",
     "url": "https://news.nbu.bg/bg/news/kniga-na-mylchanieto-na-profesor-anri-kulev-s-3-nagradi-na-zlaten-riton-!2",

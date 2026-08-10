@@ -12,6 +12,13 @@
   text-transform:uppercase;color:var(--testo2);margin:0 0 .9rem}
 .lingua-fonte{font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.1em;
   background:var(--sup2);color:var(--testo2);border-radius:4px;padding:.1rem .35rem}
+/* Distingue un evento da una notizia. Serve: un convegno di novembre in
+   cima a un elenco ordinato per data sembrerebbe una novità di oggi.
+   Colore proprio, non il grigio delle altre etichette, perché è
+   un'informazione sul contenuto e non sulla fonte. */
+.tipo-evento{font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--lavanda);color:var(--lavanda-s);
+  border-radius:4px;padding:.1rem .35rem}
 .news .riga{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .news-pagine{display:flex;justify-content:center;gap:.45rem;margin:1.6rem 0 .5rem;flex-wrap:wrap}
 .news-pagine .pg{min-width:2.3rem;height:2.3rem;border:0;border-radius:99px;cursor:pointer;
