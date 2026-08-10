@@ -137,21 +137,12 @@ function chiudiPod(){
 }
 
 /* ── comandi ───────────────────────────────────────────────────────── */
+/* Le due voci "Read / Listen" in cima alla rivista NON si comandano da
+   qui: stanno in `rivista.js`, che è caricata fin dall'inizio. Se il
+   comando vivesse in questo file, premere "Listen" non farebbe niente —
+   il file non è ancora stato scaricato, ed è appunto quel clic a doverlo
+   far scaricare. */
 document.addEventListener('click', e => {
-  /* le due voci in cima alla rivista: leggere oppure ascoltare */
-  const m = e.target.closest('#modi-mag .modo-mag');
-  if (m) {
-    const quale = m.dataset.mag;
-    document.querySelectorAll('#modi-mag .modo-mag').forEach(b => {
-      const on = b === m;
-      b.classList.toggle('on', on);
-      b.setAttribute('aria-selected', on);
-    });
-    document.getElementById('mag-leggi').hidden = quale !== 'leggi';
-    document.getElementById('mag-ascolta').hidden = quale !== 'ascolta';
-    if (quale === 'ascolta') avvia();
-    return;
-  }
   if (e.target.closest('#pl-x')) { e.preventDefault(); e.stopPropagation(); chiudiPod(); return; }
   if (e.target.closest('#pl-quad')) {
     if (podCorrente && podCorrente.yt) espandiPod(); else podPausa();
