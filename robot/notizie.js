@@ -29,6 +29,7 @@ import fs from 'node:fs';
 
 import { scaricaTutte } from './comune/rete.js';
 import { leggiFeed, soloTesto } from './comune/feed.js';
+import { leggiPagina } from './comune/pagina.js';
 import { scriviDati, RifiutoDiScrivere } from './comune/scrivi.js';
 import { segnala } from './comune/registro.js';
 
