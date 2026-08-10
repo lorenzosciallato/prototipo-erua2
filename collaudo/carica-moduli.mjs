@@ -22,6 +22,7 @@ const idsPagina = new Set(
   [...fs.readFileSync(path.join(REPO, 'index.html'), 'utf8').matchAll(/\bid="([^"]+)"/g)].map(m => m[1]));
 
 const creati = new Map();
+const perSelettore = new Map();
 function elemento(nome) {
   const base = {
     __nome: nome,
@@ -30,7 +31,8 @@ function elemento(nome) {
     dataset: {},
     children: [], hidden: false, value: '', textContent: '', innerHTML: '',
     offsetTop: 0, offsetWidth: 100, offsetHeight: 100, scrollTop: 0, disabled: false,
-    addEventListener(){}, removeEventListener(){}, appendChild(){}, removeChild(){},
+    addEventListener(tipo, fn){ (this.__ascolti ||= {})[tipo] = [...(this.__ascolti?.[tipo]||[]), fn]; },
+    removeEventListener(){}, appendChild(){}, removeChild(){},
     setAttribute(){}, getAttribute: () => null, removeAttribute(){}, focus(){},
     scrollIntoView(){}, closest: () => null, remove(){}, click(){},
     querySelector: () => elemento('generico'), querySelectorAll: () => [],
@@ -53,10 +55,15 @@ const dammi = id => { if (!creati.has(id)) creati.set(id, elemento(id)); return 
 
 const document_ = {
   getElementById: id => (idsPagina.has(id) ? dammi(id) : null),
-  querySelector: () => elemento('generico'),
+  /* stabile: lo stesso selettore restituisce sempre lo stesso elemento,
+     come farebbe il DOM. Senza questo, l'HTML scritto dentro un elemento
+     trovato per selettore andrebbe perso. */
+  querySelector: (s) => { if (!perSelettore.has(s)) perSelettore.set(s, elemento(s)); return perSelettore.get(s); },
   querySelectorAll: () => [],
   createElement: n => elemento(n),
-  addEventListener(){}, removeEventListener(){},
+  __ascolti: {},
+  addEventListener(tipo, fn){ (this.__ascolti[tipo] ||= []).push(fn); },
+  removeEventListener(){},
   body: elemento('body'),
   head: elemento('head'),
   documentElement: elemento('html'),
@@ -66,7 +73,9 @@ document_.body.classList = { add(){}, remove(){}, toggle(){}, contains: () => fa
 
 globalThis.document = document_;
 globalThis.window = globalThis;
-globalThis.location = { hash: '', hostname: 'esempio.test', href: 'http://esempio.test/' };
+/* si entra in Learn: la navigazione scrive l'indirizzo PRIMA di caricare
+   il modulo, ed e' in questa condizione che la vetrina si rompeva */
+globalThis.location = { hash: '#study', hostname: 'esempio.test', href: 'http://esempio.test/#study' };
 globalThis.addEventListener = () => {};
 globalThis.removeEventListener = () => {};
 globalThis.scrollTo = () => {};
@@ -111,7 +120,7 @@ for (const s of sezioni) {
   }
 }
 
-await new Promise(r => setTimeout(r, 300));
+await new Promise(r => setTimeout(r, 1800));
 
 /* ── quello che le sezioni hanno davvero disegnato ─────────────────── */
 const attese = [
@@ -133,6 +142,16 @@ for (const [id, sezione, frammenti] of attese) {
   if (!html) { console.log(`  ${id.padEnd(14)} VUOTO (${sezione})`); errori.push([id, new Error('niente disegnato')]); }
   else if (mancano.length) { console.log(`  ${id.padEnd(14)} manca: ${mancano.join(', ')}`); errori.push([id, new Error('manca ' + mancano.join(', '))]); }
   else console.log(`  ${id.padEnd(14)} ${String(html.length).padStart(6)} caratteri  ✓`);
+}
+
+/* Un clic finto. `closest` risponde al solo selettore che ci interessa:
+   basta a far scattare il ramo giusto del gestore. */
+async function clicca(selettore, dataset = {}) {
+  const bersaglio = elemento('bersaglio');
+  bersaglio.dataset = dataset;
+  bersaglio.closest = (s) => (s === selettore ? bersaglio : null);
+  for (const fn of (document_.__ascolti.click || [])) await fn({ target: bersaglio, preventDefault(){}, stopPropagation(){} });
+  await new Promise(r => setTimeout(r, 60));
 }
 
 /* ── percorsi che attraversano piu' moduli ─────────────────────────── */
@@ -158,6 +177,34 @@ try {
   if (!h.includes('sv-testo')) throw new Error('la storia non si e\' disegnata');
   console.log(`  apertura storia     ${String(h.length).padStart(6)} caratteri  ✓`);
 } catch (e) { console.log('  apertura storia     ERRORE'); errori.push(['apertura storia', e]); }
+
+/* ── i comandi che devono far caricare un modulo non ancora scaricato ── */
+console.log('\ncomandi che caricano un modulo:');
+const prove = [
+  ['Listen (puntate)', '#modi-mag .modo-mag', { mag: 'ascolta' }, 'mag-ascolta', 'pod-hero'],
+  ['Read (articolo)',  '.leggi-art',          { id: 'editoriale' }, 'art',        'art-testa'],
+  ['Story (storia)',   '[data-storia]',       { storia: 'editoriale' }, 'storie-viewer', 'sv-testo'],
+];
+for (const [nome, sel, ds, id, atteso] of prove) {
+  try {
+    if (creati.has(id)) creati.get(id).innerHTML = '';
+    await clicca(sel, ds);
+    await new Promise(r => setTimeout(r, 250));
+    const h = String((creati.get(id) || {}).innerHTML || '');
+    if (!h.includes(atteso)) throw new Error(`nessuna risposta al clic (manca ${atteso})`);
+    console.log(`  ${nome.padEnd(18)} ${String(h.length).padStart(6)} caratteri  ✓`);
+  } catch (e) { console.log(`  ${nome.padEnd(18)} ERRORE`); errori.push([nome, e]); }
+}
+
+/* ── la vetrina della didattica, a disegno finito ───────────────────── */
+{
+  const h = [...perSelettore.entries()].filter(([s]) => s.includes('data-slot'))
+    .map(([, el]) => String(el.innerHTML || '')).join('');
+  const attesi = ['st-card', 'data-corso', 'i.ytimg.com', 'st-dive'];
+  const mancano = attesi.filter(x => !h.includes(x));
+  if (mancano.length) { console.log(`\n  vetrina corsi      manca: ${mancano.join(', ')}`); errori.push(['vetrina corsi', new Error('manca ' + mancano.join(', '))]); }
+  else console.log(`\n  vetrina corsi      ${String(h.length).padStart(6)} caratteri  ✓`);
+}
 
 console.log('');
 if (errori.length) {
