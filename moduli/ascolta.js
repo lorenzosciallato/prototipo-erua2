@@ -74,7 +74,7 @@ function suonaPod(id, subito){
   const onda=document.getElementById('pl-onda');
   q.style.setProperty('--a', TINTE[e.u]||'var(--menta)');
   q.style.width=''; q.style.height=''; q.style.transition='';
-  if(e.yt){ th.src='https://i.ytimg.com/vi/'+e.yt+'/hqdefault.jpg'; th.style.display='block'; onda.style.display='none'; }
+  if(e.yt){ th.src=thumb(e.yt); th.style.display='block'; onda.style.display='none'; }
   else { th.removeAttribute('src'); th.style.display='none'; onda.style.display='block'; }
   clearInterval(podTimer); podTimer=null;
   if(e.yt){
