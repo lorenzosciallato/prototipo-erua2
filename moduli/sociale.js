@@ -72,25 +72,29 @@ function renderThread(){
     const et=TAG.find(x=>x.id===t.tag)||TAG[0];
     const nRisp=(COMMENTI[t.id]||[]).length;
     const aperto=String(apertoCommenti)===String(t.id);
+    /* P3: nick, titolo e testo li scrive una persona. Passano tutti da
+       esc() prima di entrare nell'HTML — anche quelli che oggi sono
+       segnaposto, perché il campo "nuovo post" qui sotto scrive nello
+       stesso elenco. */
     return `<article class="sc-post" style="--tinta:${et.sf}">
       <div class="sc-meta">
         ${faccia(t.nick,26)}
-        <span class="nick">${t.nick}</span>
-        <span class="dove">${CITTA[t.uni]||t.uni} · ${t.quando}</span>
-        <span class="sc-etich" style="--tinta2:${et.c};--tinta3:${et.sf}">${et.l[LANG]}</span>
+        <span class="nick">${esc(t.nick)}</span>
+        <span class="dove">${esc(CITTA[t.uni]||t.uni)} · ${esc(t.quando)}</span>
+        <span class="sc-etich" style="--tinta2:${et.c};--tinta3:${et.sf}">${esc(et.l[LANG])}</span>
       </div>
-      ${t.tit?`<h3>${t.tit[LANG]}</h3>`:''}
+      ${t.tit?`<h3>${esc(t.tit[LANG])}</h3>`:''}
       ${(() => {
         const txt=t.testo[LANG], lungo=txt.length>300, aperto2=espansi[t.id];
-        return `<p class="sc-testo ${lungo&&!aperto2?'corto':''}">${txt}</p>`+
-          (lungo?`<button class="sc-altro" data-espandi="${t.id}">${aperto2?T('Mostra meno','Show less'):T('Leggi tutto','Read more')}</button>`:'');
+        return `<p class="sc-testo ${lungo&&!aperto2?'corto':''}">${esc(txt)}</p>`+
+          (lungo?`<button class="sc-altro" data-espandi="${esc(t.id)}">${aperto2?T('Mostra meno','Show less'):T('Leggi tutto','Read more')}</button>`:'');
       })()}
       <div class="sc-azioni">
-        <button class="sc-az ${v===1?'on':''}" data-voto="${t.id}" data-dir="1">
+        <button class="sc-az ${v===1?'on':''}" data-voto="${esc(t.id)}" data-dir="1">
           ${ICONE.su}<b>${t.voti+v}</b> ${T('utile','useful')}</button>
-        <button class="sc-az ${aperto?'on':''}" data-risposte="${t.id}">
+        <button class="sc-az ${aperto?'on':''}" data-risposte="${esc(t.id)}">
           ${ICONE.chat}<b>${nRisp}</b> ${T('risposte','replies')}</button>
-        <button class="sc-az principale dm" data-nick="${t.nick}">${T('scrivigli','message')}</button>
+        <button class="sc-az principale dm" data-nick="${esc(t.nick)}">${T('scrivigli','message')}</button>
       </div>
       ${aperto?commentiHTML(t.id):''}
     </article>`;}).join('') ||

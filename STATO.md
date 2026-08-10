@@ -66,7 +66,7 @@ Ultimo salvataggio: **10/08/2026 alle 20:25** — file toccato: `moduli/sociale.
 | `moduli/notizie.js` | 101 | 8.0K |
 | `moduli/nucleo.js` | 231 | 12K |
 | `moduli/rivista.js` | 277 | 12K |
-| `moduli/sociale.js` | 109 | 8.0K |
+| `moduli/sociale.js` | 113 | 8.0K |
 | `moduli/storie.js` | 100 | 8.0K |
 
 <!-- fine timbro automatico -->
