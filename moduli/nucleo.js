@@ -162,12 +162,7 @@ export function bottoneTutti(attr, attivo) {
    La usano rivista, notizie e piazza: cambia solo il nome
    dell'attributo con cui ciascuna riconosce il proprio clic. */
 export function filaAtenei(attr, scelto) {
-  const { ATENEI } = window.__erua_atenei || {};
-  return '';   // sostituita da `filaAteneiDa`, tenuta per compatibilità
-}
-
-export function filaAteneiDa(atenei, attr, scelto) {
-  return bottoneTutti(attr, !scelto) + atenei.map(u => `
+  return bottoneTutti(attr, !scelto) + ATENEI.map(u => `
     <button class="storia" ${attr}="${esc(u)}" aria-pressed="${scelto === u}" title="${esc(u)}">
       <span class="anello">${stemma(u, 'avatar')}</span>
       <span class="citta">${esc(CITTA[u] || u)}</span>

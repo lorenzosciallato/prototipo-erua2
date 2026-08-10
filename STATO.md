@@ -62,5 +62,6 @@ Ultimo salvataggio: **10/08/2026 alle 20:17** — file toccato: `moduli/nucleo.j
 |:--|--:|--:|
 | `configurazione.js` | 177 | 12K |
 | `index.html` | 5356 | 796K |
+| `moduli/nucleo.js` | 232 | 12K |
 
 <!-- fine timbro automatico -->
