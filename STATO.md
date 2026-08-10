@@ -46,21 +46,23 @@ Esistono e funzionano su dati veri. Dettagli in `robot/LEGGIMI.md`.
 
 | Robot | Cosa fa oggi |
 |:--|:--|
-| `notizie.js` | legge i feed degli atenei → `dati/notizie.json`. **Un solo ateneo su nove pubblica un feed** (ERUA); gli altri conservano le notizie che hanno |
+| `notizie.js` | **tutti e nove gli atenei**: sette da feed, EUV e ULPGC leggendo la pagina → `dati/notizie.json` |
 | `ascolta.js` | legge il feed pubblico del canale → `dati/ascolta.json`. Funziona **senza accesso al canale** |
 | `didattica.js` | controlla che i 18 video dichiarati rispondano ancora. Non sceglie corsi: è selezione editoriale |
 | `studenti.js` | tiene il posto e la forma. Produce un elenco vuoto, ed è corretto così |
 
 Da fare su questo fronte, in ordine:
 
-1. **Trovare i feed degli altri otto atenei.** È la cosa che cambia di più
-   il risultato: oggi le notizie di otto atenei su nove sono ferme a quelle
-   inserite a mano. Dove un feed non esiste, va deciso caso per caso se
-   leggere la pagina o lasciar perdere — §6.2 tollera titolo, estratto e
-   collegamento, non la copia delle immagini.
-2. **Mettere `robot/giro.sh` nel cron del server**, insieme alla riga di
+1. **Riscrivere i robot per n8n.** L'orchestrazione (orari, credenziali
+   OAuth, riprove) passa a n8n; restano codice i controlli che n8n non dà:
+   rifiuto di pubblicare il vuoto, involucro, provenienza, commit.
+2. **Sorvegliare EUV e ULPGC.** Sono gli unici due letti dalla pagina
+   invece che da un feed: un restauro del loro sito li spegne in silenzio.
+   Il rifiuto di pubblicare il vuoto lo trasforma in un avviso, ma le
+   regole di lettura vanno riscritte in `configurazione.js`.
+3. **Mettere `robot/giro.sh` nel cron del server**, insieme alla riga di
    sorveglianza che avvisa se un robot smette di dare segno di vita.
-3. **Archivio completo delle puntate.** Il feed pubblico dà le ultime 15
+4. **Archivio completo delle puntate.** Il feed pubblico dà le ultime 15
    pubblicazioni; il canale ne ha più di 40. Per recuperare tutto in un
    colpo serve l'interfaccia ufficiale con una chiave — che è anche l'unico
    momento in cui servirà l'accesso al canale.

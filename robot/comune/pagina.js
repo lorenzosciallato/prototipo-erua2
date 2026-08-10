@@ -48,6 +48,13 @@ export function leggiPagina(html, base, regole) {
 
     let collegamento;
     try { collegamento = new URL(grezzo, base).href; } catch (err) { continue; }
+    /* Alcuni siti si leggono bene da un indirizzo e si mostrano meglio
+       da un altro: ULPGC si legge da `www10`, ma il collegamento che
+       diamo al lettore deve essere quello ufficiale. */
+    if (regole.hostPubblico) {
+      try { const u = new URL(collegamento); u.host = regole.hostPubblico; collegamento = u.href; }
+      catch (err) { /* indirizzo strano: lo lascio com'è */ }
+    }
     if (viste.has(collegamento)) continue;     // la stessa notizia compare più volte
     viste.add(collegamento);
 

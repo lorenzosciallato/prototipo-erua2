@@ -66,9 +66,41 @@ differito), e chiede l'identificazione visibile sull'elemento, non nei
 termini d'uso. La casella esiste da subito proprio per non dover
 ripassare tutti i file il giorno in cui servirà.
 
+## Le nove fonti delle notizie
+
+Sette pubblicano un feed. Due no, e per loro si legge l'elenco dalla
+pagina: **EUV** (il vecchio feed è morto, il portale nuovo non ne
+dichiara) e **ULPGC** (nessun feed, mai avuto).
+
+Leggere una pagina è il modo peggiore e va detto: un feed è un impegno
+della fonte a mantenere una forma, una pagina no. Quando quei due siti
+verranno rifatti, il robot restituirà zero notizie — non un errore.
+Per questo `scrivi.js` rifiuta di pubblicare il vuoto: resteranno le
+notizie di ieri e il registro dirà che qualcosa non va. Le regole di
+lettura stanno in `configurazione.js`, accanto alla fonte: si aggiusta
+una riga, non un programma.
+
+Due dettagli che è costato fatica trovare, e che si dimenticano:
+
+- **NBU**: il feed è a `/bg/rss/news`, non a `/bg/rss` — quello risponde
+  `no news found` e sembra rotto. La versione inglese esiste ma è ferma
+  al 2016: si usa la bulgara.
+- **ULPGC**: si legge da `www10.ulpgc.es` ma i collegamenti che diamo al
+  lettore puntano a `www.ulpgc.es`, che è l'indirizzo ufficiale.
+
+## Come ci presentiamo
+
+`Mozilla/5.0 (compatible; ERUA-connect/1.0; +indirizzo)` — la forma
+convenzionale dei lettori automatici che si comportano bene, la stessa
+che usa Googlebot. Non è un travestimento: chi guarda i propri registri
+legge il nostro nome e sa a chi scrivere. Con un nome secco alcuni
+filtri rispondono 403 anche quando il loro `robots.txt` consente la
+lettura — è il caso di ULPGC, che dichiara `Crawl-delay: 10` e nessun
+divieto sulle notizie. Noi facciamo una richiesta per sito a ogni giro,
+quindi siamo ampiamente dentro.
+
 ## Se aggiungi una fonte
 
 Si tocca `configurazione.js`, sotto `fonti`. Qui dentro non si tocca
-niente: `feed: null` significa "non ne ho ancora trovato uno", e quella
-fonte viene saltata dicendolo, invece di essere letta in qualche altro
-modo.
+niente: `feed: null` senza regole di pagina significa "non ne ho ancora
+trovato uno", e quella fonte viene saltata dicendolo.

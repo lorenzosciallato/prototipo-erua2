@@ -14,9 +14,21 @@
      sempre.
 */
 
-const NOME = 'ERUA-connect-robot/1.0 (prototipo; +https://github.com/lorenzosciallato/prototipo-erua2)';
+/* Il formato convenzionale dei lettori automatici che si comportano
+   bene: il segnaposto "Mozilla/5.0 (compatible; ...)" seguito dal nome
+   vero e da un indirizzo dove si legge chi siamo. È la stessa forma che
+   usa Googlebot, ed è quella che i filtri dei siti si aspettano.
+   Non è un travestimento: chi guarda i propri registri vede il nostro
+   nome e sa a chi scrivere. Con un nome secco alcuni filtri — quello di
+   ULPGC per esempio — rispondono 403 anche quando il loro robots.txt
+   consente la lettura. */
+const NOME = 'Mozilla/5.0 (compatible; ERUA-connect/1.0; +https://github.com/lorenzosciallato/prototipo-erua2)';
 const SCADENZA = 20_000;      // millisecondi
-const PAUSA = 1_200;          // fra una fonte e l'altra
+/* Fra una fonte e l'altra. Facciamo una richiesta sola per sito a ogni
+   giro, quindi il "crawl-delay" che qualcuno dichiara (ULPGC chiede
+   dieci secondi fra due richieste allo stesso host) non ci riguarda:
+   questa pausa serve solo a non presentarci a raffica. */
+const PAUSA = 2_000;
 const TENTATIVI = 2;
 
 const attendi = ms => new Promise(r => setTimeout(r, ms));

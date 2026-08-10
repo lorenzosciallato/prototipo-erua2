@@ -204,6 +204,7 @@ export const CONFIG = {
       { uni: 'ULPGC', sito: 'https://www.ulpgc.es/noticias', feed: null,
         pagina: {
           url: 'https://www10.ulpgc.es/noticias',
+          hostPubblico: 'www.ulpgc.es',
           blocco: '<article class="ulpgcds-article[\\s\\S]*?</article>',
           titolo: '<h2[^>]*>([\\s\\S]*?)</h2>',
           collegamento: '<a[^>]+href="(/noticia/[^"]+)"',
