@@ -407,30 +407,13 @@ function tutCostruisci(){
     +A('y','8;8;8;8;8;8;137;137;137;137;137')
     +A('height','121;121;121;121;121;121;95;95;95;95;95')
     +A('opacity','0;0;.85;.85;0;0;.85;.85;0;0;0')+`</rect>`;
-  // cursore-mano classico: aperta (grab) quando ferma, a pugno (grabbing) mentre trascina
-  const manoGrab='<g class="mano-cur">'
-    +'<rect x="-8" y="-16" width="4" height="12" rx="2"/><rect x="-3.5" y="-18.5" width="4" height="14.5" rx="2"/>'
-    +'<rect x="1" y="-17.5" width="4" height="13.5" rx="2"/><rect x="5.5" y="-14.5" width="4" height="10.5" rx="2"/>'
-    +'<rect x="-14" y="-3" width="5" height="11" rx="2.5" transform="rotate(-24 -11.5 2.5)"/>'
-    +'<rect x="-9" y="-7" width="18.5" height="15" rx="7"/></g>';
-  const manoGrabbing='<g class="mano-cur">'
-    +'<rect x="-9" y="-6" width="18.5" height="15" rx="7.5"/>'
-    +'<rect x="-8" y="-9.5" width="4.3" height="7" rx="2.1"/><rect x="-3.6" y="-10.5" width="4.3" height="8" rx="2.1"/>'
-    +'<rect x="0.8" y="-10.5" width="4.3" height="8" rx="2.1"/><rect x="5.2" y="-9.5" width="4.3" height="7" rx="2.1"/>'
-    +'<rect x="-4" y="-4" width="13" height="6.5" rx="3.25"/></g>';
-  const h0=HDR[seq.video[0]];
-  const tMano=map('video',s=>`${HDR[s][0]+5} ${HDR[s][1]+3}`);
-  const manoAperta=`<g filter="url(#ombraM)" transform="translate(${h0[0]+5} ${h0[1]+3})">`+AT('translate',tMano)+manoGrab
-    +`<animate attributeName="opacity" dur="${DUR}s" repeatCount="indefinite" keyTimes="${kt}" values="1;1;1;0;1;1;1;0;1;1;1"/></g>`;
-  const manoChiusa=`<g filter="url(#ombraM)" transform="translate(${h0[0]+5} ${h0[1]+3})">`+AT('translate',tMano)+manoGrabbing
-    +`<animate attributeName="opacity" dur="${DUR}s" repeatCount="indefinite" keyTimes="${kt}" values="0;0;0;1;0;0;0;1;0;0;0"/></g>`;
   const svg=`<svg viewBox="0 0 320 240" role="img" aria-label="Panels swap places when you drag them" focusable="false" xmlns="http://www.w3.org/2000/svg">`
     +DEFS
     +fondo('board')+testa('board','b')+clusterHdr('board')
     +fondo('tr')+testa('tr','t')+clusterHdr('tr')
     +grV
     +overlay('board',boardGlifo)+overlay('tr',trGlifo)+overlay('video',playGlifo)
-    +ring+manoAperta+manoChiusa+`</svg>`;
+    +ring+`</svg>`;
   box.innerHTML=svg;
   tutSVG=box.querySelector('svg');
 }
