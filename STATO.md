@@ -121,7 +121,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 21:20** — file toccato: `configurazione.js`
+Ultimo salvataggio: **10/08/2026 alle 21:20** — file toccato: `robot/comune/scrivi.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
