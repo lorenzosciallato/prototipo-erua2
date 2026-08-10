@@ -96,7 +96,7 @@ si espande, e l'aula con video e trascrizione.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 20:43** — file toccato: `index.html`
+Ultimo salvataggio: **10/08/2026 alle 21:02** — file toccato: `moduli/nucleo.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -110,7 +110,7 @@ Ultimo salvataggio: **10/08/2026 alle 20:43** — file toccato: `index.html`
 | `moduli/lingua.js` | 147 | 8.0K |
 | `moduli/navigazione.js` | 97 | 4.0K |
 | `moduli/notizie.js` | 101 | 8.0K |
-| `moduli/nucleo.js` | 231 | 12K |
+| `moduli/nucleo.js` | 253 | 16K |
 | `moduli/rivista.js` | 277 | 12K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |

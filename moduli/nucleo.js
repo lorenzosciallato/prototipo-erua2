@@ -53,6 +53,21 @@ export function dati(nome) {
 const offerte = new Map();
 const attese = new Map();
 
+/* Dove sta ogni sezione. Serve a `chiedi`: se qualcuno chiede una
+   sezione che non è ancora stata caricata, la si carica adesso invece di
+   restare ad aspettare per sempre una risposta che non arriverà. */
+const PERCORSI = {
+  rivista:   './rivista.js',
+  ascolta:   './ascolta.js',
+  notizie:   './notizie.js',
+  sociale:   './sociale.js',
+  articolo:  './articolo.js',
+  storie:    './storie.js',
+  didattica: './didattica.js',
+  aula:      './aula.js',
+};
+const inArrivo = new Set();
+
 export function offre(sezione, funzioni) {
   offerte.set(sezione, funzioni);
   const a = attese.get(sezione);
@@ -61,6 +76,13 @@ export function offre(sezione, funzioni) {
 
 export function chiedi(sezione) {
   if (offerte.has(sezione)) return Promise.resolve(offerte.get(sezione));
+  if (PERCORSI[sezione] && !inArrivo.has(sezione)) {
+    inArrivo.add(sezione);
+    import(PERCORSI[sezione]).catch(err => {
+      inArrivo.delete(sezione);
+      console.error(`sezione "${sezione}" non caricata:`, err);
+    });
+  }
   return new Promise(risolvi => {
     if (!attese.has(sezione)) attese.set(sezione, []);
     attese.get(sezione).push(risolvi);
