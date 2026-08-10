@@ -33,7 +33,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { scarica } from './comune/rete.js';
-import { DA_ULPGC, leggiCodiceErasmus } from './comune/paesi.js';
+import { DA_ULPGC, PAESI_CON_PREFISSO, leggiCodiceErasmus } from './comune/paesi.js';
 import { scriviDati, RifiutoDiScrivere } from './comune/scrivi.js';
 import { segnala } from './comune/registro.js';
 
@@ -83,8 +83,11 @@ async function daUlpgc() {
         const letto = leggiCodiceErasmus(voce.nombre);
 
         /* Controprova: il paese dichiarato nell'elenco e quello scritto
-           dentro il codice Erasmus devono dire la stessa cosa. */
-        if (letto.paeseIso && letto.paeseIso !== mappa.iso) {
+           dentro il codice Erasmus devono dire la stessa cosa. Si fa solo
+           dove la convenzione del prefisso vale — fuori dai paesi del
+           programma un codice che comincia per "A" non vuol dire Austria,
+           e la controprova scarterebbe destinazioni buone. */
+        if (letto.paeseIso && PAESI_CON_PREFISSO.has(mappa.iso) && letto.paeseIso !== mappa.iso) {
           scartate.push(`${letto.ateneo}: l'elenco dice ${mappa.iso}, il codice dice ${letto.paeseIso}`);
           continue;
         }

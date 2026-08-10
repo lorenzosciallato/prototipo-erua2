@@ -83,6 +83,11 @@ const DA_ERASMUS = {
   PL: 'PL', RO: 'RO', S: 'SE', SF: 'FI', SI: 'SI', SK: 'SK', TR: 'TR', UK: 'GB',
 };
 
+/* I paesi in cui la convenzione del prefisso vale davvero: sono quelli
+   del programma. Fuori da qui un codice che comincia per "A" non
+   significa Austria — significa niente. */
+export const PAESI_CON_PREFISSO = new Set(Object.values(DA_ERASMUS));
+
 /* Da `D  AACHEN01 - RWTH AACHEN` a { codice, prefisso, paeseIso, ateneo }.
 
    Le forme sono più varie di quanto sembri, e conviene averle sotto gli
