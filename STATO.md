@@ -65,6 +65,6 @@ Ultimo salvataggio: **10/08/2026 alle 20:24** — file toccato: `moduli/rivista.
 | `moduli/ascolta.js` | 179 | 8.0K |
 | `moduli/notizie.js` | 101 | 8.0K |
 | `moduli/nucleo.js` | 231 | 12K |
-| `moduli/rivista.js` | 276 | 12K |
+| `moduli/rivista.js` | 277 | 12K |
 
 <!-- fine timbro automatico -->

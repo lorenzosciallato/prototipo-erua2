@@ -8,23 +8,24 @@
    rivista. Le fotografie sono file veri in `immagini/rivista/`.
 */
 
-import { ATENEI, CITTA, TINTE } from '../configurazione.js';
+import { CITTA, TINTE } from '../configurazione.js';
 import {
   LANG, T, esc, dati, offre, chiedi, toast, mescola,
   stemma, filaAtenei, ICONE,
 } from './nucleo.js';
 
 /* Lo stato della sezione. Vive qui e non nel nucleo: nessun'altra
-   sezione ha ragione di leggerlo. */
-export const cuori = {}, salvati = {};
+   sezione ha ragione di leggerlo. Cuori e segnalibri stanno in memoria
+   e basta: alla ricarica spariscono, ed è giusto così finché non c'è
+   un titolare del trattamento (riferimento.md §7.0). */
+const cuori = {}, salvati = {};
 let filtroUni = null, soloSalvati = false, numeroScelto = null;
-let NUMERI = [], ARTICOLI = [], ORDINE = [], LAYOUT = {};
+let NUMERI = [], ARTICOLI = [], ORDINE = [];
 
-/* Ogni numero della rivista e' un file a se'. Aggiungerne uno vuol dire
+/* Ogni numero della rivista è un file a sé. Aggiungerne uno vuol dire
    aggiungere una riga qui: il pulsante del numero compare da solo. */
 const NUMERI_DISPONIBILI = ['rivista-03'];
 
-/* ---------------- render magazine ---------------- */
 /* ================= IL FEED =================
    Schede, ma di cinque taglie molto diverse che si incastrano nelle colonne:
    l'asimmetria nasce dai formati, non da inclinazioni finte.
