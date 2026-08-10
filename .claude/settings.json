@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/lorenzosciallato/prototipo-erua2/.claude/hooks/salva-html.sh",
+            "timeout": 90,
+            "statusMessage": "Controllo i segreti e salvo sul repo…"
+          }
+        ]
+      }
+    ]
+  }
+}
