@@ -121,12 +121,12 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 21:14** — file toccato: `moduli/aula.js`
+Ultimo salvataggio: **10/08/2026 alle 21:20** — file toccato: `configurazione.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
-| `configurazione.js` | 177 | 12K |
+| `configurazione.js` | 219 | 12K |
 | `index.html` | 356 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |

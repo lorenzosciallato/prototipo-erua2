@@ -118,6 +118,48 @@ export const CONFIG = {
     },
   },
 
+  /* ── fonti dei processi automatici ─────────────────────────────────
+     Da dove i robot in `robot/` pescano quello che finisce in `dati/`.
+     Sta qui, e non nei robot, perché è parte di "quale alleanza è
+     questa": cambiarla è cambiare progetto, non cambiare programma.
+
+     Sono tutti indirizzi pubblici, pubblicati dalle fonti stesse.
+     Nessuna chiave, nessun accesso riservato: §6.3 esclude dall'esercizio
+     l'automazione tramite interfacce non ufficiali, e un feed che la
+     piattaforma pubblica da sé non lo è.
+
+     `feed: null` vuol dire "non ne ho ancora trovato uno": quella fonte
+     viene saltata e il robot lo dice, invece di inventarsi un modo per
+     leggerla comunque. */
+  fonti: {
+    /* Il canale dell'alleanza. Il feed dà le ultime 15 pubblicazioni:
+       basta a restare aggiornati, non a ricostruire l'archivio — per
+       quello servirebbe l'interfaccia ufficiale con una chiave. */
+    canaleVideo: {
+      nome: 'ERUA su YouTube',
+      canale: 'UCRKcrKcVzq1-qTId2I84dew',
+      feed: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCRKcrKcVzq1-qTId2I84dew',
+      /* Come si riconosce una puntata del podcast fra tutti i video del
+         canale. Senza questo, in "Ascolta" finirebbero anche i
+         livestream e i video promozionali. */
+      riconosciPuntata: /erua\s*podcast/i,
+    },
+
+    /* I siti da cui arrivano le notizie. `lingua` serve a dire al
+       lettore, prima che clicchi, in che lingua troverà la pagina. */
+    notizie: [
+      { uni: 'ERUA',    feed: 'https://erua-eui.eu/feed/',    sito: 'https://erua-eui.eu/' },
+      { uni: 'UNIMC',   feed: null, sito: 'https://www.unimc.it/it/unimc-comunica/news' },
+      { uni: 'MRU',     feed: null, sito: 'https://www.mruni.eu/en/' },
+      { uni: 'NBU',     feed: null, sito: 'https://news.nbu.bg/en/' },
+      { uni: 'EUV',     feed: null, sito: 'https://www.europa-uni.de/de/universitaet/partner/verbuende/erua/news-blog/index.html' },
+      { uni: 'SWPS',    feed: null, sito: 'https://english.swps.pl/we-the-university/our-news-and-events/news' },
+      { uni: 'ULPGC',   feed: null, sito: 'https://www.ulpgc.es/node' },
+      { uni: 'UAEGEAN', feed: null, sito: 'https://www.aegean.gr/announcement' },
+      { uni: 'UP8',     feed: null, sito: 'https://www.univ-paris8.fr/-Actualites-' },
+    ],
+  },
+
   /* ── contatti e documenti ───────────────────────────────────────── */
   /* I documenti non esistono ancora: si pubblicano quando un ente
      assume per iscritto la titolarità del trattamento (§7.0, §7.3).
