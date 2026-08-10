@@ -43,7 +43,7 @@ function disegnaStoria(){
     <div class="sv-zona sx" data-sv="-1"></div>
     <div class="sv-zona dx" data-sv="1"></div>
     <div class="sv-testo">
-      ${s.tipo==='cover'?'<span class="sv-kick">Catch-Up №'+(svArt&&svArt.num?svArt.num:(NUMERI[0]&&NUMERI[0].numero||''))+'</span>':''}
+      ${s.tipo==='cover'?'<span class="sv-kick">Catch-Up №'+esc(svArt&&svArt.num||'')+'</span>':''}
       ${s.tipo==='frase'?'<span class="sv-kick">'+svIdx+' / '+(svSchermate.length-2)+'</span>':''}
       <span class="sv-frase ${s.tipo==='frase'?'piccola':''}">${esc(s.testo)}</span>
       ${s.sotto?`<span class="sv-sotto">${esc(s.sotto)}</span>`:''}
