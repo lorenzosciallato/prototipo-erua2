@@ -1622,7 +1622,7 @@
   .aula-tut[hidden]{display:none}
   @keyframes tutVelo{from{opacity:0}to{opacity:1}}
   .aula-tut-card{background:var(--sup);border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.4);
-    max-width:440px;width:100%;padding:1.6rem 1.6rem 1.4rem;animation:tutsu .3s cubic-bezier(.2,.7,.2,1)}
+    max-width:720px;width:100%;padding:1.6rem 1.6rem 1.4rem;animation:tutsu .3s cubic-bezier(.2,.7,.2,1)}
   @keyframes tutsu{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
   .aula-tut-kick{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lavanda-s)}
   .aula-tut-card h3{font-family:var(--font-display);font-weight:600;font-size:1.35rem;letter-spacing:-.02em;margin:.25rem 0 1rem}
@@ -1635,6 +1635,29 @@
     font-family:var(--font-display);font-weight:600;font-size:.95rem;padding:.7rem;cursor:pointer;
     transition:transform .15s,filter .15s}
   .aula-tut-ok:hover{transform:translateY(-1px);filter:brightness(1.05)}
+
+  /* mini-tutorial: animazione a sinistra, i 4 punti a destra (desktop);
+     impilati su schermo stretto (animazione sopra, punti sotto). §9.12:
+     su "riduci animazioni" l'SVG resta fermo sul fotogramma iniziale. */
+  .aula-tut-corpo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);
+    gap:1.25rem;align-items:center;margin-top:.25rem}
+  .aula-tut-anim{position:relative;width:100%;border-radius:16px;overflow:hidden;
+    background:var(--sup2);border:1px solid var(--bordo2);padding:.7rem}
+  .aula-tut-anim svg{display:block;width:100%;height:auto}
+  .tut-pann{fill:var(--sup);stroke:url(#gRim);stroke-width:2;vector-effect:non-scaling-stroke}
+  .tut-testa{stroke:none}
+  .tut-testa.v{fill:var(--cielo-s)}
+  .tut-testa.t{fill:var(--lavanda-s)}
+  .tut-testa.b{fill:var(--menta-s)}
+  .ln.t rect{fill:var(--lavanda-s);opacity:.62}
+  .tut-anello{fill:none;stroke:var(--lavanda-s);stroke-width:2.6;stroke-dasharray:7 6;
+    vector-effect:non-scaling-stroke}
+  .mano-cur{fill:#fff;stroke:#1b1b1b;stroke-width:1.7;stroke-linejoin:round;
+    vector-effect:non-scaling-stroke}
+  @media (max-width:620px){
+    .aula-tut-corpo{grid-template-columns:1fr;gap:1rem}
+    .aula-tut-anim{max-width:340px;margin:0 auto}
+  }
 
   .aula-scrivania{position:relative;flex:1;min-height:0;z-index:1;margin:0 1rem 1rem;display:grid;gap:.9rem}
   .aula-scrivania::after{content:"";position:absolute;inset:-1rem;pointer-events:none;z-index:-1;
@@ -1994,12 +2017,15 @@
     <div class="aula-tut-card" role="dialog" aria-modal="true" aria-label="How the study room works">
       <div class="aula-tut-kick" translate="no" data-i18n="Your study room">Your study room</div>
       <h3 translate="no" data-i18n="Build it the way you like">Build it the way you like</h3>
+      <div class="aula-tut-corpo">
+      <div class="aula-tut-anim" id="aula-tut-anim" aria-hidden="true"></div>
       <ul class="aula-tut-lista">
         <li><span class="ic" aria-hidden="true">⇄</span><div><b>Drag to swap.</b> Grab a panel by its header and drop it onto another to switch their places.</div></li>
         <li><span class="ic" aria-hidden="true">👁</span><div><b>Show or hide.</b> Use the eyes at the top to turn a panel off — the others grow to fill the space. One panel always stays on.</div></li>
         <li><span class="ic" aria-hidden="true">✎</span><div><b>Highlight &amp; note.</b> Select any line in the transcription and hit Highlight: it drops onto the board with an arrow, ready for your own note.</div></li>
         <li><span class="ic" aria-hidden="true">✓</span><div><b>It saves itself.</b> Your layout and your notes stay on this device — close and come back, they're still here.</div></li>
       </ul>
+      </div>
       <button class="aula-tut-ok" id="aula-tut-ok" translate="no" data-i18n="Got it">Got it</button>
     </div>
   </div>
@@ -4678,7 +4704,7 @@ function auRigaEv(testo,nota){
   chip.appendChild(x);
   const frec=document.createElement('span');frec.className='zn-frec';frec.setAttribute('contenteditable','false');frec.textContent='→';
   r.appendChild(chip);r.appendChild(frec);
-  r.appendChild(document.createTextNode(nota&&nota.length?nota:' '));
+  r.appendChild(document.createTextNode(nota&&nota.length?nota:' '));
   return r;
 }
 function auRenderBoard(){
@@ -4708,7 +4734,7 @@ function auSerializza(){
       if(k.nodeType===3)s+=k.textContent;
       else if(k.nodeType===1&&!k.classList.contains('zn-ev')&&!k.classList.contains('zn-frec'))s+=k.textContent;
     });
-    return s.replace(/ /g,' ').replace(/\s+$/,'').replace(/^\s+/,'');
+    return s.replace(/ /g,' ').replace(/\s+$/,'').replace(/^\s+/,'');
   };
   f.childNodes.forEach(n=>{
     if(n.nodeType===3){if(buf==null)buf=[];buf.push(n.textContent);return;}
@@ -4723,7 +4749,7 @@ function auSerializza(){
         nota:eChip?'':notaDi(n)});
     }else{
       if(buf==null)buf=[];
-      buf.push((n.textContent||'').replace(/ /g,' '));
+      buf.push((n.textContent||'').replace(/ /g,' '));
     }
   });
   chiudi();
@@ -4778,8 +4804,122 @@ function apriAula(o){
 }
 /* il mini-tutorial parte a ogni apertura di un'aula (lato professori);
    resta comunque richiamabile col "?" e chiudibile con "Got it". */
-function tutApri(){const t=auEl('aula-tut');if(t)t.hidden=false;}
-function tutChiudi(){const t=auEl('aula-tut');if(t)t.hidden=true;}
+/* ── Animazione del mini-tutorial (SVG inline; nessuna libreria → P5) ──────
+   Una manina afferra un pannello dal suo header e lo posa su un altro; i
+   pannelli si riassestano sulla griglia reale "a b / a c". A turno lo scambio
+   col riquadro in alto (Transcription) e con quello in basso (Board). Il
+   pannello video porta l'icona play. Il movimento e' in SMIL: la regola
+   globale prefers-reduced-motion ferma solo le animazioni CSS, quindi sotto
+   "riduci animazioni" mettiamo l'SVG in pausa sul primo fotogramma (ripiego
+   statico = disposizione reale con la manina posata sul video; §9.12). */
+let tutSVG=null;
+const tutReduce=()=>(typeof matchMedia==='function')&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function tutCostruisci(){
+  const box=document.getElementById('aula-tut-anim');
+  if(!box||tutSVG)return;
+  const S={a:[8,8,180,224],b:[196,8,116,121],c:[196,137,116,95]};       // slot reali
+  const CEN={a:[98,120],b:[254,68.5],c:[254,184.5]};                    // centro di ogni slot
+  const HDR={a:[98,15],b:[254,15],c:[254,144]};                         // centro dell'header
+  const seq={video:['a','a','a','b','b','a','a','c','c','a','a'],
+             tr:   ['b','b','b','a','a','b','b','b','b','b','b'],
+             board:['c','c','c','c','c','c','c','a','a','c','c']};
+  const DUR=8.4, kt='0;0.119;0.190;0.310;0.405;0.476;0.548;0.667;0.762;0.833;1';
+  const KS=new Array(10).fill('.2 .7 .2 1').join(';');
+  const A=(attr,vals)=>`<animate attributeName="${attr}" dur="${DUR}s" repeatCount="indefinite" calcMode="spline" keyTimes="${kt}" keySplines="${KS}" values="${vals}"/>`;
+  const AT=(type,vals)=>`<animateTransform attributeName="transform" type="${type}" dur="${DUR}s" repeatCount="indefinite" calcMode="spline" keyTimes="${kt}" keySplines="${KS}" values="${vals}"/>`;
+  const map=(id,f)=>seq[id].map(f).join(';');
+  const DEFS=`<defs>`
+    +`<linearGradient id="gRim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A8E6C9"/><stop offset="0.55" stop-color="#CFC4F7"/><stop offset="1" stop-color="#FFC9A8"/></linearGradient>`
+    +`<linearGradient id="gSheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/></linearGradient>`
+    +`<radialGradient id="gPlay" cx="0.42" cy="0.38" r="0.75"><stop offset="0" stop-color="#3f83c6"/><stop offset="1" stop-color="#1c4f86"/></radialGradient>`
+    +`<filter id="ombraP" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#20140a" flood-opacity="0.22"/></filter>`
+    +`<filter id="ombraM" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="2.5" stdDeviation="2.6" flood-color="#000" flood-opacity="0.3"/></filter>`
+    +`</defs>`;
+  // sfondo del pannello (angoli nitidi + ombra) — anima x/y/w/h
+  const fondo=(id)=>{const s0=S[seq[id][0]];
+    return `<rect class="tut-pann" rx="16" filter="url(#ombraP)" x="${s0[0]}" y="${s0[1]}" width="${s0[2]}" height="${s0[3]}">`
+      +A('x',map(id,s=>S[s][0]))+A('y',map(id,s=>S[s][1]))+A('width',map(id,s=>S[s][2]))+A('height',map(id,s=>S[s][3]))+`</rect>`;};
+  // header colorato + velo di luce
+  const testa=(id,cls)=>{const s0=S[seq[id][0]];
+    return `<rect class="tut-testa ${cls}" rx="8" height="16" x="${s0[0]}" y="${s0[1]}" width="${s0[2]}">`
+      +A('x',map(id,s=>S[s][0]))+A('y',map(id,s=>S[s][1]))+A('width',map(id,s=>S[s][2]))+`</rect>`
+      +`<rect fill="url(#gSheen)" pointer-events="none" rx="8" height="16" x="${s0[0]}" y="${s0[1]}" width="${s0[2]}">`
+      +A('x',map(id,s=>S[s][0]))+A('y',map(id,s=>S[s][1]))+A('width',map(id,s=>S[s][2]))+`</rect>`;};
+  // pallino + presa (⋮⋮) + titolo nell'header, ancorati in alto a sinistra (solo traslati)
+  const clusterHdr=(id)=>{const s0=S[seq[id][0]];
+    const g='<circle r="2.8" cx="0" cy="0" fill="#fff"/>'
+      +'<g fill="#fff" opacity="0.85"><circle cx="9" cy="-3" r="1"/><circle cx="9" cy="0" r="1"/><circle cx="9" cy="3" r="1"/><circle cx="12" cy="-3" r="1"/><circle cx="12" cy="0" r="1"/><circle cx="12" cy="3" r="1"/></g>'
+      +'<rect x="18" y="-1.4" width="26" height="2.8" rx="1.4" fill="#fff" opacity="0.8"/>';
+    return `<g transform="translate(${s0[0]+11} ${s0[1]+8})">`+AT('translate',map(id,s=>`${S[s][0]+11} ${S[s][1]+8}`))+g+`</g>`;};
+  // contenuto centrale del pannello (traslato + scala uniforme → resta nitido)
+  const overlay=(id,glifo)=>{const c0=CEN[seq[id][0]],sc0=seq[id][0]==='a'?1.25:0.6;
+    return `<g transform="translate(${c0[0]} ${c0[1]})">`+AT('translate',map(id,s=>CEN[s].join(' ')))
+      +`<g transform="scale(${sc0})">`+AT('scale',map(id,s=>s==='a'?'1.25':'0.6'))+glifo+`</g></g>`;};
+  const playGlifo='<circle r="19" fill="none" stroke="#255E9E" stroke-opacity="0.28" stroke-width="3"/>'
+    +'<circle r="15.5" fill="url(#gPlay)"/><circle r="15.5" fill="none" stroke="#fff" stroke-opacity="0.25" stroke-width="1"/>'
+    +'<path d="M-4.6,-7.4 L8.4,0 L-4.6,7.4 Z" fill="#fff"/>'
+    +'<rect x="-16" y="23" width="32" height="3" rx="1.5" fill="#255E9E" opacity="0.22"/>'
+    +'<rect x="-16" y="23" width="12" height="3" rx="1.5" fill="#255E9E" opacity="0.6"/>';
+  const trGlifo='<g class="ln t">'
+    +'<rect x="-16" y="-13" width="32" height="2.8" rx="1.4"/><rect x="-16" y="-6.5" width="27" height="2.8" rx="1.4"/>'
+    +'<rect x="-16" y="0" width="30" height="2.8" rx="1.4"/><rect x="-16" y="6.5" width="20" height="2.8" rx="1.4"/>'
+    +'<rect x="-16" y="13" width="25" height="2.8" rx="1.4"/></g>'
+    +'<rect x="17" y="-14" width="2.4" height="30" rx="1.2" style="fill:var(--lavanda-s);opacity:.18"/>'
+    +'<rect x="17" y="-14" width="2.4" height="12" rx="1.2" style="fill:var(--lavanda-s);opacity:.5"/>';
+  const boardGlifo='<rect x="-17" y="-11" width="30" height="7" rx="3.5" style="fill:var(--menta-s);opacity:.18"/>'
+    +'<rect x="-15" y="-8.5" width="26" height="2.6" rx="1.3" style="fill:var(--menta-s);opacity:.7"/>'
+    +'<path d="M-13,-1 q-3,7 6,8" fill="none" style="stroke:var(--menta-s)" stroke-width="2.2" stroke-linecap="round"/>'
+    +'<path d="M-9,7 l4,-4 M-9,7 l4,4" fill="none" style="stroke:var(--menta-s)" stroke-width="2.2" stroke-linecap="round"/>'
+    +'<rect x="-1" y="5" width="20" height="2.6" rx="1.3" style="fill:var(--testo2);opacity:.55"/>'
+    +'<rect x="-1" y="10.5" width="14" height="2.6" rx="1.3" style="fill:var(--testo2);opacity:.4"/>';
+  const grV=`<g>${fondo('video')}${testa('video','v')}${clusterHdr('video')}`
+    +`<animate attributeName="opacity" dur="${DUR}s" repeatCount="indefinite" calcMode="spline" keyTimes="${kt}" keySplines="${KS}" values="1;1;1;.8;1;1;1;.8;1;1;1"/></g>`;
+  const ring=`<rect class="tut-anello" rx="16" x="196" y="8" width="116" height="121" opacity="0">`
+    +A('y','8;8;8;8;8;8;137;137;137;137;137')
+    +A('height','121;121;121;121;121;121;95;95;95;95;95')
+    +A('opacity','0;0;.85;.85;0;0;.85;.85;0;0;0')+`</rect>`;
+  // cursore-mano classico: aperta (grab) quando ferma, a pugno (grabbing) mentre trascina
+  const manoGrab='<g class="mano-cur">'
+    +'<rect x="-8" y="-16" width="4" height="12" rx="2"/><rect x="-3.5" y="-18.5" width="4" height="14.5" rx="2"/>'
+    +'<rect x="1" y="-17.5" width="4" height="13.5" rx="2"/><rect x="5.5" y="-14.5" width="4" height="10.5" rx="2"/>'
+    +'<rect x="-14" y="-3" width="5" height="11" rx="2.5" transform="rotate(-24 -11.5 2.5)"/>'
+    +'<rect x="-9" y="-7" width="18.5" height="15" rx="7"/></g>';
+  const manoGrabbing='<g class="mano-cur">'
+    +'<rect x="-9" y="-6" width="18.5" height="15" rx="7.5"/>'
+    +'<rect x="-8" y="-9.5" width="4.3" height="7" rx="2.1"/><rect x="-3.6" y="-10.5" width="4.3" height="8" rx="2.1"/>'
+    +'<rect x="0.8" y="-10.5" width="4.3" height="8" rx="2.1"/><rect x="5.2" y="-9.5" width="4.3" height="7" rx="2.1"/>'
+    +'<rect x="-4" y="-4" width="13" height="6.5" rx="3.25"/></g>';
+  const h0=HDR[seq.video[0]];
+  const tMano=map('video',s=>`${HDR[s][0]+5} ${HDR[s][1]+3}`);
+  const manoAperta=`<g filter="url(#ombraM)" transform="translate(${h0[0]+5} ${h0[1]+3})">`+AT('translate',tMano)+manoGrab
+    +`<animate attributeName="opacity" dur="${DUR}s" repeatCount="indefinite" keyTimes="${kt}" values="1;1;1;0;1;1;1;0;1;1;1"/></g>`;
+  const manoChiusa=`<g filter="url(#ombraM)" transform="translate(${h0[0]+5} ${h0[1]+3})">`+AT('translate',tMano)+manoGrabbing
+    +`<animate attributeName="opacity" dur="${DUR}s" repeatCount="indefinite" keyTimes="${kt}" values="0;0;0;1;0;0;0;1;0;0;0"/></g>`;
+  const svg=`<svg viewBox="0 0 320 240" role="img" aria-label="Panels swap places when you drag them" focusable="false" xmlns="http://www.w3.org/2000/svg">`
+    +DEFS
+    +fondo('board')+testa('board','b')+clusterHdr('board')
+    +fondo('tr')+testa('tr','t')+clusterHdr('tr')
+    +grV
+    +overlay('board',boardGlifo)+overlay('tr',trGlifo)+overlay('video',playGlifo)
+    +ring+manoAperta+manoChiusa+`</svg>`;
+  box.innerHTML=svg;
+  tutSVG=box.querySelector('svg');
+}
+function tutMotore(apri){
+  if(!tutSVG||typeof tutSVG.pauseAnimations!=='function')return;
+  try{
+    if(apri&&!tutReduce()){tutSVG.unpauseAnimations();}
+    else{tutSVG.pauseAnimations();tutSVG.setCurrentTime(0);}
+  }catch(e){}
+}
+function tutApri(){const t=auEl('aula-tut');if(t){t.hidden=false;tutMotore(true);}}
+function tutChiudi(){const t=auEl('aula-tut');if(t){t.hidden=true;tutMotore(false);}}
+tutCostruisci();tutMotore(false);
+if(typeof matchMedia==='function'){
+  const mq=matchMedia('(prefers-reduced-motion: reduce)');
+  const onmq=()=>{const t=auEl('aula-tut');tutMotore(t&&!t.hidden);};
+  if(mq.addEventListener)mq.addEventListener('change',onmq);else if(mq.addListener)mq.addListener(onmq);
+}
 function tutForse(){
   if(AULA.amb!=='prof')return;
   /* su mobile il mini-tutorial non parte da solo: resta richiamabile col "?" */
