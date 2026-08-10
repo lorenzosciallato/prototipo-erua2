@@ -68,7 +68,9 @@ async function gira({ prova = false } = {}) {
   const avvio = Date.now();
   const fonti = CONFIG.fonti.notizie;
 
-  const esiti = await scaricaTutte(fonti);
+  /* Ogni fonte ha un feed oppure una pagina da leggere: da qui in poi
+     la differenza sparisce. */
+  const esiti = await scaricaTutte(fonti, f => f.feed || (f.pagina && f.pagina.url));
 
   const fresche = new Map();     // sigla ateneo → notizie nuove
   const saltati = [], falliti = [];
@@ -76,10 +78,18 @@ async function gira({ prova = false } = {}) {
   for (const e of esiti) {
     if (e.saltata) { saltati.push(e.fonte.uni); continue; }
     if (e.errore)  { falliti.push(`${e.fonte.uni} (${e.errore})`); continue; }
-    const voci = leggiFeed(e.testo);
-    if (!voci.length) { falliti.push(`${e.fonte.uni} (feed illeggibile)`); continue; }
+
+    const daPagina = !e.fonte.feed && e.fonte.pagina;
+    const voci = daPagina
+      ? leggiPagina(e.testo, e.fonte.pagina.url, e.fonte.pagina)
+      : leggiFeed(e.testo);
+
+    if (!voci.length) {
+      falliti.push(`${e.fonte.uni} (${daPagina ? 'pagina cambiata: nessuna notizia riconosciuta' : 'feed illeggibile'})`);
+      continue;
+    }
     fresche.set(e.fonte.uni, voci.slice(0, PER_ATENEO).map(v => notizia(v, e.fonte)));
-    console.log(`  ${e.fonte.uni.padEnd(8)} ${voci.length} voci lette`);
+    console.log(`  ${e.fonte.uni.padEnd(8)} ${String(voci.length).padStart(3)} voci  ${daPagina ? '(dalla pagina)' : '(dal feed)'}`);
   }
 
   if (saltati.length) console.log(`\nsenza feed dichiarato, non toccati: ${saltati.join(', ')}`);

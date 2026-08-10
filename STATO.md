@@ -177,7 +177,7 @@ Ultimo salvataggio: **10/08/2026 alle 22:02** — file toccato: `robot/notizie.j
 | `robot/comune/rete.js` | 77 | 4.0K |
 | `robot/comune/scrivi.js` | 95 | 4.0K |
 | `robot/didattica.js` | 101 | 8.0K |
-| `robot/notizie.js` | 127 | 8.0K |
+| `robot/notizie.js` | 137 | 8.0K |
 | `robot/studenti.js` | 87 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
