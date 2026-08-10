@@ -56,10 +56,11 @@ un utente, di leggere i dati di un altro, che deve fallire.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 20:16** — file toccato: `configurazione.js`
+Ultimo salvataggio: **10/08/2026 alle 20:17** — file toccato: `moduli/nucleo.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
+| `configurazione.js` | 177 | 12K |
 | `index.html` | 5356 | 796K |
 
 <!-- fine timbro automatico -->
