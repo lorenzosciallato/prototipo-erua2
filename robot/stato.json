@@ -1,0 +1,25 @@
+{
+ "robot": {
+  "ascolta": {
+   "quando": "2026-08-10T19:26:51.943Z",
+   "esito": "fatto",
+   "quanti": 6,
+   "messaggio": null,
+   "durataSecondi": 1
+  },
+  "notizie": {
+   "quando": "2026-08-10T19:26:53.020Z",
+   "esito": "fatto",
+   "quanti": 98,
+   "messaggio": "senza feed: UNIMC MRU NBU EUV SWPS ULPGC UAEGEAN UP8",
+   "durataSecondi": 1
+  },
+  "studenti": {
+   "quando": "2026-08-10T19:26:53.167Z",
+   "esito": "fatto",
+   "quanti": 0,
+   "messaggio": "nessuna fonte: elenco vuoto per scelta",
+   "durataSecondi": null
+  }
+ }
+}

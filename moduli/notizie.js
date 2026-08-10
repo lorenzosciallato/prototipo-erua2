@@ -15,7 +15,7 @@
 */
 
 import { CITTA, LINGUA_FONTE } from '../configurazione.js';
-import { T, esc, dati, offre, dataBreve, stemma, filaAtenei } from './nucleo.js';
+import { T, esc, elenco, offre, dataBreve, stemma, filaAtenei } from './nucleo.js';
 
 let NEWS = [];
 let filtroNews = null, paginaNews = 1;
@@ -93,7 +93,7 @@ let avviata = false;
 export async function avvia() {
   if (avviata) return;
   avviata = true;
-  NEWS = await dati('notizie');
+  NEWS = (await elenco('notizie')).elementi;
   renderChipsNews();
   renderNews();
 }

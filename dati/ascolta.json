@@ -1,52 +1,92 @@
-[
- {
-  "id": "p0",
-  "t": "Redefining Europe from the Edges: Inside ERUA's Vision for Reform and Connection",
-  "s": "ERUA Podcast · Episode 7",
-  "u": "ERUA",
-  "data": "2026-04",
-  "yt": "d5VIynCvDXs",
-  "n": "John McCord, rector of Macerata and chair of the alliance, on what a university built at the edges of Europe can become.",
-  "v": 1
- },
- {
-  "id": "p1",
-  "t": "ERUA Summit 2025 – Navigating the edges",
-  "s": "ERUA Podcast · Episode 5",
-  "u": "ERUA",
-  "data": "2025",
-  "yt": "ZejWof9W2a8",
-  "n": "Voices from the annual summit: what happens when eight universities sit around the same table for three days.",
-  "v": 0
- },
- {
-  "id": "p2",
-  "t": "What Future for ERUA Research Clusters",
-  "s": "ERUA Podcast · Episode 4",
-  "u": "ERUA",
-  "data": "2025-10-23",
-  "yt": "LASfEYVH8eA",
-  "n": "The research clusters told from the inside: what they are, and what they change for the people who work in them.",
-  "v": 0
- },
- {
-  "id": "p3",
-  "t": "The role of Universities today",
-  "s": "ERUA Podcast · Episode 2",
-  "u": "ERUA",
-  "data": "2025-02-27",
-  "yt": "4kLIVW7Lfqw",
-  "n": "A conversation about what universities are for, now that everything around them is changing.",
-  "v": 0
- },
- {
-  "id": "p4",
-  "t": "Let the students talk",
-  "s": "ERUA Podcast · Episode 1",
-  "u": "ERUA",
-  "data": "2024-12-31",
-  "yt": "jJdS9yaVlFI",
-  "n": "The first episode, released on the last day of 2024: students from across the alliance take the microphone.",
-  "v": 0
- }
-]
+{
+ "versione": 1,
+ "aggiornato": "2026-08-10T19:26:51.940Z",
+ "fonte": "ERUA su YouTube",
+ "note": "Feed pubblico del canale. Le ultime 15 pubblicazioni; l'archivio si conserva.",
+ "elementi": [
+  {
+   "id": "yt-d5VIynCvDXs",
+   "t": "ERUA Podcast I Redefining Europe from the Edges: Inside ERUA’s Vision for Reform and Connection Ep 7",
+   "s": "ERUA Podcast · Episode 7",
+   "u": "ERUA",
+   "data": "2026-04-27",
+   "yt": "d5VIynCvDXs",
+   "n": "In this episode, we sit down with John McCourt, Rector of the University of Macerata and Chair of the European Reform University Alliance (ERUA). The conversation dives into ERUA’s unique mission of…",
+   "v": 1,
+   "origine": {
+    "fonte": "ERUA su YouTube",
+    "url": "https://www.youtube.com/watch?v=d5VIynCvDXs",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "id": "yt-xgl89eILov0",
+   "t": "ERUA Podcast featuring Maxime Cacciuttolo Heidel",
+   "s": "ERUA Podcast",
+   "u": "ERUA",
+   "data": "2026-02-25",
+   "yt": "xgl89eILov0",
+   "n": "✨What is changing within ERUA and what awaits us in 2026? 🎥 Watch Episode 6 of the ERUA Podcast featuring Maxime Cacciuttolo Heidel and discover the latest developments, future plans, and what’s…",
+   "v": 0,
+   "origine": {
+    "fonte": "ERUA su YouTube",
+    "url": "https://www.youtube.com/watch?v=xgl89eILov0",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "id": "yt-ZejWof9W2a8",
+   "t": "ERUA Podcast | ERUA Summit 2025 - Navigating the edges | Episode 5",
+   "s": "ERUA Podcast · Episode 5",
+   "u": "ERUA",
+   "data": "2025-12-29",
+   "yt": "ZejWof9W2a8",
+   "n": "",
+   "v": 0,
+   "origine": {
+    "fonte": "ERUA su YouTube",
+    "url": "https://www.youtube.com/watch?v=ZejWof9W2a8",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "id": "yt-LASfEYVH8eA",
+   "t": "ERUA Podcast I What Future for ERUA Research Clusters I Episode 4",
+   "s": "ERUA Podcast · Episode 4",
+   "u": "ERUA",
+   "data": "2025-10-23",
+   "yt": "LASfEYVH8eA",
+   "n": "Episode 4 of the ERUA Podcast explores one of the major innovation that ERUA brings as an alliance in the field of academic research – the ERUA Research Clusters. Together with prof. Bankov we are…",
+   "v": 0,
+   "origine": {
+    "fonte": "ERUA su YouTube",
+    "url": "https://www.youtube.com/watch?v=LASfEYVH8eA",
+    "letto": "2026-08-10",
+    "generato": null
+   }
+  },
+  {
+   "id": "p3",
+   "t": "The role of Universities today",
+   "s": "ERUA Podcast · Episode 2",
+   "u": "ERUA",
+   "data": "2025-02-27",
+   "yt": "4kLIVW7Lfqw",
+   "n": "A conversation about what universities are for, now that everything around them is changing.",
+   "v": 0
+  },
+  {
+   "id": "p4",
+   "t": "Let the students talk",
+   "s": "ERUA Podcast · Episode 1",
+   "u": "ERUA",
+   "data": "2024-12-31",
+   "yt": "jJdS9yaVlFI",
+   "n": "The first episode, released on the last day of 2024: students from across the alliance take the microphone.",
+   "v": 0
+  }
+ ]
+}

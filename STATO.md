@@ -30,6 +30,7 @@ Com'è fatto adesso:
 | `stile/` | nove fogli, uno per sezione |
 | `moduli/` | il codice, un modulo per sezione, caricato su richiesta |
 | `immagini/` | le 23 fotografie, prima incorporate in base64 |
+| `robot/` | i processi automatici che riscrivono `dati/` |
 | `collaudo/` | le prove automatiche |
 
 Chi apre solo la rivista non scarica più la didattica né le trascrizioni delle
@@ -39,8 +40,38 @@ Non esiste ancora nessuna componente a database: niente PostgreSQL, niente
 policy di riga (RLS), niente accesso via collegamento monouso. Tutto quello che
 si vede gira nel browser.
 
+## I processi automatici
+
+Esistono e funzionano su dati veri. Dettagli in `robot/LEGGIMI.md`.
+
+| Robot | Cosa fa oggi |
+|:--|:--|
+| `notizie.js` | legge i feed degli atenei → `dati/notizie.json`. **Un solo ateneo su nove pubblica un feed** (ERUA); gli altri conservano le notizie che hanno |
+| `ascolta.js` | legge il feed pubblico del canale → `dati/ascolta.json`. Funziona **senza accesso al canale** |
+| `didattica.js` | controlla che i 18 video dichiarati rispondano ancora. Non sceglie corsi: è selezione editoriale |
+| `studenti.js` | tiene il posto e la forma. Produce un elenco vuoto, ed è corretto così |
+
+Da fare su questo fronte, in ordine:
+
+1. **Trovare i feed degli altri otto atenei.** È la cosa che cambia di più
+   il risultato: oggi le notizie di otto atenei su nove sono ferme a quelle
+   inserite a mano. Dove un feed non esiste, va deciso caso per caso se
+   leggere la pagina o lasciar perdere — §6.2 tollera titolo, estratto e
+   collegamento, non la copia delle immagini.
+2. **Mettere `robot/giro.sh` nel cron del server**, insieme alla riga di
+   sorveglianza che avvisa se un robot smette di dare segno di vita.
+3. **Archivio completo delle puntate.** Il feed pubblico dà le ultime 15
+   pubblicazioni; il canale ne ha più di 40. Per recuperare tutto in un
+   colpo serve l'interfaccia ufficiale con una chiave — che è anche l'unico
+   momento in cui servirà l'accesso al canale.
+
 ## Cosa manca, in ordine
 
+0. **Trasparenza sui contenuti generati: termine già scaduto.** §6.5
+   riporta il 2 agosto 2026, non differito. Oggi siamo in regola perché
+   l'unico contenuto automatico è la traduzione, ed è marcata. Ma la
+   casella `origine.generato` va valorizzata **prima** che un robot scriva
+   un riassunto o un occhiello, non dopo.
 1. **Base di dati e autorizzazione.** Prima le policy di riga con il collaudo che
    deve fallire (`riferimento.md` §3.2), poi le funzioni che le usano.
 2. **Intestazioni di sicurezza e CSP** (§3.8). Le origini da consentire sono già

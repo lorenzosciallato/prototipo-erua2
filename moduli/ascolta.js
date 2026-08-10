@@ -11,7 +11,7 @@
 */
 
 import { CITTA, TINTE, CONFIG } from '../configurazione.js';
-import { T, esc, dati, offre, dataBreve, ICONE } from './nucleo.js';
+import { T, esc, elenco, offre, dataBreve, ICONE } from './nucleo.js';
 
 let PODCAST = [];
 let podCorrente = null, podTimer = null, podPerc = 0;
@@ -163,7 +163,7 @@ let avviata = false;
 export async function avvia() {
   if (avviata) { renderPodcast(); return; }
   avviata = true;
-  PODCAST = await dati('ascolta');
+  PODCAST = (await elenco('ascolta')).elementi;
   renderPodcast();
 }
 
