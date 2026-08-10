@@ -13,6 +13,10 @@
 import { T, esc, dati, offre, chiedi, toast } from './nucleo.js';
 import { CONFIG } from '../configurazione.js';
 
+/* I video: origini dichiarate una volta sola nella configurazione, così
+   la CSP e l'informativa hanno un elenco da cui copiare (§3.8, §7.4). */
+const VIDEO = CONFIG.serviziEsterni.video;
+
 /* La didattica: l'aula si apre sempre da lì, quindi quando questo
    modulo gira quella è già caricata. Passare dal registro invece di
    importarla evita che i due moduli si importino a vicenda. */
@@ -53,10 +57,10 @@ function auCarica(){
   try{const v=localStorage.getItem(evKey());if(v)AULA.ev=JSON.parse(v)||{};}catch(e){}
 }
 function auEmbedBase(){
-  if(AULA.dive)return 'https://www.youtube-nocookie.com/embed/'+AULA.dive.yt+'?autoplay=1&rel=0';
+  if(AULA.dive)return VIDEO.incorpora+'/embed/'+AULA.dive.yt+'?autoplay=1&rel=0';
   const c=AULA.corso,l=DID.lezioneDi(c,AULA.lezIdx);
-  return l.yt?('https://www.youtube-nocookie.com/embed/'+l.yt+'?autoplay=1&rel=0')
-    :('https://www.youtube-nocookie.com/embed/videoseries?list='+c.playlist+'&index='+l.idx+'&autoplay=1&rel=0');
+  return l.yt?(VIDEO.incorpora+'/embed/'+l.yt+'?autoplay=1&rel=0')
+    :(VIDEO.incorpora+'/embed/videoseries?list='+c.playlist+'&index='+l.idx+'&autoplay=1&rel=0');
 }
 /* --- player con l'API ufficiale di YouTube (player sul dominio no-cookie).
    Serve per tre cose chieste: salti ±10/±30 s, ripresa da dove eri
@@ -71,7 +75,7 @@ function ytCarica(){
     if(window.YT&&window.YT.Player){res(true);return;}
     window.onYouTubeIframeAPIReady=()=>res(true);
     const s=document.createElement('script');
-    s.src='https://www.youtube.com/iframe_api';
+    s.src=VIDEO.api;
     s.addEventListener('error',()=>res(false));
     document.head.appendChild(s);
     setTimeout(()=>res(!!(window.YT&&window.YT.Player)),5000);
@@ -109,7 +113,7 @@ function auPlayer(start){
     if(start)vars.start=Math.floor(start);
     try{
       AULA.player=new YT.Player('yt-nido',{
-        host:'https://www.youtube-nocookie.com',
+        host:VIDEO.incorpora,
         width:'100%',height:'100%',
         videoId:vid,playerVars:vars,
         events:{onReady:auOrologio,onStateChange:auOrologio}
