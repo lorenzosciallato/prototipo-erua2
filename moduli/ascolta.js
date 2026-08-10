@@ -98,8 +98,10 @@ function espandiPod(){
   if(l.classList.contains('espansa')) return;
   const q=document.getElementById('pl-quad');
   const h0=l.offsetHeight, w0=q.offsetWidth;
+  /* Dominio senza cookie: prima era `youtube.com`, che deposita subito i
+     suoi. Il video è lo stesso, la traccia sull'utente no (§3.7). */
   document.getElementById('pl-video').innerHTML=
-    '<iframe src="https://www.youtube.com/embed/'+e.yt+'?autoplay=1&rel=0" '+
+    '<iframe src="'+VIDEO.incorpora+'/embed/'+encodeURIComponent(e.yt)+'?autoplay=1&rel=0" '+
     'title="'+esc(e.t)+'" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" '+
     'allowfullscreen></iframe>';
   l.classList.add('espansa','misura');
