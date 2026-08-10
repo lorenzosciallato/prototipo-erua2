@@ -66,6 +66,6 @@ Ultimo salvataggio: **10/08/2026 alle 20:24** — file toccato: `moduli/storie.j
 | `moduli/notizie.js` | 101 | 8.0K |
 | `moduli/nucleo.js` | 231 | 12K |
 | `moduli/rivista.js` | 277 | 12K |
-| `moduli/storie.js` | 89 | 4.0K |
+| `moduli/storie.js` | 100 | 8.0K |
 
 <!-- fine timbro automatico -->

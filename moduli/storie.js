@@ -71,8 +71,9 @@ function vaiStoria(d){
   if(svIdx>=svSchermate.length){ chiudiStorie(); return; }
   disegnaStoria();
 }
-function apriStorie(id){
-  svArt=ARTICOLI.find(x=>x.id===id);
+async function apriStorie(id){
+  const rivista = await chiedi('rivista');
+  svArt=rivista.articoli().find(x=>x.id===id);
   if(!svArt) return;
   svSchermate=costruisciStorie(svArt); svIdx=0;
   sv.classList.add('aperta'); document.body.style.overflow='hidden';
@@ -81,9 +82,19 @@ function apriStorie(id){
 function chiudiStorie(){
   clearTimeout(svTimer);
   sv.classList.remove('aperta'); sv.innerHTML='';
-  document.body.style.overflow=overlay.classList.contains('aperto')?'hidden':'';
+  document.body.style.overflow=inLettura()?'hidden':'';
 }
 sv.addEventListener('click',e=>{
   const z=e.target.closest('[data-sv]');
   if(z){ vaiStoria(+z.dataset.sv); }
 });
+
+/* Chiudere con Esc: la scorciatoia vale solo mentre le storie sono
+   aperte, così non ruba il tasto alle altre sezioni. */
+addEventListener('keydown', e => {
+  if (e.key === 'Escape' && sv.classList.contains('aperta')) chiudiStorie();
+});
+
+export const aperte = () => sv.classList.contains('aperta');
+
+offre('storie', { apri: apriStorie, chiudi: chiudiStorie, aperte });
