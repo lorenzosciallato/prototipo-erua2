@@ -52,3 +52,14 @@ un utente, di leggere i dati di un altro, che deve fallire.
   credenziale nel codice, blocca commit e pubblicazione.
   Si lancia anche a mano: `.claude/hooks/cerca-segreti.sh`
 
+<!-- TIMBRO AUTOMATICO — aggiornato dal salvataggio automatico, non modificare a mano -->
+
+## Registro automatico
+
+Ultimo salvataggio: **10/08/2026 alle 19:52** — file toccato: `index.html`
+
+| File | Righe | Peso |
+|:--|--:|--:|
+| `index.html` | 5356 | 796K |
+
+<!-- fine timbro automatico -->
