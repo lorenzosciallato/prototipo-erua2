@@ -489,3 +489,81 @@ addEventListener('scroll',()=>{
     document.getElementById('cap-nome').textContent=attuale.dataset.cap||'';
   } else barra.classList.remove('on');
 },{passive:true});
+
+/* ── comandi della pagina ──────────────────────────────────────────── */
+['btn-indietro','btn-indietro2'].forEach(id=>{
+  const b=document.getElementById(id);
+  if(b) b.addEventListener('click',chiudiArticolo);
+});
+['btn-avanti','btn-avanti2'].forEach(id=>{
+  const b=document.getElementById(id);
+  if(b) b.addEventListener('click',vaiProssimo);
+});
+
+document.addEventListener('click', e => {
+  /* i salti dell'indice dei capitoli */
+  const vai = e.target.closest('[data-vai]');
+  if (vai) {
+    const t = document.getElementById(vai.dataset.vai);
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  /* "continua questa sezione": apre un capitolo nato chiuso */
+  const ap = e.target.closest('[data-sez]');
+  if (ap) { ap.closest('.sezione').classList.add('aperta'); disegnaTacche(); return; }
+
+  /* testo intero oppure punti salienti */
+  const md = e.target.closest('[data-modo]');
+  if (md) {
+    const punti = md.dataset.modo === 'punti';
+    document.getElementById('vista-pieno').hidden = punti;
+    document.getElementById('vista-punti').hidden = !punti;
+    document.querySelectorAll('[data-modo]').forEach(b => b.classList.toggle('on', b === md));
+    overlay.scrollTop = 0;
+    disegnaTacche();
+    return;
+  }
+  /* segnalibro dalla pagina di lettura: lo stesso stato del feed */
+  const sv = e.target.closest('[data-salva]');
+  if (sv && offerta) {
+    const id = sv.dataset.salva;
+    offerta.salvati[id] = !offerta.salvati[id];
+    sv.classList.toggle('on', offerta.salvati[id]);
+    sv.innerHTML = '🔖 ' + (offerta.salvati[id] ? 'Saved' : 'Save');
+    offerta.ridisegna();
+  }
+});
+
+/* GESTI — trascina a destra per il pezzo dopo, a sinistra per tornare
+   indietro. Sotto ai pulsanti c'è la stessa cosa scritta: un gesto
+   invisibile non deve mai essere l'unico modo per fare qualcosa
+   (riferimento.md §7.12). */
+(function(){
+  let x0=null,y0=null,t0=0;
+  addEventListener('touchstart',e=>{
+    if(!overlay.classList.contains('aperto')) return;
+    if(e.target.closest('.lente,.storie-viewer')) return;
+    x0=e.touches[0].clientX; y0=e.touches[0].clientY; t0=Date.now();
+  },{passive:true});
+  addEventListener('touchend',e=>{
+    if(x0===null||!overlay.classList.contains('aperto')) return;
+    const dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0;
+    const dt=Date.now()-t0;
+    x0=null;
+    if(dt>700) return;                       // troppo lento: è uno scorrimento
+    if(Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*1.6) return;
+    if(dx<0) vaiProssimo(); else chiudiArticolo();
+  },{passive:true});
+})();
+
+addEventListener('keydown',e=>{
+  if(!overlay.classList.contains('aperto')) return;
+  if(lenteAperta()) return;
+  if(e.key==='ArrowRight') vaiProssimo();
+  if(e.key==='ArrowLeft')  chiudiArticolo();
+  if(e.key==='Escape')     chiudiArticolo();
+});
+
+export const apri = apriArticolo;
+
+offre('articolo', { apri: apriArticolo, chiudi: chiudiArticolo, sintesi: sintesiDi });
