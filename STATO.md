@@ -152,12 +152,12 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 22:01** — file toccato: `robot/comune/pagina.js`
+Ultimo salvataggio: **10/08/2026 alle 22:02** — file toccato: `configurazione.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
-| `configurazione.js` | 219 | 12K |
+| `configurazione.js` | 271 | 16K |
 | `index.html` | 356 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
@@ -172,6 +172,7 @@ Ultimo salvataggio: **10/08/2026 alle 22:01** — file toccato: `robot/comune/pa
 | `moduli/storie.js` | 100 | 8.0K |
 | `robot/ascolta.js` | 129 | 8.0K |
 | `robot/comune/feed.js` | 100 | 4.0K |
+| `robot/comune/pagina.js` | 80 | 4.0K |
 | `robot/comune/registro.js` | 77 | 4.0K |
 | `robot/comune/rete.js` | 65 | 4.0K |
 | `robot/comune/scrivi.js` | 95 | 4.0K |

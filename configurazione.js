@@ -145,18 +145,70 @@ export const CONFIG = {
       riconosciPuntata: /erua\s*podcast/i,
     },
 
-    /* I siti da cui arrivano le notizie. `lingua` serve a dire al
-       lettore, prima che clicchi, in che lingua troverà la pagina. */
+    /* I siti da cui arrivano le notizie.
+
+       Sette atenei su nove pubblicano un feed: si usa quello, perché è
+       un impegno della fonte a mantenere una forma.
+
+       Due non lo pubblicano, e per loro si legge l'elenco dalla pagina.
+       Le regole di lettura stanno qui, accanto alla fonte, e non dentro
+       il programma: quando quel sito verrà rifatto — e verrà rifatto —
+       si aggiusta una riga di configurazione. Sono espressioni scritte
+       come stringhe perché è configurazione, non codice. */
     notizie: [
-      { uni: 'ERUA',    feed: 'https://erua-eui.eu/feed/',    sito: 'https://erua-eui.eu/' },
-      { uni: 'UNIMC',   feed: null, sito: 'https://www.unimc.it/it/unimc-comunica/news' },
-      { uni: 'MRU',     feed: null, sito: 'https://www.mruni.eu/en/' },
-      { uni: 'NBU',     feed: null, sito: 'https://news.nbu.bg/en/' },
-      { uni: 'EUV',     feed: null, sito: 'https://www.europa-uni.de/de/universitaet/partner/verbuende/erua/news-blog/index.html' },
-      { uni: 'SWPS',    feed: null, sito: 'https://english.swps.pl/we-the-university/our-news-and-events/news' },
-      { uni: 'ULPGC',   feed: null, sito: 'https://www.ulpgc.es/node' },
-      { uni: 'UAEGEAN', feed: null, sito: 'https://www.aegean.gr/announcement' },
-      { uni: 'UP8',     feed: null, sito: 'https://www.univ-paris8.fr/-Actualites-' },
+      { uni: 'ERUA', sito: 'https://erua-eui.eu/',
+        feed: 'https://erua-eui.eu/feed/' },
+
+      { uni: 'UNIMC', sito: 'https://www.unimc.it/it/unimc-comunica/news',
+        feed: 'https://www.unimc.it/it/unimc-comunica/news/RSS' },
+
+      { uni: 'MRU', sito: 'https://www.mruni.eu/en/',
+        feed: 'https://www.mruni.eu/feed/' },
+
+      /* NBU: il feed sta a `/rss/news`, non a `/rss` — quello risponde
+         "no news found" e sembra rotto. La versione inglese esiste ma è
+         ferma al 2016: si prende la bulgara, che è viva. Il lettore vede
+         la sigla della lingua accanto al titolo, e la traduzione della
+         pagina fa il resto. */
+      { uni: 'NBU', sito: 'https://news.nbu.bg/bg/news',
+        feed: 'https://news.nbu.bg/bg/rss/news' },
+
+      { uni: 'SWPS', sito: 'https://english.swps.pl/we-the-university/our-news-and-events/news',
+        feed: 'https://english.swps.pl/we-the-university/our-news-and-events/news?format=feed&type=rss' },
+
+      { uni: 'UAEGEAN', sito: 'https://www.aegean.gr/',
+        feed: 'https://www.aegean.gr/rss.xml' },
+
+      { uni: 'UP8', sito: 'https://www.univ-paris8.fr/-Actualites-',
+        feed: 'https://www.univ-paris8.fr/spip.php?page=backend' },
+
+      /* Viadrina: il vecchio feed su euv-frankfurt-o.de è morto e il
+         portale nuovo non ne dichiara. Si legge l'elenco. */
+      { uni: 'EUV',
+        sito: 'https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html',
+        feed: null,
+        pagina: {
+          url: 'https://www.europa-uni.de/de/universitaet/kommunikation/newsportal/index.html',
+          blocco: '<article class="teaser-item[\\s\\S]*?</article>',
+          titolo: '<h3[^>]*>([\\s\\S]*?)</h3>',
+          data: '<time[^>]*datetime="([^"]+)"',
+          collegamento: '<a[^>]+href="([^"]+)"',
+        } },
+
+      /* ULPGC: nessun feed. Il loro robots.txt consente la lettura
+         automatica con dieci secondi di pausa — e noi facciamo una
+         richiesta sola per giro, quindi siamo ampiamente dentro. Il
+         filtro che risponde 403 guarda solo come ci si presenta.
+         La data sta nell'indirizzo della notizia: la si prende da lì,
+         che è uguale in tutte le lingue. */
+      { uni: 'ULPGC', sito: 'https://www.ulpgc.es/noticias', feed: null,
+        pagina: {
+          url: 'https://www10.ulpgc.es/noticias',
+          blocco: '<article class="ulpgcds-article[\\s\\S]*?</article>',
+          titolo: '<h2[^>]*>([\\s\\S]*?)</h2>',
+          collegamento: '<a[^>]+href="(/noticia/[^"]+)"',
+          dataDalCollegamento: '/noticia/(\\d{4})/(\\d{2})/(\\d{2})/',
+        } },
     ],
   },
 
