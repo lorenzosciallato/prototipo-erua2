@@ -68,6 +68,31 @@ scrivibile finché non c'è la base di dati.
 sezioni si vedano come prima, il cambio di lingua, il lettore delle puntate che
 si espande, e l'aula con video e trascrizione.
 
+## Guasti trovati dopo lo scorporo e corretti
+
+Quattro, tutti della stessa famiglia: codice che nel file unico girava
+quando tutto era già in memoria, e che diviso in moduli gira troppo presto o
+in un file che non è ancora stato scaricato.
+
+1. **«Read» e «Story» non rispondevano.** La rivista chiedeva la pagina di
+   lettura al registro, ma nessuno caricava quel modulo: l'attesa non finiva
+   mai. Ora `chiedi()` carica da sé la sezione che non c'è ancora.
+2. **«Listen» non rispondeva.** Il comando delle due voci in cima alla rivista
+   stava in `ascolta.js` — cioè nel file che quel clic doveva far scaricare.
+   Spostato in `rivista.js`.
+3. **La traduzione diceva «needs the page to be online» stando online.** Il
+   traduttore veniva caricato con un tag `<script>` normale, che parte prima
+   dei moduli: chiamava una funzione che `lingua.js` non aveva ancora
+   definito. Ora è `lingua.js` a caricarlo, dopo averla definita.
+4. **La vetrina dei corsi restava vuota.** Un timer ereditato disegnava a
+   150 ms dall'ingresso in Learn, prima che i dati arrivassero: andava in
+   errore e lasciava alzata la bandierina «già disegnato», così il disegno
+   vero non avveniva più. Timer tolto, e `studyReveal` ora non alza la
+   bandierina se i dati non ci sono.
+
+Il collaudo automatico ora copre tutti e quattro: simula i clic e l'ingresso
+in Learn con l'indirizzo già su `#study`.
+
 ## Deciso durante lo scorporo
 
 - La **palette generale** è rimasta in `stile/base.css`, non nel file di
