@@ -72,24 +72,49 @@ export const DA_ULPGC = {
   U:   { eurostat: null, iso: 'UY', it: 'Uruguay',            en: 'Uruguay' },
 };
 
-/* Prefisso del codice Erasmus dell'ateneo → paese ISO. Usato come
-   controprova: se il codice dice Germania e la tabella dice Austria,
-   qualcosa non torna e la destinazione va guardata. */
+/* Prefisso del codice Erasmus dell'ateneo → paese, in ISO.
+   Attenzione: qui la Grecia è GR, perché il confronto si fa con l'ISO.
+   La forma EL è una particolarità di Eurostat e sta nell'altra tabella:
+   confonderle faceva scartare come sospetti sette atenei greci giusti. */
 const DA_ERASMUS = {
   A: 'AT', B: 'BE', BG: 'BG', CH: 'CH', CY: 'CY', CZ: 'CZ', D: 'DE', DK: 'DK',
-  E: 'ES', EE: 'EE', F: 'FR', G: 'EL', HR: 'HR', HU: 'HU', I: 'IT', IRL: 'IE',
+  E: 'ES', EE: 'EE', F: 'FR', G: 'GR', HR: 'HR', HU: 'HU', I: 'IT', IRL: 'IE',
   IS: 'IS', LT: 'LT', LV: 'LV', LUX: 'LU', MT: 'MT', N: 'NO', NL: 'NL', P: 'PT',
   PL: 'PL', RO: 'RO', S: 'SE', SF: 'FI', SI: 'SI', SK: 'SK', TR: 'TR', UK: 'GB',
 };
 
-/* `D  AACHEN01 - RWTH AACHEN` → { codice, prefisso, paeseIso, ateneo } */
+/* Da `D  AACHEN01 - RWTH AACHEN` a { codice, prefisso, paeseIso, ateneo }.
+
+   Le forme sono più varie di quanto sembri, e conviene averle sotto gli
+   occhi invece di dedurle da un'espressione:
+
+       D  AACHEN01 - RWTH AACHEN            prefisso di paese europeo
+       AL TIRANA UCB - KOLEGJI …            codice con uno spazio dentro
+       A FBARCELÓ - FUNDACIÓN BARCELÓ …     lettere accentate nel codice
+       ARG_UPC01 - UNIVERSIDAD …            fuori Europa: nessun prefisso
+       MENDOZA01 - UNIVERSIDAD DE MENDOZA   nemmeno il codice, solo il nome
+
+   Quindi non si pretende una forma: si taglia al primo " - ", e il
+   prefisso di paese si riconosce solo quando c'è davvero. Dove non c'è,
+   `paeseIso` resta nullo e la controprova semplicemente non si fa —
+   invece di scartare una destinazione buona. */
 export function leggiCodiceErasmus(riga) {
-  const m = /^\s*([A-Z]{1,3})\s+([A-Z0-9\-]+)\s*-\s*(.+)$/.exec(String(riga).trim());
-  if (!m) return { codice: null, prefisso: null, paeseIso: null, ateneo: String(riga).trim() };
+  const testo = String(riga).replace(/\s+/g, ' ').trim();
+  const taglio = testo.indexOf(' - ');
+  if (taglio < 0) return { codice: null, prefisso: null, paeseIso: null, ateneo: testo };
+
+  const codice = testo.slice(0, taglio).trim();
+  const ateneo = testo.slice(taglio + 3).trim();
+
+  /* il prefisso c'è solo se il codice ha più di un pezzo e il primo è
+     una sigla di paese conosciuta */
+  const pezzi = codice.split(' ');
+  const prefisso = (pezzi.length > 1 && DA_ERASMUS[pezzi[0]]) ? pezzi[0] : null;
+
   return {
-    codice: `${m[1]} ${m[2]}`,
-    prefisso: m[1],
-    paeseIso: DA_ERASMUS[m[1]] || null,
-    ateneo: m[3].trim(),
+    codice: codice || null,
+    prefisso,
+    paeseIso: prefisso ? DA_ERASMUS[prefisso] : null,
+    ateneo: ateneo || testo,
   };
 }
