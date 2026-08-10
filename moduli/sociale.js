@@ -103,11 +103,135 @@ function renderThread(){
 
 function renderToggle(){
   document.getElementById('toggle-lista').innerHTML=TOGGLE.map(t=>`
-    <button class="toggle" data-toggle="${t.id}" aria-pressed="${statoToggle[t.id]}">
+    <button class="toggle" data-toggle="${esc(t.id)}" aria-pressed="${!!statoToggle[t.id]}">
       <span class="ico">${t.ico}</span>
-      <span class="t"><b>${t.t[LANG]}</b><span>${t.d[LANG]}</span></span>
+      <span class="t"><b>${esc(t.t[LANG])}</b><span>${esc(t.d[LANG])}</span></span>
       <span class="sw" aria-hidden="true"></span>
     </button>`).join('');
   document.getElementById('amb-griglia').innerHTML=ATENEI.map(u=>
-    `<div class="amb"><span class="anello">${stemma(u,'avatar')}</span>${CITTA[u]||u}</div>`).join('');
+    `<div class="amb"><span class="anello">${stemma(u,'avatar')}</span>${esc(CITTA[u]||u)}</div>`).join('');
 }
+
+function apriFoglio(v){
+  const f=document.getElementById('sc-foglio');
+  f.hidden=!v;
+  document.body.style.overflow=v?'hidden':'';
+  if(v) document.getElementById('board-testo').focus();
+}
+
+function ridisegna(){ renderChipsTag(); renderAtenei(); renderThread(); renderToggle(); }
+
+/* ── comandi ───────────────────────────────────────────────────────── */
+document.addEventListener('click', e => {
+  if (e.target.closest('#btn-apri-scrivi')) { apriFoglio(true); return; }
+  if (e.target.closest('#btn-chiudi-scrivi') || e.target.id === 'sc-foglio') { apriFoglio(false); return; }
+
+  const cerchio = e.target.closest('[data-citta]');
+  if (cerchio) {
+    const u = cerchio.dataset.citta || null;
+    filtroCitta = (filtroCitta === u) ? null : u;
+    renderAtenei(); renderThread();
+    return;
+  }
+  const nt = e.target.closest('[data-newtag]');
+  if (nt) { tagScelto = nt.dataset.newtag; renderChipsTag(); return; }
+
+  const ft = e.target.closest('[data-filtag]');
+  if (ft) {
+    filtroTag = ft.dataset.filtag;
+    if (filtroTag === 'tutti') filtroCitta = null;
+    renderChipsTag(); renderAtenei(); renderThread();
+    return;
+  }
+  const voto = e.target.closest('[data-voto]');
+  if (voto) {
+    const id = voto.dataset.voto, dir = +voto.dataset.dir;
+    votiThread[id] = (votiThread[id] === dir) ? 0 : dir;
+    renderThread();
+    return;
+  }
+  const esp = e.target.closest('[data-espandi]');
+  if (esp) { const id = esp.dataset.espandi; espansi[id] = !espansi[id]; renderThread(); return; }
+
+  const rs = e.target.closest('[data-risposte]');
+  if (rs) {
+    apertoCommenti = (String(apertoCommenti) === rs.dataset.risposte) ? null : rs.dataset.risposte;
+    renderThread();
+    return;
+  }
+  const inv = e.target.closest('[data-invia]');
+  if (inv) {
+    const id = inv.dataset.invia;
+    const campo = document.querySelector(`[data-risp="${CSS.escape(id)}"]`);
+    const testo = (campo && campo.value || '').trim();
+    if (!testo) { toast(T('Scrivi qualcosa', 'Write something first')); if (campo) campo.focus(); return; }
+    if (!COMMENTI[id]) COMMENTI[id] = [];
+    COMMENTI[id].push({ nick: MIO_NICK, uni: 'UNIMC', quando: T('adesso', 'now'), t: { it: testo, en: testo } });
+    apertoCommenti = id;
+    renderThread();
+    return;
+  }
+  const dm = e.target.closest('.dm');
+  if (dm) { toast(T('Messaggio a ', 'Message to ') + dm.dataset.nick); return; }
+
+  const tg = e.target.closest('[data-toggle]');
+  if (tg) { const id = tg.dataset.toggle; statoToggle[id] = !statoToggle[id]; renderToggle(); return; }
+
+  if (e.target.closest('#btn-rigenera')) {
+    MIO_NICK = generaNick();
+    document.getElementById('mio-nick').textContent = MIO_NICK;
+    const p = document.getElementById('profilo-nick');
+    if (p) p.textContent = MIO_NICK;
+    renderChipsTag();
+    return;
+  }
+  if (e.target.closest('#btn-pubblica')) {
+    const ta = document.getElementById('board-testo');
+    const testo = ta.value.trim();
+    if (!testo) { toast(T('Scrivi qualcosa prima di pubblicare', 'Write something first')); ta.focus(); return; }
+    THREAD.unshift({
+      id: 'mio-' + THREAD.length, nick: MIO_NICK, uni: 'UNIMC', tag: tagScelto,
+      voti: 1, commenti: 0, quando: T('adesso', 'just now'),
+      tit: null, testo: { it: testo, en: testo },
+    });
+    ta.value = '';
+    filtroTag = 'tutti'; filtroCitta = null;
+    apriFoglio(false);
+    renderChipsTag(); renderAtenei(); renderThread();
+  }
+});
+
+/* invio con Enter dentro il campo di risposta */
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const campo = e.target.closest('[data-risp]');
+  if (!campo) return;
+  e.preventDefault();
+  const b = document.querySelector(`[data-invia="${CSS.escape(campo.dataset.risp)}"]`);
+  if (b) b.click();
+});
+
+addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const f = document.getElementById('sc-foglio');
+  if (f && !f.hidden) apriFoglio(false);
+});
+
+/* ── avvio della sezione ───────────────────────────────────────────── */
+let avviata = false;
+export async function avvia() {
+  if (avviata) return;
+  avviata = true;
+  const d = await dati('sociale');
+  TAG = d.argomenti;
+  THREAD = d.discussioni;
+  COMMENTI = d.risposte;
+  TOGGLE = d.disponibilita;
+  /* Le disponibilità che il profilo mostra accese all'inizio. Sono
+     un esempio, non una scelta di nessuno: non esiste ancora un
+     profilo da cui leggerle. */
+  statoToggle = { divano: false, lingua: true, progetti: true, tutor: false, passaggi: false, appunti: true };
+  ridisegna();
+}
+
+offre('sociale', { avvia, ridisegna: () => { if (avviata) ridisegna(); }, nick: () => MIO_NICK });
