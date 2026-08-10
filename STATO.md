@@ -56,7 +56,7 @@ un utente, di leggere i dati di un altro, che deve fallire.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 20:23** — file toccato: `moduli/rivista.js`
+Ultimo salvataggio: **10/08/2026 alle 20:24** — file toccato: `moduli/rivista.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -65,5 +65,6 @@ Ultimo salvataggio: **10/08/2026 alle 20:23** — file toccato: `moduli/rivista.
 | `moduli/ascolta.js` | 179 | 8.0K |
 | `moduli/notizie.js` | 101 | 8.0K |
 | `moduli/nucleo.js` | 231 | 12K |
+| `moduli/rivista.js` | 276 | 12K |
 
 <!-- fine timbro automatico -->

@@ -179,3 +179,98 @@ function renderFeed(){
       : T('Nessun articolo di questo ateneo in questo numero.',
           'No articles from this university in this issue.')}</div>`;
 }
+
+/* ── dai file dei numeri alla forma che il feed usa ────────────────
+   Ogni numero è un file a sé. Qui si appiattiscono in un elenco solo,
+   dal più recente al più vecchio. I conteggi dei "mi piace" sono finti
+   e dichiarati tali: nessuno li ha mai messi. */
+const VOTI_FINTI = [128, 96, 87, 64, 73, 59, 142, 81, 103, 77, 91, 68, 115, 54, 88, 132, 71, 99, 60];
+
+function componiArticoli() {
+  let k = 0;
+  return NUMERI.flatMap(n => (n.articoli || []).map((a, i) => ({
+    id: a.id,
+    num: n.numero,
+    uni: a.uni[0],
+    unis: a.uni,
+    autore: a.autore,
+    luogo: 'pp. ' + a.pagine,
+    pagg: a.pagine,
+    titolo: a.titolo,
+    nuovo: i === 0 && n.numero === (NUMERI[0] && NUMERI[0].numero),
+    foto: (a.immagini && a.immagini.length) ? a.immagini[0].file : null,
+    immagini: a.immagini || [],
+    pezzi: a.pezzi || [],
+    lettura: a.lettura,
+    lancio: { it: a.occhiello, en: a.occhiello },
+    voti: VOTI_FINTI[(k++) % VOTI_FINTI.length],
+    tempo: { it: 'Numero ' + n.numero + ' · ' + (n.data || ''),
+             en: 'Issue ' + n.numero + ' · ' + (n.data || '') },
+  })));
+}
+
+/* ── comandi ───────────────────────────────────────────────────────── */
+document.addEventListener('click', async e => {
+  const leggi = e.target.closest('.leggi-art');
+  if (leggi) { (await chiedi('articolo')).apri(leggi.dataset.id); return; }
+
+  const st = e.target.closest('[data-storia]');
+  if (st) { (await chiedi('storie')).apri(st.dataset.storia); return; }
+
+  const cuore = e.target.closest('.cuore');
+  if (cuore) { const id = cuore.dataset.id; cuori[id] = !cuori[id]; renderFeed(); return; }
+
+  const salva = e.target.closest('.salva');
+  if (salva) { const id = salva.dataset.id; salvati[id] = !salvati[id]; renderFeed(); return; }
+
+  const share = e.target.closest('.share');
+  if (share) {
+    const a = ARTICOLI.find(x => x.id === share.dataset.id);
+    if (navigator.share) navigator.share({ title: 'Catch-Up · ' + a.titolo }).catch(() => {});
+    else toast(T('Condivisione non disponibile qui', 'Sharing not available here'));
+    return;
+  }
+
+  const bNum = e.target.closest('#numeri .num');
+  if (bNum) {
+    numeroScelto = parseInt(bNum.dataset.num, 10);
+    renderNumeri(); renderFeed();
+    document.getElementById('p-magazine').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  if (e.target.closest('#chip-tutti'))   { soloSalvati = false; renderFeed(); return; }
+  if (e.target.closest('#chip-salvati')) { soloSalvati = true;  renderFeed(); return; }
+
+  const storia = e.target.closest('.storia[data-uni]');
+  if (storia) {
+    const u = storia.dataset.uni || null;
+    filtroUni = (filtroUni === u) ? null : u;
+    renderStorie(); renderFeed();
+  }
+});
+
+/* ── avvio della sezione ───────────────────────────────────────────── */
+let avviata = false;
+export async function avvia() {
+  if (avviata) return;
+  avviata = true;
+  NUMERI = (await Promise.all(NUMERI_DISPONIBILI.map(n => dati(n))))
+    .sort((a, b) => (b.numero || 0) - (a.numero || 0));
+  ARTICOLI = componiArticoli();
+  ORDINE = mescola(ARTICOLI.map(a => a.id));
+  numeroScelto = NUMERI.length ? NUMERI[0].numero : null;
+  renderStorie();
+  renderFeed();
+}
+
+/* Quello che le altre sezioni possono chiedere alla rivista: l'elenco
+   degli articoli (serve alla pagina di lettura e alle storie) e il
+   ridisegno del feed quando cambia qualcosa che si vede anche lì. */
+offre('rivista', {
+  avvia,
+  articoli: () => ARTICOLI,
+  ordine: () => ORDINE,
+  filtrati,
+  salvati,
+  ridisegna: () => { if (avviata) renderFeed(); },
+});
