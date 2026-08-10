@@ -62,6 +62,7 @@ Ultimo salvataggio: **10/08/2026 alle 20:27** — file toccato: `moduli/articolo
 |:--|--:|--:|
 | `configurazione.js` | 177 | 12K |
 | `index.html` | 5356 | 796K |
+| `moduli/articolo.js` | 491 | 24K |
 | `moduli/ascolta.js` | 179 | 8.0K |
 | `moduli/navigazione.js` | 97 | 4.0K |
 | `moduli/notizie.js` | 101 | 8.0K |

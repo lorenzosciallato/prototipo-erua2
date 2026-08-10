@@ -12,13 +12,19 @@
 */
 
 import { CITTA } from '../configurazione.js';
-import {
-  LANG, T, esc, dati, offre, chiedi, toast, stemma, ICONE, inLettura, lenteAperta,
-} from './nucleo.js';
+import { LANG, T, esc, offre, chiedi, ICONE, lenteAperta } from './nucleo.js';
+import { mostraTab, scriviHash } from './navigazione.js';
 
 let ARTICOLI = [], artCorrente = null, idCorrente = null;
 const letti = new Set();
 const overlay = document.getElementById('p-articolo');
+
+/* La rivista, quando è pronta: serve l'elenco degli articoli e l'ordine
+   del feed per sapere qual è il pezzo dopo. Si tiene qui perché
+   `prossimoArticolo` viene chiamata durante lo scorrimento e non può
+   aspettare una promessa ogni volta. */
+let offerta = null;
+chiedi('rivista').then(r => { offerta = r; });
 
 /* 1. GRASSETTO D'ATTACCO — un appiglio per l'occhio in ogni paragrafo */
 function attacco(t,forte){
