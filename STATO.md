@@ -96,7 +96,7 @@ si espande, e l'aula con video e trascrizione.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 21:03** — file toccato: `index.html`
+Ultimo salvataggio: **10/08/2026 alle 21:05** — file toccato: `moduli/didattica.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -106,7 +106,7 @@ Ultimo salvataggio: **10/08/2026 alle 21:03** — file toccato: `index.html`
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 842 | 44K |
-| `moduli/didattica.js` | 420 | 20K |
+| `moduli/didattica.js` | 422 | 20K |
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/navigazione.js` | 97 | 4.0K |
 | `moduli/notizie.js` | 101 | 8.0K |

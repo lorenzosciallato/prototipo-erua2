@@ -315,11 +315,13 @@ stSheet.addEventListener('click',e=>{
 stVelo.addEventListener('click',stChiudi);
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;const au=document.getElementById('st-aula');if(au&&au.classList.contains('on')){chiudiAula();return;}if(stSheet.classList.contains('on'))stChiudi();});
 
-/* Il disegno della vetrina non parte più da qui: nel file unico i dati
-   erano già in memoria, adesso vanno chiesti prima. Ci pensa `avvia`. */
-document.querySelectorAll('.tab-btn[data-tab="study"]').forEach(b=>b.addEventListener('click',studyReveal));
-addEventListener('hashchange',()=>{if(location.hash==='#study')studyReveal();});
-try{if(location.hash==='#study')setTimeout(studyReveal,150);}catch(err){}
+/* Il disegno della vetrina non parte più da qui.
+   Nel file unico i dati erano già in memoria, quindi bastava un timer:
+   si entrava in Learn, dopo 150 ms si disegnava. Adesso i dati vanno
+   chiesti, e quel timer partiva prima che arrivassero — le caselle non
+   esistevano ancora, il disegno andava in errore, ma la bandierina
+   "già fatto" restava alzata. Risultato: schede vuote e nessun video.
+   Ci pensa `avvia`, che disegna quando i dati ci sono. */
 
 
 
