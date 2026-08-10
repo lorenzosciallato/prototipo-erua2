@@ -1,0 +1,273 @@
+ ERUA connect — Playbook di validazione della sicurezza generata dall'IA
+ 
+## Documento operativo per la verifica dei test di sicurezza
+ 
+**Documento interno di progetto — agosto 2026**
+ 
+---
+ 
+## PREMESSA
+ 
+I playbook precedenti prescrivono di scrivere i test di sicurezza **prima** del codice, seguendo l'approccio TDD (Test-Driven Development). Questo playbook risolve il problema successivo:
+ 
+> **Come faccio a sapere che il test di sicurezza che l'IA mi ha scritto è corretto?**
+ 
+L'IA può generare un test che passa, ma per il motivo sbagliato. Ad esempio:
+ 
+- Il test tenta di accedere a un ID di conversazione che non esiste (anziché a una conversazione esistente a cui l'utente non partecipa).
+- Il test verifica che la risposta non sia 200, ma riceve un 404 (risorsa non trovata) e lo interpreta come 403 (non autorizzato).
+- Il test non copre un endpoint correlato (es. la modifica di uno stato, o la cancellazione di un elemento).
+ 
+Questo playbook formalizza il processo di **validazione umana dei test di sicurezza generati dall'IA**.
+ 
+---
+ 
+## IL PROBLEMA IN UNA FRASE
+ 
+> Un test di sicurezza che passa per il motivo sbagliato è peggio di un test che fallisce. Dà un falso senso di sicurezza.
+ 
+---
+ 
+## I QUATTRO LIVELLI DI VALIDAZIONE
+ 
+| Livello | Descrizione | Chi lo esegue |
+|---|---|---|
+| 1. Scrittura del test | L'IA scrive il test di sicurezza (TDD) | IA |
+| 2. Test del tester | Tu esegui manualmente lo scenario di attacco (Postman/curl) | Tu |
+| 3. Revisione del test | Chiedi all'IA di spiegare il test e di trovare i suoi buchi | IA |
+| 4. Secondo paio di occhi | Un collega/amico tenta di violare il sistema con un account | Terzo |
+ 
+---
+ 
+## LIVELLO 1 — SCRITTURA DEL TEST (IA)
+ 
+**Cosa chiedere all'IA:**
+ 
+```
+"Scrivimi il test di integrazione che tenta di leggere i messaggi di una conversazione a cui l'utente non partecipa. Il test deve fallire con 403 Forbidden."
+```
+ 
+**Output atteso:** un test in pytest (Python) o Jest (Node.js) che:
+ 
+1. Crea due utenti (A e B).
+2. Crea una conversazione privata tra A e B.
+3. Inserisce alcuni messaggi.
+4. Autentica l'utente C (terzo, non partecipante).
+5. Tenta di leggere i messaggi della conversazione.
+6. Verifica che il server risponda con 403 (o che l'array dei messaggi sia vuoto).
+ 
+---
+ 
+## LIVELLO 2 — TEST DEL TESTER (TU)
+ 
+**Prima di accettare il test generato dall'IA, esegui manualmente lo scenario di attacco con un client REST (es. Postman, Bruno).**
+ 
+**Procedura:**
+ 
+1. **Crea due utenti reali** nel sistema di test:
+   - Utente A (email: a@test.com) — crea una conversazione con B.
+   - Utente B (email: b@test.com) — partecipa alla conversazione.
+   - Utente C (email: c@test.com) — non partecipa.
+ 
+2. **Ottieni i token di autenticazione** per A, B, C.
+ 
+3. **Usa Postman per tentare di accedere**:
+   - Con il token di C, tenta di leggere i messaggi della conversazione.
+   - **Se ottieni i messaggi di A e B, la RLS è fallata (IDOR).**
+   - **Se ottieni 403 o array vuoto, la RLS funziona (per questo scenario).**
+ 
+4. **Varia lo scenario**:
+   - Tenta di leggere la conversazione con token scaduto.
+   - Tenta di leggere la conversazione senza token.
+   - Tenta di leggere con token di A ma ID conversazione di un'altra.
+   - Tenta di modificare un messaggio di A con token di B.
+   - Tenta di cancellare un messaggio di A con token di B.
+ 
+5. **Documenta il risultato**:
+   - Se il test manuale passa (cioè **non** riesci ad accedere ai dati altrui), il test automatico è probabilmente corretto.
+   - Se il test manuale fallisce (cioè **riesci** ad accedere ai dati altrui), il test automatico è incompleto o la RLS è fallata.
+ 
+**Esempio di richiesta in Postman**:
+ 
+```
+GET /api/messages?conversation_id=conversation_12345
+Authorization: Bearer <token_di_C>
+```
+ 
+**Risultato atteso:** `403 Forbidden` o `[]` (array vuoto).
+ 
+**Se ottieni i messaggi**, fermati. La RLS è fallata e deve essere corretta prima di procedere.
+ 
+---
+ 
+## LIVELLO 3 — REVISIONE DEL TEST (IA)
+ 
+**Chiedi all'IA di analizzare il test che ha scritto e di trovare i suoi punti deboli.**
+ 
+**Prompt da usare:**
+ 
+```
+"Hai scritto il test [incolla il test]. Analizzalo e dimmi:
+1. Quali scenari di attacco copre?
+2. Quali scenari di attacco NON copre?
+3. Cosa potrebbe andare storto? (es. il test passa per il motivo sbagliato, usa un ID inesistente, non verifica il 403 effettivo)
+4. Come posso migliorarlo?"
+```
+ 
+**Esempio di risposta dell'IA** (potenziale):
+ 
+```
+1. Copre:
+   - Utente non partecipante che tenta di leggere la conversazione.
+ 
+2. NON copre:
+   - Utente che tenta di leggere dopo essere uscito dalla conversazione.
+   - Utente che tenta di modificare lo stato di un messaggio (letto/non letto, archiviato).
+   - Utente che tenta di cancellare un messaggio altrui.
+   - Utente che tenta di leggere con token scaduto.
+ 
+3. Cosa potrebbe andare storto:
+   - Il test usa un ID di conversazione che non esiste → il 403 potrebbe essere un 404 mascherato.
+   - Il test non verifica che l'utente A e B possano leggere (flusso felice) — se fallisce anche per loro, la RLS è troppo restrittiva.
+   - Il test non verifica che l'utente C riceva un 403 effettivo (e non, ad esempio, una risposta vuota con 200).
+ 
+4. Miglioramenti:
+   - Aggiungere test per uscita dalla conversazione.
+   - Aggiungere test per modifica/cancellazione.
+   - Aggiungere test per flusso felice (A e B leggono correttamente).
+   - Verificare che il 403 sia effettivo (non un 404 o 500).
+```
+ 
+---
+ 
+## LIVELLO 4 — SECONDO PAIO DI OCCHI (TERZO)
+ 
+**Fai eseguire il test manuale a un collega o amico che non ha scritto il codice.**
+ 
+**Istruzioni da dare:**
+ 
+```
+"Prendi un account di test (ti do le credenziali) e prova a:
+1. Leggere i messaggi di un altro utente.
+2. Modificare un post che non hai creato.
+3. Cancellare un messaggio che non hai inviato.
+4. Accedere a una conversazione a cui non partecipi.
+ 
+Se ci riesci, dimmi come hai fatto. Se non ci riesci, dimmi cosa hai provato a fare.
+Non ci sono conseguenze negative se trovi un buco. È un test di sicurezza."
+```
+ 
+**Perché funziona:** un occhio esterno non sa come il sistema "dovrebbe" funzionare. Prova cose che a te non verrebbero in mente perché sei troppo vicino al codice.
+ 
+---
+ 
+## CHECKLIST DI VALIDAZIONE DEL TEST
+ 
+Per ogni test di sicurezza generato dall'IA, completa questa checklist:
+ 
+| Verifica | Stato | Note |
+|---|---|---|
+| Il test usa un ID di risorsa esistente (non inesistente) | [ ] | |
+| Il test verifica il flusso felice (utente autorizzato) | [ ] | |
+| Il test verifica il flusso infelice (utente non autorizzato) | [ ] | |
+| Il test verifica il codice di risposta HTTP corretto (403, non 404) | [ ] | |
+| Il test verifica che il contenuto non sia restituito (array vuoto) | [ ] | |
+| Il test copre almeno 3 scenari di attacco diversi | [ ] | |
+| Il test è stato eseguito manualmente da te (Postman) | [ ] | |
+| Il test è stato riesaminato da un terzo | [ ] | |
+ 
+---
+ 
+## COSA FARE SE IL TEST È INCOMPLETO
+ 
+Se l'analisi dell'IA o il test manuale rivelano buchi:
+ 
+1. **Aggiungi i casi mancanti al test** (chiedi all'IA di estendere il test).
+2. **Riesegui il test manuale**.
+3. **Se il test manuale ora passa**, il test è completo.
+4. **Se il test manuale ancora fallisce**, la vulnerabilità è reale. Correggi il codice (la policy RLS) e ripeti.
+ 
+---
+ 
+## ESEMPIO COMPLETO DI FLUSSO
+ 
+**Step 1 — L'IA scrive il test:**
+ 
+```python
+def test_user_cannot_read_foreign_messages():
+    # Crea A, B, C, conversazione A-B
+    # Autentica C
+    # Tenta di leggere i messaggi
+    # Verifica 403
+```
+ 
+**Step 2 — Tu esegui il test manuale (Postman):**
+ 
+```
+GET /api/messages?conversation_id=conversation_12345
+Authorization: Bearer <token_di_C>
+→ Risultato: 200 con messaggi di A e B  ❌ (IDOR!)
+```
+ 
+**Step 3 — Correggi la policy RLS:**
+ 
+```sql
+-- Policy originale (fallata)
+CREATE POLICY "messages_select_policy" ON messages
+FOR SELECT USING (auth.uid() = sender_id OR auth.uid() = receiver_id);
+ 
+-- Policy corretta (con tabella partecipanti)
+CREATE POLICY "messages_select_policy" ON messages
+FOR SELECT USING (
+    auth.uid() IN (
+        SELECT user_id FROM conversation_participants
+        WHERE conversation_id = messages.conversation_id
+    )
+);
+```
+ 
+**Step 4 — Riapplica la policy e riesegui il test manuale:**
+ 
+```
+GET /api/messages?conversation_id=conversation_12345
+Authorization: Bearer <token_di_C>
+→ Risultato: 403 Forbidden ✅
+```
+ 
+**Step 5 — Chiedi all'IA di estendere il test:**
+ 
+```
+"Aggiungi al test anche la verifica che A e B possano leggere, e che C non possa modificare o cancellare messaggi."
+```
+ 
+**Step 6 — Il test esteso viene rieseguito e passa.**
+ 
+---
+ 
+## RIEPILOGO DEI PROMPT DA USARE CON L'IA
+ 
+| Fase | Prompt |
+|---|---|
+| Scrittura test | "Scrivimi il test di integrazione che [descrizione dello scenario di attacco]. Il test deve fallire con [codice di errore]." |
+| Analisi test | "Analizza il test che hai scritto. Quali scenari di attacco NON copre? Cosa potrebbe andare storto?" |
+| Estensione test | "Estendi il test per coprire anche gli scenari: [elenco]." |
+| Spiegazione | "Spiegami, riga per riga, cosa fa questo test e perché è corretto." |
+ 
+---
+ 
+## CONCLUSIONE
+ 
+Un test di sicurezza generato dall'IA **non è valido per impostazione predefinita**. Deve essere validato:
+ 
+1. **Automaticamente** — dall'IA che lo analizza (Livello 3).
+2. **Manualmente** — da te, tramite test con strumenti come Postman (Livello 2).
+3. **Esternamente** — da un secondo paio di occhi (Livello 4).
+ 
+Solo quando il test supera **tutti e tre i livelli** di validazione, il test è da considerarsi affidabile.
+ 
+**Regola d'oro:** se un test di sicurezza non è stato eseguito manualmente da te, non esiste.
+ 
+---
+ 
+*Playbook di validazione — revisione di agosto 2026. Da integrare con il Gate 2 (Autorizzazione RLS) del playbook principale. La validazione manuale dei test di sicurezza è condizione necessaria per il superamento del gate.*
+```

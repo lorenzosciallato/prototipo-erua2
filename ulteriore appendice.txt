@@ -1,0 +1,580 @@
+iore appendice legale e di cybersecurity
+```markdown
+# ERUA connect — Playbook di gestione dei rischi residui e continuità operativa
+ 
+## Documento operativo per il mantenimento della sicurezza nel tempo
+ 
+**Documento interno di progetto — agosto 2026**
+ 
+---
+ 
+## PREMESSA
+ 
+I playbook precedenti hanno coperto la **messa in sicurezza iniziale** del sistema. Questo playbook copre la **gestione dei rischi nel tempo**, ovvero:
+ 
+1. **Monitoraggio attivo**: come sapere che tutto funziona (e come sapere quando non funziona).
+2. **Aggiornamenti di sicurezza**: come gestire patch e vulnerabilità scoperte dopo il lancio.
+3. **Dipendenza dai fornitori**: come garantire che un cambio di fornitore non paralizzi il servizio.
+4. **Cambiamenti normativi**: come adattarsi a nuove leggi e interpretazioni.
+5. **L'errore non previsto**: come reagire a ciò che non era nei test.
+6. **Retrospettiva di sicurezza**: come migliorare continuamente il sistema.
+ 
+Il playbook è organizzato per **aree di rischio**, con per ciascuna: obiettivo, implementazione concreta, esempi di codice/script, e risorse da chiedere all'IA.
+ 
+---
+ 
+## INDICE DELLE AREE
+ 
+| Area | Obiettivo |
+|---|---|
+| 1. Monitoraggio attivo e allerting | Rilevare incidenti prima che diventino critici |
+| 2. Aggiornamenti di sicurezza | Patchare vulnerabilità note entro 24 ore |
+| 3. Indipendenza dai fornitori | Sostituire un fornitore senza riscrivere il sistema |
+| 4. Monitoraggio normativo | Adeguarsi a nuove leggi e interpretazioni |
+| 5. Incident Response avanzata | Reagire a scenari non previsti |
+| 6. Retrospettiva di sicurezza | Migliorare continuamente il sistema |
+| 7. Documentazione per il Titolare | Mantenere aggiornata la compliance |
+ 
+---
+ 
+## AREA 1 — MONITORAGGIO ATTIVO E ALLERTING
+ 
+### 1.1 Cosa monitorare
+ 
+| Categoria | Cosa monitorare | Soglia di allarme | Azione |
+|---|---|---|---|
+| **Accessi** | Tentativi di login falliti per stesso utente | >5 in 10 minuti | Allerta, possibile attacco a credenziali |
+| **Autorizzazione** | Tentativi di accesso a risorse altrui (403) | >10 in 5 minuti | Allerta, possibile tentativo IDOR |
+| **Traffico** | Richieste totali | >media giornaliera × 3 | Allerta, possibile DDoS o attacco di saturazione |
+| **Errori** | Errori 500 (server) | >5 in 5 minuti | Allerta, possibile bug o attacco |
+| **Latenza** | Tempo di risposta API | >2 secondi per 5 richieste consecutive | Allerta, possibile degrado o attacco |
+| **Backup** | Backup notturno | Non completato entro le 2:00 | Allerta, perdita di copia di sicurezza |
+| **Spesa** | Costo dei servizi a consumo | >70% del budget mensile | Allerta, possibile attacco economico |
+ 
+### 1.2 Implementazione del monitoraggio
+ 
+**Con i servizi gestiti**, la maggior parte del monitoraggio è già disponibile. Devi solo configurare gli alert.
+ 
+**Esempio per Supabase (PostgreSQL)**:
+ 
+```sql
+-- Query per monitorare tentativi di accesso anomalo (da eseguire ogni 5 minuti)
+SELECT 
+    user_id,
+    COUNT(*) as failed_attempts,
+    MIN(created_at) as first_attempt,
+    MAX(created_at) as last_attempt,
+    COUNT(DISTINCT ip_hash) as distinct_ips
+FROM login_attempts
+WHERE success = false
+  AND created_at > NOW() - INTERVAL '10 minutes'
+GROUP BY user_id
+HAVING COUNT(*) > 5;
+ 
+-- Se la query restituisce risultati → allerta
+```
+ 
+**Esempio per monitoraggio API (Node.js)**:
+ 
+```javascript
+// Middleware di logging con metriche
+app.use((req, res, next) => {
+    const start = Date.now();
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        const status = res.statusCode;
+        const path = req.path;
+        const method = req.method;
+        const user_id = req.user?.id || 'anonymous';
+        
+        // Log strutturato
+        const log = {
+            timestamp: new Date().toISOString(),
+            method,
+            path,
+            status,
+            duration,
+            user_id,
+            ip_hash: hash(req.ip)
+        };
+        
+        // Log su sistema di monitoraggio (es. Axiom, Datadog, o file)
+        logger.info(log);
+        
+        // Se la durata è anomala, allerta
+        if (duration > 2000 && status === 200) {
+            alert('API slow response', { path, method, duration, user_id });
+        }
+    });
+    next();
+});
+```
+ 
+### 1.3 Sistema di allerting
+ 
+**Configurazione degli alert** (da chiedere all'IA):
+ 
+```
+"Scrivimi uno script di monitoraggio che:
+1. Ogni 5 minuti esegue le query di controllo (accessi falliti, errori 403, traffico anomalo).
+2. Se una soglia è superata, invia una notifica a un canale Telegram o a un webhook.
+3. Invia un riepilogo giornaliero via email.
+"
+```
+ 
+**Strumenti consigliati**:
+- **Per il logging strutturato**: Axiom (piano gratuito per volumi ridotti) o logging del provider (es. Supabase Logs, Vercel Logs).
+- **Per gli alert**: UptimeRobot, o script personalizzato con invio a webhook (Telegram, Slack).
+- **Per il monitoraggio delle prestazioni**: strumenti integrati nel provider (es. Vercel Analytics).
+ 
+---
+ 
+## AREA 2 — AGGIORNAMENTI DI SICUREZZA
+ 
+### 2.1 Processo di aggiornamento
+ 
+**Obiettivo**: patchare vulnerabilità note entro 24 ore dalla pubblicazione dell'advisory.
+ 
+**Fasi**:
+ 
+1. **Monitoraggio delle advisories**:
+   - PostgreSQL security mailing list.
+   - Node.js/Python security advisories.
+   - Librerie utilizzate (via `npm audit` o `pip-audit`).
+   - Provider cloud (Supabase, Vercel, AWS).
+ 
+2. **Valutazione**:
+   - La vulnerabilità interessa il sistema? (es. una vulnerabilità in una funzione non utilizzata).
+   - Qual è il rischio? (critica, alta, media, bassa).
+   - Esiste già una patch?
+ 
+3. **Patching**:
+   - Applicare la patch su ambiente di test.
+   - Eseguire i test di sicurezza (IDOR, autenticazione, sanitizzazione).
+   - Se i test passano, applicare in produzione.
+   - Se i test falliscono, valutare workaround o rollback.
+ 
+4. **Verifica**:
+   - Testare la funzionalità interessata.
+   - Monitorare gli errori per 24 ore.
+ 
+### 2.2 Automazione degli aggiornamenti
+ 
+**Script di controllo automatico** (da eseguire quotidianamente):
+ 
+```bash
+#!/bin/bash
+# security_check.sh
+ 
+# Controlla aggiornamenti PostgreSQL
+# (se usi un servizio gestito, il provider li applica automaticamente)
+ 
+# Controlla vulnerabilità delle librerie Node.js
+npm audit --json > npm_audit.json
+if grep -q '"severity":"critical"' npm_audit.json; then
+    echo "CRITICAL vulnerability found in Node.js dependencies"
+    # Invia allerta
+    curl -X POST $WEBHOOK_URL -d "CRITICAL npm vulnerability found"
+fi
+ 
+# Controlla vulnerabilità delle librerie Python
+pip-audit --json > pip_audit.json
+if grep -q '"critical"' pip_audit.json; then
+    echo "CRITICAL vulnerability found in Python dependencies"
+    curl -X POST $WEBHOOK_URL -d "CRITICAL pip vulnerability found"
+fi
+ 
+# Controlla aggiornamenti del provider (se disponibile via API)
+# (es. Supabase, Vercel)
+```
+ 
+### 2.3 Workflow di aggiornamento
+ 
+```
+1. Advisory pubblicata
+   │
+   ▼
+2. Valutazione: interessa il sistema?
+   │
+   ├── NO → archivia
+   │
+   ▼ SÌ
+3. Rischio?
+   │
+   ├── BASSO/MEDIO → pianifica aggiornamento entro 7 giorni
+   │
+   ▼ ALTO/CRITICO
+4. Applica patch su ambiente di test
+   │
+   ▼
+5. Esegui test di sicurezza (RLS, autenticazione, sanitizzazione)
+   │
+   ├── FALLISCONO → valuta workaround o rollback
+   │
+   ▼ PASSANO
+6. Applica in produzione (con rollback pronto)
+   │
+   ▼
+7. Monitora per 24 ore
+```
+ 
+**Risorse da chiedere all'IA**:
+ 
+```
+"Scrivimi uno script bash che:
+1. Esegue npm audit e pip-audit.
+2. Se trova vulnerabilità critiche, invia un allarme via webhook.
+3. Registra il risultato in un file di log.
+"
+```
+ 
+---
+ 
+## AREA 3 — INDIPENDENZA DAI FORNITORI
+ 
+### 3.1 Principio
+ 
+Il sistema non deve dipendere da un singolo fornitore. Ogni servizio critico deve poter essere sostituito con un altro senza riscrivere l'intero sistema.
+ 
+### 3.2 Fornitori critici e alternative
+ 
+| Servizio | Fornitore principale | Alternativa | Note |
+|---|---|---|---|
+| Database | Supabase (PostgreSQL) | Neon, AWS RDS, self-hosted | Tutti PostgreSQL → migrazione semplice |
+| Autenticazione | Supabase Auth | Auth0, Clerk, self-hosted | Magic link è standard → migrazione possibile |
+| Storage | AWS S3 / Cloudflare R2 | MinIO, Google Cloud Storage | API S3-compatible → migrazione semplice |
+| AI | OpenAI (o fornitori EU) | Anthropic, self-hosted (Llama) | Prompt design → migrazione possibile |
+| Email | Resend / SendGrid | AWS SES, Mailgun | SMTP standard → migrazione possibile |
+| Hosting | Vercel / Fly.io | Netlify, AWS, self-hosted | Static site + API → migrazione possibile |
+ 
+### 3.3 Implementazione dell'indipendenza
+ 
+**Astrazione del fornitore via interfacce**:
+ 
+```python
+# database.py — interfaccia astratta
+class DatabaseInterface:
+    def get_user(self, user_id): ...
+    def save_message(self, message): ...
+    def get_conversation(self, conversation_id): ...
+ 
+# supabase_impl.py — implementazione con Supabase
+class SupabaseDatabase(DatabaseInterface):
+    def __init__(self, client):
+        self.client = client
+    def get_user(self, user_id):
+        return self.client.table('users').select('*').eq('id', user_id).execute()
+ 
+# neon_impl.py — implementazione con Neon (se mai necessario)
+class NeonDatabase(DatabaseInterface):
+    def __init__(self, connection):
+        self.conn = connection
+    def get_user(self, user_id):
+        # Query con psycopg2
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+        return cursor.fetchone()
+```
+ 
+**Configurazione tramite variabili d'ambiente**:
+ 
+```python
+# config.py
+import os
+ 
+DB_PROVIDER = os.getenv('DB_PROVIDER', 'supabase')
+ 
+if DB_PROVIDER == 'supabase':
+    from supabase_impl import SupabaseDatabase as Database
+elif DB_PROVIDER == 'neon':
+    from neon_impl import NeonDatabase as Database
+else:
+    raise ValueError(f"Unknown DB provider: {DB_PROVIDER}")
+ 
+db = Database()
+```
+ 
+**Piano di migrazione**:
+ 
+1. Il sistema funziona con il fornitore principale.
+2. L'alternativa è configurata su un ambiente di test con gli stessi dati (o dati fittizi).
+3. In caso di necessità, si cambia la variabile d'ambiente e si riavvia il servizio.
+4. La migrazione dei dati (se necessaria) è gestita da uno script separato.
+ 
+**Risorse da chiedere all'IA**:
+ 
+```
+"Scrivimi un'interfaccia astratta per il database con i metodi: get_user, save_message, get_conversation. Poi scrivimi due implementazioni: una per Supabase e una per Neon (o PostgreSQL puro)."
+```
+ 
+---
+ 
+## AREA 4 — MONITORAGGIO NORMATIVO
+ 
+### 4.1 Fonti da monitorare
+ 
+| Fonte | Cosa monitorare | Frequenza |
+|---|---|---|
+| **Garante Privacy** (italiano) | Provvedimenti, linee guida, sanzioni | Mensile |
+| **EDPB** (Comitato Europeo) | Linee guida, pareri, decisioni | Mensile |
+| **Commissione Europea** | Nuovi regolamenti, modifiche al GDPR | Trimestrale |
+| **AI Act** | Nuovi obblighi, termini di applicazione | Trimestrale |
+| **DSA** (Digital Services Act) | Nuove interpretazioni, obblighi per piattaforme | Trimestrale |
+ 
+### 4.2 Processo di adeguamento
+ 
+1. **Rilevazione**: individuare un nuovo obbligo o una nuova interpretazione.
+2. **Valutazione**: il sistema è già conforme? Se sì, archiviare. Se no, stimare l'impatto.
+3. **Implementazione**: modificare il sistema o la documentazione.
+4. **Verifica**: testare la conformità.
+5. **Comunicazione**: informare il Titolare e aggiornare la documentazione.
+ 
+### 4.3 Template di valutazione normativa
+ 
+```
+Data di rilevazione: [data]
+Fonte: [Garante / EDPB / Commissione / altro]
+Descrizione: [cosa prevede il nuovo obbligo]
+ 
+Impatto sul sistema:
+- [ ] Modifica del codice (stimare complessità)
+- [ ] Modifica della documentazione (informativa, termini)
+- [ ] Modifica delle procedure (moderazione, incident response)
+ 
+Termine di adeguamento: [data]
+ 
+Stato: [da valutare / in implementazione / completato]
+ 
+Note: [eventuali osservazioni]
+```
+ 
+**Risorse da chiedere all'IA**:
+ 
+```
+"Scrivimi un template di documento per il monitoraggio normativo, con: data, fonte, descrizione, impatto, termine, stato."
+```
+ 
+---
+ 
+## AREA 5 — INCIDENT RESPONSE AVANZATA
+ 
+### 5.1 Scenari non previsti
+ 
+Questa sezione copre gli scenari che i test non hanno previsto. La risposta si basa su principi generali.
+ 
+**Principi di risposta**:
+ 
+1. **Isolare**: interrompere il canale dell'attacco (commutazione in sola lettura, revoca sessioni, bloccare IP).
+2. **Analizzare**: capire cosa è successo, quando, a quali dati.
+3. **Documentare**: registrare ogni azione con data e ora.
+4. **Comunicare**: informare il Titolare immediatamente.
+5. **Correggere**: applicare la patch o la modifica necessaria.
+6. **Ripristinare**: ripristinare il servizio (con i dati, se compromessi, o senza).
+7. **Retrospettiva**: capire come evitare che si ripeta.
+ 
+### 5.2 Playbook per scenari comuni
+ 
+**Scenario A — Sospetto di accesso non autorizzato a dati**
+ 
+1. **Isolare**: commutazione in sola lettura. Revocare tutte le sessioni.
+2. **Analizzare**: esaminare i log per identificare:
+   - Quali utenti hanno avuto accesso.
+   - Quali dati sono stati letti/modificati.
+   - Quando è avvenuto.
+3. **Documentare**: registrare tutto.
+4. **Comunicare**: informare il Titolare immediatamente. Se la violazione è confermata, il Titolare decide la notifica all'autorità e agli interessati.
+5. **Correggere**: identificare la vulnerabilità (es. policy RLS errata, token compromesso) e correggerla.
+6. **Ripristinare**: ripristinare il servizio.
+7. **Retrospettiva**: aggiornare i test per coprire lo scenario.
+ 
+**Scenario B — Attacco di saturazione (DDoS o abuso)**
+ 
+1. **Isolare**: attivare le protezioni del provider (rate limiting, WAF, blocchi IP).
+2. **Analizzare**: identificare la fonte dell'attacco (IP, pattern di richieste).
+3. **Documentare**: registrare tutto.
+4. **Comunicare**: informare il Titolare.
+5. **Correggere**: se l'attacco sfrutta una vulnerabilità (es. endpoint costoso senza autenticazione), correggerla.
+6. **Ripristinare**: ripristinare il servizio.
+7. **Retrospettiva**: aggiornare i limiti di frequenza e i controlli.
+ 
+**Scenario C — Compromissione dell'account di un moderatore/amministratore**
+ 
+1. **Isolare**: revocare tutte le sessioni dell'account. Bloccare l'account.
+2. **Analizzare**: esaminare le azioni compiute dall'account compromesso.
+3. **Documentare**: registrare tutto.
+4. **Comunicare**: informare il Titolare.
+5. **Correggere**: rafforzare le politiche di autenticazione (es. 2FA per amministratori, se implementato).
+6. **Ripristinare**: ripristinare l'account con nuove credenziali.
+7. **Retrospettiva**: valutare l'introduzione di 2FA per ruoli critici.
+ 
+### 5.3 Template di report per il Titolare
+ 
+```
+REPORT INCIDENTE — ERUA connect
+ 
+Data e ora: [data]
+Tipo di incidente: [accesso non autorizzato / DDoS / compromissione account / altro]
+ 
+Descrizione:
+[breve descrizione di cosa è successo]
+ 
+Dati coinvolti:
+- Categorie: [email, messaggi, contenuti, etc.]
+- Numero di utenti stimato: [n]
+- Numero di registrazioni coinvolte: [n]
+ 
+Misure adottate:
+- [azione 1]
+- [azione 2]
+ 
+Stato attuale: [risolto / in corso / in analisi]
+ 
+Prossimi passi:
+- [passo 1]
+- [passo 2]
+ 
+Data di prossimo aggiornamento: [data]
+ 
+Referente: [nome]
+```
+ 
+---
+ 
+## AREA 6 — RETROSPETTIVA DI SICUREZZA
+ 
+### 6.1 Obiettivo
+ 
+Migliorare continuamente il sistema sulla base degli incidenti reali e delle lezioni apprese.
+ 
+### 6.2 Processo
+ 
+1. **Registrazione dell'incidente**: descrizione, data, impatto, risoluzione.
+2. **Analisi delle cause**: cosa ha permesso l'incidente? (tecnica, procedurale, umana).
+3. **Azioni correttive**: cosa si può fare per evitare che si ripeta? (test, codice, procedure).
+4. **Assegnazione**: chi implementa le azioni correttive e entro quando.
+5. **Verifica**: le azioni correttive sono state implementate e funzionano?
+ 
+### 6.3 Template di retrospettiva
+ 
+```
+RETROSPETTIVA DI SICUREZZA — [data]
+ 
+Incidente: [breve descrizione]
+ 
+Causa radice:
+- [tecnica: ...]
+- [procedurale: ...]
+- [umana: ...]
+ 
+Azioni correttive:
+1. [azione 1] — assegnata a: [nome] — entro: [data]
+2. [azione 2] — assegnata a: [nome] — entro: [data]
+ 
+Lezioni apprese:
+- [lezione 1]
+- [lezione 2]
+ 
+Verifica:
+- [azione 1] implementata il: [data] — esito: [OK / KO]
+- [azione 2] implementata il: [data] — esito: [OK / KO]
+```
+ 
+**Risorse da chiedere all'IA**:
+ 
+```
+"Scrivimi un template di retrospettiva di sicurezza per incidenti informatici, con: descrizione, causa radice, azioni correttive, lezioni apprese, verifica."
+```
+ 
+---
+ 
+## AREA 7 — DOCUMENTAZIONE PER IL TITOLARE
+ 
+### 7.1 Documenti da mantenere aggiornati
+ 
+| Documento | Frequenza di aggiornamento | Note |
+|---|---|---|
+| **Informativa privacy** | Ogni modifica sostanziale + revisione annuale | Testo da pubblicare |
+| **Termini d'uso** | Ogni modifica sostanziale + revisione annuale | Testo da pubblicare |
+| **Regolamento della comunità** | Ogni modifica sostanziale | Testo da pubblicare |
+| **Data Flow Map** | Ogni modifica dell'architettura | Per il Titolare e per la DPIA |
+| **Allegato tecnico delle misure di sicurezza** | Ogni modifica delle misure | Per il Titolare |
+| **Registro dei trattamenti** | Ogni nuova categoria di trattamento | Per il Titolare |
+| **Registro delle segnalazioni** | Continuo | Per la moderazione |
+| **Registro delle violazioni** | Ogni violazione (anche non notificata) | Per il Titolare |
+ 
+### 7.2 Processo di aggiornamento
+ 
+1. **Rilevazione**: individuare un cambiamento che richiede un aggiornamento documentale.
+2. **Modifica**: aggiornare il documento.
+3. **Verifica**: verificare la coerenza con il sistema e con gli altri documenti.
+4. **Comunicazione**: informare il Titolare e, se necessario, gli utenti.
+ 
+### 7.3 Template di comunicazione al Titolare
+ 
+```
+Oggetto: Aggiornamento documentazione — ERUA connect
+ 
+Data: [data]
+Documenti aggiornati:
+- [documento 1] — [breve descrizione della modifica]
+- [documento 2] — [breve descrizione della modifica]
+ 
+Motivazione:
+[perché è stato necessario aggiornare]
+ 
+Impatto sugli utenti:
+- [nessuno / modifica dell'informativa / modifica dei termini]
+ 
+Prossimi passi:
+- [pubblicazione / comunicazione agli utenti / altro]
+ 
+Resto a disposizione per eventuali chiarimenti.
+```
+ 
+---
+ 
+## APPENDICE A — SCHEDE DI IMPLEMENTAZIONE (DA CHIEDERE ALL'IA)
+ 
+| Area | Cosa chiedere all'IA |
+|---|---|
+| Monitoraggio | "Scrivimi uno script Node.js che verifica ogni 5 minuti il numero di tentativi di accesso falliti per utente e invia un alert via webhook se supera la soglia." |
+| Aggiornamenti | "Scrivimi uno script bash che esegue npm audit e pip-audit, e invia un alert via webhook se trova vulnerabilità critiche." |
+| Indipendenza | "Scrivimi un'interfaccia astratta per il database e due implementazioni: una per Supabase e una per PostgreSQL puro." |
+| Incident Response | "Scrivimi il template email per la notifica di violazione dati al Titolare, con placeholder per data, natura, dati coinvolti, misure adottate." |
+| Retrospettiva | "Scrivimi un template di retrospettiva di sicurezza per incidenti informatici." |
+| Documentazione | "Scrivimi un template di comunicazione al Titolare per l'aggiornamento della documentazione." |
+ 
+---
+ 
+## APPENDICE B — CHECKLIST DI MANTENIMENTO
+ 
+| Attività | Frequenza | Ultima esecuzione | Prossima esecuzione |
+|---|---|---|---|
+| Esecuzione script di controllo vulnerabilità | Settimanale | | |
+| Revisione log di sicurezza | Settimanale | | |
+| Verifica backup (ripristino test) | Mensile | | |
+| Revisione policy RLS (nuove tabelle) | Ad ogni modifica | | |
+| Aggiornamento documentazione | Ad ogni modifica | | |
+| Revisione normativa (fonti) | Mensile | | |
+| Test di sicurezza (IDOR, autenticazione) | Trimestrale | | |
+| Retrospettiva di sicurezza | Dopo ogni incidente | | |
+| Comunicazione al Titolare | Ad ogni aggiornamento significativo | | |
+ 
+---
+ 
+## APPENDICE C — VALUTAZIONE FINALE DEL RISCHIO RESIDUO (DOPO IL PLAYBOOK)
+ 
+| Rischio | Probabilità | Impatto | Copertura del playbook | Rischio residuo |
+|---|---|---|---|---|
+| Zero-day | Bassa | Alto | Monitoraggio + aggiornamenti rapidi | **1%** |
+| Errore umano nei test | Media | Medio | Retrospettiva + aggiornamento test | **2%** |
+| Attacco mirato | Bassa | Alto | WAF + monitoraggio + incident response | **1%** |
+| Cambio normativo | Media | Medio | Monitoraggio normativo + flessibilità | **2%** |
+| Fornitore di terze parti | Media | Medio | Indipendenza dai fornitori | **1%** |
+| L'errore non previsto | Bassa | Variabile | Incident Response + retrospettiva | **1%** |
+ 
+**Rischio complessivo residuo stimato: 1-2%**
+ 
+---
+ 
+*Playbook di mantenimento — revisione di agosto 2026. Da consultare periodicamente (almeno trimestralmente) e dopo ogni incidente significativo. Il superamento di tutte le checklist è condizione per il mantenimento dello stato di conformità.*
