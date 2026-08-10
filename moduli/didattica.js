@@ -99,16 +99,23 @@ function stBarre(dentro){
   }));
 }
 function studyReveal(){
-  if(stNato)return; stNato=true;
+  /* Due condizioni prima di alzare la bandierina: i dati devono essere
+     arrivati e le caselle devono esistere. Senza questo controllo, una
+     chiamata anticipata bruciava il disegno per tutta la visita. */
+  if(stNato)return;
+  if(!ST_GRUPPI.length||!document.querySelector('[data-slot="dive"]'))return;
+  stNato=true;
   ST_GRUPPI.forEach((gr,i)=>{
     setTimeout(()=>{
       const s=document.querySelector('[data-slot="'+gr.g+'"]');
+      if(!s)return;
       s.innerHTML=ST_CORSI.filter(c=>c.materia===gr.g).map(stCorsoHTML).join('');
       stBarre(s);
     },640+i*170);
   });
   setTimeout(()=>{
-    document.querySelector('[data-slot="dive"]').innerHTML=ST_DIVES.map(stDiveHTML).join('');
+    const d=document.querySelector('[data-slot="dive"]');
+    if(d)d.innerHTML=ST_DIVES.map(stDiveHTML).join('');
     const sl=document.querySelector('[data-slot="stud"]');
     if(sl)sl.innerHTML=ST_STUD.map(stStudHTML).join('')+ST_STUD_PROSSIMI.map(stPrestoHTML).join('');
   },640+ST_GRUPPI.length*170);
