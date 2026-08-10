@@ -31,6 +31,7 @@ Com'è fatto adesso:
 | `moduli/` | il codice, un modulo per sezione, caricato su richiesta |
 | `immagini/` | le 23 fotografie, prima incorporate in base64 |
 | `robot/` | i processi automatici che riscrivono `dati/` |
+| — | sezioni: sociale, notizie, **move**, didattica, rivista, messaggistica, profilo |
 | `collaudo/` | le prove automatiche |
 
 Chi apre solo la rivista non scarica più la didattica né le trascrizioni delle
@@ -49,6 +50,9 @@ Esistono e funzionano su dati veri. Dettagli in `robot/LEGGIMI.md`.
 | `notizie.js` | **tutti e nove gli atenei**: sette da feed, EUV e ULPGC leggendo la pagina → `dati/notizie.json` |
 | `ascolta.js` | legge il feed pubblico del canale → `dati/ascolta.json`. Funziona **senza accesso al canale** |
 | `didattica.js` | controlla che i 18 video dichiarati rispondano ancora. Non sceglie corsi: è selezione editoriale |
+| `bandi.js` | ricava dai bandi le scadenze in nove lingue e li dice aperti o chiusi. Non scarica niente: rilegge le notizie |
+| `destinazioni.js` | dove si può andare. Oggi solo ULPGC, che ha una banca dati interrogabile: 455 destinazioni in 36 paesi |
+| `costi.js` | livelli di prezzo Eurostat per 47 paesi su alloggio, spesa, trasporti e mangiare fuori |
 | `studenti.js` | tiene il posto e la forma. Produce un elenco vuoto, ed è corretto così |
 
 Da fare su questo fronte, in ordine:

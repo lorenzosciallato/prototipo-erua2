@@ -55,8 +55,8 @@ const PAROLE_SCADENZA = [
   'frist', 'bis zum', 'antragsfrist', 'bewerbungsfrist', 'einsendeschluss',
   // francese
   'date limite', "jusqu'au", 'avant le', 'clôture',
-  // polacco
-  'termin', 'do dnia', 'nabór do',
+  // polacco — 'do' da solo è la forma normale ("do 18 sierpnia")
+  'termin', 'do dnia', 'nabór do', 'do',
   // greco
   'προθεσμία', 'έως',
   // bulgaro
@@ -66,6 +66,24 @@ const PAROLE_SCADENZA = [
 ];
 
 const dueCifre = n => String(n).padStart(2, '0');
+
+/* Cerca una parola come parola intera, non come pezzo di un'altra:
+   senza questo, il polacco «do» si troverebbe dentro «podanie» e
+   qualunque data sembrerebbe una scadenza. I confini si controllano a
+   mano perché \b in JavaScript non conosce cirillico e greco. */
+const LETTERA = /\p{L}/u;
+function ultimaParolaIntera(dove, parola) {
+  let da = dove.length;
+  for (;;) {
+    const i = dove.lastIndexOf(parola, da - 1);
+    if (i < 0) return -1;
+    const prima = i > 0 ? dove[i - 1] : ' ';
+    const dopo = dove[i + parola.length] || ' ';
+    if (!LETTERA.test(prima) && !LETTERA.test(dopo)) return i;
+    da = i;
+    if (da <= 0) return -1;
+  }
+}
 
 function valida(anno, mese, giorno) {
   if (!(mese >= 1 && mese <= 12 && giorno >= 1 && giorno <= 31)) return null;
@@ -94,13 +112,21 @@ export function trovaDate(testo) {
     if (d) trovate.push({ data: d, a: m.index });
   }
 
-  /* 2. forme numeriche: 15/09/2026, 15.09.2026, 15-09-2026 */
+  /* 2. l'ordine inverso, che usano lituano e lettone:
+        `2026 m. rugsėjo 30 d.` — anno, mese, giorno */
+  const conNomeInverso = new RegExp(`(\\d{4})\\s*m\\.?\\s*(${nomi})\\.?\\s*(\\d{1,2})\\s*d\\.?`, 'gi');
+  for (const m of basso.matchAll(conNomeInverso)) {
+    const d = valida(Number(m[1]), NUMERO_MESE.get(m[2].toLowerCase()), Number(m[3]));
+    if (d) trovate.push({ data: d, a: m.index });
+  }
+
+  /* 3. forme numeriche: 15/09/2026, 15.09.2026, 15-09-2026 */
   for (const m of basso.matchAll(/(\d{1,2})[./-](\d{1,2})[./-](\d{4})/g)) {
     const d = valida(Number(m[3]), Number(m[2]), Number(m[1]));
     if (d) trovate.push({ data: d, a: m.index });
   }
 
-  /* 3. forma internazionale: 2026-09-15 */
+  /* 4. forma internazionale: 2026-09-15 */
   for (const m of basso.matchAll(/(\d{4})-(\d{2})-(\d{2})/g)) {
     const d = valida(Number(m[1]), Number(m[2]), Number(m[3]));
     if (d) trovate.push({ data: d, a: m.index });
@@ -129,7 +155,7 @@ export function trovaScadenza(testo) {
       /* la parola deve stare poco prima della data: oltre una sessantina
          di caratteri non è più la stessa frase */
       const zona = basso.slice(Math.max(0, d.a - 60), d.a);
-      const dove = zona.lastIndexOf(parola);
+      const dove = ultimaParolaIntera(zona, parola);
       if (dove < 0) continue;
       const distanza = zona.length - dove;
       if (!migliore || distanza < migliore.distanza) migliore = { data: d.data, parola, distanza };

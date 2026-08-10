@@ -103,7 +103,7 @@ const errori = [];
 process.on('unhandledRejection', e => errori.push(['promessa non gestita', e]));
 
 const sezioni = ['lingua', 'navigazione', 'nucleo', 'rivista', 'ascolta', 'notizie',
-                 'sociale', 'articolo', 'storie', 'didattica', 'aula'];
+                 'sociale', 'move', 'articolo', 'storie', 'didattica', 'aula'];
 
 for (const s of sezioni) {
   try {
@@ -133,11 +133,14 @@ const attese = [
   ['mag-ascolta',  'ascolta',   ['ERUA Podcast', 'pod-hero', 'i.ytimg.com']],
   ['st-gruppi',    'didattica', ['st-griglia', 'data-slot']],
   ['st-chips',     'didattica', ['data-f=']],
+  ['move-atenei',       'move', ['data-move-uni']],
+  ['move-bandi-lista',  'move', ['move-bando', 'mb-tit', 'rel="noopener"']],
+  ['move-bandi-conta',  'move', []],
 ];
 console.log('\ncontenuto prodotto:');
 for (const [id, sezione, frammenti] of attese) {
   const el = creati.get(id);
-  const html = (el && el.innerHTML) || '';
+  const html = (el && (el.innerHTML || el.textContent)) || '';
   const mancano = frammenti.filter(f => !html.includes(f));
   if (!html) { console.log(`  ${id.padEnd(14)} VUOTO (${sezione})`); errori.push([id, new Error('niente disegnato')]); }
   else if (mancano.length) { console.log(`  ${id.padEnd(14)} manca: ${mancano.join(', ')}`); errori.push([id, new Error('manca ' + mancano.join(', '))]); }
@@ -184,6 +187,7 @@ const prove = [
   ['Listen (puntate)', '#modi-mag .modo-mag', { mag: 'ascolta' }, 'mag-ascolta', 'pod-hero'],
   ['Read (articolo)',  '.leggi-art',          { id: 'editoriale' }, 'art',        'art-testa'],
   ['Story (storia)',   '[data-storia]',       { storia: 'editoriale' }, 'storie-viewer', 'sv-testo'],
+  ['Move: destinazioni', '#move-modi .modo-mag', { move: 'destinazioni' }, 'move-dest-lista', 'md-costi'],
 ];
 for (const [nome, sel, ds, id, atteso] of prove) {
   try {

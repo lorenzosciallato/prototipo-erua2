@@ -33,7 +33,9 @@ if ! git pull --rebase --quiet 2>/dev/null; then
 fi
 
 # ─── 2. I robot, uno per volta ──────────────────────────────────────
-for robot in notizie ascolta didattica studenti; do
+# L'ordine conta in un punto solo: `bandi` legge il file che `notizie`
+# ha appena scritto, quindi viene dopo.
+for robot in notizie bandi ascolta destinazioni costi didattica studenti; do
   echo
   echo "· $robot"
   if node "robot/$robot.js"; then

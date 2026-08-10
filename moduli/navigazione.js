@@ -10,7 +10,7 @@
    vede (§2.4).
 */
 
-export const TABS = ['social', 'news', 'study', 'magazine', 'chat', 'profilo'];
+export const TABS = ['social', 'news', 'move', 'study', 'magazine', 'chat', 'profilo'];
 
 /* Quale modulo serve a quale sezione. `chat` e `profilo` non hanno
    codice proprio: sono pannelli fermi. */
@@ -18,6 +18,7 @@ const MODULI = {
   magazine: () => import('./rivista.js'),
   news:     () => import('./notizie.js'),
   social:   () => import('./sociale.js'),
+  move:     () => import('./move.js'),
   study:    () => import('./didattica.js'),
 };
 

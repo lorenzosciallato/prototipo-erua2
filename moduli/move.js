@@ -121,10 +121,16 @@ function renderBandi() {
                               'No calls from this university right now.')}</p>`;
 }
 
-/* ── le destinazioni ───────────────────────────────────────────────── */
+/* ── le destinazioni ─────────────────────────────────────────────────
+   Il paese di ciascun ateneo di partenza, nei codici che usa Eurostat —
+   dove la Grecia è EL, non GR. Serve al confronto dei costi: senza
+   sapere da dove si parte, non c'è niente da confrontare. */
+const PAESE_DI = { UNIMC: 'IT', MRU: 'LT', NBU: 'BG', EUV: 'DE', SWPS: 'PL', ULPGC: 'ES', UAEGEAN: 'EL', UP8: 'FR' };
+const paeseDiPartenza = sigla => PAESE_DI[sigla] || null;
+
 function destinazioneHTML(d) {
   const flag = bandiera(d.paese);
-  const scarti = confronto(atenaoDiPartenza(d.da), d.paeseEurostat);
+  const scarti = confronto(paeseDiPartenza(d.da), d.paeseEurostat);
 
   return `<article class="move-dest">
     <div class="md-testa">
@@ -146,11 +152,6 @@ function destinazioneHTML(d) {
     </div>
   </article>`;
 }
-
-/* Il paese dell'ateneo di partenza, per il confronto. Sta in
-   configurazione: gli otto atenei hanno una città, e da quella il paese. */
-const PAESE_DI = { UNIMC: 'IT', MRU: 'LT', NBU: 'BG', EUV: 'DE', SWPS: 'PL', ULPGC: 'ES', UAEGEAN: 'EL', UP8: 'FR' };
-const atenaoDiPartenza = sigla => PAESE_DI[sigla] || null;
 
 function renderDestinazioni() {
   let lista = DESTINAZIONI;

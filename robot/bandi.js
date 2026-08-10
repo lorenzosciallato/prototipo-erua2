@@ -16,6 +16,18 @@
    titolo vero e il collegamento alla fonte: se una voce non c'entra, se
    ne accorge in un secondo.
 
+   Per lo stesso motivo il filtro non pretende che un bando parli anche
+   di mobilità: entrano tutti i bandi, e quelli che riguardano il partire
+   portano un segno e stanno davanti. Chiedendo tutte e due le cose
+   insieme, di 140 notizie ne passavano due — e le altre otto occasioni
+   vere sparivano.
+
+   Resta un limite che nessuna parola chiave risolve: **le notizie sono
+   quelle recenti**. Un bando pubblicato a marzo e ancora aperto non
+   compare, perché è uscito dal feed. Per averli tutti bisognerebbe
+   leggere le pagine dei bandi di ciascun ateneo — che è il censimento
+   ancora da fare.
+
    **La scadenza non si inventa.** Se nel testo non è scritta, il bando
    compare lo stesso, dichiarato «scadenza non indicata». Meglio una
    lacuna visibile che una data sbagliata: qui una data sbagliata fa
@@ -74,10 +86,18 @@ async function gira({ prova = false } = {}) {
   for (const n of notizie) {
     const testo = `${n.t || ''} ${n.s || ''}`.toLowerCase();
     if (!contiene(testo, PAROLE_BANDO)) continue;
-    if (!contiene(testo, PAROLE_MOBILITA)) continue;
+
+    /* l'indirizzo dice spesso più del titolo: `/erasmus/`, `/mobility/` */
+    const dove = String(n.l || '').toLowerCase();
+    const mobilita = contiene(testo, PAROLE_MOBILITA) || contiene(dove, PAROLE_MOBILITA);
 
     const trovata = trovaScadenza(`${n.t || ''}. ${n.s || ''}`);
-    const scadenza = trovata ? trovata.data : null;
+    let scadenza = trovata ? trovata.data : null;
+
+    /* Coerenza: una scadenza non può cadere prima che il bando sia
+       uscito. Se succede, la data pescata è di qualcos'altro — e vale
+       meno di nessuna data. */
+    if (scadenza && n.d && scadenza < n.d) scadenza = null;
 
     bandi.push({
       u: n.u,
@@ -88,6 +108,8 @@ async function gira({ prova = false } = {}) {
       pubblicato: n.d || null,
       scadenza,
       stato: stato(scadenza, oggi),
+      /* riguarda il partire: la sezione MOVE mette questi davanti */
+      mobilita,
       origine: {
         ...(n.origine || {}),
         /* la scadenza è ricavata da noi leggendo il testo, non
@@ -101,6 +123,7 @@ async function gira({ prova = false } = {}) {
      fondo i chiusi, dal più recente */
   const peso = { aperto: 0, 'senza-data': 1, chiuso: 2 };
   bandi.sort((a, b) =>
+    (b.mobilita === true) - (a.mobilita === true) ||
     peso[a.stato] - peso[b.stato] ||
     (a.stato === 'chiuso'
       ? String(b.scadenza || '').localeCompare(String(a.scadenza || ''))
@@ -108,12 +131,13 @@ async function gira({ prova = false } = {}) {
 
   const conta = { aperto: 0, chiuso: 0, 'senza-data': 0 };
   for (const b of bandi) conta[b.stato]++;
-  console.log(`bandi riconosciuti: ${bandi.length} — aperti ${conta.aperto}, chiusi ${conta.chiuso}, senza scadenza ${conta['senza-data']}`);
+  const diMobilita = bandi.filter(b => b.mobilita).length;
+  console.log(`bandi riconosciuti: ${bandi.length} (di mobilità: ${diMobilita}) — aperti ${conta.aperto}, chiusi ${conta.chiuso}, senza scadenza ${conta['senza-data']}`);
 
   if (prova) {
-    console.log('\n--prova: non scrivo niente. I primi aperti:');
-    for (const b of bandi.filter(x => x.stato === 'aperto').slice(0, 6))
-      console.log(`  ${b.scadenza}  ${b.u.padEnd(8)} ${b.t.slice(0, 62)}`);
+    console.log('\n--prova: non scrivo niente. I primi:');
+    for (const b of bandi.slice(0, 10))
+      console.log(`  ${(b.scadenza || '   —      ').padEnd(11)} ${b.stato.padEnd(11)} ${b.mobilita ? 'mobilità' : '        '} ${b.u.padEnd(8)} ${b.t.slice(0, 52)}`);
     return { esito: 'saltato', quanti: bandi.length, messaggio: 'prova' };
   }
 

@@ -74,6 +74,7 @@ const PERCORSI = {
   ascolta:   './ascolta.js',
   notizie:   './notizie.js',
   sociale:   './sociale.js',
+  move:      './move.js',
   articolo:  './articolo.js',
   storie:    './storie.js',
   didattica: './didattica.js',

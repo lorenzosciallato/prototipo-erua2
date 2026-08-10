@@ -1,0 +1,178 @@
+{
+ "versione": 1,
+ "aggiornato": "2026-08-10T23:16:59.809Z",
+ "fonte": "ricavati dalle notizie degli atenei",
+ "note": "La scadenza è letta dal testo della notizia, non dichiarata dalla fonte. Dove non è scritta, il bando compare senza data invece che con una data indovinata.",
+ "elementi": [
+  {
+   "u": "ERUA",
+   "t": "Call for Applications: ERUA Long-Term Research-Oriented Academic Mobility for Early Career Researchers",
+   "s": "Call for Applications for the 2026-2027 Academic Year opens now. About the Programme The ERUA Framework for Research-Oriented Academic Mobility offers Early Career Researchers, the opportunity to…",
+   "l": "https://erua-eui.eu/2026/08/04/call-for-applications-erua-long-term-research-oriented-academic-mobility-for-early-career-researchers/",
+   "pubblicato": "2026-08-04",
+   "scadenza": null,
+   "stato": "senza-data",
+   "mobilita": true,
+   "origine": {
+    "fonte": "https://erua-eui.eu/",
+    "url": "https://erua-eui.eu/2026/08/04/call-for-applications-erua-long-term-research-oriented-academic-mobility-for-early-career-researchers/",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": null
+   }
+  },
+  {
+   "u": "UNIMC",
+   "t": "Innovazione sociale: borse per tirocini all'estero",
+   "s": "Scadenza bando: 10 febbraio 2019",
+   "l": "https://www.unimc.it/it/unimc-comunica/news/innovazione-sociale-borse-per-tirocini-allestero",
+   "pubblicato": "2019-01-17",
+   "scadenza": "2019-02-10",
+   "stato": "chiuso",
+   "mobilita": true,
+   "origine": {
+    "fonte": "https://www.unimc.it/it/unimc-comunica/news",
+    "url": "https://www.unimc.it/it/unimc-comunica/news/innovazione-sociale-borse-per-tirocini-allestero",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": "dal testo, vicino a \"scadenza\""
+   }
+  },
+  {
+   "u": "UP8",
+   "t": "Candidatez au prix de l'engagement étudiant !",
+   "s": "Candidature pour le prix de l'engagement étudiant jusqu'au dimanche 30 août 2026 inclus. Dossier de candidature à remplir sur le formulaire en ligne …",
+   "l": "https://www.univ-paris8.fr/Candidatez-au-prix-de-l-engagement-etudiant",
+   "pubblicato": "2025-07-04",
+   "scadenza": "2026-08-30",
+   "stato": "aperto",
+   "mobilita": false,
+   "origine": {
+    "fonte": "https://www.univ-paris8.fr/-Actualites-",
+    "url": "https://www.univ-paris8.fr/Candidatez-au-prix-de-l-engagement-etudiant",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": "dal testo, vicino a \"jusqu'au\""
+   }
+  },
+  {
+   "u": "UNIMC",
+   "t": "Bando Bottom-Up: fino a 5.000 € per progetti ERUA guidati da studenti",
+   "s": "Partecipa all'incontro informativo e invia la tua candidatura entro il 19 ottobre 2026",
+   "l": "https://www.unimc.it/it/unimc-comunica/news/bando-bottom-up-fino-a-5-000-20ac-per-progetti-erua-guidati-da-studenti",
+   "pubblicato": "2026-08-04",
+   "scadenza": "2026-10-19",
+   "stato": "aperto",
+   "mobilita": false,
+   "origine": {
+    "fonte": "https://www.unimc.it/it/unimc-comunica/news",
+    "url": "https://www.unimc.it/it/unimc-comunica/news/bando-bottom-up-fino-a-5-000-20ac-per-progetti-erua-guidati-da-studenti",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": "dal testo, vicino a \"entro\""
+   }
+  },
+  {
+   "u": "ERUA",
+   "t": "U-Fit: the ERUA project opening up job opportunities for young migrants",
+   "s": "The Canary Islands Government and the Banco de Alimentos de Las Palmas (BALP) recently held the graduation ceremony for U-Fit (Universities for Integration through Training), an initiative launched…",
+   "l": "https://erua-eui.eu/2026/08/07/u-fit-the-erua-project-opening-up-job-opportunities-for-young-migrants/",
+   "pubblicato": "2026-08-07",
+   "scadenza": null,
+   "stato": "senza-data",
+   "mobilita": false,
+   "origine": {
+    "fonte": "https://erua-eui.eu/",
+    "url": "https://erua-eui.eu/2026/08/07/u-fit-the-erua-project-opening-up-job-opportunities-for-young-migrants/",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "La ULPGC alcanza el 81% de ocupación en las plazas de nuevo ingreso de sus grados",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/08/04/ulpgc-alcanza-81-ocupacion-plazas-nuevo-ingreso-sus-grados",
+   "pubblicato": "2026-08-04",
+   "scadenza": null,
+   "stato": "senza-data",
+   "mobilita": false,
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/08/04/ulpgc-alcanza-81-ocupacion-plazas-nuevo-ingreso-sus-grados",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": null
+   }
+  },
+  {
+   "u": "ERUA",
+   "t": "Register for the SOCIN 2026 Conference",
+   "s": "General registration for the SOCIN 2026 Conference is now open. Organized by SWPS University in collaboration with ERUA, the conference focuses on social innovation. Because social challenges are…",
+   "l": "https://erua-eui.eu/2026/07/31/register-for-the-socin-2026-conference/",
+   "pubblicato": "2026-07-31",
+   "scadenza": null,
+   "stato": "senza-data",
+   "mobilita": false,
+   "origine": {
+    "fonte": "https://erua-eui.eu/",
+    "url": "https://erua-eui.eu/2026/07/31/register-for-the-socin-2026-conference/",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": null
+   }
+  },
+  {
+   "u": "ERUA",
+   "t": "4th Bottom-Up Project Call for ERUA Students",
+   "s": "Got a project idea? ERUA wants to fund it. ERUA is launching its fourth Bottom-Up Project Call for Students — and if you have ever had an idea for a cross-university project you wanted to make…",
+   "l": "https://erua-eui.eu/2026/07/28/4th-bottom-up-project-call-for-erua-students/",
+   "pubblicato": "2026-07-28",
+   "scadenza": null,
+   "stato": "senza-data",
+   "mobilita": false,
+   "origine": {
+    "fonte": "https://erua-eui.eu/",
+    "url": "https://erua-eui.eu/2026/07/28/4th-bottom-up-project-call-for-erua-students/",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": null
+   }
+  },
+  {
+   "u": "ULPGC",
+   "t": "La ULPGC informa de la tercera asignación de plazas para el alumnado de nuevo ingreso",
+   "s": "",
+   "l": "https://www.ulpgc.es/noticia/2026/07/22/ulpgc-informa-tercera-asignacion-plazas-alumnado-nuevo-ingreso",
+   "pubblicato": "2026-07-22",
+   "scadenza": null,
+   "stato": "senza-data",
+   "mobilita": false,
+   "origine": {
+    "fonte": "https://www.ulpgc.es/noticias",
+    "url": "https://www.ulpgc.es/noticia/2026/07/22/ulpgc-informa-tercera-asignacion-plazas-alumnado-nuevo-ingreso",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": null
+   }
+  },
+  {
+   "u": "UNIMC",
+   "t": "Travel grants for supporting Msca-If 2020 applications",
+   "s": "Send your application by 31th March 2020",
+   "l": "https://www.unimc.it/it/unimc-comunica/news/marie-curie-individual-fellowships-at-unimc",
+   "pubblicato": "2020-02-18",
+   "scadenza": null,
+   "stato": "senza-data",
+   "mobilita": false,
+   "origine": {
+    "fonte": "https://www.unimc.it/it/unimc-comunica/news",
+    "url": "https://www.unimc.it/it/unimc-comunica/news/marie-curie-individual-fellowships-at-unimc",
+    "letto": "2026-08-10",
+    "generato": null,
+    "scadenzaRicavata": null
+   }
+  }
+ ]
+}

@@ -34,6 +34,13 @@
    "quanti": 455,
    "messaggio": "36 paesi; senza lettore: 7; scartate: 0",
    "durataSecondi": 17
+  },
+  "bandi": {
+   "quando": "2026-08-10T23:16:59.811Z",
+   "esito": "fatto",
+   "quanti": 10,
+   "messaggio": "aperti 2, chiusi 1, senza scadenza 7",
+   "durataSecondi": 0
   }
  }
 }
