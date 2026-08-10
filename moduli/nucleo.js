@@ -98,8 +98,7 @@ export function stemma(u, cls) {
 
 /* ── marchio dell'ateneo: forme piene in pastello, morbide ─────────── */
 export function marchio(sigla, dim) {
-  const sigle = Object.keys(LOGHI);
-  const i = Math.max(0, sigle.indexOf(sigla));
+  const i = Math.max(0, ATENEI.indexOf(sigla));
   const tinte = ['#A8E6C9', '#FFC9A8', '#A9D3FF', '#FFE1A8', '#E4DED4', '#B6E5F0', '#CFC4F7', '#FFC0CE'];
   const c = tinte[i % 8];
   const forme = [
