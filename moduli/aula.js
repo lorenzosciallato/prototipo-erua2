@@ -184,9 +184,13 @@ auEl('tr-corpo').addEventListener('scroll',()=>{
   if(Date.now()-(AULA.scrolloAuto||0)>900)AULA.scrolloMano=Date.now();
 },{passive:true});
 function auTransKey(){return AULA.dive?('d:'+AULA.dive.id):(AULA.corso.id+':'+AULA.lezIdx);}
-function auRenderTrans(){
+async function auRenderTrans(){
   const box=auEl('tr-corpo');
-  const tr=(typeof ST_TRANS!=='undefined')?ST_TRANS[auTransKey()]:null;
+  const chiave=auTransKey();
+  const tr=await caricaTrascrizione(chiave);
+  /* nel frattempo può essere cambiata lezione: se è così, questo
+     disegno è vecchio e va buttato */
+  if(chiave!==auTransKey())return;
   if(!tr){AULA.tr=null;box.innerHTML='';return;}
   AULA.tr=tr;AULA.kcap=AULA.kpar=null;
   auEl('tr-fonte').textContent=tr.fonte;
