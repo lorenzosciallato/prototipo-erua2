@@ -57,8 +57,8 @@ function commentiHTML(id){
       `<p class="sc-nessuna">${T('Ancora nessuna risposta. Comincia tu.','No replies yet. Be the first.')}</p>`}
     <div class="sc-scrivi-risp">
       ${faccia(MIO_NICK,22)}
-      <input type="text" data-risp="${id}" placeholder="${T('Scrivi una risposta…','Write a reply…')}" aria-label="Reply">
-      <button class="sc-invia" data-invia="${id}">${T('Invia','Send')}</button>
+      <input type="text" data-risp="${esc(id)}" placeholder="${T('Scrivi una risposta…','Write a reply…')}" aria-label="Reply">
+      <button class="sc-invia" data-invia="${esc(id)}">${T('Invia','Send')}</button>
     </div>
   </div>`;
 }
