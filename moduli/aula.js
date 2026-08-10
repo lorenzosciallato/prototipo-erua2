@@ -334,13 +334,20 @@ function apriAula(o){
 /* il mini-tutorial parte a ogni apertura di un'aula (lato professori);
    resta comunque richiamabile col "?" e chiudibile con "Got it". */
 /* ── Animazione del mini-tutorial (SVG inline; nessuna libreria → P5) ──────
-   Una manina afferra un pannello dal suo header e lo posa su un altro; i
-   pannelli si riassestano sulla griglia reale "a b / a c". A turno lo scambio
-   col riquadro in alto (Transcription) e con quello in basso (Board). Il
-   pannello video porta l'icona play. Il movimento e' in SMIL: la regola
-   globale prefers-reduced-motion ferma solo le animazioni CSS, quindi sotto
-   "riduci animazioni" mettiamo l'SVG in pausa sul primo fotogramma (ripiego
-   statico = disposizione reale con la manina posata sul video; §9.12). */
+   I pannelli si scambiano di posto sulla griglia reale "a b / a c": a turno
+   il video scambia col riquadro in alto (Transcription) e con quello in
+   basso (Board). Un anello tratteggiato segna dove il pannello sta andando.
+   Il pannello video porta l'icona play.
+
+   Non c'e' nessun cursore disegnato. Ci fu una manina che afferrava e
+   posava, ma era disegnata male e non aggiungeva niente: il movimento dei
+   riquadri e l'anello sulla destinazione dicono gia' tutto, e il testo
+   accanto spiega il gesto a parole.
+
+   Il movimento e' in SMIL: la regola globale prefers-reduced-motion ferma
+   solo le animazioni CSS, quindi sotto "riduci animazioni" mettiamo l'SVG in
+   pausa sul primo fotogramma (ripiego statico = la disposizione reale;
+   §7.12). */
 let tutSVG=null;
 const tutReduce=()=>(typeof matchMedia==='function')&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 function tutCostruisci(){
