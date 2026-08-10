@@ -75,6 +75,23 @@ export function googleTranslateElementInit() {
    l'unico punto in cui un modulo deve esporsi fuori. */
 window.googleTranslateElementInit = googleTranslateElementInit;
 
+/* Lo script del traduttore lo carichiamo da qui, e non con un tag
+   nell'HTML, per una ragione di ordine: i moduli sono differiti, i tag
+   `<script>` normali no. Con il tag nella pagina, il traduttore partiva
+   e chiamava `googleTranslateElementInit` prima che questo file l'avesse
+   definita: la tendina delle lingue non nasceva mai, e cambiare lingua
+   rispondeva "Translation needs the page to be online" anche essendo
+   online. Caricandolo qui, la funzione c'è già.
+
+   Nel file unico il problema non poteva presentarsi: era tutto un
+   `<script>` solo, eseguito prima del traduttore. */
+{
+  const s = document.createElement('script');
+  s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  s.addEventListener('error', () => console.error('traduttore non raggiungibile'));
+  document.head.appendChild(s);
+}
+
 /* Il cookie che il traduttore legge per sapere in che lingua stare.
    È un cookie di terzi e va dichiarato nell'informativa (§7.4). */
 function scriviCookieLingua(l) {
