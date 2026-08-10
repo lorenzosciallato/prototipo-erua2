@@ -2,16 +2,23 @@
    ==================================================================
    Corsi aperti veri (Yale, MIT, Harvard, Stanford), incorporati dal
    dominio di YouTube che non lascia cookie e caricati solo al clic. La
-   sezione e' una vetrina: mostra come potrebbe funzionare il binario
+   sezione è una vetrina: mostra come potrebbe funzionare il binario
    didattico dei percorsi congiunti.
 
-   La parte "dagli studenti" e' dichiaratamente vuota: nessun contenuto
-   studentesco esiste ancora, e non ne verra' inventato uno per fare
+   La parte "dagli studenti" è dichiaratamente vuota: nessun contenuto
+   studentesco esiste ancora, e non ne verrà inventato uno per fare
    scena.
+
+   I corsi appartengono agli atenei che li hanno pubblicati e portano le
+   loro licenze (Open Yale Courses, MIT OpenCourseWare). La licenza va
+   scritta accanto al corso: è un obbligo, non una cortesia
+   (riferimento.md §6).
 */
 
-import { CITTA } from '../configurazione.js';
-import { LANG, T, esc, dati, offre, chiedi, toast, stemma } from './nucleo.js';
+import { CITTA, CONFIG } from '../configurazione.js';
+import { LANG, T, esc, dati, offre, chiedi, toast, stemma, filaAtenei } from './nucleo.js';
+
+const VIDEO = CONFIG.serviziEsterni.video;
 
 let ST_GRUPPI = [], ST_CORSI = [], ST_DIVES = [], ST_STUD = [], ST_STUD_PROSSIMI = [];
 const ST_COL = {
