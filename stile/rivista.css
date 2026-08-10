@@ -1,0 +1,100 @@
+/* ERUA connect — rivista.css
+
+   Il feed della rivista: schede di cinque taglie diverse e le
+   schede-citazione che spezzano il ritmo.
+
+   Ricavato da index.html, righe 197-289 del file unico.
+   Vedi riferimento.md §2.4. */
+
+/* ================= IL FEED — schede di taglie diverse =================
+   Le colonne incastrano schede alte e basse: e` li` che nasce l'asimmetria.
+   Cinque formati piu` le citazioni, in un ritmo che non si ripete uguale. */
+.griglia{column-count:1;column-gap:1.3rem}
+@media(min-width:640px){.griglia{column-count:2}}
+@media(min-width:1040px){.griglia{column-count:3}}
+@media(min-width:1440px){.griglia{column-count:4}}
+.post{background:var(--sup);border:0;border-radius:22px;overflow:hidden;box-shadow:var(--ombra);
+  transition:transform .18s ease,box-shadow .18s ease;
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  margin:0 0 1.3rem;display:inline-block;width:100%;position:relative}
+.post:hover{transform:translateY(-3px);box-shadow:var(--ombra-alta)}
+
+.f-corpo{padding:1.2rem 1.3rem 1rem;position:relative}
+.f-corpo.basso{padding-top:.9rem}
+.f-corpo.stretta{padding:1.5rem 1.3rem 1rem}
+.f-corpo.pieno{padding:1.7rem 1.4rem 1.1rem}
+
+.f-capo{display:flex;align-items:center;gap:.6rem;margin-bottom:.85rem;
+  font-family:var(--font-mono);font-size:.62rem;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--testo2)}
+.f-num{font-weight:700;color:var(--ateneo);letter-spacing:0;font-size:.82rem}
+.f-min{margin-left:auto}
+
+.f-tit{display:block;width:100%;text-align:left;background:none;border:0;padding:0;
+  cursor:pointer;color:var(--testo);font-family:var(--font-display);font-weight:600;
+  letter-spacing:-.035em;line-height:1.06;text-wrap:balance;
+  font-size:clamp(1.3rem,2.2vw,1.55rem)}
+.f-tit.media{font-size:clamp(1.5rem,2.8vw,1.9rem)}
+.f-tit.enorme{font-size:clamp(1.85rem,3.4vw,2.5rem);letter-spacing:-.045em;line-height:.98}
+.f-tit:hover{color:var(--menta-s)}
+
+.f-somm{font-size:.9rem;line-height:1.6;opacity:.72;margin-top:.7rem}
+.f-chi{display:flex;align-items:center;gap:.5rem;margin-top:1rem;
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--testo2)}
+.f-av{width:22px;height:22px;border-radius:50%;background:var(--sup2);flex:0 0 auto;
+  display:grid;place-items:center;overflow:hidden;padding:3px}
+.f-av img{width:100%;height:100%;object-fit:contain}
+
+.f-foto{display:block;width:100%;background:none;border:0;padding:0;cursor:pointer;line-height:0}
+.f-foto img{width:100%;height:auto;display:block;
+  filter:saturate(.88) contrast(1.05) sepia(.07) brightness(1.01)}
+
+.f-azioni{display:flex;align-items:center;gap:.6rem;padding:.6rem 1.3rem 1.1rem}
+.f-leggi{background:none;border:0;padding:0;cursor:pointer;color:var(--menta-s);
+  font-family:var(--font-mono);font-size:.68rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;display:inline-flex;align-items:center;gap:.45rem}
+.f-leggi .fr,.v-btn .fr{display:inline-block;transition:transform .16s ease}
+.f-leggi:hover .fr,.v-btn:hover .fr{transform:translateX(4px)}
+.f-azioni .cuore{margin-left:auto}
+.f-azioni button{background:none;border:0;cursor:pointer;color:var(--testo2);padding:.2rem;line-height:0}
+.f-azioni svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9}
+.f-azioni .cuore.on{color:var(--cuore)} .f-azioni .cuore.on svg{fill:currentColor}
+.f-azioni .salva.on{color:var(--testo)} .f-azioni .salva.on svg{fill:currentColor}
+.f-conta{font-family:var(--font-mono);font-size:.68rem;font-weight:700;color:var(--testo2)}
+
+/* i due accenti forti del ritmo */
+.post.f-inchiostro{background:var(--testo)}
+.post.f-inchiostro .f-tit{color:var(--sup)}
+.post.f-inchiostro .f-tit:hover{color:var(--menta)}
+.post.f-inchiostro .f-capo,.post.f-inchiostro .f-chi,
+.post.f-inchiostro .f-conta,.post.f-inchiostro .f-azioni button{color:color-mix(in srgb,var(--sup) 62%,transparent)}
+.post.f-inchiostro .f-somm{color:var(--sup);opacity:.72}
+.post.f-inchiostro .f-leggi{color:var(--menta)}
+.post.f-inchiostro .f-num{color:var(--menta)}
+.post.f-inchiostro .f-av{background:color-mix(in srgb,var(--sup) 16%,transparent)}
+.post.f-fluo{background:var(--menta)}
+.post.f-fluo .f-tit,.post.f-fluo .f-somm{color:#0B1F14}
+.post.f-fluo .f-capo,.post.f-fluo .f-chi,.post.f-fluo .f-conta,
+.post.f-fluo .f-azioni button,.post.f-fluo .f-leggi{color:#0B1F14;opacity:.8}
+.post.f-fluo .f-num{color:#0B1F14;opacity:1}
+.post.f-fluo .f-av{background:rgba(255,255,255,.55)}
+
+/* la scheda-citazione */
+.post.vetrina{background:var(--sf);box-shadow:none;padding:2.6rem 1.5rem 1.5rem}
+.post.vetrina:hover{box-shadow:var(--ombra)}
+.vetrina .vg{position:absolute;font-family:var(--font-display);font-weight:700;
+  font-size:5rem;line-height:.7;color:var(--tx);opacity:.35;pointer-events:none;user-select:none}
+.vetrina .vg-su{top:.7rem;left:.9rem}
+.vetrina .vg-giu{right:1rem;bottom:.4rem}
+.v-frase{position:relative;font-family:var(--font-display);font-weight:600;color:var(--tx);
+  letter-spacing:-.03em;font-size:clamp(1.3rem,2.7vw,1.7rem);line-height:1.22;text-wrap:balance}
+.v-piede{margin-top:1.5rem;padding-top:1rem;position:relative;color:var(--tx);
+  border-top:2px solid color-mix(in srgb,currentColor 30%,transparent)}
+.v-tit{display:block;font-weight:700;font-size:.95rem;line-height:1.25}
+.v-chi{display:block;margin-top:.3rem;font-family:var(--font-mono);font-size:.62rem;
+  letter-spacing:.16em;text-transform:uppercase;opacity:.72}
+.v-btn{display:inline-flex;align-items:center;gap:.45rem;margin-top:1rem;background:var(--tx);
+  color:var(--sf);border:0;border-radius:99px;padding:.55rem 1.2rem;cursor:pointer;
+  font-family:var(--font-mono);font-size:.68rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase}

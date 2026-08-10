@@ -15,8 +15,8 @@
    (riferimento.md §6).
 */
 
-import { CITTA, CONFIG } from '../configurazione.js';
-import { LANG, T, esc, dati, offre, chiedi, toast, stemma, filaAtenei } from './nucleo.js';
+import { ATENEI, CITTA, CONFIG } from '../configurazione.js';
+import { LANG, T, esc, dati, offre, chiedi, toast, stemma, filaAtenei, dataBreve } from './nucleo.js';
 
 const VIDEO = CONFIG.serviziEsterni.video;
 
@@ -315,7 +315,8 @@ stSheet.addEventListener('click',e=>{
 stVelo.addEventListener('click',stChiudi);
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;const au=document.getElementById('st-aula');if(au&&au.classList.contains('on')){chiudiAula();return;}if(stSheet.classList.contains('on'))stChiudi();});
 
-renderStudy();
+/* Il disegno della vetrina non parte più da qui: nel file unico i dati
+   erano già in memoria, adesso vanno chiesti prima. Ci pensa `avvia`. */
 document.querySelectorAll('.tab-btn[data-tab="study"]').forEach(b=>b.addEventListener('click',studyReveal));
 addEventListener('hashchange',()=>{if(location.hash==='#study')studyReveal();});
 try{if(location.hash==='#study')setTimeout(studyReveal,150);}catch(err){}
@@ -356,7 +357,8 @@ function stFiltra(){
     else vis=(ST_VIA==='prof')&&(ST_MAT==='all'||id===ST_MAT);
     g.style.display=vis?'':'none';});
 }
-stFiltra();
+/* la prima applicazione dei filtri la fa `renderStudy`, dopo che i dati
+   sono arrivati: chiamarla qui girerebbe a vuoto */
 /* riga loghi ateneo in Learn: stessa vetrina di Social/Magazine, ma qui e'
    un segnaposto senza effetto — cliccabile, non filtra ancora nulla, in
    attesa dei corsi veri degli 8 atenei ERUA. */
@@ -410,6 +412,9 @@ offre('didattica', {
   lezioneDi: (c, i) => stLezDi(c, i),
   visitaSalva: (corsoId, lezIdx) => stVisitaSalva(corsoId, lezIdx),
   apriCorso: (id, lezIdx) => stApriCorso(id, lezIdx),
-  foglioAperto: () => stSheet.classList.contains('on'),
+  foglioAperto: () => stSheet.classList.contains(on),
+  colore: (materia) => stCol(materia),
+  schedaCorso: (c) => stCorsoHTML(c),
+  apriApprofondimento: (id) => stApriDive(id),
 });
 

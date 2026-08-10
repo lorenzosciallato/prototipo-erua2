@@ -1,0 +1,48 @@
+/* ERUA connect — storie.css
+
+   Le storie a tocco, la lente sulle fotografie e il messaggio
+   temporaneo in fondo allo schermo.
+
+   Ricavato da index.html, righe 1196-1236 del file unico.
+   Vedi riferimento.md §2.4. */
+
+/* ---------- STORIE A TOCCO ---------- */
+.storie-viewer{position:fixed;inset:0;z-index:110;background:var(--bg);display:none}
+.storie-viewer.aperta{display:block}
+.sv-sfondo{position:absolute;inset:0}
+.sv-sfondo img{width:100%;height:100%;object-fit:cover;opacity:.42}
+.sv-sfondo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(5,5,6,.75) 0%,rgba(5,5,6,.35) 35%,rgba(5,5,6,.92) 100%)}
+.sv-testo{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:5rem 1.5rem 6rem;max-width:34rem;margin:0 auto}
+.sv-kick{font-size:.66rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:#A8E6C9;margin-bottom:.8rem}
+.sv-frase{font-family:var(--font-display);font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.6rem,7vw,2.6rem);line-height:1.12;color:#fff;text-wrap:balance}
+.sv-frase.piccola{font-size:clamp(1.25rem,5vw,1.8rem);line-height:1.22}
+.sv-sotto{margin-top:1rem;font-size:.9rem;color:rgba(255,255,255,.72)}
+.sv-barre{position:absolute;left:.6rem;right:.6rem;top:.7rem;display:flex;gap:.25rem;z-index:3}
+.sv-barra{flex:1;height:3px;background:rgba(255,255,255,.28);border-radius:99px;overflow:hidden}
+.sv-barra i{display:block;height:100%;width:0;background:#fff;border-radius:99px}
+.sv-testa{position:absolute;left:1rem;right:1rem;top:1.6rem;display:flex;align-items:center;gap:.6rem;z-index:3}
+.sv-testa .anello{width:34px;height:34px;border-radius:50%;padding:2px;background:var(--anello);flex:0 0 auto}
+.sv-testa .avatar{width:100%;height:100%;border-radius:50%;background:#fff;display:grid;place-items:center;overflow:hidden;padding:3px}
+.sv-testa .avatar img{width:100%;height:100%;object-fit:contain}
+.sv-testa .chi{font-size:.78rem;font-weight:700;color:#fff;min-width:0;flex:1;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sv-x{background:rgba(255,255,255,.16);border:0;width:2rem;height:2rem;border-radius:50%;color:#fff;font-size:1rem}
+.sv-zona{position:absolute;top:0;bottom:0;width:34%;z-index:2}
+.sv-zona.sx{left:0}.sv-zona.dx{right:0;width:66%}
+.sv-cta{position:absolute;left:0;right:0;bottom:1.6rem;display:flex;justify-content:center;z-index:3}
+.sv-cta button{background:var(--testo);color:var(--sup);border:0;border-radius:99px;font-weight:700;font-size:.85rem;padding:.6rem 1.4rem}
+
+.lente{position:fixed;inset:0;z-index:120;background:var(--bg);display:none;align-items:center;justify-content:center}
+.lente.aperta{display:flex}
+.lente img{width:100vw;height:100vh;object-fit:contain;filter:none}
+.lente .via{position:absolute;right:1rem;top:1rem;width:2.6rem;height:2.6rem;border-radius:50%;background:rgba(255,255,255,.14);border:1px solid var(--bordo2);display:grid;place-items:center;font-size:1.1rem;color:#fff;z-index:2}
+.lente .via:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+.toast{position:fixed;left:50%;bottom:5.4rem;transform:translateX(-50%) translateY(8px);z-index:90;background:var(--testo);color:var(--sup);font-weight:700;font-size:.82rem;padding:.5rem 1rem;border-radius:99px;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;max-width:88vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:820px){.toast{bottom:2rem}}
+
+footer{max-width:1600px;margin:0 auto;padding:1.4rem 1rem 2rem;color:var(--testo2);font-size:.76rem}

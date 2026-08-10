@@ -1,0 +1,125 @@
+/* ERUA connect — notizie.css
+
+   L'elenco delle notizie degli atenei, i cerchi degli atenei in
+   cima e la paginazione.
+
+   Ricavato da index.html, righe 536-653 del file unico.
+   Vedi riferimento.md §2.4. */
+
+.post{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid}
+.f-foto img{background:var(--sup2)}
+.news-conta{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--testo2);margin:0 0 .9rem}
+.lingua-fonte{font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.1em;
+  background:var(--sup2);color:var(--testo2);border-radius:4px;padding:.1rem .35rem}
+.news .riga{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.news-pagine{display:flex;justify-content:center;gap:.45rem;margin:1.6rem 0 .5rem;flex-wrap:wrap}
+.news-pagine .pg{min-width:2.3rem;height:2.3rem;border:0;border-radius:99px;cursor:pointer;
+  background:var(--sup);box-shadow:var(--ombra);color:var(--testo2);
+  font-family:var(--font-mono);font-size:.8rem;font-weight:700}
+.news-pagine .pg:hover:not([disabled]){color:var(--testo);transform:translateY(-1px)}
+.news-pagine .pg.on{background:var(--menta);color:var(--menta-s)}
+.news-pagine .pg[disabled]{opacity:.35;cursor:default}
+
+.vuoto-feed{grid-column:1/-1;border:1.5px dashed var(--bordo2);border-radius:var(--r);
+  padding:2.4rem 1.2rem;text-align:center;color:var(--testo2);font-size:.9rem}
+
+/* STORIE */
+.storie{display:flex;gap:1rem;overflow-x:auto;padding:.5rem .2rem 1.2rem;scrollbar-width:none}
+.storie::-webkit-scrollbar{display:none}
+.storia{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.35rem;background:none;border:0;color:var(--testo2);font-size:.66rem;font-weight:600}
+.storia{transition:transform .16s ease}
+.storia:hover{transform:translateY(-2px)}
+.storia .anello{width:74px;height:74px;border-radius:50%;padding:3px;
+  background:var(--sup2);box-shadow:var(--ombra);transition:background .18s ease}
+.storia[aria-pressed="true"] .anello{background:var(--menta)}
+.storia.tutti .anello{background:var(--menta);opacity:.55}
+.storia.tutti[aria-pressed="true"] .anello{opacity:1}
+.storia .avatar.testo{font-size:.6rem;font-weight:800;color:var(--testo);letter-spacing:.04em}
+.storia .avatar{width:100%;height:100%;border-radius:50%;background:var(--sup);border:0;display:grid;place-items:center;overflow:hidden;padding:12px}
+.storia .avatar img{width:100%;height:100%;object-fit:contain}
+html[data-tema="scuro"] .storia .avatar{background:#F6F2EC}
+.storia .avatar.testo{background:var(--sup2);font-size:.58rem;font-weight:800;color:var(--testo)}
+.storia .citta{font-size:.68rem;font-weight:500;max-width:5.2rem;text-align:center;line-height:1.2;margin-top:.2rem}
+.storia[aria-pressed="true"]{color:var(--testo)}
+.storia[aria-pressed="true"]{color:var(--menta-s)}
+.storia[aria-pressed="true"] .citta{font-weight:700}
+.storia:focus-visible{outline:2px solid var(--live);outline-offset:3px;border-radius:12px}
+
+/* OPPORTUNITÀ */
+.opp-testa{display:flex;align-items:center;gap:.6rem;margin:.2rem 0 .6rem;flex-wrap:wrap}
+.opp-testa .display{font-size:1.05rem}
+.punto-live{width:8px;height:8px;border-radius:50%;background:var(--live);animation:pulsa 1.6s ease-in-out infinite}
+@keyframes pulsa{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* PASSAPORTO */
+.passaporto{background:var(--sup);border:1px solid var(--bordo);border-radius:18px;padding:.85rem 1rem;margin-bottom:1.1rem;display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+.passaporto .info b{font-size:.86rem;display:block}
+.passaporto .info span{font-size:.72rem;color:var(--testo2)}
+.timbri{display:flex;gap:.35rem;margin-left:auto;flex-wrap:wrap}
+.timbro{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:.4rem;font-weight:800;background:var(--sup2);border:1px dashed var(--bordo2);color:var(--testo2)}
+.timbro.on{background:var(--anello);color:#fff;border:0}
+
+/* FEED MAGAZINE */
+/* feed a colonne: ogni scheda e` alta quanto il suo contenuto, niente buchi */
+.griglia{column-count:1;column-gap:1.2rem}
+@media(min-width:620px){.griglia{column-count:2}}
+@media(min-width:1000px){.griglia{column-count:3}}
+@media(min-width:1400px){.griglia{column-count:4}}
+.post{background:var(--sup);border:0;border-radius:var(--r);overflow:hidden;box-shadow:var(--ombra);
+  transition:transform .18s ease,box-shadow .18s ease;
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  margin:0 0 1.9rem;display:inline-block;width:100%}
+.post:hover{transform:translateY(-2px);box-shadow:var(--ombra-alta)}
+.post-testa{display:flex;align-items:center;gap:.65rem;padding:.75rem .9rem}
+.post-testa .anello{width:38px;height:38px;border-radius:50%;padding:2px;background:var(--anello);flex:0 0 auto}
+.post-testa .avatar{width:100%;height:100%;border-radius:50%;background:var(--sup2);border:2px solid var(--sup);display:grid;place-items:center;overflow:hidden;padding:4px}
+.post-testa .avatar img{width:100%;height:100%;object-fit:contain}
+.post-testa .avatar.testo{background:var(--sup2);font-size:.5rem;font-weight:800;color:var(--testo)}
+.post-testa .chi{line-height:1.25;min-width:0}
+.post-testa .chi b{font-size:.85rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.post-testa .chi span{font-size:.72rem;color:var(--testo2)}
+.post-testa .nuovo{margin-left:auto;font-size:.62rem;font-weight:800;letter-spacing:.06em;background:var(--testo);color:var(--sup);border-radius:99px;padding:.16rem .55rem}
+/* foto a filo della scheda, come su Instagram: nessun margine, nessun taglio */
+.media-foto{background:var(--sup2);line-height:0}
+.media-foto .scatto{position:static;width:100%;height:auto;display:block;border-radius:0;
+  filter:saturate(.88) contrast(1.05) sepia(.07) brightness(1.01)}
+.media{position:relative;display:grid;place-items:center;background:var(--sup2)}
+.media.a45{aspect-ratio:4/5}.media.a11{aspect-ratio:1/1}.media.a43{aspect-ratio:4/3}.media.a169{aspect-ratio:16/9}
+.media.g1{background:radial-gradient(120% 100% at 15% 0%,#2A2230 0%,transparent 60%),var(--sup2)}
+.media.g2{background:radial-gradient(120% 100% at 85% 10%,#1E2A28 0%,transparent 60%),var(--sup2)}
+.media.g3{background:radial-gradient(130% 110% at 20% 90%,#2E2620 0%,transparent 60%),var(--sup2)}
+.media.g4{background:radial-gradient(120% 100% at 80% 90%,#202634 0%,transparent 60%),var(--sup2)}
+.media.g5{background:radial-gradient(130% 110% at 50% 0%,#2B2126 0%,transparent 62%),var(--sup2)}
+.media .scatto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in;
+  filter:saturate(.88) contrast(1.05) sepia(.07) brightness(1.01)}
+.media .chip-foto{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--testo2);border:1px dashed var(--bordo2);border-radius:99px;padding:.4rem .9rem}
+.media.testuale{padding:1.4rem}
+.media.testuale .display{font-size:clamp(1.25rem,4.2vw,1.65rem);line-height:1.15;text-align:left;letter-spacing:-.02em}
+.media .pagina{position:absolute;left:.9rem;bottom:.8rem;font-size:.66rem;color:var(--testo2);font-weight:600}
+.azioni button{background:none;border:0;display:grid;place-items:center;padding:.15rem;border-radius:10px}
+.azioni button:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+.azioni svg{width:23px;height:23px;stroke:var(--testo);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.azioni .cuore.on svg{fill:var(--cuore);stroke:var(--cuore)}
+.azioni .storia-btn{margin-left:auto}
+.azioni .salva.on svg{fill:var(--testo)}
+
+/* NEWS ATENEI */
+.news-lista{display:grid;gap:.8rem;grid-template-columns:1fr}
+@media(min-width:820px){.news-lista{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1300px){.news-lista{grid-template-columns:repeat(3,1fr)}}
+.news{display:flex;gap:.9rem;background:var(--sup);border:0;box-shadow:var(--ombra);border-radius:22px;padding:1rem;transition:transform .16s ease,box-shadow .16s ease}
+.news:hover{transform:translateY(-2px);box-shadow:var(--ombra-alta)}
+.news-logo{width:56px;height:56px;border-radius:50%;background:var(--sup2);flex:0 0 auto;
+  display:grid;place-items:center;overflow:hidden;padding:2px}
+.news-logo .avatar{width:100%;height:100%;border-radius:50%;background:var(--sup);
+  display:grid;place-items:center;overflow:hidden;padding:9px}
+.news-logo .avatar img{width:100%;height:100%;object-fit:contain}
+html[data-tema="scuro"] .news-logo .avatar{background:#F6F2EC}
+.news .txt{min-width:0;display:flex;flex-direction:column;gap:.25rem}
+.news .riga{display:flex;align-items:center;gap:.5rem;font-size:.68rem;font-weight:700;color:var(--testo2)}
+.news .riga .uni{background:var(--sup2);border:1px solid var(--bordo2);border-radius:99px;padding:.08rem .5rem}
+.news b{font-size:.9rem;line-height:1.25}
+.news p{font-size:.8rem;color:var(--testo2)}
+.news a{margin-top:.2rem;font-size:.74rem;font-weight:700;color:var(--testo);text-decoration:none;border-bottom:1px solid var(--bordo2);align-self:flex-start}
+.news a:hover{border-color:var(--testo)}

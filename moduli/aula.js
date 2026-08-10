@@ -307,17 +307,17 @@ function apriAula(o){
   const testa=auEl('aula-kick'),tit=auEl('aula-tit');
   if(AULA.dive){
     testa.textContent=AULA.dive.kick;tit.textContent=AULA.dive.tit;
-    testa.style.cssText=stCol('dive');
+    testa.style.cssText=DID.colore('dive');
   }else{
     const c=AULA.corso,l=DID.lezioneDi(c,AULA.lezIdx);
     testa.textContent=c.uniEti+' \u00b7 '+c.code+' \u00b7 L'+(AULA.lezIdx+1);
     tit.textContent=l.t;
-    testa.style.cssText=stCol(c.materia);
+    testa.style.cssText=DID.colore(c.materia);
   }
   AULA.amb=(AULA.dive&&AULA.dive.stud)?'stud':'prof';
   if(AULA.corso)DID.visitaSalva(AULA.corso.id,AULA.lezIdx);
   const radice=auEl('st-aula');
-  radice.style.cssText=AULA.dive?stCol(AULA.dive.stud?'stud':'dive'):stCol(AULA.corso.materia);
+  radice.style.cssText=AULA.dive?DID.colore(AULA.dive.stud?'stud':'dive'):DID.colore(AULA.corso.materia);
   radice.classList.toggle('amb-stud',AULA.amb==='stud');
   auCarica();
   let daDove=0;
@@ -468,7 +468,7 @@ function chiudiAula(){
   tutChiudi();
   if(AULA.corso){
     const card=document.querySelector('#st-gruppi [data-corso="'+AULA.corso.id+'"]');
-    if(card)card.outerHTML=stCorsoHTML(AULA.corso);
+    if(card)card.outerHTML=DID.schedaCorso(AULA.corso);
   }
   if(!DID.foglioAperto())document.body.classList.remove('st-blocco');
 }
@@ -476,7 +476,7 @@ auEl('aula-x').addEventListener('click',()=>{chiudiAula();if(DID.foglioAperto())
 auEl('aula-indietro').addEventListener('click',()=>{
   chiudiAula();
   if(!DID.foglioAperto()){
-    if(AULA.dive)stApriDive(AULA.dive.id);
+    if(AULA.dive)DID.apriApprofondimento(AULA.dive.id);
     else DID.apriCorso(AULA.corso.id,AULA.lezIdx);
   }
 });

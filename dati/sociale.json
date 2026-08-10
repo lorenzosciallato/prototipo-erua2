@@ -1,0 +1,326 @@
+{
+ "argomenti": [
+  {
+   "id": "progetti",
+   "l": {
+    "it": "progetti",
+    "en": "projects"
+   },
+   "c": "var(--menta-s)",
+   "sf": "var(--menta)"
+  },
+  {
+   "id": "alloggi",
+   "l": {
+    "it": "alloggi",
+    "en": "accommodations"
+   },
+   "c": "var(--pesca-s)",
+   "sf": "var(--pesca)"
+  },
+  {
+   "id": "amici",
+   "l": {
+    "it": "amicizie",
+    "en": "friends"
+   },
+   "c": "var(--rosa-s)",
+   "sf": "var(--rosa)"
+  },
+  {
+   "id": "viaggi",
+   "l": {
+    "it": "viaggi",
+    "en": "trips"
+   },
+   "c": "var(--cielo-s)",
+   "sf": "var(--cielo)"
+  },
+  {
+   "id": "lingue",
+   "l": {
+    "it": "scambio lingue",
+    "en": "language exchange"
+   },
+   "c": "var(--lavanda-s)",
+   "sf": "var(--lavanda)"
+  },
+  {
+   "id": "altro",
+   "l": {
+    "it": "altro",
+    "en": "other"
+   },
+   "c": "var(--sabbia-s)",
+   "sf": "var(--sabbia)"
+  }
+ ],
+ "discussioni": [
+  {
+   "id": 1,
+   "nick": "cartographer_curious_4417",
+   "uni": "UAEGEAN",
+   "tag": "progetti",
+   "voti": 34,
+   "commenti": 12,
+   "quando": "2h",
+   "tit": {
+    "it": "Fotografia e migrazione, per il bando di ottobre",
+    "en": "Photography and migration, for the October call"
+   },
+   "testo": {
+    "it": "Ho l'idea e un relatore che ha detto sì. Quello che mi manca è chi sa montare video, e un terzo ateneo. C'è tempo per farla bene.",
+    "en": "I have the idea and a supervisor who said yes. What I don't have is someone who can edit video, and a third university. There is time to do this properly."
+   }
+  },
+  {
+   "id": 2,
+   "nick": "archivist_lucid_2088",
+   "uni": "UNIMC",
+   "tag": "progetti",
+   "voti": 27,
+   "commenti": 8,
+   "quando": "5h",
+   "tit": {
+    "it": "Ho costruito una piattaforma di studio. La rendiamo più grande?",
+    "en": "I built a study platform. Want to make it bigger?"
+   },
+   "testo": {
+    "it": "Funziona per il mio corso e i miei compagni la usano ogni giorno. Vorrei che funzionasse per otto università invece che per una. Cerco un designer e uno sviluppatore.",
+    "en": "It works for my own course and my classmates use it every day. I would like it to work for eight universities instead of one. Looking for a designer and a developer."
+   }
+  },
+  {
+   "id": 3,
+   "nick": "printer_kind_7731",
+   "uni": "ULPGC",
+   "tag": "alloggi",
+   "voti": 19,
+   "commenti": 15,
+   "quando": "1d",
+   "tit": {
+    "it": "Lascio la stanza vicino al campus di Tafira a gennaio",
+    "en": "Leaving my room near the Tafira campus in January"
+   },
+   "testo": {
+    "it": "Appartamento tranquillo, altri due studenti, dieci minuti dal bus che sale in collina. Preferisco passarla a qualcuno dell'alleanza che a uno sconosciuto.",
+    "en": "Quiet flat, two other students, ten minutes from the bus that goes up the hill. I would rather hand it to someone from the alliance than to a stranger."
+   }
+  },
+  {
+   "id": 4,
+   "nick": "botanist_bright_5502",
+   "uni": "NBU",
+   "tag": "lingue",
+   "voti": 15,
+   "commenti": 6,
+   "quando": "1d",
+   "tit": {
+    "it": "Mezz'ora a settimana, bulgaro per italiano",
+    "en": "Thirty minutes a week, Bulgarian for Italian"
+   },
+   "testo": {
+    "it": "L'italiano lo leggo ma mi blocco appena devo parlarlo. Lo stesso per te col bulgaro? Facciamoci schifo insieme in videochiamata.",
+    "en": "I can read Italian but I freeze the moment I have to speak it. Same for you with Bulgarian? Let's be bad at it together on a video call."
+   }
+  },
+  {
+   "id": 5,
+   "nick": "commuter_honest_3164",
+   "uni": "UP8",
+   "tag": "amici",
+   "voti": 41,
+   "commenti": 9,
+   "quando": "2d",
+   "tit": {
+    "it": "Chi c'è a Parigi a settembre?",
+    "en": "Anyone in Paris in September?"
+   },
+   "testo": {
+    "it": "Arrivo per il semestre e non conosco nessuno. Non cerco niente di organizzato: un caffè, una passeggiata, qualcuno che mi dica dove si mangia bene.",
+    "en": "I arrive for the semester and I know nobody. Nothing organised: a coffee, a walk, someone to tell me where to eat well."
+   }
+  },
+  {
+   "id": 6,
+   "nick": "navigator_calm_3390",
+   "uni": "SWPS",
+   "tag": "viaggi",
+   "voti": 22,
+   "commenti": 7,
+   "quando": "3d",
+   "tit": {
+    "it": "Varsavia → Sofia per il summit, treno invece dell'aereo",
+    "en": "Warsaw → Sofia for the summit, train instead of plane"
+   },
+   "testo": {
+    "it": "Ci metto di più ma costa meno e inquino un decimo. Se qualcuno vuole venire, dividiamo la cuccetta e ci facciamo compagnia.",
+    "en": "It takes longer but costs less and pollutes a tenth. If anyone wants to come along, we split the couchette and keep each other company."
+   }
+  },
+  {
+   "id": 8,
+   "nick": "scribe_patient_2210",
+   "uni": "MRU",
+   "tag": "altro",
+   "voti": 29,
+   "commenti": 11,
+   "quando": "6h",
+   "tit": {
+    "it": "Come ho ottenuto il riconoscimento dei crediti al ritorno: la procedura, i moduli, gli errori",
+    "en": "How I got my credits recognised when I came back: the paperwork, the forms, the mistakes"
+   },
+   "testo": {
+    "it": "Scrivo questo perché a me nessuno l'aveva detto e ci ho perso due mesi. Prima cosa: il Learning Agreement va fatto firmare da tre persone diverse e una di queste è il coordinatore del corso, non il tutor internazionale — sono ruoli diversi e nel mio ateneo stanno in due uffici che non si parlano. Seconda cosa: se cambi anche un solo esame dopo l'arrivo devi compilare la sezione \"during the mobility\" entro cinque settimane, e quella scadenza non te la ricorda nessuno. Io l'ho scoperta il giorno dopo. Terza cosa, la più importante: fatti dare dal docente ospitante un foglio con il programma dell'esame e il numero di ore, timbrato. Al ritorno la commissione non guarda il voto, guarda le ore e i contenuti, e senza quel foglio ti convalidano meno crediti di quelli che hai fatto. A me è successo con Statistica: sei crediti diventati cinque, e per recuperare l'ultimo ho dovuto fare un colloquio integrativo a novembre. Quarta e ultima: il transcript of records dall'università ospitante può metterci due mesi ad arrivare, quindi chiedilo prima di partire, non dopo. Se qualcuno sta partendo adesso e vuole i moduli già compilati come esempio, scrivetemi che ve li mando.",
+    "en": "I'm writing this because nobody told me and I lost two months. First: the Learning Agreement needs three different signatures and one of them is the course coordinator, not the international tutor — they are different roles and at my university they sit in two offices that don't talk to each other. Second: if you change even one exam after you arrive you must fill the \"during the mobility\" section within five weeks, and nobody reminds you of that deadline. I found out the day after it passed. Third, and most important: ask the host teacher for a signed sheet with the syllabus and the number of hours. When you get back the committee doesn't look at your grade, it looks at hours and content, and without that sheet they recognise fewer credits than you earned. It happened to me with Statistics: six credits became five, and to get the last one back I had to sit an extra oral in November. Fourth and last: the transcript of records from the host university can take two months to arrive, so ask for it before you leave, not after. If anyone is leaving now and wants my filled-in forms as an example, write to me and I'll send them."
+   }
+  },
+  {
+   "id": 7,
+   "nick": "watchmaker_serene_6602",
+   "uni": "EUV",
+   "tag": "amici",
+   "voti": 12,
+   "commenti": 4,
+   "quando": "4d",
+   "tit": {
+    "it": "Gruppo di lettura, una volta al mese, in videochiamata",
+    "en": "Reading group, once a month, on a call"
+   },
+   "testo": {
+    "it": "Un libro al mese scelto a turno, un'ora di chiacchiere. Siamo in quattro da tre paesi, ci sta bene chiunque.",
+    "en": "One book a month chosen in turn, one hour of talking. We are four from three countries, anyone is welcome."
+   }
+  }
+ ],
+ "risposte": {
+  "1": [
+   {
+    "nick": "scribe_quiet_9021",
+    "uni": "UP8",
+    "quando": "1h",
+    "t": {
+     "it": "Io monto video. Ho fatto due corti per il cineclub, se ti serve ti mando qualcosa.",
+     "en": "I edit video. I made two shorts for the film club, happy to send you something."
+    }
+   },
+   {
+    "nick": "navigator_calm_3390",
+    "uni": "SWPS",
+    "quando": "40m",
+    "t": {
+     "it": "Terza università coperta se vi va bene Varsavia. Ho già fatto una Bottom-Up l'anno scorso.",
+     "en": "Third university covered if Warsaw works for you. I did a Bottom-Up call last year."
+    }
+   }
+  ],
+  "2": [
+   {
+    "nick": "printer_lively_1188",
+    "uni": "EUV",
+    "quando": "3h",
+    "t": {
+     "it": "Faccio design di interfacce. Mi interessa molto la parte sull'accessibilità.",
+     "en": "I do interface design. The accessibility side interests me a lot."
+    }
+   }
+  ],
+  "3": [
+   {
+    "nick": "reader_steady_5540",
+    "uni": "UNIMC",
+    "quando": "20h",
+    "t": {
+     "it": "Arrivo a gennaio per il semestre. Quanto è il deposito?",
+     "en": "I arrive in January for the semester. How much is the deposit?"
+    }
+   }
+  ],
+  "4": [],
+  "5": [
+   {
+    "nick": "botanist_bright_5502",
+    "uni": "NBU",
+    "quando": "1d",
+    "t": {
+     "it": "Mandameli per favore, sto seguendo un corso vicino.",
+     "en": "Please send them, I'm taking an adjacent course."
+    }
+   }
+  ]
+ },
+ "disponibilita": [
+  {
+   "id": "divano",
+   "ico": "🛋️",
+   "t": {
+    "it": "Offro un divano",
+    "en": "I offer a couch"
+   },
+   "d": {
+    "it": "Ospito colleghi ERUA in visita nella mia città",
+    "en": "I host visiting ERUA students in my city"
+   }
+  },
+  {
+   "id": "lingua",
+   "ico": "🗣️",
+   "t": {
+    "it": "Scambio linguistico",
+    "en": "Language exchange"
+   },
+   "d": {
+    "it": "Parlo italiano, pratico inglese e spagnolo",
+    "en": "I speak Italian, practising English and Spanish"
+   }
+  },
+  {
+   "id": "progetti",
+   "ico": "🤝",
+   "t": {
+    "it": "Cerco un gruppo",
+    "en": "Looking for a team"
+   },
+   "d": {
+    "it": "Disponibile per progetti bottom-up e tesi congiunte",
+    "en": "Available for bottom-up projects and joint theses"
+   }
+  },
+  {
+   "id": "tutor",
+   "ico": "🎓",
+   "t": {
+    "it": "Faccio da tutor",
+    "en": "I mentor"
+   },
+   "d": {
+    "it": "30 minuti a settimana per matricole e nuovi arrivati",
+    "en": "30 minutes a week for freshers and newcomers"
+   }
+  },
+  {
+   "id": "passaggi",
+   "ico": "🚗",
+   "t": {
+    "it": "Offro passaggi",
+    "en": "I offer rides"
+   },
+   "d": {
+    "it": "Viaggio in auto verso summit ed eventi dell'alleanza",
+    "en": "Driving to alliance summits and events"
+   }
+  },
+  {
+   "id": "appunti",
+   "ico": "📚",
+   "t": {
+    "it": "Condivido appunti",
+    "en": "I share notes"
+   },
+   "d": {
+    "it": "Materiale di studio dei miei corsi, a chi serve",
+    "en": "Study material from my courses, for whoever needs it"
+   }
+  }
+ ]
+}

@@ -6,7 +6,7 @@
 */
 
 import { CITTA } from '../configurazione.js';
-import { esc, chiedi, offre, stemma, inLettura } from './nucleo.js';
+import { LANG, esc, chiedi, offre, stemma, inLettura } from './nucleo.js';
 
 const sv = document.getElementById('storie-viewer');
 let svArt = null, svIdx = 0, svTimer = null, svSchermate = [];

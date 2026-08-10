@@ -1,0 +1,163 @@
+/* ERUA connect — didattica.css
+
+   La vetrina dei corsi aperti e il foglio di presentazione di un
+   corso.
+
+   Ricavato da index.html, righe 1237-1392 del file unico.
+   Vedi riferimento.md §2.4. */
+
+/* ============ STUDY (vetrina) ============ */
+#p-study .st-sotto{max-width:60ch}
+.st-eti{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.55rem;color:var(--testo2);margin:1.7rem 0 .85rem}
+.st-eti i{width:.55rem;height:.55rem;border-radius:50%;background:var(--pf,var(--menta));font-style:normal;flex:0 0 auto}
+.st-eti b{font-weight:600;color:var(--testo)}
+.st-eti span{font-weight:400;letter-spacing:.12em}
+
+/* ripresa vera per corso: vedi .st-meta nella card, niente piu' barra fissa in cima */
+
+/* chips materia — usano il .chip esistente con --sf/--sc */
+.st-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.3rem 0 .2rem}
+
+/* griglia corsi */
+.st-griglia{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.1rem}
+.st-card{background:var(--sup);border-radius:var(--r);box-shadow:var(--ombra);overflow:hidden;
+  display:flex;flex-direction:column;border:0;padding:0;text-align:left;width:100%;
+  transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s}
+.st-card:hover{transform:translateY(-3px);box-shadow:var(--ombra-alta)}
+.st-card:focus-visible{outline:2px solid var(--live);outline-offset:3px}
+.st-cover{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--sup2)}
+.st-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.st-card:hover .st-cover img{transform:scale(1.045)}
+.st-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(18,16,12,.5))}
+.st-pill{position:absolute;left:.7rem;top:.62rem;z-index:1;font-family:var(--font-mono);font-size:.6rem;
+  letter-spacing:.14em;background:var(--pf,var(--menta));color:var(--ps,var(--menta-s));
+  border-radius:99px;padding:.26rem .64rem;font-weight:600}
+.st-durata{position:absolute;right:.7rem;bottom:.6rem;z-index:1;font-family:var(--font-mono);font-size:.62rem;
+  letter-spacing:.08em;background:rgba(15,14,12,.72);color:#FFFDFA;border-radius:99px;padding:.24rem .6rem;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.st-corpo{padding:1rem 1.15rem 1.15rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.st-tit{font-family:var(--font-display);font-weight:600;font-size:1.18rem;letter-spacing:-.022em;line-height:1.25}
+.st-prof{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--testo2)}
+.st-prof .tondo{width:1.55rem;height:1.55rem;border-radius:50%;display:grid;place-items:center;
+  background:var(--pf,var(--menta));color:var(--ps,var(--menta-s));font-family:var(--font-mono);
+  font-size:.6rem;font-weight:700;flex:0 0 auto}
+.st-meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;color:var(--testo2)}
+.st-bar{height:6px;border-radius:99px;background:var(--sup2);overflow:hidden}
+.st-bar i{display:block;height:100%;border-radius:inherit;background:var(--pf,var(--menta-s));width:0;
+  transition:width 1s cubic-bezier(.2,.7,.2,1)}
+.st-piede{display:flex;align-items:center;gap:.55rem;margin-top:auto;padding-top:.35rem}
+.st-btn{border:0;border-radius:99px;padding:.5rem 1rem;font-weight:700;font-size:.82rem;
+  background:var(--ps,var(--menta-s));color:var(--bg);transition:transform .2s}
+.st-btn:hover{transform:translateY(-1px)}
+.st-salva{margin-left:auto;border:1px solid var(--bordo2);background:transparent;border-radius:99px;
+  padding:.45rem .8rem;font-size:.78rem;color:var(--testo2)}
+.st-salva:hover{color:var(--testo)}
+
+/* approfondimenti — righe larghe */
+.st-dive{display:flex;align-items:center;gap:.95rem;background:var(--sup);border-radius:20px;
+  box-shadow:var(--ombra);padding:.7rem .95rem .7rem .7rem;border:0;text-align:left;width:100%;
+  transition:transform .22s,box-shadow .22s;margin-bottom:.75rem}
+.st-dive:hover{transform:translateY(-2px);box-shadow:var(--ombra-alta)}
+.st-dive .q{width:78px;height:78px;flex:0 0 auto;border-radius:16px;overflow:hidden;position:relative;background:var(--sup2)}
+.st-dive .q img{width:100%;height:100%;object-fit:cover;display:block}
+.st-dive .q::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent 40%,rgba(18,16,12,.35))}
+.st-dive .q svg{position:absolute;inset:0;margin:auto;width:1.6rem;height:1.6rem;color:#FFFDFA;z-index:1;
+  fill:currentColor;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.st-dive .testi{min-width:0;flex:1}
+.st-dive .kick{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pesca-s)}
+.st-dive .tit{font-family:var(--font-display);font-weight:600;font-size:1rem;letter-spacing:-.015em;line-height:1.3;
+  margin:.18rem 0 .08rem;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.st-dive .sub{font-size:.78rem;color:var(--testo2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-dive .d{font-family:var(--font-mono);font-size:.66rem;color:var(--testo2);flex:0 0 auto;
+  border:1px solid var(--bordo2);border-radius:99px;padding:.28rem .6rem}
+
+.st-note{margin-top:1.9rem;font-size:.72rem;color:var(--testo2);line-height:1.7;max-width:68ch}
+.st-note a{color:inherit}
+
+/* scheletri che luccicano */
+.st-skel{background:var(--sup);border-radius:var(--r);box-shadow:var(--ombra);overflow:hidden;pointer-events:none}
+.st-skel .cv{aspect-ratio:16/9;background:var(--sup2);position:relative;overflow:hidden}
+.st-skel .pd{padding:1rem 1.15rem 1.2rem;display:flex;flex-direction:column;gap:.6rem}
+.st-skel .b{position:relative;overflow:hidden;background:var(--sup2);border-radius:9px;height:.85rem}
+.st-skel .b.t{height:1.2rem;width:78%}
+.st-skel .b.m{width:52%}
+.st-skel .b.c{width:38%;height:.7rem}
+.st-skel .cv::after,.st-skel .b::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:stluccica 1.25s infinite}
+html[data-tema="scuro"] .st-skel .cv::after,html[data-tema="scuro"] .st-skel .b::after{
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+@keyframes stluccica{100%{transform:translateX(100%)}}
+.st-skel.riga{display:flex;gap:.95rem;align-items:center;border-radius:20px;padding:.7rem}
+.st-skel.riga .q{width:78px;height:78px;border-radius:16px;background:var(--sup2);position:relative;overflow:hidden;flex:0 0 auto}
+.st-skel.riga .q::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:stluccica 1.25s infinite}
+html[data-tema="scuro"] .st-skel.riga .q::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+.st-skel.riga .pd{flex:1;padding:0}
+.st-nasce{animation:stnasce .55s cubic-bezier(.2,.7,.2,1) both}
+@keyframes stnasce{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* foglio corso dal basso */
+.st-velo{position:fixed;inset:0;background:rgba(24,22,18,.45);backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);z-index:70;opacity:0;pointer-events:none;transition:opacity .28s}
+.st-velo.on{opacity:1;pointer-events:auto}
+.st-sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,106%);width:min(760px,100%);
+  max-height:90dvh;overflow:auto;background:var(--sup);border-radius:26px 26px 0 0;box-shadow:var(--ombra-alta);
+  z-index:71;transition:transform .4s cubic-bezier(.2,.75,.25,1);padding:0 1.15rem 1.4rem;overscroll-behavior:contain}
+.st-sheet.on{transform:translate(-50%,0)}
+/* su schermi ampi non e' un pannello a scomparsa dal basso ma un vero
+   pop-up centrato, con tutti e quattro i bordi e gli angoli visibili */
+@media(min-width:760px){
+  .st-sheet{bottom:auto;top:50%;transform:translate(-50%,-46%) scale(.98);opacity:0;
+    border-radius:26px;max-height:88dvh;padding:0 1.6rem 1.6rem;
+    transition:transform .34s cubic-bezier(.2,.75,.25,1),opacity .28s}
+  .st-sheet.on{transform:translate(-50%,-50%) scale(1);opacity:1}
+  .st-sheet .presa{display:none}
+  .st-sheet .stsh-testa{border-radius:26px 26px 0 0;padding-top:1.4rem}
+}
+.st-sheet .presa{width:44px;height:5px;border-radius:99px;background:var(--bordo2);margin:.6rem auto .2rem}
+.stsh-testa{position:sticky;top:0;background:var(--sup);z-index:2;display:flex;align-items:flex-start;
+  gap:.8rem;padding:.6rem 0 .7rem}
+.stsh-testa .kick{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ps,var(--menta-s))}
+.stsh-testa .tit{font-family:var(--font-display);font-weight:600;font-size:1.28rem;letter-spacing:-.025em;
+  line-height:1.22;margin-top:.22rem}
+.stsh-testa .sub{font-size:.8rem;color:var(--testo2);margin-top:.18rem}
+.stsh-x{margin-left:auto;flex:0 0 auto;width:2.2rem;height:2.2rem;border-radius:50%;border:0;
+  background:var(--sup2);color:var(--testo);display:grid;place-items:center;font-size:.9rem}
+.stsh-player{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#0D0C0A;margin-top:.3rem}
+.stsh-player img{width:100%;height:100%;object-fit:cover;display:block;opacity:.92}
+.stsh-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.stsh-play{position:absolute;inset:0;margin:auto;width:4.1rem;height:4.1rem;border-radius:50%;border:0;
+  background:rgba(255,253,250,.92);color:#1A1813;display:grid;place-items:center;box-shadow:var(--ombra-alta);
+  transition:transform .2s;z-index:1}
+.stsh-play:hover{transform:scale(1.06)}
+.stsh-play svg{width:1.7rem;height:1.7rem;fill:currentColor;margin-left:.2rem}
+.stsh-player .velo-t{position:absolute;inset:auto 0 0 0;padding:2rem .9rem .7rem;z-index:1;
+  background:linear-gradient(180deg,transparent,rgba(10,9,7,.72));color:#FFFDFA;font-size:.8rem;pointer-events:none}
+.stsh-eti{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--testo2);margin:1.25rem 0 .5rem}
+.stsh-lez{display:flex;flex-direction:column;gap:.35rem}
+.stsh-r{display:flex;align-items:center;gap:.8rem;border:0;background:transparent;border-radius:14px;
+  padding:.6rem .7rem;text-align:left;transition:background .18s}
+.stsh-r:hover{background:var(--sup2)}
+.stsh-r.on{background:var(--pf,var(--menta));color:var(--ps,var(--menta-s))}
+.stsh-r .n{font-family:var(--font-mono);font-size:.66rem;width:2rem;flex:0 0 auto;color:inherit;opacity:.75}
+.stsh-r .t{flex:1;min-width:0;font-size:.88rem;font-weight:500;line-height:1.35}
+.stsh-r .d{font-family:var(--font-mono);font-size:.64rem;opacity:.7;flex:0 0 auto}
+.stsh-r svg{width:1rem;height:1rem;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.stsh-desc{font-family:var(--font-lettura);font-size:.92rem;line-height:1.7;color:var(--testo);
+  margin-top:1rem;max-width:62ch}
+body.st-blocco{overflow:hidden}
+
+/* copertina disegnata per corsi senza anteprima video */
+.st-cover.arte{display:grid;place-items:center;background:linear-gradient(135deg,var(--cielo),var(--lavanda) 60%,var(--rosa))}
+.st-cover.arte::after{background:linear-gradient(180deg,transparent 60%,rgba(18,16,12,.28))}
+.st-cover.arte b{font-family:var(--font-display);font-weight:600;font-size:1.5rem;letter-spacing:-.02em;
+  color:rgba(32,32,29,.78);z-index:1}
+html[data-tema="scuro"] .st-cover.arte b{color:rgba(230,227,220,.85)}
+.stsh-player .arte-p{position:absolute;inset:0;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--cielo),var(--lavanda) 60%,var(--rosa))}
+.stsh-player .arte-p b{font-family:var(--font-display);font-weight:600;font-size:1.7rem;color:rgba(32,32,29,.78)}
+html[data-tema="scuro"] .stsh-player .arte-p b{color:rgba(230,227,220,.85)}

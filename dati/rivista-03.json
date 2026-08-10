@@ -1,0 +1,650 @@
+{
+ "numero": 3,
+ "data": "04/2026",
+ "loghi": {
+  "UNIMC": "immagini/loghi/unimc.jpg",
+  "MRU": "immagini/loghi/mru.jpg",
+  "NBU": "immagini/loghi/nbu.jpg",
+  "EUV": "immagini/loghi/euv.jpg",
+  "SWPS": "immagini/loghi/swps.jpg",
+  "ULPGC": "immagini/loghi/ulpgc.jpg",
+  "UAEGEAN": "immagini/loghi/uaegean.jpg",
+  "UP8": "immagini/loghi/up8.jpg",
+  "ERUA": "immagini/loghi/erua.jpg",
+  "SIMBOLO": "immagini/loghi/simbolo.jpg"
+ },
+ "articoli": [
+  {
+   "id": "editoriale",
+   "sezione": "editoriale",
+   "titolo": "Editorial",
+   "occhiello": "Welcome to the third edition",
+   "autore": "Catch-Up Editorial Team",
+   "uni": [
+    "EUV",
+    "NBU",
+    "ULPGC"
+   ],
+   "pagine": "4-5",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/editoriale-1.jpg",
+     "w": 230,
+     "h": 256
+    },
+    {
+     "file": "immagini/rivista/editoriale-2.jpg",
+     "w": 230,
+     "h": 252
+    },
+    {
+     "file": "immagini/rivista/editoriale-3.jpg",
+     "w": 226,
+     "h": 256
+    },
+    {
+     "file": "immagini/rivista/editoriale-4.jpg",
+     "w": 189,
+     "h": 254
+    }
+   ]
+  },
+  {
+   "id": "summit",
+   "sezione": "missed",
+   "titolo": "Navigating the Edges",
+   "occhiello": "The 2025 ERUA Summit",
+   "autore": "Muhammad Ismail",
+   "uni": [
+    "EUV",
+    "UAEGEAN"
+   ],
+   "pagine": "6-19",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/summit-1.jpg",
+     "w": 1025,
+     "h": 707
+    }
+   ]
+  },
+  {
+   "id": "winterschool",
+   "sezione": "missed",
+   "titolo": "A Perspective",
+   "occhiello": "ERUA Winter School and the Summit",
+   "autore": "Sofia Tsolova",
+   "uni": [
+    "NBU",
+    "UP8",
+    "UAEGEAN"
+   ],
+   "pagine": "20-22",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "eruaday",
+   "sezione": "missed",
+   "titolo": "ERUA Day 2025",
+   "occhiello": "Eight universities, eight ways to celebrate",
+   "autore": "Muhammad Ismail",
+   "uni": [
+    "EUV",
+    "UNIMC",
+    "MRU",
+    "NBU",
+    "UP8",
+    "SWPS",
+    "ULPGC",
+    "UAEGEAN"
+   ],
+   "pagine": "23-27",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/eruaday-1.jpg",
+     "w": 900,
+     "h": 533
+    }
+   ]
+  },
+  {
+   "id": "cleanup",
+   "sezione": "missed",
+   "titolo": "The Clean-Up Day",
+   "occhiello": "A reflection time in the beach of Bocabarranco",
+   "autore": "Izan Suárez Nuez",
+   "uni": [
+    "ULPGC"
+   ],
+   "pagine": "28-30",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "contest",
+   "sezione": "talento",
+   "titolo": "ERUA Creative Expression Contest",
+   "occhiello": "Poetry, drawing, video, photography",
+   "autore": "Nicole Marut & Clementine Pourbaix",
+   "uni": [
+    "EUV",
+    "UP8",
+    "UAEGEAN",
+    "UNIMC",
+    "SWPS"
+   ],
+   "pagine": "31-39",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/contest-1.jpg",
+     "w": 760,
+     "h": 538
+    }
+   ]
+  },
+  {
+   "id": "ai-democracy",
+   "sezione": "seminari",
+   "titolo": "Rethinking Politics and Democracy",
+   "occhiello": "In the age of AI and geopolitical shifts",
+   "autore": "Matteo Musto",
+   "uni": [
+    "UNIMC",
+    "MRU"
+   ],
+   "pagine": "40-43",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "bonn",
+   "sezione": "seminari",
+   "titolo": "My Experience at the DAAD EUN Annual Conference",
+   "occhiello": "Bonn, December 2025",
+   "autore": "Gabriela Pawlowicz",
+   "uni": [
+    "EUV"
+   ],
+   "pagine": "44-45",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "better-together",
+   "sezione": "seminari",
+   "titolo": "Better Together",
+   "occhiello": "Student leadership in European higher education",
+   "autore": "Zuzanna Siwinska & Niki Kasis",
+   "uni": [
+    "SWPS",
+    "EUV"
+   ],
+   "pagine": "46-49",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "elimu",
+   "sezione": "voci",
+   "titolo": "Elimu",
+   "occhiello": "An international cooperation project centered on education",
+   "autore": "Ana Díaz Hernández & team",
+   "uni": [
+    "ULPGC"
+   ],
+   "pagine": "50-55",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "chinese-club",
+   "sezione": "voci",
+   "titolo": "The Chinese Club of the ULPGC",
+   "occhiello": "Its beginnings, trajectory and relevance",
+   "autore": "Montserrat Maldonado Arévalo",
+   "uni": [
+    "ULPGC"
+   ],
+   "pagine": "56-59",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "kneading",
+   "sezione": "voci",
+   "titolo": "Kneading is Democracy",
+   "occhiello": "When theory leaves the lecture hall",
+   "autore": "NGO MED",
+   "uni": [
+    "NBU"
+   ],
+   "pagine": "60-62",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/kneading-1.jpg",
+     "w": 226,
+     "h": 230
+    }
+   ]
+  },
+  {
+   "id": "manifesto",
+   "sezione": "voci",
+   "titolo": "ERUA Student Manifesto",
+   "occhiello": "35 first steps for sustainable higher education",
+   "autore": "Blue Commission",
+   "uni": [
+    "EUV",
+    "NBU",
+    "MRU",
+    "SWPS",
+    "UNIMC",
+    "UP8",
+    "UAEGEAN",
+    "ULPGC"
+   ],
+   "pagine": "63-71",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "green-policies",
+   "sezione": "voci",
+   "titolo": "When Environmental Ambition Meets Reality",
+   "occhiello": "Why Europe's green policies struggle to be seen",
+   "autore": "Lea Simonne",
+   "uni": [
+    "NBU"
+   ],
+   "pagine": "72-75",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/green-policies-1.jpg",
+     "w": 223,
+     "h": 289
+    }
+   ]
+  },
+  {
+   "id": "edge-of-change",
+   "sezione": "voci",
+   "titolo": "At the Edge of Change",
+   "occhiello": "Art as a sustainable future",
+   "autore": "Natali Todorova",
+   "uni": [
+    "NBU"
+   ],
+   "pagine": "76-77",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": []
+  },
+  {
+   "id": "populism",
+   "sezione": "ricerca",
+   "titolo": "From Populism to Success",
+   "occhiello": "Strategies and electoral psycho profiles",
+   "autore": "Maria Pelovska",
+   "uni": [
+    "NBU"
+   ],
+   "pagine": "78-83",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/populism-1.jpg",
+     "w": 1191,
+     "h": 788
+    }
+   ]
+  },
+  {
+   "id": "journey",
+   "sezione": "esperienza",
+   "titolo": "Journey to ERUA",
+   "occhiello": "From a social media post to an ambassadorship",
+   "autore": "Atif Yaseen",
+   "uni": [
+    "MRU"
+   ],
+   "pagine": "84-85",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/journey-1.jpg",
+     "w": 223,
+     "h": 293
+    }
+   ]
+  },
+  {
+   "id": "alumni",
+   "sezione": "esperienza",
+   "titolo": "From ERUA Alumni",
+   "occhiello": "Two years, three cities, one magazine",
+   "autore": "Elena Georgieva",
+   "uni": [
+    "NBU"
+   ],
+   "pagine": "86-88",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/alumni-1.jpg",
+     "w": 223,
+     "h": 288
+    }
+   ]
+  },
+  {
+   "id": "student-board",
+   "sezione": "board",
+   "titolo": "Meet the ERUA Student Board",
+   "occhiello": "What they actually do",
+   "autore": "Sofia Tsolova",
+   "uni": [
+    "NBU"
+   ],
+   "pagine": "89-93",
+   "lettura": 1,
+   "parole": 90,
+   "pezzi": [
+    {
+     "t": "citazione",
+     "x": "Preview edition — the full story ships with the magazine data."
+    },
+    {
+     "t": "testo",
+     "x": "This build of ERUA connect travels light: real titles, authors and a few photos, with placeholder body copy. The complete issue loads from the magazine data file, exactly as in the full version."
+    },
+    {
+     "t": "testo",
+     "x": "Nothing else changes: the mosaic layout, the university filters, saved stories and the reading page all behave the way they do with the real articles."
+    }
+   ],
+   "immagini": [
+    {
+     "file": "immagini/rivista/student-board-1.jpg",
+     "w": 230,
+     "h": 256
+    }
+   ]
+  }
+ ]
+}

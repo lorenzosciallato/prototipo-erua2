@@ -1,0 +1,132 @@
+/* ERUA connect — articolo.css
+
+   La pagina di lettura di un articolo: impianto da giornale,
+   capitoli, citazioni estratte, mosaico delle fotografie.
+
+   Ricavato da index.html, righe 290-413 del file unico.
+   Vedi riferimento.md §2.4. */
+
+/* ================= PAGINA ARTICOLO — impianto da giornale ================= */
+body.in-lettura nav.tabs{display:none}
+.pagina-art{max-width:none;padding:0}
+.art-barra{position:sticky;top:3.4rem;z-index:30;display:flex;align-items:center;gap:1rem;
+  padding:.7rem 1rem;background:var(--vetro);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bordo)}
+.art-indietro,.art-avanti{background:none;border:0;cursor:pointer;color:var(--testo);
+  font-family:var(--font-mono);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;white-space:nowrap;padding:.3rem 0}
+.art-avanz{flex:1;height:3px;background:var(--sup2);border-radius:99px;overflow:hidden}
+.art-avanz span{display:block;height:100%;width:0;background:var(--menta-s)}
+
+.art{max-width:38rem;margin:0 auto;padding:2.2rem 1.2rem 1rem;background:none;box-shadow:none;border-radius:0}
+@media(min-width:820px){.art{padding-top:3.4rem}}
+.art-testa{padding:0;margin-bottom:1.6rem}
+.art-testa .btn-chiudi{display:none}
+.art-testa h2{font-family:var(--font-display);font-weight:700;letter-spacing:-.04em;
+  line-height:1.02;font-size:clamp(2.1rem,6.4vw,3.4rem);text-wrap:balance}
+.art-testa .meta{margin-top:1rem;font-family:var(--font-mono);font-size:.68rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--testo2);
+  padding-top:.9rem;border-top:2px solid var(--testo)}
+.occhiello-art{font-family:var(--font-lettura);font-size:1.22rem;line-height:1.5;
+  font-style:italic;color:var(--testo);opacity:.8;margin-bottom:1.6rem}
+
+/* il corpo: serif da lettura, colonna stretta, prima riga senza rientro */
+.art-contenuto{max-width:36rem;padding:0}
+.art-contenuto p{font-family:var(--font-lettura);font-size:1.16rem;line-height:1.62;
+  margin-bottom:0;text-indent:1.4em;color:var(--testo);opacity:.95;hyphens:auto}
+.art-contenuto p.attacco,.art-contenuto h3+p,.art-contenuto blockquote+p,
+.art-contenuto figure+p,.art-contenuto .estratta+p{text-indent:0}
+.art-contenuto p.attacco{font-size:1.28rem;margin-bottom:0}
+.art-contenuto p.attacco::first-line{font-variant-caps:small-caps;letter-spacing:.04em}
+.art-contenuto h3.capitolo{font-family:var(--font-mono);font-weight:700;font-size:.72rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--testo);
+  margin:2.4rem 0 1rem;padding-top:1rem;border-top:2px solid var(--testo);
+  display:flex;align-items:baseline;gap:.7rem;scroll-margin-top:6rem}
+.art-contenuto h3.capitolo .num{color:var(--menta-s)}
+.art-contenuto h3.capitolo .min{margin-left:auto;opacity:.6;font-weight:400}
+.art-contenuto blockquote{margin:1.8rem 0;padding:0 0 0 1.1rem;
+  border-left:4px solid var(--menta);font-family:var(--font-display);font-weight:600;
+  font-size:clamp(1.2rem,4vw,1.5rem);line-height:1.24;letter-spacing:-.025em}
+.estratta{margin:2.2rem 0;padding:1.4rem 0;background:none;border-top:2px solid var(--testo);
+  border-bottom:2px solid var(--testo);border-radius:0;
+  font-family:var(--font-display);font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.35rem,5vw,1.9rem);line-height:1.16;text-wrap:balance}
+.estratta::before{display:none}
+.art-contenuto mark{background:linear-gradient(180deg,transparent 55%,var(--menta) 55%)}
+
+/* piede: indietro e prossimo, grandi e chiari */
+.art-piede{max-width:38rem;margin:0 auto;padding:1.6rem 1.2rem 4rem;display:grid;gap:.7rem}
+.art-grosso{width:100%;text-align:left;border:0;cursor:pointer;padding:1.1rem 1.2rem;
+  font-family:var(--font-mono);font-size:.78rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;line-height:1.4}
+.art-grosso.avanti{background:var(--testo);color:var(--sup)}
+.art-grosso.indietro{background:var(--sup2);color:var(--testo)}
+.art-grosso .fr{float:right}
+.suggerimento-gesti{max-width:38rem;margin:0 auto;padding:0 1.2rem 2rem;
+  font-family:var(--font-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--testo2);text-align:center}
+
+.numeri{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;
+  padding:.2rem .2rem 1rem;overflow-x:auto;scrollbar-width:none}
+.numeri::-webkit-scrollbar{display:none}
+.num-eti{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--testo2);margin-right:.25rem;flex:0 0 auto}
+.numeri .num{display:flex;flex-direction:column;align-items:flex-start;gap:.1rem;
+  border:0;cursor:pointer;border-radius:12px;padding:.42rem .7rem;flex:0 0 auto;
+  background:var(--sup);box-shadow:var(--ombra);color:var(--testo2);
+  transition:transform .18s,background .18s,color .18s}
+.numeri .num b{font-family:var(--font-display);font-weight:600;font-size:.95rem;line-height:1}
+.numeri .num i{font-style:normal;font-family:var(--font-mono);font-size:.55rem;
+  letter-spacing:.1em;opacity:.75;line-height:1}
+.numeri .num:hover{transform:translateY(-1px);color:var(--testo)}
+.numeri .num[aria-pressed="true"]{background:var(--menta);color:var(--menta-s)}
+.art-resta{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;
+  color:var(--testo2);white-space:nowrap;margin-left:.5rem}
+.art-contenuto mark.forte{background:linear-gradient(180deg,transparent 52%,var(--menta) 52%);
+  padding:0 .05em;font-weight:500}
+.mosaico{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);
+  gap:.4rem;margin:0 0 2rem}
+/* le foto dentro l'articolo: alcune escono a tutta larghezza, altre
+   stanno a lato e il testo ci gira intorno, come in una rivista. */
+.scatto-box{margin:1.8rem 0}
+.scatto-box.larga{margin-left:calc(-1 * var(--fuori,1.1rem));
+  margin-right:calc(-1 * var(--fuori,1.1rem))}
+.scatto-box.larga img{border-radius:0}
+@media(min-width:760px){
+  .scatto-box.flotta{float:right;width:44%;margin:.4rem 0 1.1rem 1.6rem;shape-margin:1rem}
+  .scatto-box.flotta.sinistra{float:left;margin:.4rem 1.6rem 1.1rem 0}
+  .scatto-box.flotta img{border-radius:16px}
+  .art-contenuto::after{content:"";display:block;clear:both}
+}
+hr.stacco{border:0;height:1px;background:var(--bordo2);margin:2.6rem auto;width:38%}
+.mosaico img{width:100%;height:100%;object-fit:cover;border-radius:10px;
+  aspect-ratio:1/1;filter:saturate(.92) contrast(1.03);display:block}
+/* nell'editoriale le istantanee diventano tonde, come una fila di volti */
+.mosaico.tonda{gap:.7rem}
+.mosaico.tonda img{border-radius:50%}
+/* EDITORIALE — sempre in cima, a tutta larghezza, senza foto: e` la voce
+   della redazione, non un articolo come gli altri. */
+.post.f-editoriale{column-span:all;background:var(--testo);color:var(--sup);
+  border-radius:26px;padding:1.6rem 1.5rem 1.3rem;margin-bottom:1.3rem;box-shadow:var(--ombra-alta)}
+.ed-eti{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--menta);display:block;margin-bottom:.5rem}
+.ed-tit{font-family:var(--font-display);font-weight:600;letter-spacing:-.035em;
+  font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1;color:var(--sup);
+  background:none;border:0;padding:0;cursor:pointer;text-align:left;width:100%}
+.ed-tit:hover{color:var(--menta)}
+.ed-somm{margin-top:.7rem;font-size:.92rem;line-height:1.5;color:#CFCBC2;max-width:56ch}
+.ed-piede{display:flex;align-items:center;gap:.9rem;margin-top:1.1rem;
+  padding-top:.9rem;border-top:1px solid rgba(255,255,255,.14)}
+.ed-chi{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#9C9890}
+.ed-leggi{margin-left:auto;background:var(--menta);color:#0B1F14;border:0;border-radius:99px;
+  padding:.42rem .9rem;font-weight:700;font-size:.76rem;cursor:pointer}
+.ed-leggi:hover{transform:translateY(-1px)}
+
+/* il titolo e` un pulsante: qualche browser gli mette il fondo grigio suo */
+.post .f-tit,.post .f-tit:focus{background:transparent!important;box-shadow:none;
+  -webkit-appearance:none;appearance:none}
+/* la scheda senza foto: un filetto nel colore dell'ateneo, niente fondi */
+.f-corpo.stretta{padding:1.4rem 1.3rem 1rem}
+.f-corpo.stretta::before{content:"";display:block;width:34px;height:3px;border-radius:99px;
+  background:var(--ateneo);margin-bottom:.9rem}

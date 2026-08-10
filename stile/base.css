@@ -1,0 +1,209 @@
+/* ERUA connect — base.css
+
+   Fondamenta: palette chiara e notturna, caratteri, intestazione,
+   navigazione fra sezioni, fondo animato, elementi comuni.
+
+   Ricavato da index.html, righe 10-196 del file unico.
+   Vedi riferimento.md §2.4. */
+
+:root{
+  /* CHIARO — carta calda, ombre morbide, nessun bordo duro */
+  --bg:#F6F2EC; --sup:#FFFDFA; --sup2:#F1ECE4;
+  --bordo:rgba(32,32,29,.07); --bordo2:rgba(32,32,29,.13);
+  --testo:#20201D; --testo2:#7A776F;
+  --live:#1E7A54; --live-pieno:#A8E6C9;
+  --cuore:#C0405C;
+  --ombra:0 2px 4px rgba(60,50,40,.03), 0 8px 24px rgba(60,50,40,.06);
+  --ombra-alta:0 4px 8px rgba(60,50,40,.05), 0 18px 44px rgba(60,50,40,.11);
+  --vetro:rgba(246,242,236,.86);
+  --menta:#A8E6C9; --lavanda:#CFC4F7; --pesca:#FFC9A8; --cielo:#A9D3FF; --rosa:#FFC0CE; --sabbia:#E7E0D5;
+  --menta-s:#1E7A54; --lavanda-s:#5B45B8; --pesca-s:#A85A26; --cielo-s:#255E9E; --rosa-s:#A33A55; --sabbia-s:#6B5F4E;
+  --anello:linear-gradient(140deg,#A8E6C9,#CFC4F7 55%,#FFC9A8);
+  --font-display:"Fraunces",Georgia,serif;
+  --font-sans:"Inter",system-ui,sans-serif;
+  --font-lettura:"Source Serif 4",Georgia,serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r:26px;
+}
+/* NOTTE — non e` il chiaro rovesciato. La carta calda diventa inchiostro
+   bluastro, i pastelli si abbassano perche` su fondo scuro gridano, il
+   testo non e` bianco puro (stanca) e le foto si spengono di un soffio. */
+html[data-tema="scuro"]{
+  --bg:#12141A; --sup:#1A1D25; --sup2:#222630;
+  --bordo:rgba(255,255,255,.06); --bordo2:rgba(255,255,255,.12);
+  --testo:#E6E3DC; --testo2:#8D93A1;
+  --live:#7FD3A8; --live-pieno:#7FD3A8;
+  --cuore:#E8A6B4;
+  --ombra:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.34);
+  --ombra-alta:0 4px 12px rgba(0,0,0,.5), 0 24px 60px rgba(0,0,0,.5);
+  --vetro:rgba(18,20,26,.9);
+  /* pastelli di notte: stessa tinta, meno luce */
+  --menta:#2F6B52; --lavanda:#453C6B; --pesca:#6E4A34; --cielo:#2C4A6B;
+  --rosa:#6B3A46; --sabbia:#3A3730;
+  --menta-s:#9BE0BE; --lavanda-s:#C3B8F0; --pesca-s:#F0BE9C; --cielo-s:#9FC9F0; --rosa-s:#F0B4C2;
+}
+html[data-tema="scuro"] img{filter:brightness(.88) contrast(1.02)}
+html[data-tema="scuro"] .scatto-art,html[data-tema="scuro"] .f-foto img{
+  filter:brightness(.84) saturate(.86) contrast(1.05)}
+/* il riquadro dell'editoriale di notte si rovescia: chiaro su scuro non serve */
+html[data-tema="scuro"] .post.f-editoriale{background:var(--sup2);color:var(--testo);
+  border:1px solid var(--bordo2)}
+html[data-tema="scuro"] .ed-tit{color:var(--testo)}
+html[data-tema="scuro"] .ed-somm{color:var(--testo2)}
+html[data-tema="scuro"] .ed-eti{color:var(--menta-s)}
+html[data-tema="scuro"] .ed-leggi{background:var(--menta-s);color:#0B1F14}
+/* la scheda d'inchiostro di notte non puo` essere nera su nero */
+html[data-tema="scuro"] .post.f-inchiostro{background:var(--sup2);border:1px solid var(--bordo2)}
+html[data-tema="scuro"] .post.f-inchiostro .f-tit{color:var(--testo)}
+html[data-tema="scuro"] .art-contenuto mark,html[data-tema="scuro"] .art-contenuto mark.forte{
+  background:linear-gradient(180deg,transparent 52%,rgba(155,224,190,.28) 52%);color:inherit}
+.macchie{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.macchie svg{position:absolute;filter:blur(40px);opacity:.5}
+html[data-tema="scuro"] .macchie svg{opacity:.26}
+.m1{top:-8rem;left:-9rem;width:34rem;height:34rem;animation:vaga 22s ease-in-out infinite}
+.m2{top:24rem;right:-12rem;width:36rem;height:36rem;animation:vaga 27s ease-in-out infinite reverse}
+.m3{bottom:-14rem;left:18%;width:32rem;height:32rem;animation:vaga 31s ease-in-out infinite}
+@keyframes vaga{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(2rem,-1.5rem) scale(1.08)}}
+header,nav.tabs,.pannello,footer,.lettore,.lente,.storie-viewer,.sc-foglio,.sc-piu,.toast{position:relative;z-index:1}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  background:var(--bg);color:var(--testo);
+  font-family:var(--font-sans);font-size:.95rem;line-height:1.6;
+  padding-bottom:2.4rem;
+}
+/* quando il lettore podcast e` agganciato in basso, il contenuto gli lascia spazio */
+body.pod-aperta{padding-bottom:9rem}
+::selection{background:var(--testo);color:var(--sup)}
+button{font:inherit;cursor:pointer;color:inherit}
+input,select,textarea{font:inherit;color:var(--testo)}
+.display{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:60;
+  background:var(--vetro);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--bordo);
+  display:flex;align-items:center;justify-content:space-between;gap:.7rem;padding:.7rem 1rem;
+}
+.logo{display:flex;align-items:center;gap:.55rem;min-width:0;text-decoration:none;color:inherit}
+.logo .simbolo{height:34px;width:auto;flex:0 0 auto;display:block}
+.logo .onda{opacity:.35}
+.logo .o1{animation:pulsaOnda 2.6s ease-in-out infinite}
+.logo .o2{animation:pulsaOnda 2.6s ease-in-out .35s infinite}
+@keyframes pulsaOnda{0%,100%{opacity:.22}45%{opacity:1}}
+.logo .lockup{display:flex;flex-direction:column;line-height:1;min-width:0}
+.logo .lockup b{font-family:var(--font-sans);font-weight:800;font-size:1.2rem;
+  letter-spacing:.03em;color:var(--testo)}
+.logo .lockup i{font-style:normal;font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-weight:400;font-size:.74rem;letter-spacing:.2em;color:var(--menta-s);
+  margin-top:.22rem;display:flex;align-items:center}
+.logo .lockup i::after{content:"";width:.5em;height:1.05em;background:var(--menta-s);
+  margin-left:.12em;animation:cursore 1.15s steps(1) infinite}
+@keyframes cursore{0%,49%{opacity:1}50%,100%{opacity:0}}
+.logo .display{font-size:1.3rem;letter-spacing:-.04em}
+.destra{display:flex;align-items:center;gap:.5rem}
+.xp-chip{display:flex;align-items:center;gap:.5rem;background:var(--sup);border:1px solid var(--bordo);border-radius:99px;font-size:.72rem;font-weight:700;padding:.3rem .7rem;white-space:nowrap}
+.xp-chip .fiamma{color:#FF7A00}
+@media(max-width:420px){.xp-chip .fiamma{display:none}}
+.btn-tema{width:2.3rem;height:2.3rem;border-radius:50%;background:var(--sup);
+  box-shadow:var(--ombra);border:0;color:var(--testo);font-size:.95rem;
+  display:grid;place-items:center;flex:0 0 auto}
+.btn-tema:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+#lang-box{position:relative}
+#lang-btn{display:flex;align-items:center;gap:.35rem;background:var(--sup);border:1px solid var(--bordo);
+  border-radius:99px;font-size:.75rem;font-weight:700;padding:.32rem .75rem;color:var(--testo)}
+#lang-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6}
+#lang-btn:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+#lang-menu{position:absolute;right:0;top:calc(100% + .5rem);z-index:70;
+  background:var(--sup);border:1px solid var(--bordo2);border-radius:18px;padding:.5rem;
+  display:flex;flex-direction:column;gap:.1rem;min-width:214px;
+  max-height:min(70vh,440px);overflow-y:auto;overscroll-behavior:contain;
+  box-shadow:var(--ombra-alta)}
+#lang-menu[hidden]{display:none}
+#lang-menu button{display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  width:100%;text-align:left;font-family:var(--font-sans);font-size:.9rem;font-weight:600;
+  line-height:1.2;padding:.55rem .7rem;border-radius:12px;background:none;border:0;
+  color:var(--testo);white-space:nowrap;cursor:pointer;transition:background .12s ease,color .12s ease}
+#lang-menu button:hover{background:var(--sup2)}
+#lang-menu button[aria-pressed="true"]{background:var(--menta);color:var(--menta-s)}
+#lang-menu button[aria-pressed="true"]::after{content:"\2713";font-size:.8rem;font-weight:700;opacity:.85}
+#lang-menu button:focus-visible{outline:2px solid var(--live);outline-offset:-2px}
+.lang-nota{display:flex;gap:.5rem;align-items:flex-start;margin:.05rem .3rem .35rem;
+  padding:.1rem .05rem .55rem;border-bottom:1px solid var(--bordo2)}
+.lang-nota-badge{flex:0 0 auto;margin-top:.05rem;font-family:var(--font-mono);font-size:.56rem;
+  font-weight:700;letter-spacing:.03em;line-height:1;padding:.22rem .32rem;border-radius:6px;
+  background:var(--menta);color:var(--menta-s)}
+.lang-nota-eyebrow{display:block;font-family:var(--font-mono);font-size:.55rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--testo2)}
+.lang-nota-testo{display:block;margin-top:.15rem;font-size:.75rem;line-height:1.35;color:var(--testo2)}
+/* la barra di Google Translate non deve spostare la pagina */
+body{top:0 !important}
+.skiptranslate iframe{display:none !important}
+
+/* TABS — in alto su tutti gli schermi, subito sotto la testata */
+nav.tabs{
+  position:sticky;top:3.3rem;z-index:50;display:flex;
+  background:var(--vetro);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--bordo);
+  padding:.45rem .6rem;
+  overflow-x:auto;scrollbar-width:none;gap:.25rem;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+.tab-btn{
+  background:none;border:0;color:var(--testo2);flex:0 0 auto;
+  display:flex;flex-direction:row;align-items:center;gap:.4rem;
+  font-size:.74rem;font-weight:600;padding:.4rem .85rem;border-radius:99px;
+  white-space:nowrap;
+}
+.tab-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tab-btn[aria-selected="true"]{background:var(--menta);color:var(--menta-s)}
+.tab-btn:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+@media(min-width:820px){
+  nav.tabs{justify-content:center;gap:.3rem;padding:.5rem 1rem;overflow:visible}
+  .tab-btn{font-size:.83rem;padding:.42rem 1rem}
+  .tab-btn svg{width:18px;height:18px}
+}
+
+/* PANNELLI */
+.pannello{display:none;max-width:1600px;margin:0 auto;padding:1.1rem 1rem 3rem}
+.pannello.attivo{display:block;animation:entra .18s ease}
+@keyframes entra{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}
+.intesta{margin:.5rem 0 1rem}
+.intesta .display{font-size:clamp(1.5rem,4vw,2rem)}
+.intesta p{color:var(--testo2);font-size:.85rem;margin-top:.1rem}
+.demo-mini{font-size:.62rem;font-weight:700;color:var(--testo2);border:1px solid var(--bordo2);border-radius:99px;padding:.14rem .55rem;white-space:nowrap}
+
+/* CHIPS FILTRO */
+.chips{display:flex;gap:.45rem;overflow-x:auto;padding:.1rem .1rem .9rem;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;background:var(--sup);border:0;box-shadow:var(--ombra);border-radius:99px;
+  font-size:.82rem;font-weight:500;color:var(--testo2);padding:.5rem 1.1rem;
+  transition:transform .14s ease;
+}
+.chip:hover{transform:translateY(-1px)}
+.chip[aria-pressed="true"]{background:var(--sf,var(--menta));color:var(--sc,var(--menta-s));font-weight:600}
+.chip:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+
+.barra-feed{display:flex;gap:.45rem;margin-bottom:.9rem}
+
+/* AVVISO DI TRADUZIONE AUTOMATICA (P7)
+   Compare sotto l'intestazione quando la lingua scelta non è quella in
+   cui i contenuti sono scritti. Deve essere leggibile ma non gridare:
+   è un'informazione dovuta, non un allarme. Il fondo sabbia lo stacca
+   dalla pagina senza usare il rosso, che qui significherebbe errore. */
+.avviso-traduzione{
+  margin:0;padding:.5rem 1.1rem;
+  background:var(--sabbia);color:var(--sabbia-s);
+  font-family:var(--font-mono);font-size:.68rem;line-height:1.5;
+  letter-spacing:.02em;text-align:center;
+  border-bottom:1px solid var(--bordo);
+  position:relative;z-index:1}
+.avviso-traduzione[hidden]{display:none}
+@media (max-width:640px){ .avviso-traduzione{font-size:.62rem;padding:.45rem .8rem} }
