@@ -212,6 +212,23 @@ function componiArticoli() {
 
 /* ── comandi ───────────────────────────────────────────────────────── */
 document.addEventListener('click', async e => {
+  /* le due voci in cima: leggere oppure ascoltare. Il comando sta qui e
+     non in `ascolta.js`, perché è proprio questo clic a far scaricare
+     quel modulo. */
+  const m = e.target.closest('#modi-mag .modo-mag');
+  if (m) {
+    const quale = m.dataset.mag;
+    document.querySelectorAll('#modi-mag .modo-mag').forEach(b => {
+      const on = b === m;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-selected', String(on));
+    });
+    document.getElementById('mag-leggi').hidden = quale !== 'leggi';
+    document.getElementById('mag-ascolta').hidden = quale !== 'ascolta';
+    if (quale === 'ascolta') (await chiedi('ascolta')).avvia();
+    return;
+  }
+
   const leggi = e.target.closest('.leggi-art');
   if (leggi) { (await chiedi('articolo')).apri(leggi.dataset.id); return; }
 
