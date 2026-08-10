@@ -20,6 +20,13 @@
    "quanti": 0,
    "messaggio": "nessuna fonte: elenco vuoto per scelta",
    "durataSecondi": null
+  },
+  "costi": {
+   "quando": "2026-08-10T22:59:46.336Z",
+   "esito": "fatto",
+   "quanti": 47,
+   "messaggio": "anno 2024",
+   "durataSecondi": 1
   }
  }
 }

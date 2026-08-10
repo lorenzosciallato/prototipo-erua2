@@ -1,0 +1,525 @@
+{
+ "versione": 1,
+ "aggiornato": "2026-08-10T22:59:46.330Z",
+ "fonte": "Eurostat — livelli comparativi dei prezzi (prc_ppp_ind), 2024, UE27 = 100",
+ "note": "Indici, non cifre in euro: servono a confrontare due paesi, non a stimare una spesa. Riuso consentito con attribuzione, che va mostrata accanto ai numeri.",
+ "elementi": [
+  {
+   "paese": "AL",
+   "nome": "Albania",
+   "voci": {
+    "alloggio": 51.6,
+    "spesa": 100.1,
+    "trasporti": 85.3,
+    "fuori": 52.3
+   },
+   "completo": true
+  },
+  {
+   "paese": "AT",
+   "nome": "Austria",
+   "voci": {
+    "alloggio": 113.3,
+    "spesa": 110.5,
+    "trasporti": 109.1,
+    "fuori": 110
+   },
+   "completo": true
+  },
+  {
+   "paese": "BE",
+   "nome": "Belgium",
+   "voci": {
+    "alloggio": 130.8,
+    "spesa": 105.3,
+    "trasporti": 108.4,
+    "fuori": 124.2
+   },
+   "completo": true
+  },
+  {
+   "paese": "BA",
+   "nome": "Bosnia and Herzegovina",
+   "voci": {
+    "alloggio": 31,
+    "spesa": 83.2,
+    "trasporti": 91.1,
+    "fuori": 74.6
+   },
+   "completo": true
+  },
+  {
+   "paese": "BG",
+   "nome": "Bulgaria",
+   "voci": {
+    "alloggio": 38.1,
+    "spesa": 88.8,
+    "trasporti": 72,
+    "fuori": 53.2
+   },
+   "completo": true
+  },
+  {
+   "paese": "CPC1",
+   "nome": "Candidate and potential candidate countries except Türkiye and Kosovo* (under United Nations Security Council Resolution 1244/99)",
+   "voci": {
+    "alloggio": 38.9,
+    "spesa": 90,
+    "trasporti": 82.2,
+    "fuori": 65
+   },
+   "completo": true
+  },
+  {
+   "paese": "HR",
+   "nome": "Croatia",
+   "voci": {
+    "alloggio": 44,
+    "spesa": 103.7,
+    "trasporti": 84.6,
+    "fuori": 95.4
+   },
+   "completo": true
+  },
+  {
+   "paese": "CY",
+   "nome": "Cyprus",
+   "voci": {
+    "alloggio": 92.1,
+    "spesa": 104.7,
+    "trasporti": 87.7,
+    "fuori": 89
+   },
+   "completo": true
+  },
+  {
+   "paese": "CZ",
+   "nome": "Czechia",
+   "voci": {
+    "alloggio": 103.3,
+    "spesa": 89,
+    "trasporti": 83.4,
+    "fuori": 74.1
+   },
+   "completo": true
+  },
+  {
+   "paese": "DK",
+   "nome": "Denmark",
+   "voci": {
+    "alloggio": 185.5,
+    "spesa": 120.2,
+    "trasporti": 125,
+    "fuori": 147.6
+   },
+   "completo": true
+  },
+  {
+   "paese": "EE",
+   "nome": "Estonia",
+   "voci": {
+    "alloggio": 97.4,
+    "spesa": 106.2,
+    "trasporti": 95.6,
+    "fuori": 98.3
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA11",
+   "nome": "Euro area - 11 countries (1999-2000)",
+   "voci": {
+    "alloggio": 111.4,
+    "spesa": 103.2,
+    "trasporti": 103.5,
+    "fuori": 103
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA12",
+   "nome": "Euro area - 12 countries (2001-2006)",
+   "voci": {
+    "alloggio": 110.1,
+    "spesa": 103.2,
+    "trasporti": 103.1,
+    "fuori": 102.2
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA13",
+   "nome": "Euro area - 13 countries (2007)",
+   "voci": {
+    "alloggio": 109.9,
+    "spesa": 103.2,
+    "trasporti": 103,
+    "fuori": 102.2
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA15",
+   "nome": "Euro area - 15 countries (2008)",
+   "voci": {
+    "alloggio": 109.8,
+    "spesa": 103.2,
+    "trasporti": 102.9,
+    "fuori": 102.1
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA16",
+   "nome": "Euro area - 16 countries (2009-2010)",
+   "voci": {
+    "alloggio": 109.4,
+    "spesa": 102.9,
+    "trasporti": 102.9,
+    "fuori": 102
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA17",
+   "nome": "Euro area - 17 countries (2011-2013)",
+   "voci": {
+    "alloggio": 109.3,
+    "spesa": 102.9,
+    "trasporti": 102.8,
+    "fuori": 102
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA18",
+   "nome": "Euro area - 18 countries (2014)",
+   "voci": {
+    "alloggio": 109.1,
+    "spesa": 102.9,
+    "trasporti": 102.8,
+    "fuori": 101.9
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA19",
+   "nome": "Euro area - 19 countries  (2015-2022)",
+   "voci": {
+    "alloggio": 108.8,
+    "spesa": 102.9,
+    "trasporti": 102.6,
+    "fuori": 101.9
+   },
+   "completo": true
+  },
+  {
+   "paese": "EA20",
+   "nome": "Euro area – 20 countries (2023-2025)",
+   "voci": {
+    "alloggio": 108,
+    "spesa": 102.9,
+    "trasporti": 102.5,
+    "fuori": 101.8
+   },
+   "completo": true
+  },
+  {
+   "paese": "EU27_2020",
+   "nome": "European Union - 27 countries (from 2020)",
+   "voci": {
+    "alloggio": 100,
+    "spesa": 100,
+    "trasporti": 100,
+    "fuori": 100
+   },
+   "completo": true
+  },
+  {
+   "paese": "FI",
+   "nome": "Finland",
+   "voci": {
+    "alloggio": 129,
+    "spesa": 109.8,
+    "trasporti": 111.8,
+    "fuori": 126.8
+   },
+   "completo": true
+  },
+  {
+   "paese": "FR",
+   "nome": "France",
+   "voci": {
+    "alloggio": 122.5,
+    "spesa": 110.1,
+    "trasporti": 108.9,
+    "fuori": 110
+   },
+   "completo": true
+  },
+  {
+   "paese": "DE",
+   "nome": "Germany",
+   "voci": {
+    "alloggio": 113.1,
+    "spesa": 102.7,
+    "trasporti": 109.7,
+    "fuori": 112.1
+   },
+   "completo": true
+  },
+  {
+   "paese": "EL",
+   "nome": "Greece",
+   "voci": {
+    "alloggio": 70.5,
+    "spesa": 105.8,
+    "trasporti": 90.1,
+    "fuori": 86.4
+   },
+   "completo": true
+  },
+  {
+   "paese": "HU",
+   "nome": "Hungary",
+   "voci": {
+    "alloggio": 61.1,
+    "spesa": 94.8,
+    "trasporti": 80.8,
+    "fuori": 71.8
+   },
+   "completo": true
+  },
+  {
+   "paese": "IS",
+   "nome": "Iceland",
+   "voci": {
+    "alloggio": 164,
+    "spesa": 143.9,
+    "trasporti": 135.7,
+    "fuori": 167.3
+   },
+   "completo": true
+  },
+  {
+   "paese": "IE",
+   "nome": "Ireland",
+   "voci": {
+    "alloggio": 187.3,
+    "spesa": 114.5,
+    "trasporti": 108.7,
+    "fuori": 129.3
+   },
+   "completo": true
+  },
+  {
+   "paese": "IT",
+   "nome": "Italy",
+   "voci": {
+    "alloggio": 93.4,
+    "spesa": 101.7,
+    "trasporti": 95.7,
+    "fuori": 106.9
+   },
+   "completo": true
+  },
+  {
+   "paese": "LV",
+   "nome": "Latvia",
+   "voci": {
+    "alloggio": 55,
+    "spesa": 105.4,
+    "trasporti": 83.2,
+    "fuori": 90.9
+   },
+   "completo": true
+  },
+  {
+   "paese": "LT",
+   "nome": "Lithuania",
+   "voci": {
+    "alloggio": 59.7,
+    "spesa": 101.2,
+    "trasporti": 81.6,
+    "fuori": 86.1
+   },
+   "completo": true
+  },
+  {
+   "paese": "LU",
+   "nome": "Luxembourg",
+   "voci": {
+    "alloggio": 178.4,
+    "spesa": 124.8,
+    "trasporti": 96.4,
+    "fuori": 123.6
+   },
+   "completo": true
+  },
+  {
+   "paese": "MT",
+   "nome": "Malta",
+   "voci": {
+    "alloggio": 80.1,
+    "spesa": 112.2,
+    "trasporti": 82.6,
+    "fuori": 88.7
+   },
+   "completo": true
+  },
+  {
+   "paese": "ME",
+   "nome": "Montenegro",
+   "voci": {
+    "alloggio": 39.6,
+    "spesa": 84.4,
+    "trasporti": 78.6,
+    "fuori": 65.5
+   },
+   "completo": true
+  },
+  {
+   "paese": "NL",
+   "nome": "Netherlands",
+   "voci": {
+    "alloggio": 129.8,
+    "spesa": 98.9,
+    "trasporti": 112.9,
+    "fuori": 124.6
+   },
+   "completo": true
+  },
+  {
+   "paese": "MK",
+   "nome": "North Macedonia",
+   "voci": {
+    "alloggio": 37.8,
+    "spesa": 73.4,
+    "trasporti": 66.5,
+    "fuori": 49.5
+   },
+   "completo": true
+  },
+  {
+   "paese": "NO",
+   "nome": "Norway",
+   "voci": {
+    "alloggio": 99.9,
+    "spesa": 131.2,
+    "trasporti": 117.5,
+    "fuori": 140
+   },
+   "completo": true
+  },
+  {
+   "paese": "PL",
+   "nome": "Poland",
+   "voci": {
+    "alloggio": 49.2,
+    "spesa": 86.8,
+    "trasporti": 79.6,
+    "fuori": 91.7
+   },
+   "completo": true
+  },
+  {
+   "paese": "PT",
+   "nome": "Portugal",
+   "voci": {
+    "alloggio": 80.1,
+    "spesa": 101.5,
+    "trasporti": 89.2,
+    "fuori": 75.5
+   },
+   "completo": true
+  },
+  {
+   "paese": "RO",
+   "nome": "Romania",
+   "voci": {
+    "alloggio": 52,
+    "spesa": 75.5,
+    "trasporti": 78.5,
+    "fuori": 68.5
+   },
+   "completo": true
+  },
+  {
+   "paese": "RS",
+   "nome": "Serbia",
+   "voci": {
+    "alloggio": 39.2,
+    "spesa": 96.4,
+    "trasporti": 83.2,
+    "fuori": 68.2
+   },
+   "completo": true
+  },
+  {
+   "paese": "SK",
+   "nome": "Slovakia",
+   "voci": {
+    "alloggio": 81.4,
+    "spesa": 83.4,
+    "trasporti": 87.9,
+    "fuori": 91.3
+   },
+   "completo": true
+  },
+  {
+   "paese": "SI",
+   "nome": "Slovenia",
+   "voci": {
+    "alloggio": 77.8,
+    "spesa": 100,
+    "trasporti": 87.6,
+    "fuori": 90.1
+   },
+   "completo": true
+  },
+  {
+   "paese": "ES",
+   "nome": "Spain",
+   "voci": {
+    "alloggio": 96.5,
+    "spesa": 95.2,
+    "trasporti": 87.4,
+    "fuori": 83.9
+   },
+   "completo": true
+  },
+  {
+   "paese": "SE",
+   "nome": "Sweden",
+   "voci": {
+    "alloggio": 112,
+    "spesa": 106.4,
+    "trasporti": 111.1,
+    "fuori": 116.7
+   },
+   "completo": true
+  },
+  {
+   "paese": "CH",
+   "nome": "Switzerland",
+   "voci": {
+    "alloggio": 214.4,
+    "spesa": 158.5,
+    "trasporti": 126.9,
+    "fuori": 170.8
+   },
+   "completo": true
+  },
+  {
+   "paese": "TR",
+   "nome": "Türkiye",
+   "voci": {
+    "alloggio": 24.1,
+    "spesa": 76.7,
+    "trasporti": 76.4,
+    "fuori": 68.9
+   },
+   "completo": true
+  }
+ ]
+}
