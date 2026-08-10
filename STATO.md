@@ -64,7 +64,7 @@ Ultimo salvataggio: **10/08/2026 alle 20:30** — file toccato: `moduli/aula.js`
 | `index.html` | 5356 | 796K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 179 | 8.0K |
-| `moduli/aula.js` | 817 | 44K |
+| `moduli/aula.js` | 842 | 44K |
 | `moduli/navigazione.js` | 97 | 4.0K |
 | `moduli/notizie.js` | 101 | 8.0K |
 | `moduli/nucleo.js` | 231 | 12K |

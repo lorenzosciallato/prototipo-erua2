@@ -815,3 +815,28 @@ auEl('tr-stampa').addEventListener('click',()=>{
   auStampa(T('Trascrizione','Transcription'),h);
 });
 
+/* ── avvio e apertura ──────────────────────────────────────────────
+   L'aula non ha un pannello proprio: si apre da dentro la didattica.
+   `avvia` scarica soltanto l'indice delle trascrizioni, che è minuscolo;
+   il testo di una lezione arriva quando quella lezione si apre. */
+let avviata = false;
+export async function avvia() {
+  if (avviata) return;
+  avviata = true;
+  try {
+    INDICE_TR = await dati('trascrizioni/indice');
+  } catch (err) {
+    /* senza indice l'aula funziona lo stesso: resta senza trascrizioni,
+       e lo scomparto non compare (riferimento.md §2.2). */
+    console.error('indice delle trascrizioni non caricato:', err);
+    INDICE_TR = {};
+  }
+}
+
+export async function apri(o) {
+  await avvia();
+  apriAula(o);
+}
+
+offre('aula', { avvia, apri, chiudi: chiudiAula });
+
