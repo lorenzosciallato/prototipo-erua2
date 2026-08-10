@@ -15,7 +15,7 @@
    nell'ordine in cui l'utente la apre (riferimento.md §2.4).
 */
 
-import { CONFIG, CITTA, LOGHI } from '../configurazione.js';
+import { CONFIG, ATENEI, CITTA, LOGHI } from '../configurazione.js';
 
 /* ── lingua dei contenuti ──────────────────────────────────────────
    Distinta dalla lingua dell'interfaccia. I contenuti della rivista e
