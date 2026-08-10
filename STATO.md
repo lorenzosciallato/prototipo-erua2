@@ -154,7 +154,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **11/08/2026 alle 01:18** — file toccato: `moduli/move.js`
+Ultimo salvataggio: **11/08/2026 alle 01:19** — file toccato: `stile/move.css`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -166,9 +166,10 @@ Ultimo salvataggio: **11/08/2026 alle 01:18** — file toccato: `moduli/move.js`
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 429 | 20K |
 | `moduli/lingua.js` | 164 | 8.0K |
-| `moduli/navigazione.js` | 97 | 4.0K |
+| `moduli/move.js` | 290 | 16K |
+| `moduli/navigazione.js` | 98 | 4.0K |
 | `moduli/notizie.js` | 102 | 8.0K |
-| `moduli/nucleo.js` | 266 | 16K |
+| `moduli/nucleo.js` | 267 | 16K |
 | `moduli/rivista.js` | 294 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |
