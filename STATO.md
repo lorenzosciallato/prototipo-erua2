@@ -56,7 +56,7 @@ un utente, di leggere i dati di un altro, che deve fallire.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 20:17** — file toccato: `moduli/nucleo.js`
+Ultimo salvataggio: **10/08/2026 alle 20:22** — file toccato: `moduli/notizie.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
