@@ -582,7 +582,9 @@ const SCR_PANNS={prof:['video','tr','board'],stud:['video']};
    non c'e' proprio (niente scheda, niente occhio nel dock). --- */
 function auHaTrans(){
   if(AULA.dive)return false;
-  return typeof ST_TRANS!=='undefined' && !!ST_TRANS[auTransKey()];
+  /* si guarda l'indice, non il testo: sapere *se* la trascrizione
+     esiste non deve costare il suo scaricamento */
+  return !!INDICE_TR[auTransKey()];
 }
 function pannList(){
   const base=SCR_PANNS[AULA.amb]||['video'];
