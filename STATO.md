@@ -158,19 +158,19 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **11/08/2026 alle 01:32** — file toccato: `robot/loghi.js`
+Ultimo salvataggio: **11/08/2026 alle 01:40** — file toccato: `stile/move.css`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `configurazione.js` | 300 | 16K |
-| `index.html` | 392 | 28K |
+| `index.html` | 402 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 429 | 20K |
 | `moduli/lingua.js` | 164 | 8.0K |
-| `moduli/move.js` | 290 | 16K |
+| `moduli/move.js` | 362 | 16K |
 | `moduli/navigazione.js` | 98 | 4.0K |
 | `moduli/notizie.js` | 102 | 8.0K |
 | `moduli/nucleo.js` | 267 | 16K |
@@ -189,14 +189,15 @@ Ultimo salvataggio: **11/08/2026 alle 01:32** — file toccato: `robot/loghi.js`
 | `robot/costi.js` | 136 | 8.0K |
 | `robot/destinazioni.js` | 205 | 12K |
 | `robot/didattica.js` | 101 | 8.0K |
+| `robot/loghi.js` | 315 | 16K |
 | `robot/notizie.js` | 150 | 8.0K |
 | `robot/studenti.js` | 87 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
 | `stile/aula.css` | 457 | 32K |
-| `stile/base.css` | 209 | 12K |
+| `stile/base.css` | 217 | 12K |
 | `stile/didattica.css` | 163 | 12K |
-| `stile/move.css` | 115 | 8.0K |
+| `stile/move.css` | 168 | 12K |
 | `stile/notizie.css` | 132 | 12K |
 | `stile/rivista.css` | 100 | 8.0K |
 | `stile/sociale.css` | 549 | 40K |
