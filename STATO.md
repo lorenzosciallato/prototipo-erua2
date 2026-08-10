@@ -121,7 +121,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 21:24** — file toccato: `moduli/nucleo.js`
+Ultimo salvataggio: **10/08/2026 alle 21:25** — file toccato: `robot/studenti.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
