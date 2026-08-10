@@ -272,8 +272,6 @@ html[data-tema="scuro"] .aula-sfondo svg{opacity:.24}
 .ln.t rect{fill:var(--lavanda-s);opacity:.62}
 .tut-anello{fill:none;stroke:var(--lavanda-s);stroke-width:2.6;stroke-dasharray:7 6;
   vector-effect:non-scaling-stroke}
-.mano-cur{fill:#fff;stroke:#1b1b1b;stroke-width:1.7;stroke-linejoin:round;
-  vector-effect:non-scaling-stroke}
 @media (max-width:620px){
   .aula-tut-corpo{grid-template-columns:1fr;gap:1rem}
   .aula-tut-anim{max-width:340px;margin:0 auto}

@@ -121,7 +121,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 21:14** — file toccato: `moduli/aula.js`
+Ultimo salvataggio: **10/08/2026 alle 21:14** — file toccato: `stile/aula.css`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -141,7 +141,7 @@ Ultimo salvataggio: **10/08/2026 alle 21:14** — file toccato: `moduli/aula.js`
 | `moduli/storie.js` | 100 | 8.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
-| `stile/aula.css` | 459 | 32K |
+| `stile/aula.css` | 457 | 32K |
 | `stile/base.css` | 209 | 12K |
 | `stile/didattica.css` | 163 | 12K |
 | `stile/notizie.css` | 125 | 12K |
