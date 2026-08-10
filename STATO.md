@@ -154,12 +154,12 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 22:02** — file toccato: `robot/notizie.js`
+Ultimo salvataggio: **10/08/2026 alle 22:26** — file toccato: `moduli/notizie.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
-| `configurazione.js` | 271 | 16K |
+| `configurazione.js` | 297 | 16K |
 | `index.html` | 356 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
@@ -167,19 +167,19 @@ Ultimo salvataggio: **10/08/2026 alle 22:02** — file toccato: `robot/notizie.j
 | `moduli/didattica.js` | 429 | 20K |
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/navigazione.js` | 97 | 4.0K |
-| `moduli/notizie.js` | 101 | 8.0K |
+| `moduli/notizie.js` | 102 | 8.0K |
 | `moduli/nucleo.js` | 266 | 16K |
 | `moduli/rivista.js` | 294 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |
 | `robot/ascolta.js` | 129 | 8.0K |
 | `robot/comune/feed.js` | 100 | 4.0K |
-| `robot/comune/pagina.js` | 80 | 4.0K |
+| `robot/comune/pagina.js` | 87 | 4.0K |
 | `robot/comune/registro.js` | 77 | 4.0K |
 | `robot/comune/rete.js` | 77 | 4.0K |
 | `robot/comune/scrivi.js` | 95 | 4.0K |
 | `robot/didattica.js` | 101 | 8.0K |
-| `robot/notizie.js` | 137 | 8.0K |
+| `robot/notizie.js` | 150 | 8.0K |
 | `robot/studenti.js` | 87 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |

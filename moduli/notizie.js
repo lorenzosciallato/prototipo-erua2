@@ -40,6 +40,7 @@ function renderNews() {
         <div class="riga">
           <span class="uni">${esc(CITTA[n.u] || n.u)}</span>
           <span class="lingua-fonte">${esc(LINGUA_FONTE[n.u] || '')}</span>
+          ${n.tipo === 'evento' ? `<span class="tipo-evento">${T('evento', 'event')}</span>` : ''}
           <span>${dataBreve(n.d)}</span>
         </div>
         <b>${esc(n.t)}</b>
