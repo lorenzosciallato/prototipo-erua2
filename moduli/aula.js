@@ -834,6 +834,9 @@ export async function avvia() {
 }
 
 export async function apri(o) {
+  /* la didattica va aspettata davvero: `apriAula` la usa subito, alla
+     prima riga, per sapere qual è la lezione */
+  DID = await chiedi('didattica');
   await avvia();
   apriAula(o);
 }
