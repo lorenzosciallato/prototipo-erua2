@@ -154,13 +154,13 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **11/08/2026 alle 01:15** — file toccato: `robot/bandi.js`
+Ultimo salvataggio: **11/08/2026 alle 01:18** — file toccato: `moduli/move.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `configurazione.js` | 300 | 16K |
-| `index.html` | 356 | 28K |
+| `index.html` | 392 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
@@ -173,6 +173,7 @@ Ultimo salvataggio: **11/08/2026 alle 01:15** — file toccato: `robot/bandi.js`
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |
 | `robot/ascolta.js` | 129 | 8.0K |
+| `robot/bandi.js` | 172 | 8.0K |
 | `robot/comune/date.js` | 171 | 8.0K |
 | `robot/comune/feed.js` | 100 | 4.0K |
 | `robot/comune/paesi.js` | 125 | 8.0K |
