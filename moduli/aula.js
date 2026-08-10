@@ -362,7 +362,6 @@ function tutCostruisci(){
     +`<linearGradient id="gSheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/></linearGradient>`
     +`<radialGradient id="gPlay" cx="0.42" cy="0.38" r="0.75"><stop offset="0" stop-color="#3f83c6"/><stop offset="1" stop-color="#1c4f86"/></radialGradient>`
     +`<filter id="ombraP" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#20140a" flood-opacity="0.22"/></filter>`
-    +`<filter id="ombraM" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="2.5" stdDeviation="2.6" flood-color="#000" flood-opacity="0.3"/></filter>`
     +`</defs>`;
   // sfondo del pannello (angoli nitidi + ombra) — anima x/y/w/h
   const fondo=(id)=>{const s0=S[seq[id][0]];
