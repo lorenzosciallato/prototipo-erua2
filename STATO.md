@@ -121,7 +121,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 21:20** — file toccato: `robot/comune/scrivi.js`
+Ultimo salvataggio: **10/08/2026 alle 21:21** — file toccato: `robot/comune/registro.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -139,6 +139,7 @@ Ultimo salvataggio: **10/08/2026 alle 21:20** — file toccato: `robot/comune/sc
 | `moduli/rivista.js` | 294 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |
+| `robot/comune/scrivi.js` | 95 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
 | `stile/aula.css` | 457 | 32K |
