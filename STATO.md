@@ -121,7 +121,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 21:23** — file toccato: `robot/notizie.js`
+Ultimo salvataggio: **10/08/2026 alle 21:24** — file toccato: `moduli/nucleo.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -135,7 +135,7 @@ Ultimo salvataggio: **10/08/2026 alle 21:23** — file toccato: `robot/notizie.j
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/navigazione.js` | 97 | 4.0K |
 | `moduli/notizie.js` | 101 | 8.0K |
-| `moduli/nucleo.js` | 253 | 16K |
+| `moduli/nucleo.js` | 266 | 16K |
 | `moduli/rivista.js` | 294 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |
@@ -144,6 +144,7 @@ Ultimo salvataggio: **10/08/2026 alle 21:23** — file toccato: `robot/notizie.j
 | `robot/comune/registro.js` | 77 | 4.0K |
 | `robot/comune/rete.js` | 65 | 4.0K |
 | `robot/comune/scrivi.js` | 95 | 4.0K |
+| `robot/notizie.js` | 126 | 8.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
 | `stile/aula.css` | 457 | 32K |

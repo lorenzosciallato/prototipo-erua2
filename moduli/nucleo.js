@@ -46,6 +46,19 @@ export function dati(nome) {
   return inCorso.get(nome);
 }
 
+/* I file che i robot riscrivono hanno un involucro: numero di versione,
+   quando sono stati aggiornati, da quale fonte, e poi gli elementi. Ma
+   un file appena scritto e uno mai passato dai robot convivono, e al
+   rilascio parte degli utenti ha ancora in cache la forma di prima
+   (§2.9). Quindi si accettano entrambe: un elenco nudo vale come un
+   involucro senza data. Il giorno in cui si aggiungerà un campo, si
+   aggiunge — non si rinomina e non si toglie. */
+export async function elenco(nome) {
+  const j = await dati(nome);
+  if (Array.isArray(j)) return { elementi: j, aggiornato: null, fonte: null, versione: 0 };
+  return { versione: 0, aggiornato: null, fonte: null, ...j, elementi: j.elementi || [] };
+}
+
 /* ── registro delle sezioni ────────────────────────────────────────
    Una sezione dichiara qui che cosa sa fare per le altre; le altre lo
    chiedono senza importarla. `chiedi` aspetta che la sezione sia
