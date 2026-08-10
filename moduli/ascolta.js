@@ -135,3 +135,45 @@ function chiudiPod(){
   document.body.classList.remove('pod-aperta');
   l.hidden=true;
 }
+
+/* ── comandi ───────────────────────────────────────────────────────── */
+document.addEventListener('click', e => {
+  /* le due voci in cima alla rivista: leggere oppure ascoltare */
+  const m = e.target.closest('#modi-mag .modo-mag');
+  if (m) {
+    const quale = m.dataset.mag;
+    document.querySelectorAll('#modi-mag .modo-mag').forEach(b => {
+      const on = b === m;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-selected', on);
+    });
+    document.getElementById('mag-leggi').hidden = quale !== 'leggi';
+    document.getElementById('mag-ascolta').hidden = quale !== 'ascolta';
+    if (quale === 'ascolta') avvia();
+    return;
+  }
+  if (e.target.closest('#pl-x')) { e.preventDefault(); e.stopPropagation(); chiudiPod(); return; }
+  if (e.target.closest('#pl-quad')) {
+    if (podCorrente && podCorrente.yt) espandiPod(); else podPausa();
+    return;
+  }
+  const v = e.target.closest('[data-pod]');
+  if (v) suonaPod(v.dataset.pod, true);
+});
+
+addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const l = document.getElementById('pod-lettore');
+  if (l && !l.hidden) chiudiPod();
+});
+
+/* ── avvio della sezione ───────────────────────────────────────────── */
+let avviata = false;
+export async function avvia() {
+  if (avviata) { renderPodcast(); return; }
+  avviata = true;
+  PODCAST = await dati('ascolta');
+  renderPodcast();
+}
+
+offre('ascolta', { avvia, chiudi: chiudiPod });
