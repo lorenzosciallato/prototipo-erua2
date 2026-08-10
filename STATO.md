@@ -154,7 +154,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **11/08/2026 alle 01:08** — file toccato: `robot/comune/paesi.js`
+Ultimo salvataggio: **11/08/2026 alle 01:09** — file toccato: `robot/destinazioni.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -174,6 +174,7 @@ Ultimo salvataggio: **11/08/2026 alle 01:08** — file toccato: `robot/comune/pa
 | `moduli/storie.js` | 100 | 8.0K |
 | `robot/ascolta.js` | 129 | 8.0K |
 | `robot/comune/feed.js` | 100 | 4.0K |
+| `robot/comune/paesi.js` | 95 | 8.0K |
 | `robot/comune/pagina.js` | 87 | 4.0K |
 | `robot/comune/registro.js` | 77 | 4.0K |
 | `robot/comune/rete.js` | 77 | 4.0K |
