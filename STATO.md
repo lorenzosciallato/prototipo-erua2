@@ -154,12 +154,12 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 22:26** — file toccato: `moduli/notizie.js`
+Ultimo salvataggio: **11/08/2026 alle 00:59** — file toccato: `robot/costi.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
-| `configurazione.js` | 297 | 16K |
+| `configurazione.js` | 300 | 16K |
 | `index.html` | 356 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
@@ -186,7 +186,7 @@ Ultimo salvataggio: **10/08/2026 alle 22:26** — file toccato: `moduli/notizie.
 | `stile/aula.css` | 457 | 32K |
 | `stile/base.css` | 209 | 12K |
 | `stile/didattica.css` | 163 | 12K |
-| `stile/notizie.css` | 125 | 12K |
+| `stile/notizie.css` | 132 | 12K |
 | `stile/rivista.css` | 100 | 8.0K |
 | `stile/sociale.css` | 549 | 40K |
 | `stile/storie.css` | 48 | 4.0K |
