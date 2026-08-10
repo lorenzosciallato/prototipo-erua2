@@ -56,13 +56,14 @@ un utente, di leggere i dati di un altro, che deve fallire.
 
 ## Registro automatico
 
-Ultimo salvataggio: **10/08/2026 alle 20:27** — file toccato: `moduli/navigazione.js`
+Ultimo salvataggio: **10/08/2026 alle 20:27** — file toccato: `moduli/articolo.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `configurazione.js` | 177 | 12K |
 | `index.html` | 5356 | 796K |
 | `moduli/ascolta.js` | 179 | 8.0K |
+| `moduli/navigazione.js` | 97 | 4.0K |
 | `moduli/notizie.js` | 101 | 8.0K |
 | `moduli/nucleo.js` | 231 | 12K |
 | `moduli/rivista.js` | 277 | 12K |
