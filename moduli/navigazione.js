@@ -10,7 +10,24 @@
    vede (§2.4).
 */
 
+import { scheletro } from './nucleo.js';
+
 export const TABS = ['social', 'news', 'study', 'magazine', 'chat', 'profilo'];
+
+/* Che cosa mostrare mentre la sezione si carica. Sta qui e non nei
+   moduli perché deve comparire **prima** che il modulo sia scaricato:
+   se aspettasse il modulo, il vuoto si vedrebbe lo stesso — ed è
+   proprio quello il momento in cui si vede.
+
+   Le forme somigliano a quello che comparirà davvero: schede nella
+   rivista, righe negli elenchi. Serve a non far saltare la pagina
+   quando i dati arrivano. */
+const ATTESA = {
+  magazine: [['storie', 'cerchi'], ['feed-griglia', 'scheda', 6]],
+  news:     [['news-atenei', 'cerchi'], ['news-lista', 'riga', 7]],
+  social:   [['sc-atenei', 'cerchi'], ['thread-lista', 'riga', 5]],
+  study:    [],   /* la vetrina dei corsi ha già i suoi, da sempre */
+};
 
 /* Quale modulo serve a quale sezione. `chat` e `profilo` non hanno
    codice proprio: sono pannelli fermi. */
@@ -71,6 +88,11 @@ export function mostraTab(nome, aggiornaHash = true) {
   if (aggiornaHash) scriviHash(nome);
   setTimeout(() => window.scrollTo(0, scrollMem[nome] || 0), 0);
 
+  /* prima gli scheletri, poi il caricamento: in quest'ordine, e senza
+     aspettare niente in mezzo */
+  for (const [contenitore, forma, quanti] of (ATTESA[nome] || [])) {
+    scheletro(contenitore, forma, quanti);
+  }
   caricaSezione(nome);
 }
 

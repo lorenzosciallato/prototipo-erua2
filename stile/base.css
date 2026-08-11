@@ -208,6 +208,11 @@ nav.tabs::-webkit-scrollbar{display:none}
 .avviso-traduzione[hidden]{display:none}
 @media (max-width:640px){ .avviso-traduzione{font-size:.62rem;padding:.45rem .8rem} }
 
+/* Spazio in fondo alla pagina: il pulsante "New post" sta fisso sopra
+   tutto, e senza questo margine l'ultima riga di testo gli finisce
+   sotto. Vale solo quando il pulsante c'è davvero, cioè nella piazza. */
+body:has(#p-social.attivo) footer{padding-bottom:5.5rem}
+
 /* DICITURA SUI MARCHI (§6.4)
    Deve essere leggibile senza gridare: chi la cerca la trova, chi
    naviga non ne è disturbato. Non si traduce — è una dichiarazione
@@ -215,3 +220,46 @@ nav.tabs::-webkit-scrollbar{display:none}
 footer .marchi{margin:.6rem auto 0;max-width:44rem;
   font-family:var(--font-mono);font-size:.6rem;line-height:1.7;
   letter-spacing:.03em;color:var(--testo2);opacity:.72}
+
+/* SCHELETRI CHE LUCCICANO
+   Servono a non far vedere il vuoto. Il vuoto, per chi guarda, è
+   indistinguibile da un guasto: uno pensa che il sito sia rotto e se ne
+   va prima che i dati arrivino. Uno scheletro che luccica dice due cose
+   insieme — «c'è qualcosa» e «sta arrivando» — e in più mostra già la
+   forma di quello che comparirà, così l'occhio non deve reimpostarsi.
+
+   La sezione dei corsi lo faceva già, da sola. Queste classi sono la
+   stessa idea resa disponibile a tutte le sezioni. */
+.scheletro{pointer-events:none;user-select:none}
+.scheletro .sk{position:relative;overflow:hidden;background:var(--sup2);border-radius:9px}
+.scheletro .sk::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  animation:luccica 1.25s infinite}
+html[data-tema="scuro"] .scheletro .sk::after{
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+@keyframes luccica{100%{transform:translateX(100%)}}
+
+/* chi ha detto "non farmi girare le animazioni" viene ascoltato: resta
+   il riquadro grigio, senza il riflesso che passa (§7.12) */
+@media (prefers-reduced-motion:reduce){
+  .scheletro .sk::after{animation:none}
+}
+
+/* una scheda: fotografia in cima, poi qualche riga di testo */
+.sk-scheda{background:var(--sup);border-radius:var(--r);box-shadow:var(--ombra);
+  overflow:hidden;display:flex;flex-direction:column}
+.sk-scheda .sk.foto{aspect-ratio:16/10;border-radius:0}
+.sk-scheda .corpo{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.6rem}
+.sk-scheda .sk.tit{height:1.3rem;width:82%}
+.sk-scheda .sk.riga{height:.8rem}
+.sk-scheda .sk.corta{height:.8rem;width:46%}
+
+/* una riga d'elenco: quadratino a sinistra, testo a destra */
+.sk-riga{background:var(--sup);border-radius:var(--r);box-shadow:var(--ombra);
+  display:flex;gap:.95rem;align-items:center;padding:1rem 1.1rem}
+.sk-riga .sk.quad{width:52px;height:52px;border-radius:50%;flex:0 0 auto}
+.sk-riga .corpo{flex:1;display:flex;flex-direction:column;gap:.5rem;min-width:0}
+
+/* i cerchi degli atenei in cima alle sezioni */
+.sk-cerchi{display:flex;gap:1.1rem;padding:.2rem 0 .4rem}
+.sk-cerchi .sk{width:56px;height:56px;border-radius:50%;flex:0 0 auto}

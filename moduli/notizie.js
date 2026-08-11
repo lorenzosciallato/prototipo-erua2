@@ -22,7 +22,10 @@ let filtroNews = null, paginaNews = 1;
 const PER_PAGINA = 20;
 
 function renderChipsNews() {
-  document.getElementById('news-atenei').innerHTML = filaAtenei('data-news', filtroNews);
+  /* qui il cerchio ERUA è un filtro come gli altri: mostra le notizie
+     pubblicate dal sito dell'alleanza, non tutte quante */
+  document.getElementById('news-atenei').innerHTML =
+    filaAtenei('data-news', filtroNews, true);
 }
 
 function renderNews() {

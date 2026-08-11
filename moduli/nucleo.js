@@ -102,6 +102,41 @@ export function chiedi(sezione) {
   });
 }
 
+/* ── scheletri che luccicano ───────────────────────────────────────
+   Da mettere in un contenitore *prima* di aspettare i dati. Il vuoto,
+   per chi guarda, è indistinguibile da un guasto: uno pensa che il sito
+   sia rotto e se ne va prima che i dati arrivino.
+
+   `scheletro('feed-griglia', 'scheda', 6)` riempie il contenitore di sei
+   schede finte. Quando i dati arrivano, il vero disegno le sostituisce
+   scrivendo sopra: non serve toglierle. */
+const FORME = {
+  scheda: `<div class="scheletro sk-scheda">
+      <span class="sk foto"></span>
+      <div class="corpo">
+        <span class="sk tit"></span><span class="sk riga"></span><span class="sk corta"></span>
+      </div>
+    </div>`,
+  riga: `<div class="scheletro sk-riga">
+      <span class="sk quad"></span>
+      <div class="corpo">
+        <span class="sk tit" style="height:1.05rem;width:70%"></span>
+        <span class="sk riga" style="height:.75rem"></span>
+        <span class="sk corta" style="height:.75rem;width:38%"></span>
+      </div>
+    </div>`,
+  cerchi: `<div class="scheletro sk-cerchi">${'<span class="sk"></span>'.repeat(9)}</div>`,
+};
+
+export function scheletro(idContenitore, forma = 'scheda', quanti = 6) {
+  const box = document.getElementById(idContenitore);
+  if (!box) return;
+  /* se c'è già qualcosa di vero, non lo si copre: succede tornando in
+     una sezione già vista */
+  if (box.children.length && !box.querySelector('.scheletro')) return;
+  box.innerHTML = forma === 'cerchi' ? FORME.cerchi : FORME[forma].repeat(quanti);
+}
+
 /* ── messaggio temporaneo ──────────────────────────────────────────── */
 let toastTimer;
 export function toast(msg) {
@@ -181,22 +216,40 @@ export function faccia(nome, dim) {
     <circle cx="24" cy="24" r="24" fill="${c}"/>${segni[(h >> 3) % 12]}</svg>`;
 }
 
-/* ── il cerchio dell'alleanza, in testa a ogni fila di atenei ──────── */
-export function bottoneTutti(attr, attivo) {
+/* ── il cerchio dell'alleanza, in testa a ogni fila di atenei ──────────
+   Fa due mestieri diversi a seconda della sezione, e la differenza
+   conta:
+
+   - Nella rivista e nella piazza significa **tutti**: gli articoli sono
+     scritti da studenti dei vari atenei, e "ERUA" vuol dire "senza
+     filtro".
+   - Nelle notizie significa **ERUA come fonte**: il sito dell'alleanza
+     pubblica notizie sue, distinte da quelle degli atenei. Lì il
+     cerchio col logo ERUA che mostrava tutto era proprio fuorviante —
+     uno lo preme aspettandosi le notizie dell'alleanza e ottiene le
+     stesse di prima.
+
+   Da qui `comeFiltro`: quando è acceso, il cerchio porta la sigla
+   dell'alleanza come valore invece che il vuoto. Premendolo di nuovo si
+   torna a vedere tutto, come per gli altri cerchi. */
+export function bottoneTutti(attr, attivo, comeFiltro = false) {
   const l = LOGHI[CONFIG.siglaAlleanza];
   const sigla = esc(CONFIG.siglaAlleanza);
   const dentro = l
     ? `<span class="avatar"><img src="${l}" alt="${sigla}"></span>`
     : `<span class="avatar testo">${sigla}</span>`;
-  return `<button class="storia tutti" ${attr}="" aria-pressed="${attivo}" title="${sigla}">
+  return `<button class="storia tutti" ${attr}="${comeFiltro ? sigla : ''}"
+    aria-pressed="${attivo}" title="${sigla}">
     <span class="anello">${dentro}</span><span class="citta">${sigla}</span></button>`;
 }
 
 /* ── la fila dei cerchi degli atenei ───────────────────────────────
    La usano rivista, notizie e piazza: cambia solo il nome
    dell'attributo con cui ciascuna riconosce il proprio clic. */
-export function filaAtenei(attr, scelto) {
-  return bottoneTutti(attr, !scelto) + ATENEI.map(u => `
+export function filaAtenei(attr, scelto, comeFiltro = false) {
+  const sigla = CONFIG.siglaAlleanza;
+  const acceso = comeFiltro ? scelto === sigla : !scelto;
+  return bottoneTutti(attr, acceso, comeFiltro) + ATENEI.map(u => `
     <button class="storia" ${attr}="${esc(u)}" aria-pressed="${scelto === u}" title="${esc(u)}">
       <span class="anello">${stemma(u, 'avatar')}</span>
       <span class="citta">${esc(CITTA[u] || u)}</span>

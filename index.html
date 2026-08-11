@@ -36,7 +36,12 @@
 </div>
 
 <header>
-  <a class="logo" href="#social" aria-label="ERUA connect">
+  <!-- Il marchio non si traduce: "ERUA connect" è un nome proprio, e
+       Google Translate altrimenti lo rende "ERUA si connette" o simili.
+       `translate="no"` lo dice al traduttore, la classe `notranslate` è
+       la forma che Google riconosce da sempre: tenerle entrambe costa
+       nulla e copre entrambi i casi. -->
+  <a class="logo notranslate" translate="no" href="#social" aria-label="ERUA connect">
     <svg class="simbolo" viewBox="0 0 1020 932" aria-hidden="true">
       <path d="M404 0 L440 6 L483 20 L508 32 L524 42 L553 64 L581 92 L603 122 L624 162 L634 190 L643 238 L644 272 L641 308 L627 360 L604 406 L575 444 L550 468 L520 490 L495 504 L471 514 L445 522 L408 530 L408 532 L644 932 L0 932 L0 696 L308 532 L31 530 L31 0 Z" fill="#48F89B"/>
       <g fill="none" stroke="#48F89B" stroke-width="62" stroke-linecap="round">
@@ -44,7 +49,7 @@
         <path d="M846 76a385 385 0 0 1 0 580" class="onda o2"/>
       </g>
     </svg>
-    <span class="lockup"><b>ERUA</b><i>connect</i></span>
+    <span class="lockup notranslate" translate="no"><b>ERUA</b><i>connect</i></span>
   </a>
   <div class="destra">
     <button class="btn-tema" id="btn-tema" aria-label="Switch theme">☾</button>

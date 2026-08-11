@@ -206,6 +206,43 @@ for (const [nome, sel, ds, id, atteso] of prove) {
   else console.log(`\n  vetrina corsi      ${String(h.length).padStart(6)} caratteri  ✓`);
 }
 
+/* ── controlli su comportamenti che si rompono in silenzio ─────────── */
+console.log('\ncomportamenti:');
+const prove2 = [
+  ['ERUA filtra nelle notizie',
+   () => /data-news="ERUA"/.test(String((creati.get('news-atenei')||{}).innerHTML||'')),
+   'il cerchio ERUA deve portare data-news="ERUA", non il vuoto'],
+  ['ERUA resta "tutti" nella rivista',
+   () => /data-uni=""/.test(String((creati.get('storie')||{}).innerHTML||'')),
+   'nella rivista il cerchio ERUA deve restare senza valore'],
+  ['il marchio non si traduce',
+   () => {
+     const html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
+     const i = html.indexOf('class="logo');
+     return i > 0 && /translate="no"/.test(html.slice(i - 90, i + 90));
+   },
+   'il logo deve portare translate="no"'],
+  ['scheletri dichiarati per le sezioni',
+   () => {
+     const nav = fs.readFileSync(path.join(REPO, 'moduli/navigazione.js'), 'utf8');
+     return ['magazine:', 'news:', 'social:'].every(k => nav.includes(k)) && nav.includes('scheletro');
+   },
+   'la navigazione deve dipingere gli scheletri prima di caricare'],
+  ['il pulsante si toglie in fondo',
+   () => {
+     const css = fs.readFileSync(path.join(REPO, 'stile/sociale.css'), 'utf8');
+     const js = fs.readFileSync(path.join(REPO, 'moduli/sociale.js'), 'utf8');
+     return css.includes('.sc-piu.in-fondo') && js.includes('IntersectionObserver');
+   },
+   'serve la classe in-fondo e chi la accende'],
+];
+for (const [nome, prova, perche] of prove2) {
+  let ok = false;
+  try { ok = !!prova(); } catch (e) { ok = false; }
+  console.log(`  ${nome.padEnd(34)} ${ok ? '✓' : 'NO — ' + perche}`);
+  if (!ok) errori.push([nome, new Error(perche)]);
+}
+
 console.log('');
 if (errori.length) {
   for (const [dove, e] of errori) {
