@@ -158,7 +158,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **11/08/2026 alle 01:40** — file toccato: `stile/move.css`
+Ultimo salvataggio: **11/08/2026 alle 02:05** — file toccato: `robot/comune/pdf.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -189,7 +189,7 @@ Ultimo salvataggio: **11/08/2026 alle 01:40** — file toccato: `stile/move.css`
 | `robot/costi.js` | 136 | 8.0K |
 | `robot/destinazioni.js` | 205 | 12K |
 | `robot/didattica.js` | 101 | 8.0K |
-| `robot/loghi.js` | 315 | 16K |
+| `robot/loghi.js` | 336 | 16K |
 | `robot/notizie.js` | 150 | 8.0K |
 | `robot/studenti.js` | 87 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
