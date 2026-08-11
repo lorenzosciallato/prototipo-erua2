@@ -99,6 +99,59 @@ lettura — è il caso di ULPGC, che dichiara `Crawl-delay: 10` e nessun
 divieto sulle notizie. Noi facciamo una richiesta per sito a ogni giro,
 quindi siamo ampiamente dentro.
 
+## Le destinazioni: due fonti, due mondi
+
+**ULPGC** ha una banca dati interrogabile in JSON. È il caso fortunato:
+i nomi arrivano col codice Erasmus ufficiale davanti, che identifica
+l'ateneo senza ambiguità.
+
+**UniMC** pubblica le destinazioni nell'allegato del bando: trenta pagine
+di tabella stampata in PDF. Tre cose imparate leggendola, che varranno
+per qualunque altro allegato:
+
+1. L'intestazione della tabella **non è allineata** al corpo — codice e
+   materia stavano venti caratteri più a sinistra del loro titolo.
+   Ricavare le colonne dall'intestazione dava zero risultati **senza
+   nessun errore**, che è il modo peggiore di sbagliare.
+2. Una voce occupa **più righe**. Leggere riga per riga attaccava il
+   pezzo di un ateneo a quello prima, e il risultato sembrava giusto.
+3. I nomi lunghi **sbordano** nella colonna del paese. Per questo i
+   numeri si cercano *in fondo alla riga*, dove stanno sempre.
+
+E un errore che vale la pena ricordare: la tabella dei paesi era ricavata
+da quella di ULPGC, che per forza di cose **non contiene la Spagna** —
+è casa loro. Quarantuno destinazioni spagnole finivano fra le scartate
+con un «paese sconosciuto: ES» che sembrava un problema dei dati.
+
+## I loghi degli atenei di destinazione
+
+Vengono da **Wikidata e Wikimedia Commons**, non dai siti degli atenei:
+là ogni immagine porta licenza e autore in forma leggibile dalla
+macchina, quindi si può tenere solo ciò che è libero e scrivere sempre
+chi l'ha fatto. Un logo preso dal sito di un'università è un file con
+licenza sua, che non si estende a chi lo ripubblica (§6.2).
+
+Per non prendere il logo sbagliato — cercare un nome restituisce anche
+facoltà, ospedali universitari, omonimi — si accetta un risultato solo se
+**è un ente di istruzione superiore** e **sta nel paese giusto**, che
+sappiamo già dalla destinazione.
+
+La copertura non sarà mai piena: molti atenei su Wikidata non hanno un
+logo, altri non si identificano con sicurezza. Dove manca restano le
+iniziali su fondo pastello, che è una scelta grafica e non un buco.
+
+Wikimedia limita chi scarica in fretta e risponde `429`: non è un
+guasto, è un cartello che dice di rallentare. Il robot rallenta e
+riprova. C'è anche una memoria delle ricerche già fatte
+(`robot/.ricerche-loghi.json`, fuori dal controllo di versione): senza,
+ogni ritentativo rifarebbe sei minuti di interrogazioni.
+
+**Il marchio resta comunque loro.** Una licenza sul file è una cosa, il
+marchio un'altra (§6.4). Per questo il piè di pagina dichiara, in
+inglese e senza traduzione automatica, che il prototipo non è un
+servizio di ERUA né degli atenei e che i marchi appartengono ai
+rispettivi titolari.
+
 ## Se aggiungi una fonte
 
 Si tocca `configurazione.js`, sotto `fonti`. Qui dentro non si tocca

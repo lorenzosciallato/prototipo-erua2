@@ -29,11 +29,11 @@
    "durataSecondi": 1
   },
   "destinazioni": {
-   "quando": "2026-08-10T23:11:58.097Z",
+   "quando": "2026-08-11T00:13:26.604Z",
    "esito": "fatto",
-   "quanti": 455,
-   "messaggio": "36 paesi; senza lettore: 7; scartate: 0",
-   "durataSecondi": 17
+   "quanti": 751,
+   "messaggio": "38 paesi; senza lettore: 6; scartate: 0",
+   "durataSecondi": 19
   },
   "bandi": {
    "quando": "2026-08-10T23:16:59.811Z",
@@ -41,6 +41,13 @@
    "quanti": 10,
    "messaggio": "aperti 2, chiusi 1, senza scadenza 7",
    "durataSecondi": 0
+  },
+  "loghi": {
+   "quando": "2026-08-11T00:17:55.803Z",
+   "esito": "fatto",
+   "quanti": 212,
+   "messaggio": "nuovi 40; senza logo 168; non identificati 244; licenza non libera 0",
+   "durataSecondi": 264
   }
  }
 }

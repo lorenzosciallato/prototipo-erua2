@@ -51,7 +51,8 @@ Esistono e funzionano su dati veri. Dettagli in `robot/LEGGIMI.md`.
 | `ascolta.js` | legge il feed pubblico del canale → `dati/ascolta.json`. Funziona **senza accesso al canale** |
 | `didattica.js` | controlla che i 18 video dichiarati rispondano ancora. Non sceglie corsi: è selezione editoriale |
 | `bandi.js` | ricava dai bandi le scadenze in nove lingue e li dice aperti o chiusi. Non scarica niente: rilegge le notizie |
-| `destinazioni.js` | dove si può andare. Oggi solo ULPGC, che ha una banca dati interrogabile: 455 destinazioni in 36 paesi |
+| `destinazioni.js` | dove si può andare: **751 destinazioni in 38 paesi**, da ULPGC (banca dati JSON) e UniMC (allegato del bando in PDF) |
+| `loghi.js` | i loghi degli atenei di destinazione da Wikidata e Commons, solo con licenza libera: 211 atenei, un terzo delle destinazioni |
 | `costi.js` | livelli di prezzo Eurostat per 47 paesi su alloggio, spesa, trasporti e mangiare fuori |
 | `studenti.js` | tiene il posto e la forma. Produce un elenco vuoto, ed è corretto così |
 
@@ -60,13 +61,16 @@ Da fare su questo fronte, in ordine:
 1. **Riscrivere i robot per n8n.** L'orchestrazione (orari, credenziali
    OAuth, riprove) passa a n8n; restano codice i controlli che n8n non dà:
    rifiuto di pubblicare il vuoto, involucro, provenienza, commit.
-2. **Sorvegliare EUV e ULPGC.** Sono gli unici due letti dalla pagina
+2. **Le destinazioni degli altri sei atenei.** MRU, NBU, EUV, SWPS,
+   UAEGEAN e UP8 non hanno ancora un lettore. La sezione lo dice per
+   nome sopra l'elenco, invece di far credere che non esistano.
+3. **Sorvegliare EUV e ULPGC.** Sono gli unici due letti dalla pagina
    invece che da un feed: un restauro del loro sito li spegne in silenzio.
    Il rifiuto di pubblicare il vuoto lo trasforma in un avviso, ma le
    regole di lettura vanno riscritte in `configurazione.js`.
-3. **Mettere `robot/giro.sh` nel cron del server**, insieme alla riga di
+4. **Mettere `robot/giro.sh` nel cron del server**, insieme alla riga di
    sorveglianza che avvisa se un robot smette di dare segno di vita.
-4. **Archivio completo delle puntate.** Il feed pubblico dà le ultime 15
+5. **Archivio completo delle puntate.** Il feed pubblico dà le ultime 15
    pubblicazioni; il canale ne ha più di 40. Per recuperare tutto in un
    colpo serve l'interfaccia ufficiale con una chiave — che è anche l'unico
    momento in cui servirà l'accesso al canale.
@@ -142,6 +146,11 @@ in Learn con l'indirizzo già su `#study`.
   non va cambiato: alcune regole si sovrascrivono a vicenda.
 - Il lettore delle puntate ora incorpora i video dal dominio **senza cookie**;
   prima usava `youtube.com`, che li deposita subito.
+- I loghi degli atenei di destinazione vengono da **Wikidata e Wikimedia
+  Commons**, non dai siti degli atenei: là licenza e autore sono
+  dichiarati, quindi si tiene solo ciò che è libero e si attribuisce
+  sempre. Il marchio resta comunque loro, e il piè di pagina lo dichiara
+  come chiede §6.4 — dicitura che prima mancava del tutto.
 - Corretta una violazione di **P3**: i post e le risposte scritti nella piazza
   finivano dentro l'HTML senza essere messi in sicurezza. Ora passano tutti da
   `esc()`.

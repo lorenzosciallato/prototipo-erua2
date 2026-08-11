@@ -32,8 +32,9 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { scarica } from './comune/rete.js';
-import { DA_ULPGC, PAESI_CON_PREFISSO, leggiCodiceErasmus } from './comune/paesi.js';
+import { scarica, scaricaBinario } from './comune/rete.js';
+import { testoDaPdf, raggruppaBlocchi } from './comune/pdf.js';
+import { DA_ULPGC, PAESI_ISO, PAESI_CON_PREFISSO, leggiCodiceErasmus } from './comune/paesi.js';
 import { scriviDati, RifiutoDiScrivere } from './comune/scrivi.js';
 import { segnala } from './comune/registro.js';
 
@@ -116,6 +117,97 @@ async function daUlpgc() {
   return { destinazioni, scartate };
 }
 
+/* ── UniMC ─────────────────────────────────────────────────────────
+   Le destinazioni stanno nell'allegato del bando annuale, un PDF di
+   trenta pagine con una tabella stampata. Le pagine "Accordo Erasmus –
+   <dipartimento>" del loro sito non c'entrano: sono i moduli da
+   compilare per *attivare* un accordo, non gli elenchi.
+
+   Tre cose imparate leggendolo, che valgono per qualunque altro PDF:
+
+   1. L'intestazione della tabella **non è allineata** al corpo: il
+      codice e la materia stanno venti caratteri più a sinistra del loro
+      titolo. Ricavare le colonne dall'intestazione dava zero risultati
+      senza nessun errore, che è il modo peggiore di sbagliare.
+   2. Una voce occupa **più righe**: codice e materia su una, ateneo e
+      numeri sulla successiva, le lingue su una terza. Leggere riga per
+      riga attacca il pezzo di un ateneo a quello prima.
+   3. I nomi lunghi **sbordano** nella colonna del paese. Tagliare a
+      posizione fissa spezzava "Université Paris 8 (Vincennes-Saint-
+      Denis)" e metteva ")" dentro il codice del paese. Per questo i
+      numeri si cercano **in fondo alla riga**, dove stanno sempre. */
+const UNIMC = {
+  pdf: 'https://oldportal1.unimc.it/iro/erasmus+2627/info/ewExternalFiles/Accordi_E%2BStudio%2026-27%20RT.pdf',
+  pagina: 'https://oldportal1.unimc.it/iro/erasmus+2627/info/accordi-.html',
+  anno: '2026-27',
+  /* i numeri in coda alla riga: paese, borse, mesi */
+  coda: /\s([A-Z]{2,4})\s+(\d{1,3})\s+(\d{1,2})\s*$/,
+  colonnaAteneo: 33,
+  colonnaPaese: 74,
+  /* la Croazia la scrivono HRC; il resto sono codici ISO */
+  correggiPaese: { HRC: 'HR' },
+};
+
+async function daUnimc() {
+  const destinazioni = [];
+  const scartate = [];
+
+  const testo = testoDaPdf(await scaricaBinario(UNIMC.pdf));
+  const blocchi = raggruppaBlocchi(testo,
+    r => /^\s{0,6}\d{1,4}\s+\S/.test(r) && !/Note:/.test(r),
+    /* le righe di servizio che si ripetono a ogni pagina. Senza la
+       forma larga, un pezzo dell'intestazione finiva incollato in coda
+       a un nome: "Universidad de Jaén udio RT 2026-2027 RT". */
+    r => /Cod\. Bando|Accordi Erasmus|mobilità per studio|^\s*Pag(\.|ina)?\s*\d|^\s*\d+\s*\/\s*\d+\s*$/.test(r));
+
+  for (const b of blocchi) {
+    const materia = (b[0].slice(5, UNIMC.colonnaAteneo) || '').replace(/\s+/g, ' ').trim();
+    const conNumeri = b.find(r => UNIMC.coda.test(r));
+    if (!conNumeri) { scartate.push(`nessun numero nel blocco: ${b[0].trim().slice(0, 50)}`); continue; }
+    const m = UNIMC.coda.exec(conNumeri);
+
+    /* il nome sta fra la colonna dell'ateneo e quella del paese; sulla
+       riga che porta i numeri si taglia dove cominciano */
+    const pezzi = [];
+    for (const r of b) {
+      const fino = UNIMC.coda.test(r)
+        ? r.slice(UNIMC.colonnaAteneo, UNIMC.coda.exec(r).index + 1)
+        : r.slice(UNIMC.colonnaAteneo, UNIMC.colonnaPaese);
+      const p = fino.replace(/\s+/g, ' ').trim();
+      if (p && !/^Note:?$/i.test(p)) pezzi.push(p);
+    }
+    const ateneo = pezzi.join(' ').replace(/\s+/g, ' ').trim();
+    if (!ateneo) { scartate.push(`blocco senza nome: ${b[0].trim().slice(0, 50)}`); continue; }
+
+    const iso = UNIMC.correggiPaese[m[1]] || m[1];
+    const paese = PAESI_ISO[iso];
+    if (!paese) { scartate.push(`${ateneo}: paese sconosciuto "${m[1]}"`); continue; }
+
+    destinazioni.push({
+      da: 'UNIMC',
+      ateneo,
+      codice: null,                       /* l'allegato non porta il codice Erasmus */
+      paese: iso,
+      paeseEurostat: paese.eurostat,
+      paeseNome: { it: paese.it, en: paese.en },
+      posti: Number(m[2]) || 0,
+      mesi: Number(m[3]) || null,
+      materia: materia || null,
+      programma: { it: 'Erasmus+ studio', en: 'Erasmus+ studies' },
+      anno: UNIMC.anno,
+      origine: {
+        fonte: 'Allegato del bando Erasmus+ studio UniMC',
+        url: UNIMC.pagina,
+        documento: UNIMC.pdf,
+        letto: new Date().toISOString().slice(0, 10),
+        generato: null,
+      },
+    });
+  }
+
+  return { destinazioni, scartate };
+}
+
 /* ── le strategie, una per ateneo ─────────────────────────────────
    Gli altri sette non hanno ancora un lettore. Non sono dimenticati:
    sono dichiarati qui con quello che si sa, così chi ci mette mano dopo
@@ -124,8 +216,8 @@ const STRATEGIE = {
   ULPGC: { pronta: true, leggi: daUlpgc,
     nota: 'banca dati interrogabile in JSON' },
 
-  UNIMC: { pronta: false,
-    nota: 'destinazioni negli allegati del bando annuale in PDF; le pagine "Accordo Erasmus – <dipartimento>" sono i moduli da compilare, non gli elenchi' },
+  UNIMC: { pronta: true, leggi: daUnimc,
+    nota: 'allegato del bando annuale, tabella stampata in PDF' },
   MRU:     { pronta: false, nota: 'da censire' },
   NBU:     { pronta: false, nota: 'da censire' },
   EUV:     { pronta: false, nota: 'da censire' },

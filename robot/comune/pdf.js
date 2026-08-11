@@ -63,50 +63,100 @@ export function colonneDa(riga, titoli) {
 const cella = (riga, c) => (riga.slice(c.da, c.a) || '').replace(/\s+/g, ' ').trim();
 
 /**
- * Legge una tabella a colonne fisse.
+ * Legge una tabella a colonne fisse dove **una voce occupa più righe**.
  *
- * @param {string} testo        l'uscita di `pdftotext -layout`
+ * È il caso normale negli allegati dei bandi: il codice sta su una riga,
+ * il nome dell'ateneo su quella dopo (e magari va a capo un'altra volta),
+ * le lingue richieste su una terza. Leggere riga per riga dà risultati
+ * che sembrano giusti e non lo sono — un pezzo di un ateneo attaccato a
+ * quello prima.
+ *
+ * Quindi si lavora a blocchi: una riga apre una voce nuova, e tutto ciò
+ * che segue fino alla prossima apertura appartiene a quella voce. Dentro
+ * il blocco, ogni colonna si ricompone secondo la sua regola: il nome si
+ * concatena, il numero si prende dove compare.
+ *
+ * @param {string} testo   l'uscita di `pdftotext -layout`
  * @param {object} regole
- *   - titoli:     i titoli delle colonne, come compaiono nell'intestazione
- *   - rigaBuona:  dice se una riga è l'inizio di un record
- *   - continua:   dice se una riga è la coda di un record precedente
- *                 (nelle tabelle stampate i nomi lunghi vanno a capo)
- * @returns { record: [{...celle}], scartate: [], colonne }
+ *   - titoli:      i titoli delle colonne come compaiono nell'intestazione
+ *   - colonne:     confini dichiarati a mano, [{nome, da, a}]. Servono
+ *                  quando l'intestazione non è allineata al corpo — e
+ *                  succede: in un allegato che ho letto, il codice e la
+ *                  materia stavano venti caratteri più a sinistra del
+ *                  loro titolo. Fidarsi dell'intestazione dava zero
+ *                  risultati senza nessun errore, che è il modo peggiore
+ *                  di sbagliare.
+ *   - apre:        (celle, riga) => vero se qui comincia una voce nuova
+ *   - unisci:      { colonna: 'concatena' | 'primo' } — come ricomporla
+ *   - valida:      (voce) => vero se la voce ricomposta è utilizzabile
+ * @returns { record, scartate, colonne }
  */
 export function leggiTabella(testo, regole) {
   const righe = String(testo).split('\n');
-  const intestazione = righe.find(r => regole.titoli.every(t => r.includes(t)));
-  if (!intestazione) return { record: [], scartate: [], colonne: null, motivo: 'intestazione non trovata' };
 
-  const colonne = colonneDa(intestazione, regole.titoli);
-  if (!colonne) return { record: [], scartate: [], colonne: null, motivo: 'colonne non riconosciute' };
+  let colonne = regole.colonne || null;
+  if (!colonne) {
+    const intestazione = righe.find(r => regole.titoli.every(t => r.includes(t)));
+    if (!intestazione) return { record: [], scartate: [], colonne: null, motivo: 'intestazione non trovata' };
+    colonne = colonneDa(intestazione, regole.titoli);
+    if (!colonne) return { record: [], scartate: [], colonne: null, motivo: 'colonne non riconosciute' };
+  }
 
-  const record = [];
-  const scartate = [];
+  const blocchi = [];
+  let corrente = null;
 
   for (const riga of righe) {
     if (!riga.trim()) continue;
-    if (riga.includes(regole.titoli[0]) && riga.includes(regole.titoli[1])) continue;   // intestazione ripetuta a ogni pagina
+    /* l'intestazione si ripete a ogni pagina: non è un dato */
+    if (regole.titoli && regole.titoli.every(t => riga.includes(t))) continue;
 
     const celle = {};
     for (const c of colonne) celle[c.nome] = cella(riga, c);
 
-    if (regole.rigaBuona(celle, riga)) { record.push({ ...celle, _riga: riga }); continue; }
+    if (regole.apre(celle, riga)) { corrente = { righe: [celle], testo: [riga] }; blocchi.push(corrente); }
+    else if (corrente) { corrente.righe.push(celle); corrente.testo.push(riga); }
+  }
 
-    /* Coda di un record precedente: un nome andato a capo. Si attacca a
-       quello che c'è, invece di buttarlo. */
-    if (record.length && regole.continua && regole.continua(celle, riga)) {
-      const ultimo = record[record.length - 1];
-      for (const c of colonne) {
-        if (celle[c.nome] && regole.attaccabili && regole.attaccabili.includes(c.nome)) {
-          ultimo[c.nome] = `${ultimo[c.nome]} ${celle[c.nome]}`.trim();
-        }
-      }
-      continue;
+  const record = [];
+  const scartate = [];
+
+  for (const b of blocchi) {
+    const voce = {};
+    for (const c of colonne) {
+      const valori = b.righe.map(r => r[c.nome]).filter(Boolean);
+      const modo = (regole.unisci && regole.unisci[c.nome]) || 'primo';
+      voce[c.nome] = modo === 'concatena' ? valori.join(' ').replace(/\s+/g, ' ').trim() : (valori[0] || '');
     }
-
-    if (Object.values(celle).some(v => v)) scartate.push(riga);
+    voce._righe = b.testo.length;
+    if (!regole.valida || regole.valida(voce)) record.push(voce);
+    else scartate.push(b.testo[0]);
   }
 
   return { record, scartate, colonne };
+}
+
+/**
+ * Raggruppa le righe in blocchi, senza interpretarle.
+ *
+ * Serve quando le colonne non tengono: un nome lungo sborda nella
+ * colonna accanto, e tagliare a posizione fissa mette il paese dentro il
+ * nome o viceversa. In quei casi conviene che sia chi conosce la fonte a
+ * estrarre i campi — di solito con un'espressione ancorata alla **fine**
+ * della riga, dove i numeri stanno sempre — e che questo file si limiti
+ * a dire dove comincia e finisce una voce.
+ *
+ * @param {string} testo   l'uscita di `pdftotext -layout`
+ * @param {function} apre  (riga) => vero se qui comincia una voce nuova
+ * @param {function} salta (riga) => vero se la riga non è un dato
+ * @returns [[riga, ...]]
+ */
+export function raggruppaBlocchi(testo, apre, salta = () => false) {
+  const blocchi = [];
+  let corrente = null;
+  for (const riga of String(testo).split('\n')) {
+    if (!riga.trim() || salta(riga)) continue;
+    if (apre(riga)) { corrente = [riga]; blocchi.push(corrente); }
+    else if (corrente) corrente.push(riga);
+  }
+  return blocchi;
 }

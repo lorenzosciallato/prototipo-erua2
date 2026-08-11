@@ -156,9 +156,16 @@ html[data-tema="scuro"] .md-logo.iniziali{background:var(--sf)}
 .md-nocosti{font-size:.72rem;line-height:1.55;color:var(--testo2);font-style:italic;
   margin:auto 0 0;padding-top:.7rem;border-top:1px solid var(--bordo)}
 
-.md-piede{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;
+/* Materia, durata e anno accademico. Sono le tre cose che uno studente
+   confronta fra una destinazione e l'altra, quindi stanno in fondo ma
+   sempre nello stesso posto, allineate: si leggono scorrendo in
+   verticale senza rileggere ogni scheda. */
+.md-piede{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;
   padding-top:.6rem;font-family:var(--font-mono);font-size:.57rem;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--testo2);opacity:.72}
+  letter-spacing:.06em;text-transform:uppercase;color:var(--testo2);opacity:.75}
+.md-piede span:first-child{flex:1 1 auto;min-width:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.md-piede .md-anno{margin-left:auto;flex:0 0 auto;opacity:.8}
 
 @media (max-width:640px){
   .move-griglia{grid-template-columns:1fr}

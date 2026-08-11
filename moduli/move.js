@@ -29,8 +29,8 @@
 import { CITTA, ATENEI } from '../configurazione.js';
 import { LANG, T, esc, elenco, offre, dataBreve, filaAtenei, marchio } from './nucleo.js';
 
-let BANDI = [], DESTINAZIONI = [], COSTI = new Map();
-let fonteBandi = null, fonteDest = null, fonteCosti = null;
+let BANDI = [], DESTINAZIONI = [], COSTI = new Map(), LOGHI = new Map();
+let fonteBandi = null, fonteDest = null, fonteCosti = null, fonteLoghi = null;
 let vista = 'bandi';
 let filtroUni = null, filtroPaese = null, pagina = 1;
 const PER_PAGINA = 24;
@@ -128,28 +128,79 @@ function renderBandi() {
 const PAESE_DI = { UNIMC: 'IT', MRU: 'LT', NBU: 'BG', EUV: 'DE', SWPS: 'PL', ULPGC: 'ES', UAEGEAN: 'EL', UP8: 'FR' };
 const paeseDiPartenza = sigla => PAESE_DI[sigla] || null;
 
+/* Le iniziali dell'ateneo, per quando il logo non c'è. Due lettere prese
+   dalle parole che contano — saltando le preposizioni, che altrimenti
+   darebbero "DE" a mezza Europa. */
+const VUOTE = new Set(['de', 'di', 'da', 'of', 'the', 'och', 'und', 'et', 'y', 'e', 'in', 'v', 've', 'za', 'na']);
+function iniziali(nome) {
+  const parole = String(nome).split(/[\s\-–]+/)
+    .map(p => p.replace(/[^\p{L}]/gu, ''))
+    .filter(p => p && !VUOTE.has(p.toLowerCase()));
+  const prese = parole.slice(0, 2).map(p => p[0].toUpperCase()).join('');
+  return prese || String(nome).slice(0, 2).toUpperCase();
+}
+
+/* Il segno di una destinazione. Il logo vero quando ce l'abbiamo con una
+   licenza libera; altrimenti le iniziali su fondo pastello, che è una
+   scelta grafica e non un buco. */
+function segnoAteneo(d) {
+  const l = LOGHI.get(d.codice) || LOGHI.get(`${d.ateneo}|${d.paese}`);
+  if (l) {
+    return `<span class="md-logo"><img src="${esc(l.file)}" alt="" loading="lazy"
+      title="${esc(l.licenza ? `${l.licenza} — ${l.autore || ''}`.trim() : '')}"></span>`;
+  }
+  const tinte = ['--menta', '--lavanda', '--pesca', '--cielo', '--rosa', '--sabbia'];
+  let h = 0; for (const c of String(d.ateneo)) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const t = tinte[h % tinte.length];
+  return `<span class="md-logo iniziali" style="--sf:var(${t});--tx:var(${t}-s)"
+    aria-hidden="true">${esc(iniziali(d.ateneo))}</span>`;
+}
+
 function destinazioneHTML(d) {
   const flag = bandiera(d.paese);
   const scarti = confronto(paeseDiPartenza(d.da), d.paeseEurostat);
 
+  /* La barra del costo: la lunghezza dice quanto, il colore da che
+     parte. Un numero da solo si legge; una barra si capisce di
+     traverso, che è come si guarda un elenco di cento destinazioni. */
+  const barra = s => {
+    const largo = Math.min(100, Math.abs(s) * 1.6);
+    return `<span class="md-barra"><i class="${s < 0 ? 'meno' : s > 0 ? 'piu' : 'pari'}"
+      style="width:${largo}%"></i></span>`;
+  };
+
   return `<article class="move-dest">
-    <div class="md-testa">
-      ${flag ? `<span class="md-bandiera" aria-hidden="true">${flag}</span>`
-             : marchio(d.da, 26)}
-      <span class="md-paese">${esc(d.paeseNome[LANG] || d.paeseNome.en)}</span>
-      ${d.posti > 0 ? `<span class="md-posti">${d.posti} ${T('posti', 'places')}</span>` : ''}
-    </div>
-    <b class="md-ateneo">${esc(d.ateneo)}</b>
-    ${d.codice ? `<span class="md-codice">${esc(d.codice)}</span>` : ''}
+    <header class="md-capo">
+      ${segnoAteneo(d)}
+      <div class="md-chi">
+        <b class="md-ateneo">${esc(d.ateneo)}</b>
+        <span class="md-dove">
+          ${flag ? `<span class="md-bandiera" aria-hidden="true">${flag}</span>` : ''}
+          ${esc(d.paeseNome[LANG] || d.paeseNome.en)}
+          ${d.codice ? `<i class="md-codice">${esc(d.codice)}</i>` : ''}
+        </span>
+      </div>
+      ${d.posti > 0 ? `<span class="md-posti"><b>${d.posti}</b>${T('posti', 'places')}</span>` : ''}
+    </header>
+
     ${scarti
-      ? `<ul class="md-costi">${scarti.map(r => `
-          <li><span>${esc(r.voce)}</span><b class="${r.scarto < 0 ? 'meno' : r.scarto > 0 ? 'piu' : ''}">${r.scarto > 0 ? '+' : ''}${r.scarto}%</b></li>`).join('')}</ul>`
+      ? `<div class="md-costi">
+          <span class="md-costi-eti">${T('rispetto a', 'compared to')} ${esc(CITTA[d.da] || d.da)}</span>
+          <ul>${scarti.map(r => `
+            <li>
+              <span class="v">${esc(r.voce)}</span>
+              ${barra(r.scarto)}
+              <b class="${r.scarto < 0 ? 'meno' : r.scarto > 0 ? 'piu' : ''}">${r.scarto > 0 ? '+' : ''}${r.scarto}%</b>
+            </li>`).join('')}</ul>
+        </div>`
       : `<p class="md-nocosti">${T('Confronto dei costi non disponibile per questo paese.',
                                    'Cost comparison not available for this country.')}</p>`}
-    <div class="md-piede">
-      <span>${T('partendo da', 'leaving from')} ${esc(CITTA[d.da] || d.da)}</span>
+
+    <footer class="md-piede">
+      <span>${esc(d.materia || d.programma[LANG] || d.programma.en)}</span>
+      ${d.mesi ? `<span>${d.mesi} ${T('mesi', 'months')}</span>` : ''}
       <span class="md-anno">${esc(d.anno)}</span>
-    </div>
+    </footer>
   </article>`;
 }
 
@@ -189,8 +240,24 @@ function renderDestinazioni() {
           esc(mancanti.map(a => CITTA[a] || a).join(', '))}</span>`
       : '');
 
+  /* Raggruppate per paese, con una fascia che li separa: cento schede
+     di fila sono un muro, cento schede in dieci gruppi sono un elenco. */
+  const gruppi = [];
+  for (const d of pezzo) {
+    const ultimo = gruppi[gruppi.length - 1];
+    if (ultimo && ultimo.paese === d.paese) ultimo.voci.push(d);
+    else gruppi.push({ paese: d.paese, nome: d.paeseNome[LANG] || d.paeseNome.en, voci: [d] });
+  }
+
   document.getElementById('move-dest-lista').innerHTML =
-    pezzo.map(destinazioneHTML).join('') ||
+    gruppi.map(g => {
+      const f = bandiera(g.paese);
+      return `<div class="move-paese-fascia">
+          ${f ? `<span aria-hidden="true">${f}</span>` : ''}
+          <b>${esc(g.nome)}</b><i>${g.voci.length}</i>
+        </div>
+        <div class="move-griglia">${g.voci.map(destinazioneHTML).join('')}</div>`;
+    }).join('') ||
     `<p class="move-vuoto">${T('Nessuna destinazione con questi filtri.', 'No destinations with these filters.')}</p>`;
 
   const nav = document.getElementById('move-pagine');
@@ -211,6 +278,7 @@ function renderFonte() {
   if (vista === 'destinazioni') {
     if (fonteDest) parti.push(fonteDest);
     if (fonteCosti) parti.push(fonteCosti);
+    if (fonteLoghi && LOGHI.size) parti.push(`${T('loghi', 'logos')}: ${fonteLoghi}`);
   }
   document.getElementById('move-fonte').textContent = parti.join(' · ');
 }
@@ -271,10 +339,11 @@ export async function avvia() {
   if (avviata) return;
   avviata = true;
 
-  const [bandi, dest, costi] = await Promise.all([
+  const [bandi, dest, costi, loghi] = await Promise.all([
     elenco('bandi').catch(() => null),
     elenco('destinazioni').catch(() => null),
     elenco('costi').catch(() => null),
+    elenco('loghi').catch(() => null),
   ]);
 
   if (bandi) { BANDI = bandi.elementi; fonteBandi = bandi.fonte; }
@@ -282,6 +351,10 @@ export async function avvia() {
   if (costi) {
     fonteCosti = costi.fonte;
     for (const p of costi.elementi) COSTI.set(p.paese, p);
+  }
+  if (loghi) {
+    fonteLoghi = loghi.fonte;
+    for (const l of loghi.elementi) LOGHI.set(l.chiave, l);
   }
 
   ridisegna();

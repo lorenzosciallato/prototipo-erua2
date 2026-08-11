@@ -58,6 +58,31 @@ export async function scarica(url) {
   throw new Error(`${url}: ${ultimo && ultimo.message}`);
 }
 
+/* Come `scarica`, ma per i file: PDF, immagini. Restituisce i byte
+   invece del testo, perché interpretarli come testo li rovina. */
+export async function scaricaBinario(url) {
+  let ultimo;
+  for (let tentativo = 1; tentativo <= TENTATIVI; tentativo++) {
+    const taglia = new AbortController();
+    const orologio = setTimeout(() => taglia.abort(), SCADENZA * 3);   // i PDF sono grossi
+    try {
+      const r = await fetch(url, {
+        signal: taglia.signal,
+        redirect: 'follow',
+        headers: { 'User-Agent': NOME, Accept: 'application/pdf,*/*' },
+      });
+      if (!r.ok) throw new Error(`risposta ${r.status}`);
+      return Buffer.from(await r.arrayBuffer());
+    } catch (err) {
+      ultimo = err;
+      if (tentativo < TENTATIVI) await attendi(2_000 * tentativo);
+    } finally {
+      clearTimeout(orologio);
+    }
+  }
+  throw new Error(`${url}: ${ultimo && ultimo.message}`);
+}
+
 /* Scorre le fonti una per volta, con una pausa in mezzo. Restituisce
    sempre un risultato per fonte, anche quando è andata male: chi chiama
    deve poter dire "sette su nove", non "è fallito". */

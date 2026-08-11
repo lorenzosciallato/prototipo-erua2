@@ -72,6 +72,39 @@ export const DA_ULPGC = {
   U:   { eurostat: null, iso: 'UY', it: 'Uruguay',            en: 'Uruguay' },
 };
 
+/* I paesi indicizzati per codice ISO, per le fonti che li scrivono già
+   così — l'allegato di UniMC, per esempio.
+
+   Non basta rovesciare la tabella di ULPGC: quella contiene solo i paesi
+   con cui ULPGC ha accordi, e per forza di cose **non contiene la
+   Spagna**, che è casa loro. Leggendo l'allegato di UniMC, quarantuno
+   destinazioni spagnole finivano fra le scartate con un "paese
+   sconosciuto: ES" che sembrava un errore dei dati e invece era mio. Da
+   qui l'aggiunta esplicita di quello che manca. */
+const ALTRI_ISO = {
+  ES: { eurostat: 'ES', iso: 'ES', it: 'Spagna',       en: 'Spain' },
+  CY: { eurostat: 'CY', iso: 'CY', it: 'Cipro',        en: 'Cyprus' },
+  IS: { eurostat: 'IS', iso: 'IS', it: 'Islanda',      en: 'Iceland' },
+  MT: { eurostat: 'MT', iso: 'MT', it: 'Malta',        en: 'Malta' },
+  LU: { eurostat: 'LU', iso: 'LU', it: 'Lussemburgo',  en: 'Luxembourg' },
+  RS: { eurostat: 'RS', iso: 'RS', it: 'Serbia',       en: 'Serbia' },
+  MK: { eurostat: 'MK', iso: 'MK', it: 'Macedonia del Nord', en: 'North Macedonia' },
+  BA: { eurostat: 'BA', iso: 'BA', it: 'Bosnia ed Erzegovina', en: 'Bosnia and Herzegovina' },
+  ME: { eurostat: 'ME', iso: 'ME', it: 'Montenegro',   en: 'Montenegro' },
+  UA: { eurostat: 'UA', iso: 'UA', it: 'Ucraina',      en: 'Ukraine' },
+  MD: { eurostat: 'MD', iso: 'MD', it: 'Moldova',      en: 'Moldova' },
+  AM: { eurostat: null, iso: 'AM', it: 'Armenia',      en: 'Armenia' },
+  IL: { eurostat: null, iso: 'IL', it: 'Israele',      en: 'Israel' },
+  CA: { eurostat: null, iso: 'CA', it: 'Canada',       en: 'Canada' },
+  CN: { eurostat: null, iso: 'CN', it: 'Cina',         en: 'China' },
+  AU: { eurostat: null, iso: 'AU', it: 'Australia',    en: 'Australia' },
+};
+
+export const PAESI_ISO = {
+  ...Object.fromEntries(Object.values(DA_ULPGC).map(p => [p.iso, p])),
+  ...ALTRI_ISO,
+};
+
 /* Prefisso del codice Erasmus dell'ateneo → paese, in ISO.
    Attenzione: qui la Grecia è GR, perché il confronto si fa con l'ISO.
    La forma EL è una particolarità di Eurostat e sta nell'altra tabella:

@@ -41,6 +41,10 @@ import { segnala } from './comune/registro.js';
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const NOME = 'loghi';
 const CARTELLA = path.join(RADICE, 'immagini', 'atenei');
+/* Memoria delle ricerche gia' fatte. Cercare 455 atenei su Wikidata
+   costa sei minuti: senza questa, ogni ritentativo dopo un intoppo li
+   rifarebbe tutti. Non e' un file di dati, e' un appunto di lavoro. */
+const MEMORIA = path.join(RADICE, 'robot', '.ricerche-loghi.json');
 
 /* Wikimedia chiede di presentarsi con un nome e un recapito: è nelle
    loro condizioni d'uso, e le richieste anonime vengono limitate. */
@@ -91,15 +95,33 @@ async function caricaPaesi(qid) {
   return iso;
 }
 
+/* I nomi arrivano dai sistemi degli atenei tutti in maiuscolo, spesso con
+   una sigla fra parentesi in coda. La ricerca di Wikidata se la cava
+   meglio con la forma normale, quindi si prova prima com'è e poi
+   ripulita: due tentativi valgono una manciata di riscontri in più. */
+function formeDelNome(nome) {
+  const forme = [nome];
+  const senzaSigla = nome.replace(/\s*\([^)]{2,10}\)\s*$/, '').trim();
+  const normale = senzaSigla.toLowerCase()
+    .replace(/\b\p{L}/gu, c => c.toUpperCase());
+  if (normale && normale !== nome) forme.push(normale);
+  return forme;
+}
+
 /* ── cerca l'ateneo e verifica che sia quello giusto ───────────────── */
 async function trovaAteneo(nome, isoAtteso) {
-  const j = await api(`${WD}?action=wbsearchentities&format=json&language=en&uselang=en&type=item&limit=5&search=${encodeURIComponent(nome)}`);
-  const candidati = (j.search || []).map(x => x.id);
+  const candidati = [];
+  for (const forma of formeDelNome(nome)) {
+    const j = await api(`${WD}?action=wbsearchentities&format=json&language=en&uselang=en&type=item&limit=5&search=${encodeURIComponent(forma)}`);
+    for (const x of (j.search || [])) if (!candidati.includes(x.id)) candidati.push(x.id);
+    if (candidati.length) break;          // la prima forma che dà qualcosa basta
+    await attendi(PAUSA);
+  }
   if (!candidati.length) return { esito: 'non trovato' };
 
-  const e = await api(`${WD}?action=wbgetentities&format=json&props=claims|labels&languages=en&ids=${candidati.join('|')}`);
+  const e = await api(`${WD}?action=wbgetentities&format=json&props=claims|labels&languages=en&ids=${candidati.slice(0, 8).join('|')}`);
 
-  for (const qid of candidati) {
+  for (const qid of candidati.slice(0, 8)) {
     const ent = e.entities[qid];
     if (!ent || !ent.claims) continue;
     const valori = (p, f = x => x) => (ent.claims[p] || [])
@@ -153,16 +175,30 @@ async function informazioni(files) {
 /* ── scarica la miniatura ──────────────────────────────────────────── */
 const nomeFile = chiave => chiave.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 
+/* Wikimedia limita chi scarica in fretta, e risponde 429. Non e' un
+   guasto: e' un cartello che dice "rallenta". Quindi si rallenta e si
+   riprova, aspettando ogni volta di piu'. Insistere alla stessa velocita'
+   e' il modo di farsi bloccare davvero. */
 async function scaricaLogo(url, base) {
-  const r = await fetch(url, { headers: { 'User-Agent': UA } });
+  let r;
+  for (let tentativo = 1; tentativo <= 4; tentativo++) {
+    r = await fetch(url, { headers: { 'User-Agent': UA } });
+    if (r.status !== 429) break;
+    await attendi(1500 * tentativo);
+  }
   if (!r.ok) throw new Error(`miniatura ${r.status}`);
   const tipo = (r.headers.get('content-type') || '').split(';')[0];
   const est = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/svg+xml': 'svg', 'image/webp': 'webp', 'image/gif': 'gif' }[tipo];
   if (!est) throw new Error(`tipo non previsto: ${tipo}`);
   const dati = Buffer.from(await r.arrayBuffer());
+  /* Commons non genera sempre la miniatura: quando non ce la fa
+     restituisce l'originale, che può pesare due megabyte. Un logo da
+     due megabyte in un elenco di settecento schede non si scarica: si
+     scarta, e resta la sigla. */
+  if (dati.length > 250 * 1024) throw new Error(`troppo pesante: ${Math.round(dati.length / 1024)} KB`);
   fs.mkdirSync(CARTELLA, { recursive: true });
   const rel = `immagini/atenei/${base}.${est}`;
-  fs.writeFileSync(path.join(RADICE, `${base}.${est}`.replace(/^/, 'immagini/atenei/')), dati);
+  fs.writeFileSync(path.join(RADICE, rel), dati);
   return { rel, byte: dati.length };
 }
 
@@ -191,25 +227,31 @@ async function gira({ prova = false, tutti = false } = {}) {
   }
   console.log(`atenei distinti fra le destinazioni: ${atenei.size}`);
 
+  let memoria = {};
+  if (!tutti) { try { memoria = JSON.parse(fs.readFileSync(MEMORIA, 'utf8')); } catch (err) { memoria = {}; } }
+
   const noti = tutti ? new Map() : giaTrovati();
   const daFare = [...atenei.values()].filter(a => !noti.has(a.chiave));
   console.log(`già noti: ${noti.size} · da cercare adesso: ${daFare.length}`);
 
   const trovati = [];
+  const errori = [];
   const conta = { ok: 0, 'senza logo': 0, 'non trovato': 0, 'nessun riscontro sicuro': 0, 'licenza non libera': 0, errore: 0 };
 
   for (const [i, a] of daFare.entries()) {
     if (i && i % 25 === 0) console.log(`  … ${i}/${daFare.length}`);
     try {
-      const r = await trovaAteneo(a.nome, a.paese);
-      await attendi(PAUSA);
+      const r = memoria[a.chiave] || await trovaAteneo(a.nome, a.paese);
+      if (!memoria[a.chiave]) { memoria[a.chiave] = r; await attendi(PAUSA); }
       if (r.esito !== 'ok') { conta[r.esito] = (conta[r.esito] || 0) + 1; continue; }
       trovati.push({ ...a, qid: r.qid, fileCommons: r.file, etichetta: r.etichetta });
     } catch (err) {
       conta.errore++;
+      if (errori.length < 6) errori.push(`ricerca ${a.nome}: ${err.message}`);
     }
   }
 
+  try { fs.writeFileSync(MEMORIA, JSON.stringify(memoria)); } catch (err) { /* appunto non salvato: pazienza */ }
   console.log(`\ncon un logo su Wikidata: ${trovati.length}`);
   if (!trovati.length) {
     for (const [k, v] of Object.entries(conta)) if (v) console.log(`  ${k}: ${v}`);
@@ -258,9 +300,10 @@ async function gira({ prova = false, tutti = false } = {}) {
       });
       scaricati++; byteTotali += byte;
       conta.ok++;
-      await attendi(120);
+      await attendi(700);
     } catch (err) {
       conta.errore++;
+      if (errori.length < 6) errori.push(`${b.nome}: ${err.message}`);
     }
   }
 
@@ -275,6 +318,7 @@ async function gira({ prova = false, tutti = false } = {}) {
   console.log(`\nscaricati ${scaricati} loghi, ${Math.round(byteTotali / 1024)} KB in tutto`);
   console.log(`schedario: ${esito.quanti} atenei con logo`);
   for (const [k, v] of Object.entries(conta)) if (v) console.log(`  ${k}: ${v}`);
+  if (errori.length) { console.log('\nprimi errori:'); for (const e of errori) console.log(`  ${e}`); }
 
   return {
     esito: 'fatto',

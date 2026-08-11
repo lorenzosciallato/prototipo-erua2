@@ -207,3 +207,11 @@ nav.tabs::-webkit-scrollbar{display:none}
   position:relative;z-index:1}
 .avviso-traduzione[hidden]{display:none}
 @media (max-width:640px){ .avviso-traduzione{font-size:.62rem;padding:.45rem .8rem} }
+
+/* DICITURA SUI MARCHI (§6.4)
+   Deve essere leggibile senza gridare: chi la cerca la trova, chi
+   naviga non ne è disturbato. Non si traduce — è una dichiarazione
+   giuridica e deve dire sempre la stessa cosa. */
+footer .marchi{margin:.6rem auto 0;max-width:44rem;
+  font-family:var(--font-mono);font-size:.6rem;line-height:1.7;
+  letter-spacing:.03em;color:var(--testo2);opacity:.72}

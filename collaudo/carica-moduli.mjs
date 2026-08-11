@@ -188,6 +188,7 @@ const prove = [
   ['Read (articolo)',  '.leggi-art',          { id: 'editoriale' }, 'art',        'art-testa'],
   ['Story (storia)',   '[data-storia]',       { storia: 'editoriale' }, 'storie-viewer', 'sv-testo'],
   ['Move: destinazioni', '#move-modi .modo-mag', { move: 'destinazioni' }, 'move-dest-lista', 'md-costi'],
+  ['Move: filtro paese',  '#move-paesi [data-paese]', { paese: 'IT' }, 'move-dest-lista', 'md-ateneo'],
 ];
 for (const [nome, sel, ds, id, atteso] of prove) {
   try {
