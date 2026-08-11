@@ -90,36 +90,23 @@
 
 /* pulsante per scrivere: sempre a portata di pollice.
 
-   Sta fisso sopra la pagina, quindi in fondo finiva addosso alla
-   dicitura sui marchi: due testi sovrapposti, illeggibili tutti e due.
-   Tre correzioni, che risolvono il problema da tre lati diversi:
+   Sta fisso sopra la pagina, e in fondo finiva addosso alla dicitura sui
+   marchi. La correzione è una sola e sta altrove: sotto al piè di pagina
+   c'è abbastanza spazio perché il testo non gli arrivi mai sotto
+   (`stile/base.css`).
 
-   1. il fondo è pieno, non velato: qualunque cosa passi sotto non si
-      legge attraverso;
-   2. sotto il pulsante c'è un velo sfumato verso il colore della
-      pagina, così il testo non gli arriva a filo ma sfuma;
-   3. e soprattutto — quando si arriva in fondo, il pulsante **se ne
-      va**. Chi sta leggendo il piè di pagina non sta scrivendo un post.
-      Se ne occupa `sociale.js`, guardando quando il piè di pagina entra
-      nello schermo. */
+   Ci avevo provato con un velo sfumato dietro al pulsante e facendolo
+   sparire quando si arriva in fondo. Erano due trovate di troppo: il
+   velo si vedeva come una barra grigia in fondo al sito, e un pulsante
+   che sparisce mentre scorri sembra un guasto. Quando basta dello
+   spazio, si mette dello spazio. */
 .sc-piu{position:fixed;left:50%;transform:translateX(-50%);
   bottom:calc(1.3rem + env(safe-area-inset-bottom));z-index:60;
   background:var(--testo);color:var(--sup);border-radius:99px;padding:.8rem 1.5rem;
   font-size:.92rem;font-weight:600;line-height:1;white-space:nowrap;
   box-shadow:var(--ombra-alta);display:none;align-items:center;gap:.5rem;
-  transition:transform .16s ease,opacity .22s ease,visibility .22s ease}
+  transition:transform .16s ease}
 .sc-piu:hover{transform:translateX(-50%) translateY(-2px)}
-
-/* il velo sotto: sfuma dal colore della pagina al trasparente, così il
-   testo che scorre sotto non tocca mai il bordo del pulsante */
-.sc-piu::before{content:"";position:absolute;left:50%;transform:translateX(-50%);
-  bottom:calc(-1.3rem - env(safe-area-inset-bottom));
-  width:100vw;height:calc(100% + 2.6rem + env(safe-area-inset-bottom));
-  background:linear-gradient(to top,var(--bg) 38%,transparent);
-  z-index:-1;pointer-events:none}
-
-/* arrivati in fondo, il pulsante si toglie di mezzo */
-.sc-piu.in-fondo{opacity:0;visibility:hidden;pointer-events:none}
 #p-social.attivo ~ .sc-piu,.sc-piu.mostra{display:inline-flex}
 /* se il lettore podcast e` agganciato in basso, il pulsante gli sale sopra */
 body.pod-aperta .sc-piu{bottom:calc(6.6rem + env(safe-area-inset-bottom))}

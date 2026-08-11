@@ -208,10 +208,15 @@ nav.tabs::-webkit-scrollbar{display:none}
 .avviso-traduzione[hidden]{display:none}
 @media (max-width:640px){ .avviso-traduzione{font-size:.62rem;padding:.45rem .8rem} }
 
-/* Spazio in fondo alla pagina: il pulsante "New post" sta fisso sopra
-   tutto, e senza questo margine l'ultima riga di testo gli finisce
-   sotto. Vale solo quando il pulsante c'è davvero, cioè nella piazza. */
-body:has(#p-social.attivo) footer{padding-bottom:5.5rem}
+/* Spazio in fondo alla pagina. Il pulsante "New post" sta fisso sopra
+   tutto e occupa gli ultimi quattro centimetri dello schermo: senza
+   questo margine, l'ultima riga della dicitura gli finisce sotto.
+
+   Vale sempre, non solo dove il pulsante compare: una regola che
+   dipende da quale sezione è aperta è una regola che un giorno smette
+   di valere senza che nessuno se ne accorga. Sei righe di spazio vuoto
+   in fondo alle altre sezioni non le guasta. */
+footer{padding-bottom:6rem}
 
 /* DICITURA SUI MARCHI (§6.4)
    Deve essere leggibile senza gridare: chi la cerca la trova, chi

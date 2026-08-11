@@ -222,19 +222,21 @@ const prove2 = [
      return i > 0 && /translate="no"/.test(html.slice(i - 90, i + 90));
    },
    'il logo deve portare translate="no"'],
+  ['spazio sotto il piè di pagina',
+   () => fs.readFileSync(path.join(REPO, 'stile/base.css'), 'utf8').includes('footer{padding-bottom'),
+   'senza spazio in fondo, la dicitura finisce sotto al pulsante New post'],
+  ['niente trucchi sul pulsante',
+   () => {
+     const css = fs.readFileSync(path.join(REPO, 'stile/sociale.css'), 'utf8');
+     return !css.includes('.sc-piu::before') && !css.includes('.sc-piu.in-fondo');
+   },
+   'il pulsante non deve avere veli dietro né sparire scorrendo'],
   ['scheletri dichiarati per le sezioni',
    () => {
      const nav = fs.readFileSync(path.join(REPO, 'moduli/navigazione.js'), 'utf8');
      return ['magazine:', 'news:', 'social:'].every(k => nav.includes(k)) && nav.includes('scheletro');
    },
    'la navigazione deve dipingere gli scheletri prima di caricare'],
-  ['il pulsante si toglie in fondo',
-   () => {
-     const css = fs.readFileSync(path.join(REPO, 'stile/sociale.css'), 'utf8');
-     const js = fs.readFileSync(path.join(REPO, 'moduli/sociale.js'), 'utf8');
-     return css.includes('.sc-piu.in-fondo') && js.includes('IntersectionObserver');
-   },
-   'serve la classe in-fondo e chi la accende'],
 ];
 for (const [nome, prova, perche] of prove2) {
   let ok = false;

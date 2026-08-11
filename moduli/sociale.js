@@ -217,25 +217,6 @@ addEventListener('keydown', e => {
   if (f && !f.hidden) apriFoglio(false);
 });
 
-/* ── il pulsante si toglie di mezzo in fondo alla pagina ────────────
-   Sta fisso sopra tutto, quindi arrivati in fondo finiva addosso alla
-   dicitura sui marchi. Quando il piè di pagina entra nello schermo il
-   pulsante sparisce: chi sta leggendo lì non sta scrivendo un post.
-
-   Si guarda il piè di pagina invece di misurare lo scorrimento perché
-   funziona da solo su qualunque schermo e con qualunque lunghezza di
-   pagina — e non costa niente, il browser avvisa solo quando serve. */
-{
-  const piede = document.querySelector('footer');
-  const piu = document.getElementById('btn-apri-scrivi');
-  if (piede && piu && typeof IntersectionObserver === 'function') {
-    new IntersectionObserver(
-      ([voce]) => piu.classList.toggle('in-fondo', voce.isIntersecting),
-      { rootMargin: '0px 0px -12px 0px' },
-    ).observe(piede);
-  }
-}
-
 /* ── avvio della sezione ───────────────────────────────────────────── */
 let avviata = false;
 export async function avvia() {
