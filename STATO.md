@@ -31,7 +31,6 @@ Com'è fatto adesso:
 | `moduli/` | il codice, un modulo per sezione, caricato su richiesta |
 | `immagini/` | le 23 fotografie, prima incorporate in base64 |
 | `robot/` | i processi automatici che riscrivono `dati/` |
-| — | sezioni: sociale, notizie, **move**, didattica, rivista, messaggistica, profilo |
 | `collaudo/` | le prove automatiche |
 
 Chi apre solo la rivista non scarica più la didattica né le trascrizioni delle
@@ -50,10 +49,10 @@ Esistono e funzionano su dati veri. Dettagli in `robot/LEGGIMI.md`.
 | `notizie.js` | **tutti e nove gli atenei**: sette da feed, EUV e ULPGC leggendo la pagina → `dati/notizie.json` |
 | `ascolta.js` | legge il feed pubblico del canale → `dati/ascolta.json`. Funziona **senza accesso al canale** |
 | `didattica.js` | controlla che i 18 video dichiarati rispondano ancora. Non sceglie corsi: è selezione editoriale |
-| `bandi.js` | ricava dai bandi le scadenze in nove lingue e li dice aperti o chiusi. Non scarica niente: rilegge le notizie |
-| `destinazioni.js` | dove si può andare: **751 destinazioni in 38 paesi**, da ULPGC (banca dati JSON) e UniMC (allegato del bando in PDF) |
-| `loghi.js` | i loghi degli atenei di destinazione da Wikidata e Commons, solo con licenza libera: 211 atenei, un terzo delle destinazioni |
-| `costi.js` | livelli di prezzo Eurostat per 47 paesi su alloggio, spesa, trasporti e mangiare fuori |
+| `bandi.js` | *fermo* — ricavava le scadenze dai bandi in nove lingue |
+| `destinazioni.js` | *fermo* — 751 destinazioni da ULPGC (banca dati) e UniMC (allegato in PDF) |
+| `loghi.js` | *fermo* — 211 loghi da Wikidata e Commons, solo con licenza libera |
+| `costi.js` | *fermo* — livelli di prezzo Eurostat per 47 paesi |
 | `studenti.js` | tiene il posto e la forma. Produce un elenco vuoto, ed è corretto così |
 
 Da fare su questo fronte, in ordine:
@@ -74,6 +73,31 @@ Da fare su questo fronte, in ordine:
    pubblicazioni; il canale ne ha più di 40. Per recuperare tutto in un
    colpo serve l'interfaccia ufficiale con una chiave — che è anche l'unico
    momento in cui servirà l'accesso al canale.
+
+## La sezione Move: tolta
+
+Esisteva una settima sezione, **Move**, con bandi e destinazioni di
+mobilità. È stata **rimossa dall'applicazione** perché l'impaginazione non
+convinceva.
+
+Che cosa resta e che cosa no:
+
+- **Tolti**: la voce nella navigazione, il pannello, `moduli/move.js`,
+  `stile/move.css`, le stringhe nei file dei testi, le prove nel collaudo.
+  Nell'applicazione non c'è più alcun riferimento.
+- **Restano, ma fermi**: i quattro robot che la alimentavano
+  (`bandi`, `destinazioni`, `loghi`, `costi`) e i dati che avevano già
+  prodotto — fra cui 751 destinazioni con i loro atenei e 211 loghi con
+  licenza libera. Sono fuori dal giro automatico: continuare ad
+  aggiornare dati che nessuno legge sarebbe lavoro sprecato.
+- **Perché non sono stati cancellati**: quel materiale è costoso da
+  rifare. Il lettore di tabelle in PDF (`robot/comune/pdf.js`) e il
+  riconoscimento delle date in nove lingue (`robot/comune/date.js`)
+  servono anche altrove. Se la sezione non tornerà, si cancellano con un
+  comando solo — vale anche per `immagini/atenei/`, che pesa 3,8 MB.
+
+La dicitura sui marchi in fondo alla pagina **resta**: era dovuta comunque
+(§6.4) e prima mancava.
 
 ## Cosa manca, in ordine
 

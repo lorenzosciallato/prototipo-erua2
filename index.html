@@ -25,7 +25,6 @@
 <link rel="stylesheet" href="stile/notizie.css">
 <link rel="stylesheet" href="stile/sociale.css">
 <link rel="stylesheet" href="stile/storie.css">
-<link rel="stylesheet" href="stile/move.css">
 <link rel="stylesheet" href="stile/didattica.css">
 <link rel="stylesheet" href="stile/aula.css">
 </head>
@@ -103,10 +102,6 @@
     <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 9h16M9 9v10"/></svg>
     <span translate="no" data-i18n="Magazine">Magazine</span>
   </button>
-  <button class="tab-btn" role="tab" data-tab="move" aria-selected="false">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"/></svg>
-    <span translate="no" data-i18n="Move">Move</span>
-  </button>
   <button class="tab-btn" role="tab" data-tab="study" aria-selected="false">
     <svg viewBox="0 0 24 24"><path d="M3 9.2 12 5l9 4.2-9 4.2z"/><path d="M6.8 11.4v3.9c0 1.5 2.3 2.7 5.2 2.7s5.2-1.2 5.2-2.7v-3.9"/><path d="M21 9.2v5.2"/></svg>
     <span translate="no" data-i18n="Learn">Learn</span>
@@ -155,37 +150,6 @@
 </section>
 
 <!-- ============ STUDY (vetrina) ============ -->
-<!-- MOVE — dove si puo' andare, e entro quando.
-     Le destinazioni non portano il logo dell'ateneo ospitante: sono
-     marchi altrui, con manuali d'identita' vincolanti (riferimento.md
-     §6.4) e file con licenza loro (§6.2). Portano la bandiera del paese
-     e il segno pastello che il sito genera da se'. I loghi in questa
-     sezione sono solo quelli degli otto atenei dell'alleanza, nel
-     filtro, come nelle altre sezioni. -->
-<section class="pannello" id="p-move" role="tabpanel">
-
-  <div class="storie" id="move-atenei" role="group" aria-label="Filter by university"></div>
-
-  <nav class="modi-mag" id="move-modi" role="tablist" aria-label="Move">
-    <button class="modo-mag on" role="tab" data-move="bandi" aria-selected="true" data-i18n="Calls">Calls</button>
-    <button class="modo-mag" role="tab" data-move="destinazioni" aria-selected="false" data-i18n="Destinations">Destinations</button>
-  </nav>
-
-  <div id="move-bandi">
-    <div class="move-conta" id="move-bandi-conta"></div>
-    <div class="move-lista" id="move-bandi-lista"></div>
-  </div>
-
-  <div id="move-destinazioni" hidden>
-    <div class="move-conta" id="move-dest-conta"></div>
-    <nav class="move-paesi" id="move-paesi" aria-label="Countries"></nav>
-    <div class="move-griglia" id="move-dest-lista"></div>
-    <nav class="news-pagine" id="move-pagine" aria-label="Pages"></nav>
-  </div>
-
-  <p class="move-fonte" id="move-fonte"></p>
-</section>
-
 <section class="pannello" id="p-study" role="tabpanel">
 
 

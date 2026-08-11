@@ -33,9 +33,12 @@ if ! git pull --rebase --quiet 2>/dev/null; then
 fi
 
 # ─── 2. I robot, uno per volta ──────────────────────────────────────
-# `bandi` legge il file che `notizie` ha appena scritto, e `loghi` legge
-# quello di `destinazioni`: per questo vengono dopo.
-for robot in notizie bandi ascolta destinazioni loghi costi didattica studenti; do
+# La sezione Move e' stata tolta dall'applicazione. I robot che la
+# alimentavano — bandi, destinazioni, loghi, costi — restano nel
+# progetto ma fuori da questo giro: continuare ad aggiornare dati che
+# nessuno legge sarebbe lavoro sprecato, e farebbe credere al registro
+# che tutto e' in uso.
+for robot in notizie ascolta didattica studenti; do
   echo
   echo "· $robot"
   if node "robot/$robot.js"; then
