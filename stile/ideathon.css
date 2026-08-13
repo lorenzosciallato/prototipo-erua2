@@ -1,0 +1,198 @@
+/* ERUA connect — ideathon.css
+
+   Un bando europeo aperto, e chi si sta organizzando per vincerlo.
+
+   È l'unica sezione dove c'è in gioco un premio vero, esterno
+   all'alleanza. Per questo è la sola che si permette un accento pieno:
+   la voce nella navigazione è accesa, e il bando in cima è un blocco
+   scuro che non somiglia a nient'altro nel sito. Tutto il resto —
+   schede, pillole, cerchi degli atenei — resta il linguaggio di sempre,
+   altrimenti sembrerebbe un sito diverso incollato dentro.
+
+   La regola che ho seguito: **una sola cosa può gridare**. Qui grida il
+   premio. Le squadre e le persone stanno sotto, in tono normale. */
+
+/* ── la voce accesa nella navigazione ────────────────────────────────
+   Il fulmine e il fondo pieno: chi apre il sito per la prima volta deve
+   trovarla senza cercarla. È l'unica voce trattata così, e funziona
+   proprio perché è l'unica. */
+.tab-btn.acceso{background:var(--live);color:#fff}
+.tab-btn.acceso svg{fill:#fff;stroke:none}
+.tab-btn.acceso[aria-selected="true"]{background:var(--testo);color:var(--sup)}
+.tab-btn.acceso[aria-selected="true"] svg{fill:var(--sup)}
+html[data-tema="scuro"] .tab-btn.acceso{background:var(--menta-s);color:#0B1F14}
+html[data-tema="scuro"] .tab-btn.acceso svg{fill:#0B1F14}
+
+/* ── il bando ────────────────────────────────────────────────────────
+   Deve rispondere in tre secondi: quanto si vince, entro quando, posso
+   partecipare io. Fondo scuro perché è l'unico blocco della pagina che
+   deve fermare l'occhio. */
+.idea-bando{background:var(--testo);color:var(--sup);border-radius:var(--r);
+  padding:1.8rem 1.9rem 1.5rem;box-shadow:var(--ombra-alta);
+  position:relative;overflow:hidden;margin-bottom:1.6rem}
+/* un alone verde in alto a destra: dà profondità senza disturbare */
+.idea-bando::after{content:"";position:absolute;top:-45%;right:-18%;
+  width:26rem;height:26rem;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(30,122,84,.5),transparent 66%)}
+.idea-bando > *{position:relative;z-index:1}
+
+.ib-testa{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ib-ente{font-family:var(--font-mono);font-size:.62rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;background:rgba(255,255,255,.14);border-radius:5px;padding:.2rem .5rem}
+.ib-strand{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;
+  color:rgba(255,255,255,.62)}
+
+.ib-tit{font-family:var(--font-display);font-size:1.85rem;font-weight:600;line-height:1.12;
+  letter-spacing:-.03em;margin:0 0 .55rem;max-width:26ch}
+.ib-desc{font-size:.92rem;line-height:1.6;color:rgba(255,255,255,.74);
+  margin:0 0 1.4rem;max-width:56ch}
+
+/* i tre numeri che contano, in fila */
+.ib-numeri{display:flex;gap:2.2rem;flex-wrap:wrap;
+  padding:1.1rem 0;margin-bottom:1.1rem;
+  border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
+.ib-num{display:flex;flex-direction:column;gap:.15rem}
+.ib-num b{font-family:var(--font-display);font-size:1.5rem;font-weight:600;letter-spacing:-.02em;
+  line-height:1.1}
+.ib-num.grande b{font-size:2.1rem;color:var(--live-pieno)}
+.ib-num span{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.07em;
+  text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+.ib-vantaggi{list-style:none;margin:0 0 1.3rem;padding:0;
+  display:flex;flex-wrap:wrap;gap:.45rem}
+.ib-vantaggi li{font-size:.74rem;line-height:1.4;color:rgba(255,255,255,.8);
+  background:rgba(255,255,255,.09);border-radius:99px;padding:.32rem .75rem}
+
+.ib-piede{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap}
+.ib-vai{background:var(--live-pieno);color:#0B1F14;border-radius:99px;
+  padding:.62rem 1.25rem;font-size:.85rem;font-weight:700;text-decoration:none;white-space:nowrap;
+  transition:transform .15s ease}
+.ib-vai:hover{transform:translateY(-2px)}
+.ib-guida{font-size:.78rem;color:rgba(255,255,255,.72);text-decoration:underline;white-space:nowrap}
+.ib-guida:hover{color:#fff}
+/* l'avvertenza sulle date: piccola ma sempre presente. Nessuno deve
+   perdere una scadenza per colpa di una nostra pagina. */
+.ib-avviso{font-family:var(--font-mono);font-size:.58rem;line-height:1.5;
+  letter-spacing:.03em;color:rgba(255,255,255,.5);margin-left:auto;max-width:22rem}
+
+/* ── i tre numeri sotto: quante persone si sono già mosse ─────────────
+   Servono a togliere la paura di essere il primo. */
+.idea-conta{display:flex;gap:2.4rem;flex-wrap:wrap;margin:0 0 1.2rem;padding:0 .2rem}
+.ic-voce{display:flex;flex-direction:column;gap:.1rem}
+.ic-voce b{font-family:var(--font-display);font-size:1.6rem;font-weight:600;
+  letter-spacing:-.02em;line-height:1;color:var(--testo)}
+.ic-voce span{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--testo2)}
+
+.idea-filtri{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem}
+
+/* ── intestazioni di sezione ─────────────────────────────────────── */
+.idea-sezione{margin:2.4rem 0 1.1rem}
+.idea-sezione:first-child{margin-top:0}
+.idea-titolo{font-family:var(--font-display);font-size:1.28rem;font-weight:600;
+  letter-spacing:-.02em;color:var(--testo);margin:0 0 .3rem}
+.idea-sotto{font-size:.85rem;line-height:1.6;color:var(--testo2);margin:0;max-width:60ch}
+
+.idea-griglia{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+.idea-griglia.soli{grid-template-columns:repeat(auto-fill,minmax(268px,1fr))}
+.idea-vuoto{color:var(--testo2);padding:2rem 0}
+
+/* ── una squadra ───────────────────────────────────────────────────
+   Il filetto colorato a sinistra è la categoria del bando: scorrendo si
+   vede a colpo d'occhio quali ambiti sono già coperti e quali no. */
+.idea-squadra{background:var(--sup);border-radius:var(--r);box-shadow:var(--ombra);
+  padding:1.15rem 1.25rem 1.1rem;display:flex;flex-direction:column;gap:.7rem;
+  border-left:4px solid var(--tinta);
+  transition:box-shadow .18s ease,transform .18s ease}
+.idea-squadra:hover{box-shadow:var(--ombra-alta);transform:translateY(-2px)}
+
+.is-capo{display:flex;align-items:center;gap:.6rem}
+.is-cat{font-family:var(--font-mono);font-size:.57rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--tinta-s);background:var(--tinta);
+  border-radius:4px;padding:.16rem .45rem;line-height:1.3}
+.is-atenei{margin-left:auto;display:flex;gap:-.4rem}
+.is-logo{width:22px;height:22px;border-radius:50%;overflow:hidden;display:block;
+  background:var(--sup2);margin-left:-.35rem;border:2px solid var(--sup)}
+.is-logo img{width:100%;height:100%;object-fit:cover;display:block}
+
+.is-tit{font-family:var(--font-display);font-size:1.12rem;font-weight:600;line-height:1.24;
+  letter-spacing:-.02em;color:var(--testo);margin:0}
+.is-sintesi{font-size:.85rem;line-height:1.62;color:var(--testo2);margin:0}
+
+.is-membri{display:flex;flex-wrap:wrap;gap:.55rem;padding:.2rem 0}
+.is-membro{display:flex;align-items:center;gap:.4rem;background:var(--sup2);
+  border-radius:99px;padding:.22rem .7rem .22rem .22rem}
+.is-chi{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.is-chi b{font-size:.72rem;font-weight:600;color:var(--testo);white-space:nowrap}
+.is-chi i{font-family:var(--font-mono);font-style:normal;font-size:.55rem;letter-spacing:.05em;
+  color:var(--testo2);white-space:nowrap}
+/* i posti liberi: un vuoto disegnato apposta, che invita */
+.is-liberi{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-width:2.9rem;border:1.5px dashed var(--bordo2);border-radius:99px;padding:.28rem .6rem;
+  font-family:var(--font-display);font-weight:700;font-size:.9rem;color:var(--tinta-s);line-height:1}
+.is-liberi i{font-family:var(--font-mono);font-style:normal;font-size:.5rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--testo2);font-weight:400}
+
+.is-cerca{background:var(--sup2);border-radius:14px;padding:.65rem .8rem}
+.is-cerca-eti{display:block;font-family:var(--font-mono);font-size:.55rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--testo2);margin-bottom:.2rem}
+.is-cerca p{font-size:.8rem;line-height:1.5;color:var(--testo);margin:0}
+
+.is-unisci{margin-top:auto;align-self:flex-start;background:var(--testo);color:var(--sup);
+  border-radius:99px;padding:.55rem 1.1rem;font-size:.8rem;font-weight:600;
+  transition:transform .15s ease}
+.is-unisci:hover{transform:translateY(-2px)}
+
+/* ── chi cerca ancora un gruppo ──────────────────────────────────────
+   Schede di persone, non di progetti: si legge prima cosa sanno fare e
+   poi da dove vengono. */
+.idea-solo{background:var(--sup);border-radius:var(--r);box-shadow:var(--ombra);
+  padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.6rem;
+  transition:box-shadow .18s ease,transform .18s ease}
+.idea-solo:hover{box-shadow:var(--ombra-alta);transform:translateY(-2px)}
+
+.isl-capo{display:flex;align-items:center;gap:.6rem}
+.isl-chi{min-width:0;display:flex;flex-direction:column;gap:.1rem}
+.isl-chi b{font-size:.9rem;font-weight:600;color:var(--testo);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.isl-dove{display:flex;align-items:center;gap:.3rem;
+  font-family:var(--font-mono);font-size:.57rem;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--testo2)}
+.isl-logo{width:15px;height:15px;border-radius:50%;overflow:hidden;display:block;flex:0 0 auto}
+.isl-logo img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* età e genere: piccoli, in coda. Sono dati personali e non sono il
+   motivo per cui si sceglie un compagno di squadra. */
+.isl-dati{margin-left:auto;text-align:right;display:flex;flex-direction:column;line-height:1.25}
+.isl-dati i{font-family:var(--font-display);font-style:normal;font-size:1rem;font-weight:600;
+  color:var(--testo);letter-spacing:-.02em}
+.isl-dati span{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--testo2)}
+
+.isl-testo{font-size:.83rem;line-height:1.6;color:var(--testo);margin:0}
+
+.isl-interessi{list-style:none;margin:auto 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.3rem}
+.isl-interessi li{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.03em;
+  color:var(--testo2);background:var(--sup2);border-radius:99px;padding:.2rem .55rem}
+
+.isl-scrivi{align-self:flex-start;margin-top:.2rem;background:none;color:var(--live);
+  font-size:.78rem;font-weight:600;padding:.3rem 0}
+.isl-scrivi:hover{text-decoration:underline}
+
+/* ── la nota in fondo ────────────────────────────────────────────────
+   Dice che le squadre sono inventate. Non è una postilla da nascondere:
+   chi guarda deve sapere cosa è vero e cosa è mostrato. */
+.idea-nota{font-family:var(--font-mono);font-size:.62rem;line-height:1.75;
+  color:var(--testo2);background:var(--sabbia);border-radius:14px;
+  padding:.9rem 1.1rem;margin:2.6rem 0 .5rem;max-width:70ch}
+html[data-tema="scuro"] .idea-nota{background:var(--sup2)}
+
+@media (max-width:640px){
+  .idea-bando{padding:1.4rem 1.3rem 1.2rem}
+  .ib-tit{font-size:1.45rem}
+  .ib-numeri{gap:1.4rem}
+  .ib-num.grande b{font-size:1.7rem}
+  .ib-avviso{margin-left:0;max-width:none}
+  .idea-conta{gap:1.5rem}
+  .idea-griglia,.idea-griglia.soli{grid-template-columns:1fr}
+}

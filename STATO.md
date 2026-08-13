@@ -191,7 +191,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **13/08/2026 alle 21:55** — file toccato: `moduli/ideathon.js`
+Ultimo salvataggio: **13/08/2026 alle 21:56** — file toccato: `stile/ideathon.css`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -202,6 +202,7 @@ Ultimo salvataggio: **13/08/2026 alle 21:55** — file toccato: `moduli/ideathon
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 454 | 24K |
+| `moduli/ideathon.js` | 237 | 12K |
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/navigazione.js` | 124 | 8.0K |
 | `moduli/notizie.js` | 105 | 8.0K |
