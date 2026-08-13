@@ -111,15 +111,40 @@ function studyReveal(){
       if(!s)return;
       s.innerHTML=ST_CORSI.filter(c=>c.materia===gr.g).map(stCorsoHTML).join('');
       stBarre(s);
-    },640+i*170);
+    /* Lo scaglionamento serve a far entrare i gruppi uno dopo l'altro,
+       non a far aspettare. Prima erano 640 ms fermi più 170 per gruppo:
+       oltre un secondo di pagina vuota **dopo** che i dati erano già
+       arrivati, che sembrava un caricamento mai finito. Adesso il primo
+       gruppo compare subito e gli altri lo seguono a ruota. */
+    },i*70);
   });
   setTimeout(()=>{
     const d=document.querySelector('[data-slot="dive"]');
     if(d)d.innerHTML=ST_DIVES.map(stDiveHTML).join('');
     const sl=document.querySelector('[data-slot="stud"]');
     if(sl)sl.innerHTML=ST_STUD.map(stStudHTML).join('')+ST_STUD_PROSSIMI.map(stPrestoHTML).join('');
-  },640+ST_GRUPPI.length*170);
+  },ST_GRUPPI.length*70);
 }
+
+/* ── copertine che non arrivano ────────────────────────────────────
+   Le anteprime vengono da YouTube: ogni tanto una non risponde, o il
+   video e' stato ritirato. Senza ripiego resta un riquadro vuoto, e
+   sembra che la sezione non abbia caricato — che e' esattamente quello
+   che si vedeva.
+
+   Il foglio del corso questo ripiego ce l'aveva gia'; la vetrina no.
+   Qui si ascolta in fase di cattura perche' l'errore di un'immagine non
+   risale da solo fino al contenitore. */
+document.getElementById('st-gruppi').addEventListener('error', e => {
+  const img = e.target;
+  if (!img || img.tagName !== 'IMG') return;
+  const cover = img.closest('.st-cover, .q');
+  if (!cover) return;
+  const scheda = img.closest('[data-corso]');
+  const corso = scheda && ST_CORSI.find(c => c.id === scheda.dataset.corso);
+  cover.classList.add('arte');
+  cover.innerHTML = `<b>${esc((corso && (corso.arte || corso.code)) || 'ERUA')}</b>`;
+}, true);
 
 /* --- foglio corso --- */
 const stVelo=document.getElementById('st-velo'),stSheet=document.getElementById('st-sheet');

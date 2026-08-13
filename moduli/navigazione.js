@@ -26,7 +26,10 @@ const ATTESA = {
   magazine: [['storie', 'cerchi'], ['feed-griglia', 'scheda', 6]],
   news:     [['news-atenei', 'cerchi'], ['news-lista', 'riga', 7]],
   social:   [['sc-atenei', 'cerchi'], ['thread-lista', 'riga', 5]],
-  study:    [],   /* la vetrina dei corsi ha già i suoi, da sempre */
+  /* La vetrina dei corsi ha scheletri suoi, ma li disegna solo dopo aver
+     scaricato i dati: nel frattempo si vedeva la pagina vuota e, sotto,
+     la dicitura in fondo al sito. Questi arrivano prima. */
+  study:    [['st-atenei', 'cerchi'], ['st-gruppi', 'scheda', 6]],
 };
 
 /* Quale modulo serve a quale sezione. `chat` e `profilo` non hanno

@@ -231,6 +231,15 @@ const prove2 = [
      return !css.includes('.sc-piu::before') && !css.includes('.sc-piu.in-fondo');
    },
    'il pulsante non deve avere veli dietro né sparire scorrendo'],
+  ['Learn ha gli scheletri',
+   () => fs.readFileSync(path.join(REPO, 'moduli/navigazione.js'), 'utf8').includes("study:    [['st-atenei'"),
+   'entrando in Learn si vedeva la pagina vuota e la dicitura in fondo'],
+  ['la vetrina non fa aspettare',
+   () => {
+     const js = fs.readFileSync(path.join(REPO, 'moduli/didattica.js'), 'utf8');
+     return !/640\s*\+\s*i\s*\*/.test(js) && !/640\s*\+\s*ST_GRUPPI/.test(js);
+   },
+   'i ritardi voluti dopo l\'arrivo dei dati vanno tolti'],
   ['scheletri dichiarati per le sezioni',
    () => {
      const nav = fs.readFileSync(path.join(REPO, 'moduli/navigazione.js'), 'utf8');
