@@ -1,0 +1,123 @@
+{
+ "versione": 1,
+ "aggiornato": null,
+ "fonte": "New European Bauhaus Prizes — European Commission",
+ "note": "Il bando è reale: New European Bauhaus Prizes, Strand B «Rising Stars», riservato a chi ha 30 anni o meno. Categorie, premi e sito ufficiale sono quelli veri. Le date sono quelle della prossima edizione e vanno verificate sul sito ufficiale prima di candidarsi. Squadre e studenti qui sotto sono INVENTATI per mostrare come funzionerebbe la sezione: nessuna di queste persone esiste.",
+ "bando": {
+  "titolo": "New European Bauhaus Prizes — Rising Stars",
+  "ente": "European Commission",
+  "sottotitolo": "Strand B — for talents aged 30 or under",
+  "descrizione": "Ideas that make Europe more beautiful, sustainable and inclusive. Concepts can be at any stage, from a clear plan to a working prototype. Applications are submitted in English.",
+  "premio": "€15,000",
+  "premioNota": "per each winning category · €5,000 for runners-up",
+  "scadenza": "2027-03-22",
+  "scadenzaNota": "Dates from the previous edition — check the official site before applying",
+  "sito": "https://prizes.new-european-bauhaus.europa.eu/",
+  "sitoStrand": "https://prizes.new-european-bauhaus.europa.eu/guide-strand-b-rising-stars",
+  "vantaggi": [
+   "Communication package from the European Commission",
+   "Coaching and mentoring programme",
+   "Public vote across Europe"
+  ],
+  "categorie": [
+   { "id": "circolarita", "nome": "Circularity, sustainability and innovation", "tinta": "--menta" },
+   { "id": "democrazia", "nome": "Local democracy and inclusion", "tinta": "--cielo" },
+   { "id": "arti", "nome": "Arts, culture and heritage as drivers of change", "tinta": "--lavanda" },
+   { "id": "abilitanti", "nome": "Enablers of transformation", "tinta": "--pesca" }
+  ]
+ },
+ "conta": {
+  "rispostoAllaCall": 53,
+  "squadreFormate": 4,
+  "ancoraSoli": 12
+ },
+ "squadre": [
+  {
+   "id": "sq-1",
+   "progetto": "Second Life Campus",
+   "categoria": "circolarita",
+   "sintesi": "Eight campuses throw away the same chairs, lamps and lab stools every June, and buy them again in September. We are mapping what leaves each building and building a shared board where it finds a second owner across the alliance.",
+   "cerca": "Someone who can build a simple web catalogue, and one person per campus to do the counting.",
+   "postiLiberi": 2,
+   "membri": [
+    { "nome": "Giulia M.", "uni": "UNIMC", "ruolo": "design" },
+    { "nome": "Kacper W.", "uni": "SWPS", "ruolo": "field research" },
+    { "nome": "Alejandra R.", "uni": "ULPGC", "ruolo": "logistics" }
+   ]
+  },
+  {
+   "id": "sq-2",
+   "progetto": "The Listening Square",
+   "categoria": "democrazia",
+   "sintesi": "A portable wooden structure that sits in a town square for a week and records what residents actually want from the university next door. Built once, shipped between four cities, transcribed and published openly.",
+   "cerca": "A carpenter or product designer, and someone comfortable with audio editing.",
+   "postiLiberi": 3,
+   "membri": [
+    { "nome": "Léa D.", "uni": "UP8", "ruolo": "urban studies" },
+    { "nome": "Ivan P.", "uni": "NBU", "ruolo": "sociology" }
+   ]
+  },
+  {
+   "id": "sq-3",
+   "progetto": "Rooms That Remember",
+   "categoria": "arti",
+   "sintesi": "Student housing built in the 1960s is being demolished across Europe without anyone photographing it. We document four buildings before they go, with the people who lived in them, and turn it into a travelling exhibition.",
+   "cerca": "A photographer, and someone who can handle archive permissions.",
+   "postiLiberi": 2,
+   "membri": [
+    { "nome": "Jonas K.", "uni": "EUV", "ruolo": "photography" },
+    { "nome": "Eleni S.", "uni": "UAEGEAN", "ruolo": "oral history" },
+    { "nome": "Marta B.", "uni": "UNIMC", "ruolo": "curation" }
+   ]
+  },
+  {
+   "id": "sq-4",
+   "progetto": "Blueprint Commons",
+   "categoria": "abilitanti",
+   "sintesi": "Every student project starts from zero: the same budget template, the same permission letters, the same mistakes. We are collecting what previous funded teams actually used and releasing it as an open toolkit anyone in Europe can copy.",
+   "cerca": "Someone who has already run a funded project, and a translator for at least one more language.",
+   "postiLiberi": 4,
+   "membri": [
+    { "nome": "Rūta J.", "uni": "MRU", "ruolo": "coordination" }
+   ]
+  }
+ ],
+ "soli": [
+  { "id": "s1", "nome": "Tomás L.", "uni": "ULPGC", "eta": 22, "genere": "male",
+    "interessi": ["marine ecology", "data visualisation", "diving"],
+    "testo": "I map seagrass loss around the islands for my thesis. I would like to turn a dataset into something people can actually look at." },
+  { "id": "s2", "nome": "Zofia N.", "uni": "SWPS", "eta": 24, "genere": "female",
+    "interessi": ["psychology of cities", "podcasting", "cycling"],
+    "testo": "I care about how public space makes people feel. I can interview, write and record — I cannot build anything." },
+  { "id": "s3", "nome": "Andrei D.", "uni": "NBU", "eta": 26, "genere": "male",
+    "interessi": ["software", "open data", "chess"],
+    "testo": "I write code for a living and I want to do it once for something that is not a company. Happy to be the only technical person on a team." },
+  { "id": "s4", "nome": "Chloé F.", "uni": "UP8", "eta": 23, "genere": "female",
+    "interessi": ["documentary film", "migration", "printmaking"],
+    "testo": "I have a camera and two years of editing behind me. Looking for a subject worth six months." },
+  { "id": "s5", "nome": "Sara K.", "uni": "EUV", "eta": 25, "genere": "non-binary",
+    "interessi": ["circular economy", "product design", "repair cafés"],
+    "testo": "I run a repair café on campus every second Thursday. I would like to make it something more than a hobby." },
+  { "id": "s6", "nome": "Dimitris V.", "uni": "UAEGEAN", "eta": 21, "genere": "male",
+    "interessi": ["architecture", "island infrastructure", "sailing"],
+    "testo": "First year of my master's. I draw well and I know the Aegean islands better than most. Looking for people who need a place to start from." },
+  { "id": "s7", "nome": "Aistė P.", "uni": "MRU", "eta": 27, "genere": "female",
+    "interessi": ["law", "digital rights", "translation"],
+    "testo": "I can read a call for proposals and tell you what it actually asks for. That is not glamorous but it is why applications fail." },
+  { "id": "s8", "nome": "Federico A.", "uni": "UNIMC", "eta": 22, "genere": "male",
+    "interessi": ["cultural heritage", "3D scanning", "hiking"],
+    "testo": "I scan objects in the university museum. I have the equipment and nobody to point it at outside the syllabus." },
+  { "id": "s9", "nome": "Nadia H.", "uni": "SWPS", "eta": 29, "genere": "female",
+    "interessi": ["community organising", "budgeting", "cooking"],
+    "testo": "Older than most here. I have run two association budgets and I know where money disappears. Looking for a team that already has an idea." },
+  { "id": "s10", "nome": "Petar I.", "uni": "NBU", "eta": 20, "genere": "male",
+    "interessi": ["sound design", "electronics", "field recording"],
+    "testo": "I build small devices that record and play back. No idea what for yet — that is why I am here." },
+  { "id": "s11", "nome": "Inés C.", "uni": "ULPGC", "eta": 24, "genere": "female",
+    "interessi": ["tourism studies", "statistics", "surfing"],
+    "testo": "I study what mass tourism does to small towns. I would like to work with someone from a place that has the same problem for different reasons." },
+  { "id": "s12", "nome": "Lukas B.", "uni": "EUV", "eta": 23, "genere": "male",
+    "interessi": ["political science", "public speaking", "board games"],
+    "testo": "I can present a project to a room of people who do not care yet. Every team needs one of those." }
+ ]
+}

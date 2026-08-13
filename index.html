@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="stile/notizie.css">
 <link rel="stylesheet" href="stile/sociale.css">
 <link rel="stylesheet" href="stile/storie.css">
+<link rel="stylesheet" href="stile/ideathon.css">
 <link rel="stylesheet" href="stile/didattica.css">
 <link rel="stylesheet" href="stile/aula.css">
 </head>
@@ -107,6 +108,13 @@
     <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM4 9h16M9 9v10"/></svg>
     <span translate="no" data-i18n="Magazine">Magazine</span>
   </button>
+  <!-- Ideathon: la voce è marcata apposta. È l'unica sezione dove si
+       compete per soldi veri, fuori dall'alleanza, ed è quella che in
+       sede istituzionale interessa di più: va vista subito. -->
+  <button class="tab-btn acceso" role="tab" data-tab="ideathon" aria-selected="false">
+    <svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></svg>
+    <span translate="no" data-i18n="Ideathon">Ideathon</span>
+  </button>
   <button class="tab-btn" role="tab" data-tab="study" aria-selected="false">
     <svg viewBox="0 0 24 24"><path d="M3 9.2 12 5l9 4.2-9 4.2z"/><path d="M6.8 11.4v3.9c0 1.5 2.3 2.7 5.2 2.7s5.2-1.2 5.2-2.7v-3.9"/><path d="M21 9.2v5.2"/></svg>
     <span translate="no" data-i18n="Learn">Learn</span>
@@ -155,6 +163,19 @@
 </section>
 
 <!-- ============ STUDY (vetrina) ============ -->
+<!-- IDEATHON — un bando europeo vero e chi si sta organizzando per vincerlo.
+     Il bando (New European Bauhaus Prizes, Strand B) è reale: categorie,
+     premi e sito ufficiale sono quelli della Commissione. Squadre e
+     studenti sono inventati per mostrare come funzionerebbe, e la
+     sezione lo dichiara in fondo invece di lasciarlo intuire. -->
+<section class="pannello" id="p-ideathon" role="tabpanel">
+  <div id="idea-bando"></div>
+  <div id="idea-conta"></div>
+  <div id="idea-squadre"></div>
+  <div id="idea-soli"></div>
+  <p class="idea-nota" id="idea-nota"></p>
+</section>
+
 <section class="pannello" id="p-study" role="tabpanel">
 
 

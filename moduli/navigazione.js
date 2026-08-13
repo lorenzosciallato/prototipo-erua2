@@ -12,7 +12,7 @@
 
 import { scheletro } from './nucleo.js';
 
-export const TABS = ['social', 'news', 'study', 'magazine', 'chat', 'profilo'];
+export const TABS = ['social', 'news', 'ideathon', 'study', 'magazine', 'chat', 'profilo'];
 
 /* Che cosa mostrare mentre la sezione si carica. Sta qui e non nei
    moduli perché deve comparire **prima** che il modulo sia scaricato:
@@ -30,6 +30,7 @@ const ATTESA = {
      scaricato i dati: nel frattempo si vedeva la pagina vuota e, sotto,
      la dicitura in fondo al sito. Questi arrivano prima. */
   study:    [['st-atenei', 'cerchi'], ['st-gruppi', 'scheda', 6]],
+  ideathon: [['idea-squadre', 'scheda', 4], ['idea-soli', 'riga', 6]],
 };
 
 /* Quale modulo serve a quale sezione. `chat` e `profilo` non hanno
@@ -38,6 +39,7 @@ const MODULI = {
   magazine: () => import('./rivista.js'),
   news:     () => import('./notizie.js'),
   social:   () => import('./sociale.js'),
+  ideathon: () => import('./ideathon.js'),
   study:    () => import('./didattica.js'),
 };
 

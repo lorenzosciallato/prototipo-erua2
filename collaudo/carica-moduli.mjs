@@ -103,7 +103,7 @@ const errori = [];
 process.on('unhandledRejection', e => errori.push(['promessa non gestita', e]));
 
 const sezioni = ['lingua', 'navigazione', 'nucleo', 'rivista', 'ascolta', 'notizie',
-                 'sociale', 'articolo', 'storie', 'didattica', 'aula'];
+                 'sociale', 'ideathon', 'articolo', 'storie', 'didattica', 'aula'];
 
 for (const s of sezioni) {
   try {
@@ -133,6 +133,10 @@ const attese = [
   ['mag-ascolta',  'ascolta',   ['ERUA Podcast', 'pod-hero', 'i.ytimg.com']],
   ['st-gruppi',    'didattica', ['st-griglia', 'data-slot']],
   ['st-chips',     'didattica', ['data-f=']],
+  ['idea-bando',   'ideathon', ['New European Bauhaus', 'European Commission', 'ib-numeri']],
+  ['idea-squadre', 'ideathon', ['idea-squadra', 'is-tit', 'is-liberi']],
+  ['idea-soli',    'ideathon', ['idea-solo', 'isl-interessi']],
+  ['idea-conta',   'ideathon', ['data-cat']],
 ];
 console.log('\ncontenuto prodotto:');
 for (const [id, sezione, frammenti] of attese) {
@@ -240,6 +244,19 @@ const prove2 = [
      return !/640\s*\+\s*i\s*\*/.test(js) && !/640\s*\+\s*ST_GRUPPI/.test(js);
    },
    'i ritardi voluti dopo l\'arrivo dei dati vanno tolti'],
+  ['il bando dell ideathon e esterno a ERUA',
+   () => {
+     const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
+     return d.bando.ente === 'European Commission' && /europa\.eu/.test(d.bando.sito);
+   },
+   'deve essere un bando europeo vero, non uno interno all alleanza'],
+  ['la sezione dichiara cosa e inventato',
+   () => {
+     const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
+     const js = fs.readFileSync(path.join(REPO, 'moduli/ideathon.js'), 'utf8');
+     return /INVENTAT/i.test(d.note) && js.includes("idea-nota");
+   },
+   'squadre e studenti sono finti: va scritto nella pagina, non solo nei dati'],
   ['scheletri dichiarati per le sezioni',
    () => {
      const nav = fs.readFileSync(path.join(REPO, 'moduli/navigazione.js'), 'utf8');
