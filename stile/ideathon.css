@@ -3,37 +3,73 @@
    Un bando europeo aperto, e chi si sta organizzando per vincerlo.
 
    È l'unica sezione dove c'è in gioco un premio vero, esterno
-   all'alleanza. Per questo è la sola che si permette un accento pieno:
-   la voce nella navigazione è accesa, e il bando in cima è un blocco
-   scuro che non somiglia a nient'altro nel sito. Tutto il resto —
+   all'alleanza. Per questo è la sola che si permette un gradiente pieno:
+   il bando in cima non somiglia a nient'altro nel sito. Tutto il resto —
    schede, pillole, cerchi degli atenei — resta il linguaggio di sempre,
    altrimenti sembrerebbe un sito diverso incollato dentro.
 
    La regola che ho seguito: **una sola cosa può gridare**. Qui grida il
    premio. Le squadre e le persone stanno sotto, in tono normale. */
 
-/* ── la voce accesa nella navigazione ────────────────────────────────
-   Il fulmine e il fondo pieno: chi apre il sito per la prima volta deve
-   trovarla senza cercarla. È l'unica voce trattata così, e funziona
-   proprio perché è l'unica. */
-.tab-btn.acceso{background:var(--live);color:#fff}
-.tab-btn.acceso svg{fill:#fff;stroke:none}
-.tab-btn.acceso[aria-selected="true"]{background:var(--testo);color:var(--sup)}
-.tab-btn.acceso[aria-selected="true"] svg{fill:var(--sup)}
-html[data-tema="scuro"] .tab-btn.acceso{background:var(--menta-s);color:#0B1F14}
-html[data-tema="scuro"] .tab-btn.acceso svg{fill:#0B1F14}
+/* ── il gradiente della sezione ──────────────────────────────────────
+   Non è un colore inventato: sono le **stesse tre tinte** del cerchio
+   che il sito disegna intorno agli atenei (`--anello`: menta, lavanda,
+   pesca), prese nella loro versione profonda. Stesso angolo, stesso
+   ordine. Per questo salta all'occhio senza sembrare arrivato da un
+   altro sito: è il colore di casa, alzato di voce. */
+:root{
+  --idea-grad:linear-gradient(140deg,#1E7A54 0%,#5B45B8 54%,#A85A26 100%);
+  --idea-grad-chiaro:linear-gradient(140deg,#A8E6C9 0%,#CFC4F7 54%,#FFC9A8 100%);
+}
+
+/* ── la voce nella navigazione ───────────────────────────────────────
+   Il fondo pieno non andava: una voce piena in mezzo a voci vuote
+   sembra **già selezionata**, e chi guarda non capisce dove si trova.
+   Qui il contorno è il gradiente e il dentro è la pagina — si nota
+   perché è l'unica colorata, non perché è l'unica piena. Quando la
+   selezioni, allora sì che si riempie: e allora vuol dire qualcosa. */
+.tab-btn.acceso{
+  background:linear-gradient(var(--sup),var(--sup)) padding-box,
+             var(--idea-grad) border-box;
+  border:1.5px solid transparent;
+  padding:calc(.4rem - 1.5px) calc(.85rem - 1.5px);
+  color:var(--lavanda-s);
+}
+.tab-btn.acceso svg{fill:currentColor;stroke:none}
+.tab-btn.acceso:hover{color:var(--menta-s)}
+
+.tab-btn.acceso[aria-selected="true"]{
+  background:var(--idea-grad) border-box;
+  border-color:transparent;
+  color:#fff;
+}
+.tab-btn.acceso[aria-selected="true"] svg{fill:#fff}
+
+html[data-tema="scuro"] .tab-btn.acceso{
+  background:linear-gradient(var(--bg),var(--bg)) padding-box,
+             var(--idea-grad-chiaro) border-box;
+  color:var(--lavanda-s);
+}
+html[data-tema="scuro"] .tab-btn.acceso[aria-selected="true"]{
+  background:var(--idea-grad-chiaro) border-box;color:#12141A}
 
 /* ── il bando ────────────────────────────────────────────────────────
    Deve rispondere in tre secondi: quanto si vince, entro quando, posso
    partecipare io. Fondo scuro perché è l'unico blocco della pagina che
    deve fermare l'occhio. */
-.idea-bando{background:var(--testo);color:var(--sup);border-radius:var(--r);
-  padding:1.8rem 1.9rem 1.5rem;box-shadow:var(--ombra-alta);
-  position:relative;overflow:hidden;margin-bottom:1.6rem}
-/* un alone verde in alto a destra: dà profondità senza disturbare */
-.idea-bando::after{content:"";position:absolute;top:-45%;right:-18%;
-  width:26rem;height:26rem;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(30,122,84,.5),transparent 66%)}
+.idea-bando{background:var(--idea-grad);color:#fff;border-radius:var(--r);
+  padding:2rem 2.1rem 1.6rem;box-shadow:var(--ombra-alta);
+  position:relative;overflow:hidden;margin-bottom:1.8rem}
+
+/* Due veli sopra il gradiente. Il primo lo scurisce dove va il testo,
+   così le lettere restano leggibili su tutte e tre le tinte — un testo
+   bianco su pesca chiaro non si legge. Il secondo è un alone caldo in
+   alto a destra, che dà profondità e toglie l'aria di fondale piatto. */
+.idea-bando::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,rgba(16,14,24,.62) 0%,rgba(16,14,24,.34) 52%,rgba(16,14,24,.16) 100%)}
+.idea-bando::after{content:"";position:absolute;top:-52%;right:-14%;
+  width:30rem;height:30rem;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,255,255,.22),transparent 64%)}
 .idea-bando > *{position:relative;z-index:1}
 
 .ib-testa{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.9rem}
@@ -44,8 +80,22 @@ html[data-tema="scuro"] .tab-btn.acceso svg{fill:#0B1F14}
 
 .ib-tit{font-family:var(--font-display);font-size:1.85rem;font-weight:600;line-height:1.12;
   letter-spacing:-.03em;margin:0 0 .55rem;max-width:26ch}
-.ib-desc{font-size:.92rem;line-height:1.6;color:rgba(255,255,255,.74);
-  margin:0 0 1.4rem;max-width:56ch}
+/* l'occhiello: una riga che dice di cosa si tratta, prima del resto */
+.ib-occhiello{font-family:var(--font-lettura);font-size:1.02rem;line-height:1.55;
+  font-style:italic;color:rgba(255,255,255,.9);margin:0 0 1.3rem;max-width:52ch}
+
+/* la spiegazione lunga. In carattere da lettura, non da interfaccia:
+   sono cinque paragrafi che qualcuno deve davvero leggere. */
+.ib-lungo{max-width:64ch;margin-bottom:1.5rem}
+.ib-lungo p{font-family:var(--font-lettura);font-size:.9rem;line-height:1.72;
+  color:rgba(255,255,255,.82);margin:0 0 .85rem}
+.ib-lungo p:last-child{margin-bottom:0}
+.ib-lungo b{font-weight:700;color:#fff}
+/* le condizioni da non sbagliare: sottolineate come farebbe una matita,
+   non con la riga secca del collegamento */
+.ib-lungo u{text-decoration:none;
+  background:linear-gradient(180deg,transparent 62%,rgba(168,230,201,.42) 62%);
+  padding-bottom:.05em}
 
 /* i tre numeri che contano, in fila */
 .ib-numeri{display:flex;gap:2.2rem;flex-wrap:wrap;
@@ -85,6 +135,34 @@ html[data-tema="scuro"] .tab-btn.acceso svg{fill:#0B1F14}
   text-transform:uppercase;color:var(--testo2)}
 
 .idea-filtri{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem}
+
+/* ── le idee che hanno vinto ─────────────────────────────────────────
+   Schede basse e strette, in fila orizzontale: si scorrono con un dito
+   e non rubano spazio alle squadre, che sono la cosa da fare. Sono
+   esempi, non contenuti da studiare. La striscia di gradiente in cima
+   le lega al bando senza ripeterne il peso. */
+.idea-vincitori{display:grid;gap:.8rem;
+  grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);
+  overflow-x:auto;padding:.2rem .2rem 1rem;
+  scroll-snap-type:x proximity;
+  /* la barra di scorrimento discreta, come nelle altre file del sito */
+  scrollbar-width:thin}
+.iv-scheda{scroll-snap-align:start;
+  background:var(--sup);border-radius:18px;box-shadow:var(--ombra);
+  padding:.95rem 1.05rem 1rem;display:flex;flex-direction:column;gap:.35rem;
+  position:relative;overflow:hidden}
+.iv-scheda::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--idea-grad)}
+.iv-scheda header{display:flex;align-items:baseline;gap:.5rem;margin-top:.15rem}
+.iv-anno{font-family:var(--font-mono);font-size:.62rem;font-weight:700;letter-spacing:.1em;
+  color:var(--lavanda-s)}
+.iv-paese{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--testo2);margin-left:auto}
+.iv-tit{font-family:var(--font-display);font-size:1rem;font-weight:600;line-height:1.25;
+  letter-spacing:-.02em;color:var(--testo)}
+.iv-cat{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--menta-s)}
+.iv-sintesi{font-size:.79rem;line-height:1.55;color:var(--testo2);margin:.15rem 0 0}
 
 /* ── intestazioni di sezione ─────────────────────────────────────── */
 .idea-sezione{margin:2.4rem 0 1.1rem}
@@ -189,6 +267,8 @@ html[data-tema="scuro"] .idea-nota{background:var(--sup2)}
 
 @media (max-width:640px){
   .idea-bando{padding:1.4rem 1.3rem 1.2rem}
+  .ib-lungo p{font-size:.86rem}
+  .idea-vincitori{grid-auto-columns:minmax(208px,78vw)}
   .ib-tit{font-size:1.45rem}
   .ib-numeri{gap:1.4rem}
   .ib-num.grande b{font-size:1.7rem}

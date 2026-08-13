@@ -35,6 +35,23 @@ let filtroCategoria = null;
 
 const categoriaDi = id => (BANDO.categorie || []).find(c => c.id === id) || BANDO.categorie[0];
 
+/* ── enfasi nel testo del bando ────────────────────────────────────
+   Il testo lo scriviamo noi, ma passa comunque da `esc()` per primo:
+   la regola P3 non ha eccezioni per i contenuti «di casa», perché è
+   proprio l'eccezione che un giorno lascia passare qualcos'altro.
+   Solo dopo, su testo già innocuo, si riconoscono due segni:
+
+       **grassetto**      le parole che portano il senso
+       __sottolineato__   le condizioni da non sbagliare
+
+   Due e non di più: un linguaggio di marcatura completo dentro un file
+   di dati diventa un buco per cui nessuno si sente responsabile. */
+function conEnfasi(testo) {
+  return esc(testo)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/__(.+?)__/g, '<u>$1</u>');
+}
+
 /* ── il bando, in cima ─────────────────────────────────────────────
    Deve rispondere in tre secondi a: quanto si vince, entro quando, e
    posso partecipare io. Tutto il resto viene dopo. */
@@ -49,7 +66,11 @@ function bandoHTML() {
     </div>
 
     <h2 class="ib-tit">${esc(b.titolo)}</h2>
-    <p class="ib-desc">${esc(b.descrizione)}</p>
+    <p class="ib-occhiello">${esc(b.descrizione)}</p>
+
+    <div class="ib-lungo">
+      ${(b.descrizioneLunga || []).map(p => `<p>${conEnfasi(p)}</p>`).join('')}
+    </div>
 
     <div class="ib-numeri">
       <div class="ib-num grande">
@@ -80,6 +101,34 @@ function bandoHTML() {
       <span class="ib-avviso">${esc(b.scadenzaNota)}</span>
     </div>
   </article>`;
+}
+
+/* ── chi ha vinto negli anni scorsi ────────────────────────────────
+   Sono progetti veri, premiati davvero. Stanno qui perché la domanda
+   che si fa chiunque legga un bando è «ma che cosa vince, di preciso?»,
+   e cinque esempi rispondono meglio di qualunque descrizione. Servono
+   anche a togliere soggezione: nessuno di questi era un'opera d'ingegno
+   irraggiungibile, erano idee chiare. */
+function vincitoriHTML() {
+  const v = BANDO.vincitori || [];
+  if (!v.length) return '';
+  return `<div class="idea-sezione">
+      <h2 class="idea-titolo">${T('Idee che hanno vinto', 'Ideas that won')}</h2>
+      <p class="idea-sotto">${T('Progetti veri, premiati nelle edizioni precedenti dello stesso bando.',
+                                'Real projects, awarded in previous editions of this same prize.')}</p>
+    </div>
+    <div class="idea-vincitori">
+      ${v.map(x => `
+        <article class="iv-scheda">
+          <header>
+            <span class="iv-anno">${esc(x.anno)}</span>
+            <span class="iv-paese">${esc(x.paese)}</span>
+          </header>
+          <b class="iv-tit">${esc(x.titolo)}</b>
+          <span class="iv-cat">${esc(x.categoria)}</span>
+          <p class="iv-sintesi">${esc(x.sintesi)}</p>
+        </article>`).join('')}
+    </div>`;
 }
 
 /* ── il conteggio: quante persone si sono già mosse ────────────────
@@ -189,6 +238,7 @@ function soliHTML() {
 
 function ridisegna() {
   document.getElementById('idea-bando').innerHTML = bandoHTML();
+  document.getElementById('idea-vincitori').innerHTML = vincitoriHTML();
   document.getElementById('idea-conta').innerHTML = contaHTML();
   document.getElementById('idea-squadre').innerHTML = squadreHTML();
   document.getElementById('idea-soli').innerHTML = soliHTML();

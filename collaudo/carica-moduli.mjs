@@ -137,6 +137,7 @@ const attese = [
   ['idea-squadre', 'ideathon', ['idea-squadra', 'is-tit', 'is-liberi']],
   ['idea-soli',    'ideathon', ['idea-solo', 'isl-interessi']],
   ['idea-conta',   'ideathon', ['data-cat']],
+  ['idea-vincitori','ideathon', ['iv-scheda', 'Pollino', 'Hydroscape']],
 ];
 console.log('\ncontenuto prodotto:');
 for (const [id, sezione, frammenti] of attese) {
@@ -257,6 +258,26 @@ const prove2 = [
      return /INVENTAT/i.test(d.note) && js.includes("idea-nota");
    },
    'squadre e studenti sono finti: va scritto nella pagina, non solo nei dati'],
+  ['la voce Ideathon non sembra selezionata',
+   () => {
+     const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');
+     const i = css.indexOf('.tab-btn.acceso{');
+     const regola = css.slice(i, css.indexOf('}', i));
+     /* deve avere il contorno colorato e il dentro della pagina, non un
+        fondo pieno: pieno vuol dire "selezionata" in tutte le altre voci */
+     return regola.includes('padding-box') && regola.includes('border-box');
+   },
+   'una voce piena in mezzo a voci vuote sembra gia selezionata'],
+  ['il bando usa il gradiente del sito',
+   () => {
+     const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');
+     const base = fs.readFileSync(path.join(REPO, 'stile/base.css'), 'utf8');
+     /* le stesse tre tinte di --anello, in versione profonda */
+     return css.includes('--idea-grad:') && css.includes('#1E7A54') &&
+            css.includes('#5B45B8') && css.includes('#A85A26') &&
+            base.includes('--anello:linear-gradient(140deg');
+   },
+   'il gradiente deve nascere dalle tinte che il sito usa gia'],
   ['scheletri dichiarati per le sezioni',
    () => {
      const nav = fs.readFileSync(path.join(REPO, 'moduli/navigazione.js'), 'utf8');
