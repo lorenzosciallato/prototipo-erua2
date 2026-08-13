@@ -191,21 +191,21 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **13/08/2026 alle 21:36** — file toccato: `robot/ricevi.js`
+Ultimo salvataggio: **13/08/2026 alle 21:55** — file toccato: `moduli/ideathon.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `configurazione.js` | 300 | 16K |
-| `index.html` | 371 | 28K |
+| `index.html` | 392 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 454 | 24K |
 | `moduli/lingua.js` | 164 | 8.0K |
-| `moduli/navigazione.js` | 122 | 8.0K |
+| `moduli/navigazione.js` | 124 | 8.0K |
 | `moduli/notizie.js` | 105 | 8.0K |
-| `moduli/nucleo.js` | 319 | 16K |
+| `moduli/nucleo.js` | 320 | 16K |
 | `moduli/rivista.js` | 294 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |
@@ -224,6 +224,7 @@ Ultimo salvataggio: **13/08/2026 alle 21:36** — file toccato: `robot/ricevi.js
 | `robot/didattica.js` | 101 | 8.0K |
 | `robot/loghi.js` | 341 | 16K |
 | `robot/notizie.js` | 150 | 8.0K |
+| `robot/ricevi.js` | 167 | 8.0K |
 | `robot/studenti.js` | 87 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
