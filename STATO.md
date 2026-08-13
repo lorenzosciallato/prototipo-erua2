@@ -191,22 +191,21 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **11/08/2026 alle 02:05** — file toccato: `robot/comune/pdf.js`
+Ultimo salvataggio: **13/08/2026 alle 21:36** — file toccato: `robot/ricevi.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `configurazione.js` | 300 | 16K |
-| `index.html` | 402 | 28K |
+| `index.html` | 371 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
-| `moduli/didattica.js` | 429 | 20K |
+| `moduli/didattica.js` | 454 | 24K |
 | `moduli/lingua.js` | 164 | 8.0K |
-| `moduli/move.js` | 362 | 16K |
-| `moduli/navigazione.js` | 98 | 4.0K |
-| `moduli/notizie.js` | 102 | 8.0K |
-| `moduli/nucleo.js` | 267 | 16K |
+| `moduli/navigazione.js` | 122 | 8.0K |
+| `moduli/notizie.js` | 105 | 8.0K |
+| `moduli/nucleo.js` | 319 | 16K |
 | `moduli/rivista.js` | 294 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |
@@ -214,26 +213,26 @@ Ultimo salvataggio: **11/08/2026 alle 02:05** — file toccato: `robot/comune/pd
 | `robot/bandi.js` | 172 | 8.0K |
 | `robot/comune/date.js` | 171 | 8.0K |
 | `robot/comune/feed.js` | 100 | 4.0K |
-| `robot/comune/paesi.js` | 125 | 8.0K |
+| `robot/comune/paesi.js` | 158 | 12K |
 | `robot/comune/pagina.js` | 87 | 4.0K |
+| `robot/comune/pdf.js` | 162 | 8.0K |
 | `robot/comune/registro.js` | 77 | 4.0K |
-| `robot/comune/rete.js` | 77 | 4.0K |
+| `robot/comune/rete.js` | 102 | 8.0K |
 | `robot/comune/scrivi.js` | 95 | 4.0K |
 | `robot/costi.js` | 136 | 8.0K |
-| `robot/destinazioni.js` | 205 | 12K |
+| `robot/destinazioni.js` | 297 | 16K |
 | `robot/didattica.js` | 101 | 8.0K |
-| `robot/loghi.js` | 336 | 16K |
+| `robot/loghi.js` | 341 | 16K |
 | `robot/notizie.js` | 150 | 8.0K |
 | `robot/studenti.js` | 87 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
 | `stile/aula.css` | 457 | 32K |
-| `stile/base.css` | 217 | 12K |
+| `stile/base.css` | 270 | 16K |
 | `stile/didattica.css` | 163 | 12K |
-| `stile/move.css` | 168 | 12K |
 | `stile/notizie.css` | 132 | 12K |
 | `stile/rivista.css` | 100 | 8.0K |
-| `stile/sociale.css` | 549 | 40K |
+| `stile/sociale.css` | 560 | 40K |
 | `stile/storie.css` | 48 | 4.0K |
 
 <!-- fine timbro automatico -->
