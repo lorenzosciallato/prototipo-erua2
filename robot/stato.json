@@ -48,6 +48,13 @@
    "quanti": 212,
    "messaggio": "nuovi 40; senza logo 168; non identificati 244; licenza non libera 0",
    "durataSecondi": 264
+  },
+  "ricevi:notizie": {
+   "quando": "2026-08-13T19:39:36.475Z",
+   "esito": "saltato",
+   "quanti": null,
+   "messaggio": "non scrivo: zero elementi, ma 140 c'erano. Resta l'aggiornamento precedente.",
+   "durataSecondi": null
   }
  }
 }

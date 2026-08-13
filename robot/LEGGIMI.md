@@ -10,8 +10,15 @@ node robot/ascolta.js              aggiorna davvero
 node robot/didattica.js            controlla che i video dichiarati esistano ancora
 node robot/studenti.js             tiene il posto: oggi non produce niente
 node robot/comune/registro.js 36   chi non dà segno di vita da 36 ore
-robot/giro.sh                      il giro completo, da cron sul server
+robot/giro.sh                      il giro completo, da cron o da n8n
+node robot/ricevi.js notizie       riceve dati da fuori e li scrive con le stesse cautele
 ```
+
+**n8n:** guida da zero in `robot/N8N.md`. In breve: per far girare i
+robot **non serve riscriverli** — n8n li lancia com'è (`giro.sh`) e
+diventa la sveglia con l'interfaccia. Riscriverli serve solo per leggere
+dal canale YouTube i video non elencati, che richiedono OAuth: in quel
+caso n8n raccoglie e `ricevi.js` scrive.
 
 ## Le tre regole che contano
 
