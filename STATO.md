@@ -191,22 +191,23 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 16:10** — file toccato: `moduli/geometrie.js`
+Ultimo salvataggio: **14/08/2026 alle 17:10** — file toccato: `moduli/nucleo.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `configurazione.js` | 300 | 16K |
-| `index.html` | 393 | 28K |
+| `index.html` | 394 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 454 | 24K |
-| `moduli/ideathon.js` | 287 | 16K |
+| `moduli/geometrie.js` | 155 | 8.0K |
+| `moduli/ideathon.js` | 317 | 16K |
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/navigazione.js` | 124 | 8.0K |
 | `moduli/notizie.js` | 105 | 8.0K |
-| `moduli/nucleo.js` | 320 | 16K |
+| `moduli/nucleo.js` | 321 | 16K |
 | `moduli/rivista.js` | 294 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |
@@ -232,7 +233,7 @@ Ultimo salvataggio: **14/08/2026 alle 16:10** — file toccato: `moduli/geometri
 | `stile/aula.css` | 457 | 32K |
 | `stile/base.css` | 270 | 16K |
 | `stile/didattica.css` | 163 | 12K |
-| `stile/ideathon.css` | 278 | 16K |
+| `stile/ideathon.css` | 373 | 24K |
 | `stile/notizie.css` | 132 | 12K |
 | `stile/rivista.css` | 100 | 8.0K |
 | `stile/sociale.css` | 560 | 40K |

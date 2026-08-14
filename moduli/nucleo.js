@@ -16,6 +16,7 @@
 */
 
 import { CONFIG, ATENEI, CITTA, LOGHI } from '../configurazione.js';
+import { logoIncorporato } from './loghi-incorporati.js';
 
 /* ── lingua dei contenuti ──────────────────────────────────────────
    Distinta dalla lingua dell'interfaccia. I contenuti della rivista e
