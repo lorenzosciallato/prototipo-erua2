@@ -16,8 +16,31 @@ account propri (`riferimento.md` §7.0).
 
 Esiste un **prototipo di presentazione**, ora **scorporato** secondo
 `riferimento.md` §2.4. Le sezioni sono rivista, didattica (vetrina), notizie,
-sociale, messaggistica e profilo. I testi lunghi restano segnaposto: titoli,
-autori e alcune fotografie sono veri, il corpo degli articoli no.
+sociale, ideathon, messaggistica e profilo. I testi lunghi restano segnaposto:
+titoli, autori e alcune fotografie sono veri, il corpo degli articoli no.
+
+**Ideathon: quattro bandi europei, uno per volta in evidenza.** New European
+Bauhaus Prizes (Strand B), European Solidarity Corps — Solidarity Projects,
+European Charlemagne Youth Prize e CASSINI Hackathons. Sono bandi veri, esterni
+all'alleanza, e ognuno porta la sua sezione vincitori. Solo del Bauhaus i
+vincitori sono premiati veri, con le fotografie della Commissione: **degli altri
+tre i progetti mostrati sono esempi scritti da noi, e la pagina lo dichiara
+sopra ogni sezione**. Vanno sostituiti con i vincitori reali prima di mostrarli
+a qualcuno. Le date sono dell'edizione precedente e la scheda lo dice, col
+collegamento al sito ufficiale accanto.
+
+La struttura dei dati è già quella che servirà a un robot: `dati/ideathon.json`
+tiene una lista `bandi` e un campo `bandoInEvidenza`. Il robot che andrà a
+prendere i bandi aperti dovrà scrivere in quella forma; il modulo legge in modo
+tollerante e regge anche un file vecchio con un bando solo.
+
+**I loghi degli atenei stanno dentro il codice.** Prima ogni cerchio era una
+richiesta al server: le sezioni si ridisegnano a ogni clic su un filtro, e un
+logo ancora in viaggio lasciava il cerchio vuoto — Sofia e Francoforte
+sparivano e ricomparivano a intermittenza. Ora arrivano con la pagina
+(`moduli/loghi-incorporati.js`, generato da `robot/incorpora-loghi.js`): 45 KB
+in più all'avvio, dieci richieste in meno, e nessun istante in cui possono
+mancare. Se cambia un logo va rilanciato lo script.
 
 Com'è fatto adesso:
 

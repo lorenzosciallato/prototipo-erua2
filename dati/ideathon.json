@@ -1,103 +1,348 @@
 {
- "versione": 1,
+ "versione": 2,
  "aggiornato": null,
- "fonte": "New European Bauhaus Prizes — European Commission",
+ "fonte": "Siti ufficiali di Commissione europea, Parlamento europeo e EUSPA",
  "note": "Il bando e le fotografie dei progetti vincitori sono reali e vengono dal sito della Commissione europea. Le date sono quelle dell'edizione precedente e vanno verificate sul sito ufficiale prima di candidarsi. Le squadre e gli studenti in cerca di gruppo sono INVENTATI, per mostrare come funzionerebbe la sezione: nessuna di quelle persone esiste. Le loro copertine sono disegni generati dal codice, non fotografie.",
- "bando": {
-  "titolo": "New European Bauhaus Prizes — Rising Stars",
-  "ente": "European Commission",
-  "sottotitolo": "Strand B — for talents aged 30 or under",
-  "descrizione": "The European Commission's prize for people who make the green transition beautiful, not only efficient. Strand B is reserved for authors aged 30 or under.",
-  "premio": "€15,000",
-  "premioNota": "per each winning category · €5,000 for runners-up",
-  "scadenza": "2027-03-22",
-  "scadenzaNota": "Dates from the previous edition — check the official site before applying",
-  "sito": "https://prizes.new-european-bauhaus.europa.eu/",
-  "sitoStrand": "https://prizes.new-european-bauhaus.europa.eu/guide-strand-b-rising-stars",
-  "vantaggi": [
-   "Communication package from the European Commission",
-   "Coaching and mentoring programme",
-   "Public vote across Europe"
-  ],
-  "categorie": [
-   {
-    "id": "circolarita",
-    "nome": "Circularity, sustainability and innovation",
-    "tinta": "--menta"
-   },
-   {
-    "id": "democrazia",
-    "nome": "Local democracy and inclusion",
-    "tinta": "--cielo"
-   },
-   {
-    "id": "arti",
-    "nome": "Arts, culture and heritage as drivers of change",
-    "tinta": "--lavanda"
-   },
-   {
-    "id": "abilitanti",
-    "nome": "Enablers of transformation",
-    "tinta": "--pesca"
-   }
-  ],
-  "descrizioneLunga": [
-   "**Strand B is reserved for you.** Every listed author must be __30 years old or younger__ on the closing day. You are not competing against architecture firms or city councils - you compete against other young people with an idea.",
-   "An entry does not have to be finished. Concepts are accepted __at any stage__, from a plan on paper to a working prototype. What the jury looks for is whether the idea is **sustainable, beautiful and inclusive at once** - two out of three is not enough, and that is the hard part.",
-   "Winning brings EUR 15,000, a communication package from the Commission, a mentoring programme, and a __public vote across Europe__ that puts the project in front of thousands of people."
-  ],
-  "vincitori": [
-   {
-    "anno": "2024",
-    "titolo": "Urban MYCOskin",
-    "paese": "Portugal",
-    "categoria": "Rising Stars winner",
-    "foto": "immagini/ideathon/urban-mycoskin.png",
-    "sintesi": "Mushroom roots turned into a building material. Agricultural and textile waste becomes a mycelium skin for urban structures in Lisbon."
-   },
-   {
-    "anno": "2024",
-    "titolo": "Faget Forest Park",
-    "paese": "Romania",
-    "categoria": "Reconnecting with nature",
-    "foto": "immagini/ideathon/faget-forest-park.jpg",
-    "sintesi": "Cluj's green lung: a large forest park managed so that people can use it and the forest survives being used."
-   },
-   {
-    "anno": "2024",
-    "titolo": "Map4Water",
-    "paese": "Bosnia and Herzegovina",
-    "categoria": "Public vote winner",
-    "foto": "immagini/ideathon/map4water.jpg",
-    "sintesi": "One thousand fountains, mapped. Sarajevo's public water points found, documented and brought back into use with the people who drink from them."
-   },
-   {
-    "anno": "2024",
-    "titolo": "Yes We Camp",
-    "paese": "France",
-    "categoria": "Runner-up",
-    "foto": "immagini/ideathon/yes-we-camp.jpg",
-    "sintesi": "Empty spaces opened for free: community kitchens, family areas, greening, run with the people who need them most."
-   },
-   {
-    "anno": "2025",
-    "titolo": "Pollino",
-    "paese": "Hungary",
-    "categoria": "Reconnecting with nature",
-    "foto": null,
-    "sintesi": "Ordinary street signage redesigned to host pollinators - the poles and panels a city already owns, turned into habitat."
-   },
-   {
-    "anno": "2025",
-    "titolo": "Kopli Community Courtyard",
-    "paese": "Estonia",
-    "categoria": "Local democracy",
-    "foto": null,
-    "sintesi": "Students and residents designed a shared courtyard together, built from construction material recovered in the neighbourhood."
-   }
-  ],
-  "occhiello": "Turn an idea into something Europe pays for."
- },
+ "bandoInEvidenza": "neb-rising-stars",
+ "bandi": [
+  {
+   "id": "neb-rising-stars",
+   "titolo": "New European Bauhaus Prizes — Rising Stars",
+   "ente": "European Commission",
+   "sottotitolo": "Strand B — for talents aged 30 or under",
+   "descrizione": "The European Commission's prize for people who make the green transition beautiful, not only efficient. Strand B is reserved for authors aged 30 or under.",
+   "premio": "€15,000",
+   "premioNota": "per each winning category · €5,000 for runners-up",
+   "scadenza": "2027-03-22",
+   "scadenzaNota": "Dates from the previous edition — check the official site before applying",
+   "sito": "https://prizes.new-european-bauhaus.europa.eu/",
+   "sitoStrand": "https://prizes.new-european-bauhaus.europa.eu/guide-strand-b-rising-stars",
+   "vantaggi": [
+    "Communication package from the European Commission",
+    "Coaching and mentoring programme",
+    "Public vote across Europe"
+   ],
+   "categorie": [
+    {
+     "id": "circolarita",
+     "nome": "Circularity, sustainability and innovation",
+     "tinta": "--menta"
+    },
+    {
+     "id": "democrazia",
+     "nome": "Local democracy and inclusion",
+     "tinta": "--cielo"
+    },
+    {
+     "id": "arti",
+     "nome": "Arts, culture and heritage as drivers of change",
+     "tinta": "--lavanda"
+    },
+    {
+     "id": "abilitanti",
+     "nome": "Enablers of transformation",
+     "tinta": "--pesca"
+    }
+   ],
+   "descrizioneLunga": [
+    "**Strand B is reserved for you.** Every listed author must be __30 years old or younger__ on the closing day. You are not competing against architecture firms or city councils - you compete against other young people with an idea.",
+    "An entry does not have to be finished. Concepts are accepted __at any stage__, from a plan on paper to a working prototype. What the jury looks for is whether the idea is **sustainable, beautiful and inclusive at once** - two out of three is not enough, and that is the hard part.",
+    "Winning brings EUR 15,000, a communication package from the Commission, a mentoring programme, and a __public vote across Europe__ that puts the project in front of thousands of people."
+   ],
+   "vincitori": [
+    {
+     "anno": "2024",
+     "titolo": "Urban MYCOskin",
+     "paese": "Portugal",
+     "categoria": "Rising Stars winner",
+     "foto": "immagini/ideathon/urban-mycoskin.png",
+     "sintesi": "Mushroom roots turned into a building material. Agricultural and textile waste becomes a mycelium skin for urban structures in Lisbon."
+    },
+    {
+     "anno": "2024",
+     "titolo": "Faget Forest Park",
+     "paese": "Romania",
+     "categoria": "Reconnecting with nature",
+     "foto": "immagini/ideathon/faget-forest-park.jpg",
+     "sintesi": "Cluj's green lung: a large forest park managed so that people can use it and the forest survives being used."
+    },
+    {
+     "anno": "2024",
+     "titolo": "Map4Water",
+     "paese": "Bosnia and Herzegovina",
+     "categoria": "Public vote winner",
+     "foto": "immagini/ideathon/map4water.jpg",
+     "sintesi": "One thousand fountains, mapped. Sarajevo's public water points found, documented and brought back into use with the people who drink from them."
+    },
+    {
+     "anno": "2024",
+     "titolo": "Yes We Camp",
+     "paese": "France",
+     "categoria": "Runner-up",
+     "foto": "immagini/ideathon/yes-we-camp.jpg",
+     "sintesi": "Empty spaces opened for free: community kitchens, family areas, greening, run with the people who need them most."
+    },
+    {
+     "anno": "2025",
+     "titolo": "Pollino",
+     "paese": "Hungary",
+     "categoria": "Reconnecting with nature",
+     "foto": null,
+     "sintesi": "Ordinary street signage redesigned to host pollinators - the poles and panels a city already owns, turned into habitat."
+    },
+    {
+     "anno": "2025",
+     "titolo": "Kopli Community Courtyard",
+     "paese": "Estonia",
+     "categoria": "Local democracy",
+     "foto": null,
+     "sintesi": "Students and residents designed a shared courtyard together, built from construction material recovered in the neighbourhood."
+    }
+   ],
+   "occhiello": "Turn an idea into something Europe pays for.",
+   "stato": "aperto",
+   "fonte": "https://prizes.new-european-bauhaus.europa.eu/",
+   "eta": "≤ 30",
+   "etaNota": "years old, every author",
+   "vincitoriReali": true,
+   "vincitoriNota": "Progetti realmente premiati dalla Commissione europea.",
+   "guidaEtichetta": "Strand B rules"
+  },
+  {
+   "id": "esc-solidarity-projects",
+   "stato": "aperto",
+   "titolo": "Solidarity Projects",
+   "ente": "European Solidarity Corps",
+   "sottotitolo": "A group of young people, funded directly — no organisation needed",
+   "occhiello": "Five of you. One local problem. European money.",
+   "descrizione": "A group of at least five young people applies on its own, without going through any organisation, to run a project in their own community for up to twelve months.",
+   "premio": "Up to 12 months",
+   "premioNota": "funded · groups of 5+ · ages 18–30",
+   "scadenza": "2027-02-04",
+   "scadenzaNota": "Deadlines from the current programme guide — check the National Agency before applying",
+   "sito": "https://youth.europa.eu/solidarity_en",
+   "sitoStrand": "https://youth.europa.eu/solidarity/organisations/calls-for-proposals_en",
+   "eta": "18–30",
+   "etaNota": "years old · group of 5 or more",
+   "vantaggi": [
+    "No host organisation required",
+    "A coach assigned to the group",
+    "Runs in your own town, not abroad"
+   ],
+   "descrizioneLunga": [
+    "**This is the one call you can win without an institution behind you.** Five young people aged __18 to 30__, legally resident in the same country, register the group and apply directly. No university signature, no partner NGO, no co-funding.",
+    "The project must address __a real need in your own community__ and last between two and twelve months. The Commission funds the running costs, and assigns you a coach if you ask for one.",
+    "The 2026 call for the European Solidarity Corps carries a budget of **over €129 million** across all its strands. Solidarity Projects are the smallest and by far the least competitive door into it."
+   ],
+   "categorie": [
+    {
+     "id": "ambiente",
+     "nome": "Environment and climate",
+     "tinta": "--menta"
+    },
+    {
+     "id": "inclusione",
+     "nome": "Inclusion and diversity",
+     "tinta": "--cielo"
+    },
+    {
+     "id": "salute",
+     "nome": "Health and wellbeing",
+     "tinta": "--lavanda"
+    },
+    {
+     "id": "cittadinanza",
+     "nome": "Participation and citizenship",
+     "tinta": "--pesca"
+    }
+   ],
+   "vincitoriReali": false,
+   "vincitoriNota": "Esempi del tipo di progetto che questo bando finanzia, scritti da noi per far vedere la forma. Non sono progetti realmente premiati.",
+   "vincitori": [
+    {
+     "anno": "esempio",
+     "titolo": "The Repair Round",
+     "paese": "—",
+     "categoria": "Environment and climate",
+     "foto": null,
+     "sintesi": "A monthly repair workshop rotating between four neighbourhoods, run by students who already know how to fix things."
+    },
+    {
+     "anno": "esempio",
+     "titolo": "Night Bus Companions",
+     "paese": "—",
+     "categoria": "Inclusion and diversity",
+     "foto": null,
+     "sintesi": "Volunteers riding the last bus of the night so that people who are afraid to take it, take it."
+    },
+    {
+     "anno": "esempio",
+     "titolo": "Grandparents Online",
+     "paese": "—",
+     "categoria": "Participation and citizenship",
+     "foto": null,
+     "sintesi": "Weekly sessions where older residents learn the three digital services they actually need, taught one to one."
+    }
+   ],
+   "guidaEtichetta": "How to apply as a group"
+  },
+  {
+   "id": "charlemagne-youth-prize",
+   "stato": "aperto",
+   "titolo": "European Charlemagne Youth Prize",
+   "ente": "European Parliament",
+   "sottotitolo": "One winning project per country, then one for Europe",
+   "occhiello": "Win at home first. Then compete for Europe.",
+   "descrizione": "The European Parliament and the Charlemagne Prize Foundation award projects that build a shared European identity. One national winner per Member State, then a European first prize.",
+   "premio": "€7,500",
+   "premioNota": "first prize · €5,000 second · €2,500 third",
+   "scadenza": "2027-02-02",
+   "scadenzaNota": "Deadline is usually early February — confirm on the Parliament site",
+   "sito": "https://www.charlemagneyouthprize.eu/",
+   "sitoStrand": "https://www.europarl.europa.eu/youth/en/take-part/charlemagne-youth-prize",
+   "eta": "16–30",
+   "etaNota": "years old, every participant",
+   "vantaggi": [
+    "A national win even if you do not take Europe",
+    "Ceremony in Aachen",
+    "Parliament visibility across 27 countries"
+   ],
+   "descrizioneLunga": [
+    "**There are two competitions here, not one.** Every Member State picks __its own national winner__ — so you are first judged against projects from your country, not against all of Europe. Twenty-seven projects then go forward to the European jury.",
+    "Entries must be run by people aged __16 to 30__ and must promote European and international understanding, shared identity, or practical cooperation across borders. A project already running counts; it does not have to be new.",
+    "The three European winners receive **€7,500, €5,000 and €2,500**, and all national winners are invited to the ceremony in **Aachen** — the same city, and the same week, as the Charlemagne Prize itself."
+   ],
+   "categorie": [
+    {
+     "id": "identita",
+     "nome": "European identity",
+     "tinta": "--lavanda"
+    },
+    {
+     "id": "scambio",
+     "nome": "Youth exchange",
+     "tinta": "--menta"
+    },
+    {
+     "id": "democratico",
+     "nome": "Democratic participation",
+     "tinta": "--cielo"
+    },
+    {
+     "id": "memoria",
+     "nome": "History and memory",
+     "tinta": "--pesca"
+    }
+   ],
+   "vincitoriReali": false,
+   "vincitoriNota": "Esempi del tipo di progetto premiato negli anni scorsi, riscritti da noi. Vanno sostituiti con i vincitori veri prima di mostrarli fuori.",
+   "vincitori": [
+    {
+     "anno": "esempio",
+     "titolo": "Letters Across the Line",
+     "paese": "—",
+     "categoria": "History and memory",
+     "foto": null,
+     "sintesi": "Students on both sides of a former border exchange letters written from archive documents about the same year."
+    },
+    {
+     "anno": "esempio",
+     "titolo": "The Ballot Explained",
+     "paese": "—",
+     "categoria": "Democratic participation",
+     "foto": null,
+     "sintesi": "Short films made by first-time voters explaining what the European Parliament actually decides."
+    },
+    {
+     "anno": "esempio",
+     "titolo": "One Kitchen, Nine Languages",
+     "paese": "—",
+     "categoria": "European identity",
+     "foto": null,
+     "sintesi": "A shared student kitchen where every week one country cooks and the rest learn ten words of its language."
+    }
+   ],
+   "guidaEtichetta": "Rules and national juries"
+  },
+  {
+   "id": "cassini-hackathons",
+   "stato": "aperto",
+   "titolo": "CASSINI Hackathons",
+   "ente": "European Commission — EUSPA",
+   "sottotitolo": "Three days, ten countries, EU space data",
+   "occhiello": "A weekend. Ten cities. Real satellite data.",
+   "descrizione": "The EU space programme opens Galileo and Copernicus data to teams who build something with it over a single weekend, in ten countries at once.",
+   "premio": "€5,000",
+   "premioNota": "first prize · €3,000 second · €1,000 third · 6 months mentoring",
+   "scadenza": "2026-11-27",
+   "scadenzaNota": "12th edition, 27–29 November 2026 — registration closes earlier",
+   "sito": "https://www.cassini.eu/hackathons/",
+   "sitoStrand": "https://www.euspa.europa.eu/",
+   "eta": "18+",
+   "etaNota": "years old · mixed teams welcome",
+   "vantaggi": [
+    "No idea needed beforehand",
+    "Free access to Galileo and Copernicus data",
+    "Six months of mentoring for the winners"
+   ],
+   "descrizioneLunga": [
+    "**This is the fastest one on the list.** It takes __a single weekend__, not a year. You arrive with a team, or you form one on the first evening, and you leave on Sunday with something that runs.",
+    "The material is __EU space data__: Galileo positioning and Copernicus Earth observation, opened for the event with the tools to use them. Previous editions have run on agriculture, defence, mobility and climate resilience.",
+    "The 12th edition runs **27–29 November 2026 in ten countries at once** — among them Bulgaria, Germany, Italy, Lithuania and Poland, which is five of our eight cities. Prizes are €5,000, €3,000 and €1,000, plus **six months of mentoring**."
+   ],
+   "categorie": [
+    {
+     "id": "clima",
+     "nome": "Climate and environment",
+     "tinta": "--menta"
+    },
+    {
+     "id": "mobilita",
+     "nome": "Mobility and logistics",
+     "tinta": "--cielo"
+    },
+    {
+     "id": "agricoltura",
+     "nome": "Agriculture and food",
+     "tinta": "--pesca"
+    },
+    {
+     "id": "sicurezza",
+     "nome": "Safety and resilience",
+     "tinta": "--lavanda"
+    }
+   ],
+   "vincitoriReali": false,
+   "vincitoriNota": "Esempi del tipo di soluzione che vince un hackathon CASSINI, scritti da noi. Non sono squadre reali.",
+   "vincitori": [
+    {
+     "anno": "esempio",
+     "titolo": "Dry Field Alert",
+     "paese": "—",
+     "categoria": "Agriculture and food",
+     "foto": null,
+     "sintesi": "Copernicus moisture data turned into a message a smallholder receives before the soil is too dry, not after."
+    },
+    {
+     "anno": "esempio",
+     "titolo": "Last Ferry Home",
+     "paese": "—",
+     "categoria": "Mobility and logistics",
+     "foto": null,
+     "sintesi": "Island ferry delays predicted from sea state, for the people who plan a whole day around one crossing."
+    },
+    {
+     "anno": "esempio",
+     "titolo": "Fire Line",
+     "paese": "—",
+     "categoria": "Safety and resilience",
+     "foto": null,
+     "sintesi": "A wildfire perimeter redrawn every six hours from satellite passes, readable on a phone with no signal."
+    }
+   ],
+   "guidaEtichetta": "About the EU space programme"
+  }
+ ],
  "conta": {
   "rispostoAllaCall": 53,
   "squadreFormate": 4,

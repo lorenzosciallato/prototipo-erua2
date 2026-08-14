@@ -245,12 +245,41 @@ const prove2 = [
      return !/640\s*\+\s*i\s*\*/.test(js) && !/640\s*\+\s*ST_GRUPPI/.test(js);
    },
    'i ritardi voluti dopo l\'arrivo dei dati vanno tolti'],
-  ['il bando dell ideathon e esterno a ERUA',
+  ['i bandi sono europei, non interni a ERUA',
    () => {
      const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
-     return d.bando.ente === 'European Commission' && /europa\.eu/.test(d.bando.sito);
+     /* Ogni bando deve venire da fuori l'alleanza: il senso della
+        sezione è mostrare che si prendono soldi europei, non che si
+        redistribuiscono quelli di casa. */
+     return d.bandi.length >= 2 &&
+            d.bandi.every(b => /europa\.eu|charlemagneyouthprize\.eu|cassini\.eu/.test(b.sito)) &&
+            !d.bandi.some(b => /^ERUA/i.test(b.ente));
    },
-   'deve essere un bando europeo vero, non uno interno all alleanza'],
+   'devono essere bandi europei veri, non interni all alleanza'],
+  ['il bando in evidenza esiste davvero',
+   () => {
+     const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
+     return d.bandi.some(b => b.id === d.bandoInEvidenza);
+   },
+   'bandoInEvidenza deve puntare a un bando della lista, o la sezione si apre vuota'],
+  ['ogni bando ha la sua sezione vincitori',
+   () => {
+     const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
+     return d.bandi.every(b => Array.isArray(b.vincitori) && b.vincitori.length >= 3);
+   },
+   'un bando senza vincitori lascia un buco quando lo si mette in evidenza'],
+  ['i vincitori inventati sono dichiarati',
+   () => {
+     const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
+     const js = fs.readFileSync(path.join(REPO, 'moduli/ideathon.js'), 'utf8');
+     /* Dove i vincitori non sono premiati veri, la pagina deve dirlo:
+        un esempio scambiato per un vincitore lo si scopre davanti a chi
+        non doveva scoprirlo. */
+     return d.bandi.every(b => typeof b.vincitoriReali === 'boolean' &&
+              (b.vincitoriReali || (b.vincitoriNota || '').length > 20)) &&
+            js.includes('vincitoriNota');
+   },
+   'i vincitori non veri vanno marcati nei dati e mostrati come tali nella pagina'],
   ['la sezione dichiara cosa e inventato',
    () => {
      const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
@@ -278,11 +307,26 @@ const prove2 = [
   ['i vincitori hanno foto vere',
    () => {
      const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
-     const conFoto = d.bando.vincitori.filter(v => v.foto);
+     const conFoto = d.bandi.flatMap(b => b.vincitori).filter(v => v.foto);
      return conFoto.length >= 4 && conFoto.every(v =>
        fs.existsSync(path.join(REPO, v.foto)));
    },
    'le fotografie dei vincitori devono esistere davvero sul disco'],
+  ['i loghi degli atenei non si possono perdere',
+   () => {
+     const inc = fs.readFileSync(path.join(REPO, 'moduli/loghi-incorporati.js'), 'utf8');
+     const nucleo = fs.readFileSync(path.join(REPO, 'moduli/nucleo.js'), 'utf8');
+     const conf = fs.readFileSync(path.join(REPO, 'configurazione.js'), 'utf8');
+     /* Ogni ateneo dichiarato in configurazione.js deve avere il suo
+        logo dentro il codice. Finché ci arrivavano dalla rete, un
+        ridisegno poteva coglierli a metà strada e lasciare il cerchio
+        vuoto: è il guasto per cui Sofia e Francoforte sparivano. */
+     const sigle = [...conf.matchAll(/logo:\s*'immagini\/loghi\/([a-z0-9]+)\./g)].map(m => m[1]);
+     return sigle.length >= 8 &&
+            sigle.every(s => inc.includes(`'${s}': 'data:image/`)) &&
+            nucleo.includes('logoIncorporato(LOGHI[u])');
+   },
+   'i loghi vanno incorporati nel codice: dalla rete sparivano a ogni ridisegno'],
   ['la voce Ideathon non sembra selezionata',
    () => {
      const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');

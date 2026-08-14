@@ -17,7 +17,10 @@ let PODCAST = [];
 let podCorrente = null, podTimer = null, podPerc = 0;
 
 const VIDEO = CONFIG.serviziEsterni.video;
-const thumb = id => `${VIDEO.anteprime}/vi/${id}/hqdefault.jpg`;
+/* Due misure: quella grande solo per la puntata in evidenza, che
+   occupa mezza schermata. Le miniature dell'elenco prendono la misura
+   piccola — metà del peso, e la proporzione giusta senza bande nere. */
+const thumb = (id, grande) => `${VIDEO.anteprime}/vi/${id}/${grande ? 'hqdefault' : 'mqdefault'}.jpg`;
 
 function renderPodcast(){
   const box=document.getElementById('mag-ascolta');
@@ -26,7 +29,7 @@ function renderPodcast(){
   box.innerHTML=`
     <article class="pod-hero">
       <button class="pod-cover video" data-pod="${uno.id}" aria-label="Play">
-        <img src="${thumb(uno.yt)}" alt="" loading="lazy">
+        <img src="${thumb(uno.yt, true)}" alt="" loading="lazy" decoding="async">
         <span class="pod-velo" aria-hidden="true"></span>
         <span class="pod-play grande" aria-hidden="true">${ICONE.playPieno}</span>
       </button>
@@ -43,7 +46,7 @@ function renderPodcast(){
     <div class="pod-lista">
       ${resto.map(e=>`
         <button class="pod-voce" data-pod="${e.id}">
-          <span class="pod-mini video"><img src="${thumb(e.yt)}" alt="" loading="lazy"></span>
+          <span class="pod-mini video"><img src="${thumb(e.yt)}" alt="" loading="lazy" width="320" height="180" decoding="async"></span>
           <span class="pod-testi">
             <b>${esc(e.t)}</b>
             <i>${esc(e.s)} \u00b7 ${dataBreve(e.data)}</i>

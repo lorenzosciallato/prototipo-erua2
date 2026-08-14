@@ -371,3 +371,52 @@ html[data-tema="scuro"] .idea-nota{background:var(--sup2)}
   .idea-conta{gap:1.5rem}
   .idea-griglia,.idea-griglia.soli{grid-template-columns:1fr}
 }
+
+/* ── la striscia dei bandi ──────────────────────────────────────────
+   Sta sopra al banner e serve a dire una cosa sola prima di ogni
+   altra: i bandi sono quattro, non uno. Le schede sono piccole di
+   proposito — devono farsi contare, non leggere: il banner sotto è il
+   posto dove si legge.
+
+   Quella scelta si accende col gradiente del sito; le altre restano
+   in tono minore ma leggibili. Non si usa il riempimento pieno per
+   distinguerle: una scheda piena accanto a tre vuote sembra un
+   avviso, non una scelta. */
+.idea-scelta-lista{margin:0 0 1rem}
+.isc-eti{display:block;font-size:.7rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--testo2);margin:0 0 .55rem}
+.isc-fila{display:flex;gap:.55rem;overflow-x:auto;padding:.15rem .15rem .5rem;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.isc-fila::-webkit-scrollbar{height:0}
+.isc-carta{flex:0 0 13.5rem;scroll-snap-align:start;text-align:left;
+  display:flex;flex-direction:column;gap:.3rem;
+  padding:.7rem .8rem .65rem;border-radius:14px;cursor:pointer;
+  background:var(--sup);border:1px solid var(--bordo);color:var(--testo);
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.isc-carta:hover{transform:translateY(-2px);box-shadow:var(--ombra)}
+.isc-ente{font-size:.63rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--testo2)}
+.isc-tit{font-size:.92rem;font-weight:800;line-height:1.2}
+.isc-piede{display:flex;align-items:baseline;gap:.5rem;margin-top:.15rem;
+  font-style:normal;flex-wrap:wrap}
+.isc-premio{font-size:.82rem;font-weight:800;font-style:normal}
+.isc-quando{font-size:.68rem;font-weight:600;font-style:normal;color:var(--testo2)}
+
+/* La scheda scelta: bordo col gradiente, non fondo pieno. Il fondo
+   pieno la farebbe sembrare già premuta anche quando non lo è — lo
+   stesso errore già corretto sulla linguetta della sezione. */
+.isc-carta[aria-pressed="true"]{
+  border-color:transparent;
+  background:linear-gradient(var(--sup),var(--sup)) padding-box,
+             var(--idea-grad) border-box;
+  border-width:1.5px}
+.isc-carta[aria-pressed="true"] .isc-tit{
+  background:var(--idea-grad);-webkit-background-clip:text;background-clip:text;
+  color:transparent}
+.isc-carta:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+
+/* L'avviso sui vincitori che sono esempi e non premiati veri. */
+.idea-avviso{margin:.5rem 0 0;font-size:.74rem;line-height:1.45;color:var(--testo2);
+  padding-left:.7rem;border-left:2px solid var(--bordo)}
+
+@media (max-width:520px){.isc-carta{flex-basis:11.5rem}}
