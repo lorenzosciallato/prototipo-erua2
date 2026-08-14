@@ -11,7 +11,7 @@
 import { CITTA, TINTE } from '../configurazione.js';
 import {
   LANG, T, esc, dati, offre, chiedi, toast, mescola,
-  stemma, prioritaFoto, filaAtenei, ICONE,
+  stemma, prioritaFoto, riusaFoto, filaAtenei, ICONE,
 } from './nucleo.js';
 
 /* Lo stato della sezione. Vive qui e non nel nucleo: nessun'altra
