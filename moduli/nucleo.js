@@ -160,11 +160,16 @@ export function mescola(a) {
 }
 
 /* ── stemma di un ateneo ───────────────────────────────────────────
-   Il logo vero se c'è, la sigla scritta se manca il file. */
+   Il logo vero se c'è, la sigla scritta se manca il file.
+
+   Il logo arriva incorporato nel codice, non da una richiesta al
+   server: le sezioni si ridisegnano a ogni clic su un filtro, e
+   un'immagine da riscaricare a ogni ridisegno lasciava il cerchio
+   vuoto per un istante. Vedi `loghi-incorporati.js`. */
 export function stemma(u, cls) {
-  const l = LOGHI[u];
+  const l = logoIncorporato(LOGHI[u]);
   return l
-    ? `<span class="${cls}"><img src="${l}" alt="${esc(u)}"></span>`
+    ? `<span class="${cls}"><img src="${l}" alt="${esc(u)}" decoding="sync"></span>`
     : `<span class="${cls} testo">${esc(u.slice(0, 5))}</span>`;
 }
 
