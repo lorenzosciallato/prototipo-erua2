@@ -253,13 +253,37 @@ function foglioProgettoHTML(v, i, b) {
    una persona guarda prima di decidere se vale la pena. */
 function contaHTML() {
   const c = CONTA;
-  /* Numeri enormi, parole piccole. Erano l'opposto e non li vedeva
-     nessuno: un numero in corpo 1,6 con l'etichetta della stessa taglia
-     è una riga di testo, non un dato. Qui il numero è il messaggio. */
+
+  /* Ogni numero sta dentro una figura, e la figura è **solo contorno**.
+     Riempirle di colore avrebbe messo il colore davanti al numero:
+     un contorno spesso circoscrive senza competere, e il numero resta
+     la cosa più scura e più grande dentro il riquadro.
+
+     Tre figure diverse e non tre cerchi: alla seconda ripetizione
+     l'occhio smette di distinguere e legge «tre pallini». Cerchio,
+     rombo e triangolo si riconoscono di scorcio, ognuno col suo colore.
+
+     I contorni sono disegnati, non bordi CSS: un bordo sa fare solo
+     rettangoli e cerchi, e il triangolo verrebbe con i vertici tagliati. */
+  const figure = [
+    { d: '<circle cx="60" cy="60" r="52"/>', tinta: '#F5C518', v: c.rispostoAllaCall,
+      eti: T('hanno risposto', 'answered the call') },
+    { d: '<rect x="20" y="20" width="80" height="80" rx="8" transform="rotate(45 60 60)"/>', tinta: '#48F89B', v: c.squadreFormate,
+      eti: T('squadre formate', 'teams formed') },
+    { d: '<path d="M60 10 112 104H8z" stroke-linejoin="round"/>', tinta: '#8B6BFF', v: c.ancoraSoli,
+      eti: T('cercano un gruppo', 'looking for a team') },
+  ];
+
   return `<div class="idea-conta">
-    <div class="ic-voce"><b>${c.rispostoAllaCall}</b><span>${T('hanno risposto', 'answered the call')}</span></div>
-    <div class="ic-voce"><b>${c.squadreFormate}</b><span>${T('squadre formate', 'teams formed')}</span></div>
-    <div class="ic-voce evidenza"><b>${c.ancoraSoli}</b><span>${T('cercano un gruppo', 'looking for a team')}</span></div>
+    ${figure.map(f => `
+      <div class="ic-voce" style="--seg:${f.tinta}">
+        <span class="ic-figura">
+          <svg viewBox="0 0 120 120" aria-hidden="true" fill="none"
+            stroke="${f.tinta}" stroke-width="4">${f.d}</svg>
+          <b>${f.v}</b>
+        </span>
+        <span class="ic-eti">${f.eti}</span>
+      </div>`).join('')}
   </div>
 
   <nav class="idea-filtri" aria-label="${T('Categorie', 'Categories')}">
