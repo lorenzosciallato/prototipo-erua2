@@ -139,7 +139,7 @@ function bandoHTML() {
           <button class="ibv" data-vinto="${i}" ${v.foto ? '' : 'data-disegno="1"'}
             aria-label="${esc(v.titolo)}">
             <span class="ibv-img">${v.foto
-              ? `<img src="${esc(v.foto)}" alt="" loading="lazy" decoding="async">`
+              ? `<img src="${esc(v.foto)}" alt="" ${prioritaFoto(i)}>`
               : copertina(v.titolo, { larghezza: 480, altezza: 320, tavolozza: i })}
               <span class="ibv-piu">${T('Leggi', 'Read')} →</span>
             </span>
