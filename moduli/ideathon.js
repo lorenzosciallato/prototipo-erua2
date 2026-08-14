@@ -60,58 +60,6 @@ function giorniA(scadenza) {
   return Math.round((new Date(scadenza + 'T12:00:00Z') - Date.now()) / 86400000);
 }
 
-/* ── la striscia dei bandi ─────────────────────────────────────────
-   I bandi europei aperti a uno studente sono più d'uno, e il punto
-   della sezione è proprio questo: non «c'è un bando», ma «ce n'è una
-   fila, e sono raggiungibili». Metterne uno solo avrebbe raccontato il
-   contrario di quello che serve dimostrare.
-
-   Se ne sceglie uno alla volta perché un banner vale finché è uno:
-   quattro banner affiancati sono un listino, e un listino non lo legge
-   nessuno. Gli altri restano lì accanto, piccoli, a dire che ci sono.
-
-   Ogni scheda porta la scadenza, perché è il primo dato per cui si
-   scarta un bando — e va vista prima di aprirlo, non dopo. */
-function selettoreHTML() {
-  if (BANDI.length < 2) return '';
-  return `<nav class="idea-scelta-lista" aria-label="${T('Bandi aperti', 'Open calls')}">
-    <span class="isc-eti">${T(`${BANDI.length} bandi europei aperti`, `${BANDI.length} open European calls`)}</span>
-    <div class="isc-fila">
-      ${BANDI.map(b => {
-        const g = giorniA(b.scadenza);
-        return `<button class="isc-carta" data-bando="${esc(b.id)}"
-          aria-pressed="${b.id === BANDO.id}">
-          <span class="isc-ente">${esc(b.ente)}</span>
-          <b class="isc-tit">${esc(b.titolo)}</b>
-          <span class="isc-piede">
-            <i class="isc-premio">${esc(b.premio)}</i>
-            <i class="isc-quando">${g > 0
-              ? T(`fra ${g} g`, `${g} d left`)
-              : T('da riaprire', 'reopening')}</i>
-          </span>
-        </button>`;
-      }).join('')}
-    </div>
-  </nav>`;
-}
-
-/* ── enfasi nel testo del bando ────────────────────────────────────
-   Il testo lo scriviamo noi, ma passa comunque da `esc()` per primo:
-   la regola P3 non ha eccezioni per i contenuti «di casa», perché è
-   proprio l'eccezione che un giorno lascia passare qualcos'altro.
-   Solo dopo, su testo già innocuo, si riconoscono due segni:
-
-       **grassetto**      le parole che portano il senso
-       __sottolineato__   le condizioni da non sbagliare
-
-   Due e non di più: un linguaggio di marcatura completo dentro un file
-   di dati diventa un buco per cui nessuno si sente responsabile. */
-function conEnfasi(testo) {
-  return esc(testo)
-    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
-    .replace(/__(.+?)__/g, '<u>$1</u>');
-}
-
 /* ── il bando ──────────────────────────────────────────────────────
    Un blocco solo, che in due secondi deve dire: **quanto si vince**, che
    è aperto, e che riguarda te. Tre informazioni, tre dimensioni di
@@ -300,55 +248,6 @@ function foglioProgettoHTML(v, i, b) {
   </div>`;
 }
 
-/* ── la spiegazione, e le idee che hanno vinto ─────────────────────
-   Il testo lungo sta qui e non nel banner: in un banner nessuno legge
-   tre paragrafi. Qui invece sì, perché chi è arrivato fin giù vuole
-   sapere come funziona. */
-function spiegazioneHTML() {
-  return `<div class="idea-spiega">
-      ${(BANDO.descrizioneLunga || []).map(p => `<p>${conEnfasi(p)}</p>`).join('')}
-    </div>`;
-}
-
-function vincitoriHTML() {
-  const v = BANDO.vincitori || [];
-  if (!v.length) return '';
-
-  /* Ogni bando ha i suoi vincitori, e non tutti sono veri: del New
-     European Bauhaus abbiamo i progetti premiati davvero, con le
-     fotografie della Commissione; degli altri tre no. Dove non sono
-     veri la sezione lo scrive qui sopra, in chiaro, invece di lasciarlo
-     capire — un esempio scambiato per un vincitore è un errore che si
-     scopre davanti a chi non doveva scoprirlo (§P7). */
-  return `<div class="idea-sezione">
-      <h2 class="idea-titolo">${BANDO.vincitoriReali
-        ? T('Cosa vince, di preciso', 'What actually wins')
-        : T('Che forma ha un progetto che vince', 'What a winning project looks like')}</h2>
-      <p class="idea-sotto">${BANDO.vincitoriReali
-        ? T('Progetti veri, premiati nelle edizioni precedenti. Nessuno era irraggiungibile: erano idee chiare.',
-            'Real projects, awarded in previous editions. None of them was out of reach — they were clear ideas.')
-        : T('Esempi scritti da noi per far vedere la misura giusta: piccoli, concreti, di una frase sola.',
-            'Examples written by us to show the right size: small, concrete, one sentence each.')}</p>
-      ${BANDO.vincitoriReali ? '' : `<p class="idea-avviso">${esc(BANDO.vincitoriNota)}</p>`}
-    </div>
-    <div class="idea-vincitori">
-      ${v.map((x, i) => `
-        <article class="iv-scheda">
-          <span class="iv-img">${x.foto
-            ? `<img src="${esc(x.foto)}" alt="" loading="lazy">`
-            : copertina(x.titolo, { larghezza: 600, altezza: 400, tavolozza: i })}
-            <span class="iv-anno">${esc(x.anno)}</span>
-          </span>
-          <div class="iv-testi">
-            <span class="iv-cat">${esc(x.categoria)}</span>
-            <b class="iv-tit">${esc(x.titolo)}</b>
-            <span class="iv-paese">${esc(x.paese)}</span>
-            <p class="iv-sintesi">${esc(x.sintesi)}</p>
-          </div>
-        </article>`).join('')}
-    </div>`;
-}
-
 /* ── il conteggio: quante persone si sono già mosse ────────────────
    Serve a togliere la paura di essere il primo. Sono i tre numeri che
    una persona guarda prima di decidere se vale la pena. */
@@ -475,15 +374,40 @@ document.addEventListener('click', e => {
      dipende dal bando — banner, spiegazione, vincitori — e non le
      squadre: quelle sono le stesse, e rifarle farebbe saltare la
      pagina sotto le mani di chi sta leggendo. */
-  const nuovo = e.target.closest('#p-ideathon [data-bando]');
-  if (nuovo) {
-    const scelto = BANDI.find(b => b.id === nuovo.dataset.bando);
+  /* Un altro bando, o la spiegazione di quello in evidenza: stessa
+     finestra, stesso contenuto. «Come funziona» non è che il foglio del
+     bando che stai già guardando. */
+  const apri = e.target.closest('#p-ideathon [data-apri], #p-ideathon [data-spiega]');
+  if (apri) {
+    const id = apri.dataset.apri || apri.dataset.spiega;
+    const b = BANDI.find(x => x.id === id);
+    if (b) apriFoglio(foglioBandoHTML(b), b.titolo);
+    return;
+  }
+
+  /* Un progetto premiato. L'indice basta a ritrovarlo: la striscia è
+     disegnata dal bando in evidenza, quindi è lì che si cerca. */
+  const vinto = e.target.closest('#p-ideathon [data-vinto]');
+  if (vinto) {
+    const i = Number(vinto.dataset.vinto);
+    const v = (BANDO.vincitori || [])[i];
+    if (v) apriFoglio(foglioProgettoHTML(v, i, BANDO), v.titolo);
+    return;
+  }
+
+  /* Dal foglio di un bando: portalo nel banner. Si chiude la finestra e
+     si risale al banner — senza lo scorrimento, chi aveva letto in
+     fondo si ritroverebbe davanti le squadre e non capirebbe che il
+     bando sopra è cambiato. */
+  const evid = e.target.closest('[data-evidenzia]');
+  if (evid) {
+    const scelto = BANDI.find(b => b.id === evid.dataset.evidenzia);
     if (!scelto || scelto === BANDO) return;
     BANDO = scelto;
-    document.getElementById('idea-scelta').innerHTML = selettoreHTML();
+    chiudiFoglio();
     document.getElementById('idea-bando').innerHTML = bandoHTML();
-    document.getElementById('idea-spiega').innerHTML = spiegazioneHTML();
-    document.getElementById('idea-vincitori').innerHTML = vincitoriHTML();
+    const su = document.getElementById('idea-bando');
+    if (su && su.scrollIntoView) su.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
 
