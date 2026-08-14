@@ -121,7 +121,7 @@ function bandoHTML() {
     <div class="ib-corpo">
       <div class="ib-premio">
         <b>${esc(b.premio)}</b>
-        <span>${T('a chi vince, per categoria', 'to each winning entry')}</span>
+        <span>${esc(b.premioNota)}</span>
       </div>
       <div class="ib-lato">
         <p class="ib-cosa">${esc(b.descrizione)}</p>
