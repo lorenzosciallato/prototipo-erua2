@@ -42,6 +42,14 @@ sparivano e ricomparivano a intermittenza. Ora arrivano con la pagina
 in più all'avvio, dieci richieste in meno, e nessun istante in cui possono
 mancare. Se cambia un logo va rilanciato lo script.
 
+**Le fotografie sono in WebP.** Da 761 KB a 317 (58% in meno), con
+`robot/converti-webp.js`. Il caso grosso era una fotografia salvata in PNG: da
+sola pesava 414 KB, più di tutte le altre quindici insieme; ora 36. Una è
+rimasta com'era perché il WebP usciva più pesante, e lo script se ne accorge da
+solo invece di convertirla lo stesso. Serve `cwebp` installato sulla macchina
+(`sudo apt install webp`): è un programma di sistema, non una dipendenza dentro
+il codice pubblicato (§6.7).
+
 Com'è fatto adesso:
 
 | Cartella | Che cosa contiene |
