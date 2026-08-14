@@ -291,6 +291,65 @@ export const ICONE = {
   chat:      '<svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg>',
 };
 
+/* ── il foglio: una finestra per un contenuto lungo ────────────────
+   La lente qui sotto ingrandisce una fotografia e non fa altro. Questo
+   serve a un testo: la scheda di un bando, la storia di un progetto
+   premiato. Una scatola sola per entrambe le cose avrebbe significato
+   un componente che fa due mestieri e nessuno dei due bene.
+
+   Perché una finestra e non una pagina: quello che c'è dentro è un
+   approfondimento di ciò che stavi guardando. Cambiare pagina ti fa
+   perdere il posto e ti obbliga a tornare indietro per riprenderlo;
+   una finestra si chiude e sei di nuovo dove eri, allo stesso punto di
+   scorrimento.
+
+   Chi apre passa l'HTML già pronto: il testo che ci finisce dentro
+   dev'essere già passato da `esc()` a monte (P3). */
+export function apriFoglio(html, etichetta = '') {
+  const f = document.getElementById('foglio');
+  if (!f) return;
+  document.getElementById('foglio-dentro').innerHTML = html;
+  f.setAttribute('aria-label', etichetta);
+  f.setAttribute('aria-hidden', 'false');
+  f.classList.add('aperto');
+  document.body.style.overflow = 'hidden';
+  /* Il foglio riparte dall'alto: riaprendolo, restava allo scorrimento
+     di quello aperto prima e sembrava un testo che comincia a metà. */
+  const scatola = f.querySelector('.fg-scatola');
+  if (scatola) scatola.scrollTop = 0;
+  const via = document.getElementById('foglio-via');
+  if (via && via.focus) via.focus();
+}
+
+export function chiudiFoglio() {
+  const f = document.getElementById('foglio');
+  if (!f) return;
+  f.classList.remove('aperto');
+  f.setAttribute('aria-hidden', 'true');
+  document.getElementById('foglio-dentro').innerHTML = '';
+  document.body.style.overflow = inLettura() ? 'hidden' : '';
+}
+
+export const foglioAperto = () => {
+  const f = document.getElementById('foglio');
+  return !!f && f.classList.contains('aperto');
+};
+
+/* Si chiude dal fondo, dal pulsante, e con Esc. Tre modi perché è la
+   cosa che si cerca per prima quando si vuole uscire, e chi la cerca è
+   già leggermente infastidito. */
+{
+  const f = document.getElementById('foglio');
+  if (f) {
+    f.addEventListener('click', e => {
+      if (e.target === f || e.target.closest('#foglio-via')) chiudiFoglio();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && foglioAperto()) chiudiFoglio();
+    });
+  }
+}
+
 /* ── lente sulle fotografie ────────────────────────────────────────── */
 export function apriLente(src) {
   const lente = document.getElementById('lente');
