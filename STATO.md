@@ -222,7 +222,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 18:10** — file toccato: `moduli/nucleo.js`
+Ultimo salvataggio: **14/08/2026 alle 18:17** — file toccato: `moduli/ideathon.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -234,7 +234,7 @@ Ultimo salvataggio: **14/08/2026 alle 18:10** — file toccato: `moduli/nucleo.j
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 463 | 24K |
 | `moduli/geometrie.js` | 155 | 8.0K |
-| `moduli/ideathon.js` | 416 | 20K |
+| `moduli/ideathon.js` | 538 | 28K |
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/loghi-incorporati.js` | 35 | 64K |
 | `moduli/navigazione.js` | 124 | 8.0K |
@@ -265,7 +265,7 @@ Ultimo salvataggio: **14/08/2026 alle 18:10** — file toccato: `moduli/nucleo.j
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
 | `stile/aula.css` | 457 | 32K |
-| `stile/base.css` | 270 | 16K |
+| `stile/base.css` | 306 | 20K |
 | `stile/didattica.css` | 163 | 12K |
 | `stile/ideathon.css` | 422 | 28K |
 | `stile/notizie.css` | 132 | 12K |

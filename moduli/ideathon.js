@@ -153,29 +153,151 @@ function bandoHTML() {
     <div class="ib-piede">
       <a class="ib-vai" href="${esc(b.sito)}" target="_blank" rel="noopener">
         ${T('Vai al bando', 'Open the call')} →</a>
-      <a class="ib-guida" href="${esc(b.sitoStrand)}" target="_blank" rel="noopener">
-        ${esc(b.guidaEtichetta)}</a>
+      <button class="ib-guida" data-spiega="${esc(b.id)}">
+        ${T('Come funziona', 'How it works')}</button>
       <span class="ib-avviso">${esc(b.scadenzaNota)}</span>
     </div>
 
     <div class="ib-vinti">
-      <span class="ib-vinti-eti">${b.vincitoriReali
-        ? T('Hanno vinto con questo bando', 'These won this call')
-        : T('Il genere di progetto che vince', 'The kind of project that wins')}</span>
+      <span class="ib-vinti-eti">${etichettaVincitori(b)}</span>
       <div class="ib-striscia">
         ${(b.vincitori || []).map((v, i) => `
-          <figure class="ibv" ${v.foto ? '' : 'data-disegno="1"'}>
+          <button class="ibv" data-vinto="${i}" ${v.foto ? '' : 'data-disegno="1"'}
+            aria-label="${esc(v.titolo)}">
             <span class="ibv-img">${v.foto
-              ? `<img src="${esc(v.foto)}" alt="" loading="lazy">`
-              : copertina(v.titolo, { larghezza: 480, altezza: 320, tavolozza: i })}</span>
-            <figcaption>
+              ? `<img src="${esc(v.foto)}" alt="" loading="lazy" decoding="async">`
+              : copertina(v.titolo, { larghezza: 480, altezza: 320, tavolozza: i })}
+              <span class="ibv-piu">${T('Leggi', 'Read')} →</span>
+            </span>
+            <span class="ibv-testi">
               <b>${esc(v.titolo)}</b>
               <i>${esc(v.paese)} · ${esc(v.anno)}</i>
-            </figcaption>
-          </figure>`).join('')}
+            </span>
+          </button>`).join('')}
       </div>
     </div>
+
+    ${altriBandiHTML()}
   </article>`;
+}
+
+/* L'etichetta sopra i progetti dice quello che sono davvero. Dove c'è
+   una classifica sono vincitori; dove non c'è — il contributo del corpo
+   di solidarietà si ottiene, non si vince — chiamarli vincitori sarebbe
+   falso, e la parola sbagliata qui costa a chi ci crede. */
+function etichettaVincitori(b) {
+  if (b.senzaClassifica) return T('Come funziona, in tre punti', 'How it works, in three points');
+  return b.vincitoriReali
+    ? T('Hanno vinto con questo bando', 'These won this call')
+    : T('Il genere di progetto che vince', 'The kind of project that wins');
+}
+
+/* ── gli altri bandi, dentro al banner ─────────────────────────────
+   Stanno in fondo al blocco e non sopra: prima si guarda il bando che
+   c'è, poi si scopre che non è l'unico. Invertendoli, si comincerebbe
+   da una scelta fra quattro cose di cui non si sa ancora niente.
+
+   Si aprono in un foglio invece di cambiare la pagina sotto: da lì si
+   legge il bando per intero, e solo se convince lo si porta nel banner.
+   Cambiare tutto al primo clic punisce la curiosità. */
+function altriBandiHTML() {
+  const altri = BANDI.filter(b => b.id !== BANDO.id);
+  if (!altri.length) return '';
+
+  return `<div class="ib-altri">
+    <span class="ib-altri-eti">${T(
+      `Non è l'unico: altri ${altri.length} bandi europei aperti`,
+      `Not the only one: ${altri.length} more open European calls`)}</span>
+    <div class="ib-altri-fila">
+      ${altri.map(a => {
+        const g = giorniA(a.scadenza);
+        return `<button class="iba" data-apri="${esc(a.id)}">
+          <span class="iba-ente">${esc(a.ente)}</span>
+          <b class="iba-tit">${esc(a.titolo)}</b>
+          <span class="iba-piede">
+            <i class="iba-premio">${esc(a.premio)}</i>
+            <i class="iba-quando">${g > 0
+              ? T(`fra ${g} g`, `${g} d left`)
+              : T('da riaprire', 'reopening')}</i>
+          </span>
+        </button>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+/* ── il foglio di un bando ─────────────────────────────────────────
+   Il testo lungo per intero, coi grassetti e le sottolineature segnati
+   a mano nei dati. In fondo due strade: il sito ufficiale, oppure
+   portare questo bando nel banner al posto di quello che c'è — perché
+   chi ha letto tutto è esattamente chi potrebbe volerselo davanti
+   mentre guarda le squadre. */
+function foglioBandoHTML(b) {
+  const g = giorniA(b.scadenza);
+  return `<div class="fgb">
+    <span class="fgb-ente">${esc(b.ente)}</span>
+    <h2 class="fgb-tit">${esc(b.titolo)}</h2>
+    <p class="fgb-occhiello">${esc(b.occhiello)}</p>
+
+    <div class="fgb-dati">
+      <div><b>${esc(b.premio)}</b><span>${esc(b.premioNota)}</span></div>
+      <div><b>${dataBreve(b.scadenza)}</b><span>${g > 0
+        ? T(`fra ${g} giorni`, `${g} days left`)
+        : T('edizione chiusa', 'edition closed')}</span></div>
+      <div><b>${esc(b.eta)}</b><span>${esc(b.etaNota)}</span></div>
+    </div>
+
+    <div class="fgb-testo">
+      ${(b.descrizioneLunga || []).map(p => `<p>${conEnfasi(p)}</p>`).join('')}
+    </div>
+
+    ${(b.vantaggi || []).length ? `<ul class="fgb-vantaggi">
+      ${b.vantaggi.map(v => `<li>${esc(v)}</li>`).join('')}
+    </ul>` : ''}
+
+    <p class="fgb-avviso">${esc(b.scadenzaNota)}</p>
+
+    <div class="fgb-piede">
+      <a class="fgb-vai" href="${esc(b.sito)}" target="_blank" rel="noopener">
+        ${T('Vai al bando', 'Open the call')} →</a>
+      <a class="fgb-guida" href="${esc(b.sitoStrand)}" target="_blank" rel="noopener">
+        ${esc(b.guidaEtichetta)}</a>
+      ${b.id === BANDO.id ? '' : `<button class="fgb-evidenza" data-evidenzia="${esc(b.id)}">
+        ${T('Mettilo in evidenza', 'Show it in the banner')}</button>`}
+    </div>
+  </div>`;
+}
+
+/* ── il foglio di un progetto ──────────────────────────────────────
+   La copertina grande e poi il racconto lungo. Risponde alla domanda
+   che viene guardando la striscia — «sì, ma cosa hanno fatto di
+   preciso?» — a cui una didascalia di sei parole non risponde.
+
+   In fondo, sempre, da dove viene: il collegamento all'annuncio
+   ufficiale se il progetto è premiato davvero, e la dichiarazione per
+   esteso se invece l'abbiamo scritto noi. */
+function foglioProgettoHTML(v, i, b) {
+  return `<div class="fgp">
+    <div class="fgp-img"${v.foto ? '' : ' data-disegno="1"'}>${v.foto
+      ? `<img src="${esc(v.foto)}" alt="">`
+      : copertina(v.titolo, { larghezza: 600, altezza: 340, tavolozza: i })}</div>
+
+    <span class="fgp-cat">${esc(v.categoria)}</span>
+    <h2 class="fgp-tit">${esc(v.titolo)}</h2>
+    <span class="fgp-paese">${esc(v.paese)} · ${esc(v.anno)}</span>
+
+    <p class="fgp-testo">${esc(v.esteso || v.sintesi)}</p>
+
+    <div class="fgp-piede">
+      <span class="fgp-bando">${b.senzaClassifica
+        ? T('Da', 'From')
+        : T('Premiato da', 'Awarded by')} <b>${esc(b.titolo)}</b></span>
+      ${b.vincitoriReali && b.vincitoriFonte
+        ? `<a class="fgp-fonte" href="${esc(b.vincitoriFonte)}" target="_blank" rel="noopener">
+            ${T('Annuncio ufficiale', 'Official announcement')} →</a>`
+        : `<span class="fgp-nonvero">${esc(b.vincitoriNota || '')}</span>`}
+    </div>
+  </div>`;
 }
 
 /* ── la spiegazione, e le idee che hanno vinto ─────────────────────
