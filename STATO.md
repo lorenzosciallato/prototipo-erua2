@@ -237,14 +237,14 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 23:33** — file toccato: `moduli/rivista.js`
+Ultimo salvataggio: **14/08/2026 alle 23:34** — file toccato: `moduli/articolo.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `configurazione.js` | 300 | 16K |
 | `index.html` | 408 | 28K |
-| `moduli/articolo.js` | 569 | 24K |
+| `moduli/articolo.js` | 574 | 28K |
 | `moduli/ascolta.js` | 173 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 463 | 24K |

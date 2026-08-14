@@ -530,7 +530,12 @@ document.addEventListener('click', e => {
     offerta.salvati[id] = !offerta.salvati[id];
     sv.classList.toggle('on', offerta.salvati[id]);
     sv.innerHTML = '🔖 ' + (offerta.salvati[id] ? 'Saved' : 'Save');
-    offerta.ridisegna();
+    /* Non il ridisegno di tutto il feed: quello ricreava ogni `<img>` del
+       magazine mentre il pannello è nascosto sotto la pagina di lettura,
+       e al ritorno le fotografie non c'erano più. Basta accendere lo
+       stesso segnalibro di là. */
+    if (offerta.aggiornaSalvato) offerta.aggiornaSalvato(id);
+    else offerta.ridisegna();
   }
 });
 
