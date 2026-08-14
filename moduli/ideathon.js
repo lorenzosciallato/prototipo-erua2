@@ -416,6 +416,10 @@ function ridisegna() {
   document.getElementById('idea-squadre').innerHTML = squadreHTML();
   document.getElementById('idea-soli').innerHTML = soliHTML();
   document.getElementById('idea-nota').textContent = NOTA || '';
+  /* Le fotografie dei progetti premiati stanno nel banner, che si
+     riscrive tutto a ogni cambio di bando in evidenza. Senza questo
+     ripartivano da zero ogni volta. */
+  riusaFoto('idea-bando');
 }
 
 /* ── comandi ───────────────────────────────────────────────────────── */
