@@ -191,7 +191,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 17:10** — file toccato: `moduli/nucleo.js`
+Ultimo salvataggio: **14/08/2026 alle 17:11** — file toccato: `moduli/nucleo.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|

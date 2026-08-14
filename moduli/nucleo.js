@@ -240,10 +240,10 @@ export function faccia(nome, dim) {
    dell'alleanza come valore invece che il vuoto. Premendolo di nuovo si
    torna a vedere tutto, come per gli altri cerchi. */
 export function bottoneTutti(attr, attivo, comeFiltro = false) {
-  const l = LOGHI[CONFIG.siglaAlleanza];
+  const l = logoIncorporato(LOGHI[CONFIG.siglaAlleanza]);
   const sigla = esc(CONFIG.siglaAlleanza);
   const dentro = l
-    ? `<span class="avatar"><img src="${l}" alt="${sigla}"></span>`
+    ? `<span class="avatar"><img src="${l}" alt="${sigla}" decoding="sync"></span>`
     : `<span class="avatar testo">${sigla}</span>`;
   return `<button class="storia tutti" ${attr}="${comeFiltro ? sigla : ''}"
     aria-pressed="${attivo}" title="${sigla}">
