@@ -19,15 +19,27 @@ Esiste un **prototipo di presentazione**, ora **scorporato** secondo
 sociale, ideathon, messaggistica e profilo. I testi lunghi restano segnaposto:
 titoli, autori e alcune fotografie sono veri, il corpo degli articoli no.
 
-**Ideathon: quattro bandi europei, uno per volta in evidenza.** New European
+**Ideathon: quattro bandi europei, uno per volta nel banner.** New European
 Bauhaus Prizes (Strand B), European Solidarity Corps — Solidarity Projects,
 European Charlemagne Youth Prize e CASSINI Hackathons. Sono bandi veri, esterni
-all'alleanza, e ognuno porta la sua sezione vincitori. Solo del Bauhaus i
-vincitori sono premiati veri, con le fotografie della Commissione: **degli altri
-tre i progetti mostrati sono esempi scritti da noi, e la pagina lo dichiara
-sopra ogni sezione**. Vanno sostituiti con i vincitori reali prima di mostrarli
-a qualcuno. Le date sono dell'edizione precedente e la scheda lo dice, col
-collegamento al sito ufficiale accanto.
+all'alleanza. Gli altri tre stanno **dentro** al banner, in fondo, e si aprono
+in un foglio da cui si può portarli in evidenza al posto di quello che c'è.
+
+**I progetti premiati sono veri su tre bandi su quattro**, con l'annuncio
+ufficiale linkato dentro ogni scheda: Bauhaus (edizione 2024-25, fotografie
+della Commissione), Charlemagne 2025 (Forum Europaeum, Díky že můžem volit,
+Feminist Law Clinic) e CASSINI decima edizione (Avalanche Detectors, TrailRadar,
+GlideBuddy). Il quarto — il corpo europeo di solidarietà — **non ha vincitori
+perché non è una gara**: è un contributo che si ottiene stando nei requisiti,
+non battendo qualcun altro. Lì le tre schede spiegano come funziona e la sezione
+dichiara che le abbiamo scritte noi.
+
+Ogni progetto si preme e apre il racconto lungo in un foglio. Le date sono
+dell'edizione precedente e la scheda lo dice, col collegamento al sito ufficiale
+accanto.
+
+Restano inventate **le squadre e gli studenti in cerca di gruppo**, e la sezione
+lo dichiara in fondo.
 
 La struttura dei dati è già quella che servirà a un robot: `dati/ideathon.json`
 tiene una lista `bandi` e un campo `bandoInEvidenza`. Il robot che andrà a
@@ -124,8 +136,11 @@ Che cosa resta e che cosa no:
 - **Perché non sono stati cancellati**: quel materiale è costoso da
   rifare. Il lettore di tabelle in PDF (`robot/comune/pdf.js`) e il
   riconoscimento delle date in nove lingue (`robot/comune/date.js`)
-  servono anche altrove. Se la sezione non tornerà, si cancellano con un
-  comando solo — vale anche per `immagini/atenei/`, che pesa 3,8 MB.
+  servono anche altrove.
+- **Cancellati**: `immagini/atenei/`, i 211 loghi che pesavano 3,8 MB.
+  Nessun modulo li caricava, quindi il sito non ne risente; se la
+  sezione tornerà, `robot/loghi.js` li riscarica. Restano comunque
+  recuperabili dai commit precedenti.
 
 La dicitura sui marchi in fondo alla pagina **resta**: era dovuta comunque
 (§6.4) e prima mancava.

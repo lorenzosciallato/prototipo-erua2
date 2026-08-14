@@ -56,7 +56,8 @@
      "paese": "Portugal",
      "categoria": "Rising Stars winner",
      "foto": "immagini/ideathon/urban-mycoskin.webp",
-     "sintesi": "Mushroom roots turned into a building material. Agricultural and textile waste becomes a mycelium skin for urban structures in Lisbon."
+     "sintesi": "Mushroom roots turned into a building material. Agricultural and textile waste becomes a mycelium skin for urban structures in Lisbon.",
+     "esteso": "Mycelium — the root network of a mushroom — will bind almost anything it is fed. The team fed it agricultural and textile waste from around Lisbon and grew it into panels: a skin for urban structures that is made from what the city throws away and returns to the ground when it is done. It won in the Rising Stars strand, which is the one reserved for people aged 30 or under. Worth remembering when the idea feels too small: this was a material, grown in a room."
     },
     {
      "anno": "2024",
@@ -64,7 +65,8 @@
      "paese": "Romania",
      "categoria": "Reconnecting with nature",
      "foto": "immagini/ideathon/faget-forest-park.jpg",
-     "sintesi": "Cluj's green lung: a large forest park managed so that people can use it and the forest survives being used."
+     "sintesi": "Cluj's green lung: a large forest park managed so that people can use it and the forest survives being used.",
+     "esteso": "Cluj-Napoca has a forest on its doorstep and, like most cities with one, was slowly wearing it out. The project is a large forest park managed on an uncomfortable principle: that people must be able to use it **and** the forest must survive being used. That means deciding where the paths go, what gets closed, and who says so — governance work, not landscape work, and the reason it won under “reconnecting with nature” rather than under design."
     },
     {
      "anno": "2024",
@@ -72,7 +74,8 @@
      "paese": "Bosnia and Herzegovina",
      "categoria": "Public vote winner",
      "foto": "immagini/ideathon/map4water.webp",
-     "sintesi": "One thousand fountains, mapped. Sarajevo's public water points found, documented and brought back into use with the people who drink from them."
+     "sintesi": "One thousand fountains, mapped. Sarajevo's public water points found, documented and brought back into use with the people who drink from them.",
+     "esteso": "Sarajevo has around a thousand public fountains. Nobody had a list. The team found them, documented them, and put them back into use — with the people who actually drink from them, not on their behalf. It took the public vote, which is the prize decided by everyone across Europe rather than by a jury, and that is telling: it is the kind of project whose value is obvious to anyone who has ever looked for a drink of water."
     },
     {
      "anno": "2024",
@@ -80,7 +83,8 @@
      "paese": "France",
      "categoria": "Runner-up",
      "foto": "immagini/ideathon/yes-we-camp.webp",
-     "sintesi": "Empty spaces opened for free: community kitchens, family areas, greening, run with the people who need them most."
+     "sintesi": "Empty spaces opened for free: community kitchens, family areas, greening, run with the people who need them most.",
+     "esteso": "Empty buildings and unused lots, opened for free: community kitchens, spaces for families, planting. The organisation runs them with the people who need them most rather than for them, which is slower and is the whole point. A runner-up in the awards, and the most directly copyable thing on this page — every one of our eight cities has a building standing empty right now."
     },
     {
      "anno": "2025",
@@ -88,7 +92,8 @@
      "paese": "Hungary",
      "categoria": "Reconnecting with nature",
      "foto": null,
-     "sintesi": "Ordinary street signage redesigned to host pollinators - the poles and panels a city already owns, turned into habitat."
+     "sintesi": "Ordinary street signage redesigned to host pollinators - the poles and panels a city already owns, turned into habitat.",
+     "esteso": "A city already owns thousands of poles and panels: street signs, posts, brackets. Pollino redesigns that ordinary furniture to host pollinators. No new land, no new budget line, no permission to acquire anything — just a different specification for something that was going to be installed anyway. It won under “reconnecting with nature” in 2025, and it is the clearest example on this page of an idea that is small on purpose."
     },
     {
      "anno": "2025",
@@ -96,7 +101,8 @@
      "paese": "Estonia",
      "categoria": "Local democracy",
      "foto": null,
-     "sintesi": "Students and residents designed a shared courtyard together, built from construction material recovered in the neighbourhood."
+     "sintesi": "Students and residents designed a shared courtyard together, built from construction material recovered in the neighbourhood.",
+     "esteso": "Students and residents designed a shared courtyard together — actually together, in the same room, over months — and then built it from construction material recovered in the neighbourhood. It won under local democracy rather than under design, and that is the honest classification: the courtyard is the visible part, the process of agreeing on it was the work."
     }
    ],
    "occhiello": "Turn an idea into something Europe pays for.",
@@ -106,7 +112,8 @@
    "etaNota": "years old, every author",
    "vincitoriReali": true,
    "vincitoriNota": "Progetti realmente premiati dalla Commissione europea.",
-   "guidaEtichetta": "Strand B rules"
+   "guidaEtichetta": "Strand B rules",
+   "vincitoriFonte": "https://prizes.new-european-bauhaus.europa.eu/"
   },
   {
    "id": "esc-solidarity-projects",
@@ -157,34 +164,38 @@
     }
    ],
    "vincitoriReali": false,
-   "vincitoriNota": "Esempi del tipo di progetto che questo bando finanzia, scritti da noi per far vedere la forma. Non sono progetti realmente premiati.",
+   "vincitoriNota": "Questo non è un concorso: non esiste un elenco di vincitori perché non c’è una graduatoria. È un contributo che si ottiene se si è in regola con i requisiti. Le tre schede qui sotto spiegano come funziona, e sono scritte da noi.",
    "vincitori": [
     {
-     "anno": "esempio",
-     "titolo": "The Repair Round",
-     "paese": "—",
-     "categoria": "Environment and climate",
+     "anno": "—",
+     "titolo": "There is nobody to beat",
+     "paese": "How it works",
+     "categoria": "No ranking",
      "foto": null,
-     "sintesi": "A monthly repair workshop rotating between four neighbourhoods, run by students who already know how to fix things."
+     "sintesi": "This is a grant, not a prize. You are not competing against other groups: you are being checked against a list of requirements.",
+     "esteso": "Every other call on this page has winners because it has losers. This one does not work that way. The National Agency assesses your application against published criteria — relevance, quality of the plan, impact on your community — and funds it if it clears the bar. Two good applications from the same town can both succeed. That changes what you should spend your time on: not on being more impressive than someone else, but on being unambiguously eligible."
     },
     {
-     "anno": "esempio",
-     "titolo": "Night Bus Companions",
-     "paese": "—",
-     "categoria": "Inclusion and diversity",
+     "anno": "—",
+     "titolo": "Five of you, and nobody above you",
+     "paese": "Who applies",
+     "categoria": "The group",
      "foto": null,
-     "sintesi": "Volunteers riding the last bus of the night so that people who are afraid to take it, take it."
+     "sintesi": "At least five young people aged 18 to 30, legally resident in the same country. No university, no NGO, no co-funding.",
+     "esteso": "The group registers itself and applies directly. There is no host organisation to find, no institutional signature to chase, and no matching funds to raise — which is precisely what stops most student ideas before they start. One of you takes on the legal representation of the group; if you would rather not, an organisation can hold the money for you without taking over the project. A coach is available if you ask for one."
     },
     {
-     "anno": "esempio",
-     "titolo": "Grandparents Online",
-     "paese": "—",
-     "categoria": "Participation and citizenship",
+     "anno": "—",
+     "titolo": "Two to twelve months, €500 a month",
+     "paese": "What it pays",
+     "categoria": "The money",
      "foto": null,
-     "sintesi": "Weekly sessions where older residents learn the three digital services they actually need, taught one to one."
+     "sintesi": "Up to €500 a month for project management, for a project lasting between two and twelve months, in your own community.",
+     "esteso": "The contribution covers running the thing: preparation, carrying out the activities, evaluating them, and telling people about them afterwards. It is deliberately modest, and it is meant for a project that happens where you already live — rural, isolated or marginalised communities are explicitly favoured. Twelve months at €500 is €6,000, which is not a salary and is not supposed to be: it is enough to stop a good idea from dying of small expenses."
     }
    ],
-   "guidaEtichetta": "How to apply as a group"
+   "guidaEtichetta": "How to apply as a group",
+   "senzaClassifica": true
   },
   {
    "id": "charlemagne-youth-prize",
@@ -234,35 +245,39 @@
      "tinta": "--pesca"
     }
    ],
-   "vincitoriReali": false,
-   "vincitoriNota": "Esempi del tipo di progetto premiato negli anni scorsi, riscritti da noi. Vanno sostituiti con i vincitori veri prima di mostrarli fuori.",
+   "vincitoriReali": true,
+   "vincitoriNota": null,
    "vincitori": [
     {
-     "anno": "esempio",
-     "titolo": "Letters Across the Line",
-     "paese": "—",
-     "categoria": "History and memory",
+     "anno": "2025",
+     "titolo": "Forum Europaeum",
+     "paese": "Hungary",
+     "categoria": "First prize · €7,500",
      "foto": null,
-     "sintesi": "Students on both sides of a former border exchange letters written from archive documents about the same year."
+     "sintesi": "A pan-European media outlet run by young people: articles, podcasts, TikTok videos and interviews, all asking what a European identity actually is.",
+     "esteso": "Forum Europaeum took the first prize of the 2025 edition. It is not an app and not an event — it is a publication, made by young people across several countries, that treats European identity as a question worth arguing about rather than a slogan. It works in the formats its readers already use: long articles for those who want them, podcasts for the commute, TikTok for everyone else. The jury rewarded the fact that it had been running long enough to have an audience, not just a plan."
     },
     {
-     "anno": "esempio",
-     "titolo": "The Ballot Explained",
-     "paese": "—",
-     "categoria": "Democratic participation",
+     "anno": "2025",
+     "titolo": "Díky, že můžem volit",
+     "paese": "Czechia",
+     "categoria": "Second prize · €5,000",
      "foto": null,
-     "sintesi": "Short films made by first-time voters explaining what the European Parliament actually decides."
+     "sintesi": "“Thanks that we can vote” — a campaign to get 18-to-29-year-olds to the polls in the 2024 European elections.",
+     "esteso": "Turnout among young Czech voters was the problem, and the team treated it as one: not a poster campaign, but education and outreach aimed squarely at people who had decided in advance that the European Parliament had nothing to do with them. The name is a deliberate provocation — a reminder, in a country whose grandparents could not vote freely, that the right is recent. It took second prize and €5,000."
     },
     {
-     "anno": "esempio",
-     "titolo": "One Kitchen, Nine Languages",
-     "paese": "—",
-     "categoria": "European identity",
+     "anno": "2025",
+     "titolo": "Feminist Law Clinic",
+     "paese": "Germany",
+     "categoria": "Third prize · €2,500",
      "foto": null,
-     "sintesi": "A shared student kitchen where every week one country cooks and the rest learn ten words of its language."
+     "sintesi": "Free legal support for people facing gender-based discrimination and sexualised violence, run by law students.",
+     "esteso": "Law students giving free legal advice to the people least able to pay for it: women and members of the LGBTIQ+ community facing discrimination, sexualised violence, or simply a legal situation nobody had explained to them. It is the smallest of the three prizes and the most directly useful — a service that exists on the days it opens, whether or not anyone writes about it. Third prize, €2,500."
     }
    ],
-   "guidaEtichetta": "Rules and national juries"
+   "guidaEtichetta": "Rules and national juries",
+   "vincitoriFonte": "https://www.europarl.europa.eu/topics/en/article/20250520STO28530/"
   },
   {
    "id": "cassini-hackathons",
@@ -272,8 +287,8 @@
    "sottotitolo": "Three days, ten countries, EU space data",
    "occhiello": "A weekend. Ten cities. Real satellite data.",
    "descrizione": "The EU space programme opens Galileo and Copernicus data to teams who build something with it over a single weekend, in ten countries at once.",
-   "premio": "€5,000",
-   "premioNota": "first prize · €3,000 second · €1,000 third · 6 months mentoring",
+   "premio": "€3,000",
+   "premioNota": "to each of three winning teams · plus 100 hours of mentoring",
    "scadenza": "2026-11-27",
    "scadenzaNota": "12th edition, 27–29 November 2026 — registration closes earlier",
    "sito": "https://www.cassini.eu/hackathons/",
@@ -312,35 +327,39 @@
      "tinta": "--lavanda"
     }
    ],
-   "vincitoriReali": false,
-   "vincitoriNota": "Esempi del tipo di soluzione che vince un hackathon CASSINI, scritti da noi. Non sono squadre reali.",
+   "vincitoriReali": true,
+   "vincitoriNota": null,
    "vincitori": [
     {
-     "anno": "esempio",
-     "titolo": "Dry Field Alert",
-     "paese": "—",
-     "categoria": "Agriculture and food",
+     "anno": "2025",
+     "titolo": "Avalanche Detectors",
+     "paese": "Bulgaria",
+     "categoria": "Winner · 10th edition",
      "foto": null,
-     "sintesi": "Copernicus moisture data turned into a message a smallholder receives before the soil is too dry, not after."
+     "sintesi": "Sentinel-1 and Sentinel-2 data read for fresh snowfall, crossed with live weather, to give the probability of an avalanche where you are standing.",
+     "esteso": "Built over one weekend by a team from Bulgaria. Copernicus satellites pass over the mountains anyway; the team used Sentinel-1 and Sentinel-2 to detect how much snow has just fallen, then crossed that with live weather data to produce a probability for a specific point — not a regional bulletin, but the slope you are about to cross. It won the 10th edition and €3,000, plus a hundred hours of mentoring to keep going."
     },
     {
-     "anno": "esempio",
-     "titolo": "Last Ferry Home",
-     "paese": "—",
-     "categoria": "Mobility and logistics",
+     "anno": "2025",
+     "titolo": "TrailRadar",
+     "paese": "Finland",
+     "categoria": "Winner · 10th edition",
      "foto": null,
-     "sintesi": "Island ferry delays predicted from sea state, for the people who plan a whole day around one crossing."
+     "sintesi": "Galileo and Copernicus data tracking athletes during a race, so spectators can follow them on a live map or through an augmented-reality camera.",
+     "esteso": "A trail race disappears into the forest and the spectators lose it for hours. TrailRadar uses Galileo positioning and Copernicus terrain data to keep every runner on a live map, and adds an augmented-reality camera view: point the phone at the hillside and see who is on it. The team came out of the Finnish edition and went on to the Aalto Startup Center. Same weekend, same €3,000, same hundred hours."
     },
     {
-     "anno": "esempio",
-     "titolo": "Fire Line",
-     "paese": "—",
-     "categoria": "Safety and resilience",
+     "anno": "2025",
+     "titolo": "GlideBuddy",
+     "paese": "Italy",
+     "categoria": "Winner · 10th edition",
      "foto": null,
-     "sintesi": "A wildfire perimeter redrawn every six hours from satellite passes, readable on a phone with no signal."
+     "sintesi": "Paragliding safety in AR glasses: wind patterns, landing zones, restricted airspace and proximity alerts, in the pilot’s field of view.",
+     "esteso": "Paragliders make decisions with their hands full and their eyes on the horizon. GlideBuddy puts what they need into AR glasses — wind patterns, where it is safe to land, which airspace is closed, and sensor-based alerts when something else is too close. Weather and terrain analysis from EU space data, built in three days by an Italian team, third of the three winners of the 10th edition."
     }
    ],
-   "guidaEtichetta": "About the EU space programme"
+   "guidaEtichetta": "About the EU space programme",
+   "vincitoriFonte": "https://www.euspa.europa.eu/newsroom-events/news/meet-10th-cassini-hackathon-winners"
   }
  ],
  "conta": {

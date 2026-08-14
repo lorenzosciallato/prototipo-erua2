@@ -137,7 +137,6 @@ const attese = [
   ['idea-squadre', 'ideathon', ['idea-squadra', 'is-tit', 'is-liberi', 'is-cop', '<svg']],
   ['idea-soli',    'ideathon', ['idea-solo', 'isl-interessi']],
   ['idea-conta',   'ideathon', ['data-cat']],
-  ['idea-vincitori','ideathon', ['iv-scheda', 'Urban MYCOskin', 'Pollino', 'immagini/ideathon/']],
 ];
 console.log('\ncontenuto prodotto:');
 for (const [id, sezione, frammenti] of attese) {
@@ -327,6 +326,69 @@ const prove2 = [
             nucleo.includes('logoIncorporato(LOGHI[u])');
    },
    'i loghi vanno incorporati nel codice: dalla rete sparivano a ogni ridisegno'],
+  ['i progetti premiati si aprono',
+   () => {
+     const js = fs.readFileSync(path.join(REPO, 'moduli/ideathon.js'), 'utf8');
+     /* Devono essere pulsanti, non figure ferme: una copertina che non
+        si preme è una promessa che la pagina non mantiene. E il foglio
+        deve ricevere il testo lungo, non la stessa didascalia. */
+     return js.includes('data-vinto') && js.includes('apriFoglio(foglioProgettoHTML') &&
+            js.includes('v.esteso');
+   },
+   'ogni progetto deve aprire il suo racconto lungo in un foglio'],
+  ['gli altri bandi stanno dentro al banner',
+   () => {
+     const html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
+     const js = fs.readFileSync(path.join(REPO, 'moduli/ideathon.js'), 'utf8');
+     /* Spiegazione e vincitori sono stati assorbiti nel banner: se i
+        contenitori separati tornassero, tornerebbero anche i tre blocchi
+        in fila che nessuno leggeva come un discorso solo. */
+     return !html.includes('idea-spiega') && !html.includes('idea-vincitori') &&
+            js.includes('altriBandiHTML') && js.includes('data-apri') &&
+            js.includes('data-evidenzia');
+   },
+   'i bandi vanno dentro al banner e si aprono in un foglio'],
+  ['ogni progetto ha un racconto lungo',
+   () => {
+     const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
+     return d.bandi.every(b => b.vincitori.every(v => (v.esteso || '').length > 200));
+   },
+   'senza testo esteso il foglio ripete la didascalia e non serve a niente'],
+  ['i vincitori veri portano la loro fonte',
+   () => {
+     const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
+     /* Un progetto dichiarato premiato davvero deve avere accanto
+        l'annuncio ufficiale: e' la differenza fra un'informazione e
+        un'affermazione. */
+     return d.bandi.filter(b => b.vincitoriReali)
+       .every(b => /^https:\/\//.test(b.vincitoriFonte || ''));
+   },
+   'chi dichiara vincitori veri deve linkare l annuncio ufficiale'],
+  ['i numeri stanno in figure di solo contorno',
+   () => {
+     const js = fs.readFileSync(path.join(REPO, 'moduli/ideathon.js'), 'utf8');
+     const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');
+     /* Contorno e non riempimento: riempite, il colore verrebbe prima
+        del numero, che e' il contrario di quello che serve. E tre forme
+        diverse, perche' tre cerchi uguali si leggono come tre pallini. */
+     const figure = js.slice(js.indexOf('const figure = ['), js.indexOf('];', js.indexOf('const figure = [')));
+     return js.includes('fill="none"') && js.includes('stroke="${f.tinta}"') &&
+            /tinta: '#[0-9A-F]{6}'/i.test(figure) &&
+            figure.includes('<circle') && figure.includes('<rect') && figure.includes('<path') &&
+            css.includes('.ic-figura');
+   },
+   'i numeri vanno dentro figure colorate solo nel contorno, e diverse fra loro'],
+  ['il foglio si chiude in tre modi',
+   () => {
+     const nucleo = fs.readFileSync(path.join(REPO, 'moduli/nucleo.js'), 'utf8');
+     const html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
+     /* Dal fondo, dal pulsante e con Esc. E' la cosa che si cerca per
+        prima quando si vuole uscire, e chi la cerca e' gia' infastidito. */
+     return nucleo.includes("e.key === 'Escape'") && nucleo.includes('foglio-via') &&
+            nucleo.includes('e.target === f') &&
+            html.includes('id="foglio"') && html.includes('aria-modal="true"');
+   },
+   'il foglio deve chiudersi dal fondo, dal pulsante e con Esc'],
   ['la voce Ideathon non sembra selezionata',
    () => {
      const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');
