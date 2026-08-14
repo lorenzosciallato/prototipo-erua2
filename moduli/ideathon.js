@@ -155,6 +155,22 @@ function bandoHTML() {
   </article>`;
 }
 
+/* ── quando chiedere una fotografia ────────────────────────────────
+   `loading="lazy"` serve a non scaricare quello che sta sotto la piega.
+   Sulle immagini che si vedono **subito** fa il danno opposto: il
+   browser le tratta come rimandabili e le mette in fondo alla coda, così
+   la striscia dei progetti restava grigia per secondi mentre i file —
+   trenta o quaranta kilobyte l'uno — erano già pronti sul server.
+
+   Le prime tre della striscia sono in schermo appena si apre la
+   sezione: si chiedono subito, e la prima con priorità alta. Dalla
+   quarta in poi bisogna scorrere di lato per vederle, e lì il
+   differimento torna a essere quello che deve essere. */
+function prioritaFoto(i) {
+  if (i === 0) return 'fetchpriority="high" decoding="sync"';
+  return i < 3 ? 'decoding="async"' : 'loading="lazy" decoding="async"';
+}
+
 /* L'etichetta sopra i progetti dice quello che sono davvero. Dove c'è
    una classifica sono vincitori; dove non c'è — il contributo del corpo
    di solidarietà si ottiene, non si vince — chiamarli vincitori sarebbe
