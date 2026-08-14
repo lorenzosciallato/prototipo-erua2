@@ -389,6 +389,69 @@ const prove2 = [
             html.includes('id="foglio"') && html.includes('aria-modal="true"');
    },
    'il foglio deve chiudersi dal fondo, dal pulsante e con Esc'],
+  ['ogni colore usato esiste davvero',
+   () => {
+     /* Un `var(--nome)` che non esiste non è un errore: il browser lo
+        tratta come vuoto e tira dritto. Su un fondo diventa trasparente,
+        e il risultato è testo illeggibile senza che niente si lamenti —
+        è così che il foglio dei bandi è uscito senza fondo.
+
+        Tre modi leciti di avere un valore, e vanno riconosciuti tutti e
+        tre, altrimenti il controllo grida al lupo e si smette di
+        ascoltarlo:
+
+          1. definita in un foglio di stile;
+          2. scritta da un modulo — nell'attributo `style` o con
+             `setProperty`: le tinte delle squadre e delle materie
+             nascono così;
+          3. usata con un ripiego dichiarato, `var(--x, 1.1rem)`, che è
+             una scelta esplicita e non una dimenticanza. */
+     const fogli = fs.readdirSync(path.join(REPO, 'stile')).filter(f => f.endsWith('.css'));
+     const definite = new Set();
+     const usate = new Map();
+     for (const f of fogli) {
+       const s = fs.readFileSync(path.join(REPO, 'stile', f), 'utf8');
+       for (const m of s.matchAll(/(--[A-Za-z0-9_-]+)\s*:/g)) definite.add(m[1]);
+       /* solo gli usi SENZA ripiego: `var(--x)` o `var(--x)` seguito da
+          qualcosa che non sia una virgola */
+       for (const m of s.matchAll(/var\((--[A-Za-z0-9_-]+)\s*([,)])/g))
+         if (m[2] === ')' && !usate.has(m[1])) usate.set(m[1], f);
+     }
+     for (const f of fs.readdirSync(path.join(REPO, 'moduli'))) {
+       if (!f.endsWith('.js')) continue;
+       const s = fs.readFileSync(path.join(REPO, 'moduli', f), 'utf8');
+       for (const m of s.matchAll(/(--[A-Za-z0-9_-]+)\s*:/g)) definite.add(m[1]);
+       for (const m of s.matchAll(/setProperty\(\s*['"](--[A-Za-z0-9_-]+)/g)) definite.add(m[1]);
+     }
+     const orfane = [...usate.keys()].filter(v => !definite.has(v));
+     if (orfane.length) console.log('     colori inesistenti: ' +
+       orfane.map(v => `${v} (${usate.get(v)})`).join(', '));
+     return !orfane.length;
+   },
+   'un var(--nome) che non esiste diventa trasparente in silenzio'],
+  ['il foglio ha un fondo opaco',
+   () => {
+     const css = fs.readFileSync(path.join(REPO, 'stile/base.css'), 'utf8');
+     const i = css.indexOf('.fg-scatola{');
+     const regola = css.slice(i, css.indexOf('}', i));
+     /* Fondo e colore del testo espliciti: il foglio sta sopra sezioni
+        che vanno dal bianco al gradiente scuro, e senza dichiararli
+        entrambi eredita quello sbagliato in metà dei casi. */
+     return i > 0 && /background:var\(--(sup|sup2|bg)\)/.test(regola) && /color:var\(--testo\)/.test(regola);
+   },
+   'il foglio deve dichiarare fondo e colore del testo, non ereditarli'],
+  ['i pulsanti partono nudi',
+   () => {
+     const css = fs.readFileSync(path.join(REPO, 'stile/base.css'), 'utf8');
+     const i = css.indexOf('button{');
+     const regola = css.slice(i, css.indexOf('}', i));
+     /* `color:inherit` senza `background` era la trappola: dentro il
+        banner scuro il pulsante ereditava il testo bianco e teneva il
+        grigio di serie del browser. Vanno azzerati insieme. */
+     return i > 0 && regola.includes('color:inherit') &&
+            regola.includes('background:none') && regola.includes('border:0');
+   },
+   'senza azzerare il fondo, un pulsante su fondo scuro esce bianco su grigio'],
   ['la voce Ideathon non sembra selezionata',
    () => {
      const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');
