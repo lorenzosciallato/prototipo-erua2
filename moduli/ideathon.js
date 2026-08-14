@@ -34,7 +34,23 @@ import { copertina, QUANTE_TAVOLOZZE } from './geometrie.js';
 let BANDI = [], BANDO = null, CONTA = null, SQUADRE = [], SOLI = [], NOTA = null;
 let filtroCategoria = null;
 
-const categoriaDi = id => (BANDO.categorie || []).find(c => c.id === id) || BANDO.categorie[0];
+/* Le categorie di tutti i bandi messe insieme.
+
+   Le squadre non cambiano quando cambi il bando in evidenza: sono
+   persone dell'alleanza che si stanno organizzando, non la graduatoria
+   di un bando. Se cercassimo la loro categoria solo dentro il bando
+   scelto, cambiando bando perderebbero tutte il colore e il filtro non
+   troverebbe più niente. Si cerca quindi nell'insieme. */
+const tutteCategorie = () => BANDI.flatMap(b => b.categorie || []);
+const categoriaDi = id => tutteCategorie().find(c => c.id === id) || tutteCategorie()[0];
+
+/* Le categorie che i filtri mostrano: solo quelle che almeno una
+   squadra usa davvero. Un filtro che non ha niente da filtrare è un
+   pulsante che porta a una pagina vuota. */
+const categorieUsate = () => {
+  const usate = new Set(SQUADRE.map(s => s.categoria));
+  return tutteCategorie().filter(c => usate.has(c.id));
+};
 
 /* ── quanti giorni mancano ──────────────────────────────────────────
    Un numero solo, calcolato in un posto solo: la striscia dei bandi e
