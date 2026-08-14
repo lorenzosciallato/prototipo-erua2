@@ -138,7 +138,7 @@ function bandoHTML() {
       <a class="ib-vai" href="${esc(b.sito)}" target="_blank" rel="noopener">
         ${T('Vai al bando', 'Open the call')} →</a>
       <a class="ib-guida" href="${esc(b.sitoStrand)}" target="_blank" rel="noopener">
-        ${T('Regole dello Strand B', 'Strand B rules')}</a>
+        ${esc(b.guidaEtichetta)}</a>
       <span class="ib-avviso">${esc(b.scadenzaNota)}</span>
     </div>
 
