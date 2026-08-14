@@ -31,10 +31,53 @@ import { CITTA } from '../configurazione.js';
 import { T, esc, dati, offre, dataBreve, faccia, stemma } from './nucleo.js';
 import { copertina, QUANTE_TAVOLOZZE } from './geometrie.js';
 
-let BANDO = null, CONTA = null, SQUADRE = [], SOLI = [], NOTA = null;
+let BANDI = [], BANDO = null, CONTA = null, SQUADRE = [], SOLI = [], NOTA = null;
 let filtroCategoria = null;
 
 const categoriaDi = id => (BANDO.categorie || []).find(c => c.id === id) || BANDO.categorie[0];
+
+/* ── quanti giorni mancano ──────────────────────────────────────────
+   Un numero solo, calcolato in un posto solo: la striscia dei bandi e
+   il banner devono dire la stessa cosa, e due conti separati che
+   sembrano uguali sono due conti che un giorno divergono. */
+function giorniA(scadenza) {
+  return Math.round((new Date(scadenza + 'T12:00:00Z') - Date.now()) / 86400000);
+}
+
+/* ── la striscia dei bandi ─────────────────────────────────────────
+   I bandi europei aperti a uno studente sono più d'uno, e il punto
+   della sezione è proprio questo: non «c'è un bando», ma «ce n'è una
+   fila, e sono raggiungibili». Metterne uno solo avrebbe raccontato il
+   contrario di quello che serve dimostrare.
+
+   Se ne sceglie uno alla volta perché un banner vale finché è uno:
+   quattro banner affiancati sono un listino, e un listino non lo legge
+   nessuno. Gli altri restano lì accanto, piccoli, a dire che ci sono.
+
+   Ogni scheda porta la scadenza, perché è il primo dato per cui si
+   scarta un bando — e va vista prima di aprirlo, non dopo. */
+function selettoreHTML() {
+  if (BANDI.length < 2) return '';
+  return `<nav class="idea-scelta-lista" aria-label="${T('Bandi aperti', 'Open calls')}">
+    <span class="isc-eti">${T(`${BANDI.length} bandi europei aperti`, `${BANDI.length} open European calls`)}</span>
+    <div class="isc-fila">
+      ${BANDI.map(b => {
+        const g = giorniA(b.scadenza);
+        return `<button class="isc-carta" data-bando="${esc(b.id)}"
+          aria-pressed="${b.id === BANDO.id}">
+          <span class="isc-ente">${esc(b.ente)}</span>
+          <b class="isc-tit">${esc(b.titolo)}</b>
+          <span class="isc-piede">
+            <i class="isc-premio">${esc(b.premio)}</i>
+            <i class="isc-quando">${g > 0
+              ? T(`fra ${g} g`, `${g} d left`)
+              : T('da riaprire', 'reopening')}</i>
+          </span>
+        </button>`;
+      }).join('')}
+    </div>
+  </nav>`;
+}
 
 /* ── enfasi nel testo del bando ────────────────────────────────────
    Il testo lo scriviamo noi, ma passa comunque da `esc()` per primo:
