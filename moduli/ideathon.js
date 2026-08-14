@@ -9,12 +9,21 @@
    c'è in gioco un premio vero, e per questo la voce nella navigazione è
    marcata: chi guarda il sito per la prima volta deve trovarla subito.
 
-   **Il bando è reale.** New European Bauhaus Prizes, Strand B «Rising
-   Stars», Commissione europea, riservato a chi ha trent'anni o meno.
-   Categorie, premi e sito ufficiale sono quelli veri. Le date sono
-   quelle dell'edizione precedente e la scheda lo dice apertamente, con
-   il collegamento al sito ufficiale accanto: nessuno deve poter perdere
-   una scadenza per colpa di una nostra pagina.
+   **I bandi sono reali, e sono quattro.** New European Bauhaus Prizes,
+   European Solidarity Corps, Charlemagne Youth Prize, CASSINI
+   Hackathons. Uno per volta sta nel banner; gli altri sono lì sotto e
+   si aprono in un foglio. Premi, requisiti e siti ufficiali sono quelli
+   veri. Le date sono quelle dell'edizione precedente e la scheda lo dice
+   apertamente, col collegamento al sito ufficiale accanto: nessuno deve
+   poter perdere una scadenza per colpa di una nostra pagina.
+
+   **I progetti premiati sono veri per tre bandi su quattro**, con
+   l'annuncio ufficiale linkato dentro ogni scheda. Il quarto — il corpo
+   europeo di solidarietà — non ha vincitori perché non è una gara: è un
+   contributo che si ottiene stando nei requisiti, non battendo qualcun
+   altro. Lì le tre schede spiegano come funziona, e la sezione dice che
+   le abbiamo scritte noi. Chiamarli vincitori sarebbe stato più comodo
+   e sarebbe stato falso.
 
    **Le squadre e gli studenti sono inventati**, e la sezione lo dichiara
    in fondo. Servono a mostrare come funzionerebbe: senza qualcuno già
