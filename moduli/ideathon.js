@@ -107,7 +107,7 @@ function conEnfasi(testo) {
    tutti e cinque. */
 function bandoHTML() {
   const b = BANDO;
-  const giorni = Math.round((new Date(b.scadenza + 'T12:00:00Z') - Date.now()) / 86400000);
+  const giorni = giorniA(b.scadenza);
 
   return `<article class="idea-bando">
     <div class="ib-alto">
