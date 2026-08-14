@@ -340,6 +340,7 @@ function soliHTML() {
 }
 
 function ridisegna() {
+  document.getElementById('idea-scelta').innerHTML = selettoreHTML();
   document.getElementById('idea-bando').innerHTML = bandoHTML();
   document.getElementById('idea-spiega').innerHTML = spiegazioneHTML();
   document.getElementById('idea-vincitori').innerHTML = vincitoriHTML();
