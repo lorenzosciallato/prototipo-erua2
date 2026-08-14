@@ -44,22 +44,22 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/editoriale-1.jpg",
+     "file": "immagini/rivista/editoriale-1.webp",
      "w": 230,
      "h": 256
     },
     {
-     "file": "immagini/rivista/editoriale-2.jpg",
+     "file": "immagini/rivista/editoriale-2.webp",
      "w": 230,
      "h": 252
     },
     {
-     "file": "immagini/rivista/editoriale-3.jpg",
+     "file": "immagini/rivista/editoriale-3.webp",
      "w": 226,
      "h": 256
     },
     {
-     "file": "immagini/rivista/editoriale-4.jpg",
+     "file": "immagini/rivista/editoriale-4.webp",
      "w": 189,
      "h": 254
     }
@@ -94,7 +94,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/summit-1.jpg",
+     "file": "immagini/rivista/summit-1.webp",
      "w": 1025,
      "h": 707
     }
@@ -165,7 +165,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/eruaday-1.jpg",
+     "file": "immagini/rivista/eruaday-1.webp",
      "w": 900,
      "h": 533
     }
@@ -231,7 +231,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/contest-1.jpg",
+     "file": "immagini/rivista/contest-1.webp",
      "w": 760,
      "h": 538
     }
@@ -407,7 +407,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/kneading-1.jpg",
+     "file": "immagini/rivista/kneading-1.webp",
      "w": 226,
      "h": 230
     }
@@ -476,7 +476,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/green-policies-1.jpg",
+     "file": "immagini/rivista/green-policies-1.webp",
      "w": 223,
      "h": 289
     }
@@ -538,7 +538,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/populism-1.jpg",
+     "file": "immagini/rivista/populism-1.webp",
      "w": 1191,
      "h": 788
     }
@@ -572,7 +572,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/journey-1.jpg",
+     "file": "immagini/rivista/journey-1.webp",
      "w": 223,
      "h": 293
     }
@@ -606,7 +606,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/alumni-1.jpg",
+     "file": "immagini/rivista/alumni-1.webp",
      "w": 223,
      "h": 288
     }
@@ -640,7 +640,7 @@
    ],
    "immagini": [
     {
-     "file": "immagini/rivista/student-board-1.jpg",
+     "file": "immagini/rivista/student-board-1.webp",
      "w": 230,
      "h": 256
     }
