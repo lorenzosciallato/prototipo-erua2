@@ -159,6 +159,25 @@ export function mescola(a) {
   return a;
 }
 
+/* ── quando chiedere una fotografia ────────────────────────────────
+   `loading="lazy"` serve a non scaricare quello che sta sotto la piega.
+   Sulle immagini che si vedono **subito** fa il danno opposto: il
+   browser le tratta come rimandabili e le mette in fondo alla coda. Le
+   fotografie in cima a una sezione restavano grigie per secondi mentre
+   i file — trenta o quaranta kilobyte l'uno — erano già pronti sul
+   server e arrivavano in mezzo secondo.
+
+   Quindi: le prime che stanno in schermo si chiedono subito, la prima
+   con priorità alta, e il differimento riprende da lì in giù, dove è
+   quello che deve essere.
+
+   @param {number} i        posizione nell'elenco, da zero
+   @param {number} inVista  quante ne sta in schermo senza scorrere */
+export function prioritaFoto(i, inVista = 3) {
+  if (i === 0) return 'fetchpriority="high" decoding="sync"';
+  return i < inVista ? 'decoding="async"' : 'loading="lazy" decoding="async"';
+}
+
 /* ── stemma di un ateneo ───────────────────────────────────────────
    Il logo vero se c'è, la sigla scritta se manca il file.
 
