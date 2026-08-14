@@ -354,7 +354,7 @@ function corpoArticolo(a){
         const lato = (Math.ceil(nFoto/2) % 2 === 1) ? '' : ' sinistra';
         const larga = flottante ? (' flotta'+lato) : ' larga';
         corpoCap+=`<figure class="scatto-box${larga} ${aCapitoli?'oltre':''}">
-          <img class="scatto-art" src="${dentro.get(i).file}" alt="" loading="lazy"${propor(dentro.get(i))}></figure>`;
+          <img class="scatto-art" src="${dentro.get(i).file}" alt="" decoding="async"${propor(dentro.get(i))}></figure>`;
       }
     });
 
