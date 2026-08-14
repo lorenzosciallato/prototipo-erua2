@@ -460,6 +460,7 @@ document.addEventListener('click', e => {
     BANDO = scelto;
     chiudiFoglio();
     document.getElementById('idea-bando').innerHTML = bandoHTML();
+    riusaFoto('idea-bando');
     const su = document.getElementById('idea-bando');
     if (su && su.scrollIntoView) su.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
