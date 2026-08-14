@@ -27,7 +27,16 @@ const ST_COL = {
   dive: ['--pesca', '--pesca-s'], stud: ['--rosa', '--rosa-s'],
 };
 
-const stThumb=id=>VIDEO.anteprime+'/vi/'+id+'/hqdefault.jpg';
+/* ── anteprime dei video ────────────────────────────────────────────
+   YouTube tiene la stessa anteprima in più misure. `hq` pesa il doppio
+   di `mq` e serve solo dove l'immagine è grande davvero: nelle
+   miniature di elenco il peso in più non si vede, si aspetta soltanto.
+
+   `mq` ha anche la proporzione giusta — sedici a nove pieni, mentre
+   `hq` arriva con due bande nere sopra e sotto che il foglio di stile
+   deve ritagliare. Nelle miniature quindi non è un ripiego: è meglio. */
+const stThumb=(id,grande)=>VIDEO.anteprime+'/vi/'+id+(grande?'/hqdefault.jpg':'/mqdefault.jpg');
+const MISURA_MINI='width="320" height="180" decoding="async"';
 function stCol(materia){const c=ST_COL[materia]||ST_COL.psych;return '--pf:var('+c[0]+');--ps:var('+c[1]+')';}
 
 function stCorsoHTML(c){

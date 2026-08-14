@@ -191,7 +191,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 17:16** — file toccato: `index.html`
+Ultimo salvataggio: **14/08/2026 alle 17:24** — file toccato: `moduli/didattica.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -201,7 +201,7 @@ Ultimo salvataggio: **14/08/2026 alle 17:16** — file toccato: `index.html`
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
-| `moduli/didattica.js` | 454 | 24K |
+| `moduli/didattica.js` | 463 | 24K |
 | `moduli/geometrie.js` | 155 | 8.0K |
 | `moduli/ideathon.js` | 416 | 20K |
 | `moduli/lingua.js` | 164 | 8.0K |
@@ -233,7 +233,7 @@ Ultimo salvataggio: **14/08/2026 alle 17:16** — file toccato: `index.html`
 | `stile/aula.css` | 457 | 32K |
 | `stile/base.css` | 270 | 16K |
 | `stile/didattica.css` | 163 | 12K |
-| `stile/ideathon.css` | 373 | 24K |
+| `stile/ideathon.css` | 422 | 28K |
 | `stile/notizie.css` | 132 | 12K |
 | `stile/rivista.css` | 100 | 8.0K |
 | `stile/sociale.css` | 560 | 40K |
