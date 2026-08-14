@@ -175,10 +175,23 @@ function spiegazioneHTML() {
 function vincitoriHTML() {
   const v = BANDO.vincitori || [];
   if (!v.length) return '';
+
+  /* Ogni bando ha i suoi vincitori, e non tutti sono veri: del New
+     European Bauhaus abbiamo i progetti premiati davvero, con le
+     fotografie della Commissione; degli altri tre no. Dove non sono
+     veri la sezione lo scrive qui sopra, in chiaro, invece di lasciarlo
+     capire — un esempio scambiato per un vincitore è un errore che si
+     scopre davanti a chi non doveva scoprirlo (§P7). */
   return `<div class="idea-sezione">
-      <h2 class="idea-titolo">${T('Cosa vince, di preciso', 'What actually wins')}</h2>
-      <p class="idea-sotto">${T('Progetti veri, premiati nelle edizioni precedenti. Nessuno era irraggiungibile: erano idee chiare.',
-                                'Real projects, awarded in previous editions. None of them was out of reach — they were clear ideas.')}</p>
+      <h2 class="idea-titolo">${BANDO.vincitoriReali
+        ? T('Cosa vince, di preciso', 'What actually wins')
+        : T('Che forma ha un progetto che vince', 'What a winning project looks like')}</h2>
+      <p class="idea-sotto">${BANDO.vincitoriReali
+        ? T('Progetti veri, premiati nelle edizioni precedenti. Nessuno era irraggiungibile: erano idee chiare.',
+            'Real projects, awarded in previous editions. None of them was out of reach — they were clear ideas.')
+        : T('Esempi scritti da noi per far vedere la misura giusta: piccoli, concreti, di una frase sola.',
+            'Examples written by us to show the right size: small, concrete, one sentence each.')}</p>
+      ${BANDO.vincitoriReali ? '' : `<p class="idea-avviso">${esc(BANDO.vincitoriNota)}</p>`}
     </div>
     <div class="idea-vincitori">
       ${v.map((x, i) => `
