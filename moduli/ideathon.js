@@ -396,7 +396,15 @@ export async function avvia() {
   avviata = true;
 
   const d = await dati('ideathon');
-  BANDO = d.bando;
+
+  /* Lettura tollerante (§2.9): oggi i bandi sono una lista, ma un file
+     vecchio con un bando solo continua a funzionare. Il giorno in cui un
+     robot scriverà qui dentro, sarà lui a dover rispettare questa forma
+     — non questa funzione a doversi adattare a lui. */
+  BANDI = Array.isArray(d.bandi) ? d.bandi : (d.bando ? [d.bando] : []);
+  BANDO = BANDI.find(b => b.id === d.bandoInEvidenza) || BANDI[0];
+  if (!BANDO) return;
+
   CONTA = d.conta;
   SQUADRE = d.squadre || [];
   SOLI = d.soli || [];

@@ -203,7 +203,7 @@ Ultimo salvataggio: **14/08/2026 alle 17:16** — file toccato: `moduli/ideathon
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 454 | 24K |
 | `moduli/geometrie.js` | 155 | 8.0K |
-| `moduli/ideathon.js` | 408 | 20K |
+| `moduli/ideathon.js` | 416 | 20K |
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/navigazione.js` | 124 | 8.0K |
 | `moduli/notizie.js` | 105 | 8.0K |
