@@ -1,6 +1,6 @@
 /* ERUA connect — Ideathon
    ==================================================================
-   Un bando europeo aperto, e chi si sta organizzando per vincerlo.
+   Quattro bandi europei aperti, e chi si sta organizzando per vincerli.
 
    **Perché questa sezione esiste separata dalle altre.** La rivista, le
    notizie e la piazza raccontano quello che l'alleanza fa. Questa fa una

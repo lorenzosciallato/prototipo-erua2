@@ -222,7 +222,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 19:18** — file toccato: `moduli/ideathon.js`
+Ultimo salvataggio: **14/08/2026 alle 19:22** — file toccato: `moduli/ideathon.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -267,7 +267,7 @@ Ultimo salvataggio: **14/08/2026 alle 19:18** — file toccato: `moduli/ideathon
 | `stile/aula.css` | 457 | 32K |
 | `stile/base.css` | 306 | 20K |
 | `stile/didattica.css` | 163 | 12K |
-| `stile/ideathon.css` | 422 | 28K |
+| `stile/ideathon.css` | 514 | 32K |
 | `stile/notizie.css` | 132 | 12K |
 | `stile/rivista.css` | 100 | 8.0K |
 | `stile/sociale.css` | 560 | 40K |
