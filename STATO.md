@@ -214,7 +214,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 17:25** — file toccato: `moduli/didattica.js`
+Ultimo salvataggio: **14/08/2026 alle 17:33** — file toccato: `robot/converti-webp.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -228,6 +228,7 @@ Ultimo salvataggio: **14/08/2026 alle 17:25** — file toccato: `moduli/didattic
 | `moduli/geometrie.js` | 155 | 8.0K |
 | `moduli/ideathon.js` | 416 | 20K |
 | `moduli/lingua.js` | 164 | 8.0K |
+| `moduli/loghi-incorporati.js` | 35 | 64K |
 | `moduli/navigazione.js` | 124 | 8.0K |
 | `moduli/notizie.js` | 105 | 8.0K |
 | `moduli/nucleo.js` | 326 | 20K |
@@ -247,6 +248,7 @@ Ultimo salvataggio: **14/08/2026 alle 17:25** — file toccato: `moduli/didattic
 | `robot/costi.js` | 136 | 8.0K |
 | `robot/destinazioni.js` | 297 | 16K |
 | `robot/didattica.js` | 101 | 8.0K |
+| `robot/incorpora-loghi.js` | 80 | 4.0K |
 | `robot/loghi.js` | 341 | 16K |
 | `robot/notizie.js` | 150 | 8.0K |
 | `robot/ricevi.js` | 167 | 8.0K |
