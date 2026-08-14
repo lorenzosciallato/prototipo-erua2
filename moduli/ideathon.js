@@ -29,7 +29,7 @@
 
 import { CITTA } from '../configurazione.js';
 import { T, esc, dati, offre, dataBreve, faccia, stemma, apriFoglio, chiudiFoglio } from './nucleo.js';
-import { copertina, QUANTE_TAVOLOZZE } from './geometrie.js';
+import { copertina } from './geometrie.js';
 
 let BANDI = [], BANDO = null, CONTA = null, SQUADRE = [], SOLI = [], NOTA = null;
 let filtroCategoria = null;
