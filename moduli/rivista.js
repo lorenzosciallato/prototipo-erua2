@@ -11,7 +11,7 @@
 import { CITTA, TINTE } from '../configurazione.js';
 import {
   LANG, T, esc, dati, offre, chiedi, toast, mescola,
-  stemma, filaAtenei, ICONE,
+  stemma, prioritaFoto, filaAtenei, ICONE,
 } from './nucleo.js';
 
 /* Lo stato della sezione. Vive qui e non nel nucleo: nessun'altra
@@ -60,7 +60,7 @@ function postHTML(a, indice){
   const im0=(a.immagini&&a.immagini[0])||null;
   const prop=(im0&&im0.w&&im0.h)?` style="aspect-ratio:${im0.w}/${im0.h}"`:'';
   const foto=(cl)=>a.foto?`<button class="f-foto ${cl||''} leggi-art" data-id="${a.id}"
-      aria-label="${esc(a.titolo)}"><img src="${a.foto}" alt="" loading="lazy"${prop}></button>`:'';
+      aria-label="${esc(a.titolo)}"><img src="${a.foto}" alt="" ${prioritaFoto(indice||0,2)}${prop}></button>`:'';
   const chi=`<div class="f-chi">${stemma(a.uni,'f-av')}<span>${esc(a.autore)}</span></div>`;
   const azioni=`<div class="f-azioni">
       <button class="f-leggi leggi-art" data-id="${a.id}">${T('Leggi','Read')} <span class="fr">\u2192</span></button>

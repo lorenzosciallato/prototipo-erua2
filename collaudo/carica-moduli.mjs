@@ -120,6 +120,10 @@ for (const s of sezioni) {
   }
 }
 
+/* nucleo.js si aggancia alla pagina appena viene importato, quindi lo si
+   può prendere solo adesso: prima non esisterebbe niente a cui agganciarsi. */
+const { prioritaFoto } = await import(path.join(REPO, 'moduli', 'nucleo.js'));
+
 await new Promise(r => setTimeout(r, 1800));
 
 /* ── quello che le sezioni hanno davvero disegnato ─────────────────── */
@@ -208,6 +212,52 @@ for (const [nome, sel, ds, id, atteso] of prove) {
   const mancano = attesi.filter(x => !h.includes(x));
   if (mancano.length) { console.log(`\n  vetrina corsi      manca: ${mancano.join(', ')}`); errori.push(['vetrina corsi', new Error('manca ' + mancano.join(', '))]); }
   else console.log(`\n  vetrina corsi      ${String(h.length).padStart(6)} caratteri  ✓`);
+}
+
+/* ── i fogli dell'ideathon, premendo davvero ───────────────────────
+   Questo blocco esiste per un errore preciso: avevo cancellato una
+   funzione (`conEnfasi`) insieme a un blocco che stavo togliendo, e
+   nessuna prova se n'era accorta — perché controllavano il **testo**
+   del codice invece di **eseguirlo**. Il foglio di un bando si compone
+   solo quando qualcuno preme, e quel percorso non lo premeva nessuno.
+
+   Da qui in poi si preme: se una funzione manca o solleva un'eccezione,
+   il foglio resta vuoto e la prova fallisce. */
+console.log('\nfogli che si aprono premendo:');
+{
+  const dentro = () => String((creati.get('foglio-dentro') || {}).innerHTML || '');
+  const banner = () => String((creati.get('idea-bando') || {}).innerHTML || '');
+  const quale = h => (/New European Bauhaus|Solidarity Projects|Charlemagne|CASSINI/.exec(h) || [])[0];
+
+  const provaFoglio = async (nome, sel, ds, atteso) => {
+    try {
+      if (creati.has('foglio-dentro')) creati.get('foglio-dentro').innerHTML = '';
+      await clicca(sel, ds);
+      const h = dentro();
+      if (!h) throw new Error('il foglio è rimasto vuoto');
+      const mancano = atteso.filter(x => !h.includes(x));
+      if (mancano.length) throw new Error('manca ' + mancano.join(', '));
+      console.log(`  ${nome.padEnd(26)} ${String(h.length).padStart(6)} caratteri  ✓`);
+    } catch (e) { console.log(`  ${nome.padEnd(26)} ERRORE: ${e.message}`); errori.push([nome, e]); }
+  };
+
+  await provaFoglio('un altro bando', '#p-ideathon [data-apri], #p-ideathon [data-spiega]',
+    { apri: 'cassini-hackathons' }, ['CASSINI', 'data-evidenzia', 'fgb-testo', '<b>']);
+  await provaFoglio('come funziona questo bando', '#p-ideathon [data-apri], #p-ideathon [data-spiega]',
+    { spiega: 'neb-rising-stars' }, ['fgb-testo', '<u>']);
+  await provaFoglio('un progetto premiato', '#p-ideathon [data-vinto]',
+    { vinto: '0' }, ['fgp-testo', 'fgp-tit']);
+
+  /* E il bando in evidenza deve cambiare davvero: è la cosa che
+     l'utente ha visto non funzionare. */
+  try {
+    const prima = quale(banner());
+    await clicca('[data-evidenzia]', { evidenzia: 'charlemagne-youth-prize' });
+    await new Promise(r => setTimeout(r, 120));
+    const dopo = quale(banner());
+    if (dopo === prima || !/Charlemagne/.test(dopo || '')) throw new Error(`il banner e rimasto su ${prima}`);
+    console.log(`  ${'cambio del bando'.padEnd(26)} ${prima} → ${dopo}  ✓`);
+  } catch (e) { console.log(`  ${'cambio del bando'.padEnd(26)} ERRORE: ${e.message}`); errori.push(['cambio del bando', e]); }
 }
 
 /* ── controlli su comportamenti che si rompono in silenzio ─────────── */
@@ -452,6 +502,23 @@ const prove2 = [
             regola.includes('background:none') && regola.includes('border:0');
    },
    'senza azzerare il fondo, un pulsante su fondo scuro esce bianco su grigio'],
+  ['le foto in cima non si fanno aspettare',
+   () => {
+     /* La prima immagine di una sezione si vede appena la si apre:
+        differirla la manda in fondo alla coda del browser, e resta
+        grigia per secondi mentre il file era gia' pronto sul server.
+        Si prova la funzione, non il disegno di un momento: quale bando
+        sia in evidenza quando la prova gira non deve contare. */
+     const p = prioritaFoto;
+     const primaSubito = p(0).includes('fetchpriority="high"') && !p(0).includes('lazy');
+     const vicineSubito = !p(1).includes('lazy') && !p(2).includes('lazy');
+     const lontaneDopo = p(3).includes('loading="lazy"') && p(9).includes('loading="lazy"');
+     /* e le sezioni devono usarla, invece di scrivere lazy a mano */
+     const usata = ['ideathon', 'rivista'].every(s =>
+       fs.readFileSync(path.join(REPO, 'moduli', s + '.js'), 'utf8').includes('prioritaFoto('));
+     return primaSubito && vicineSubito && lontaneDopo && usata;
+   },
+   'la prima foto in schermo va chiesta subito, quelle sotto la piega no'],
   ['la voce Ideathon non sembra selezionata',
    () => {
      const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');
