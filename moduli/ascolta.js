@@ -44,9 +44,9 @@ function renderPodcast(){
       </div>
     </article>
     <div class="pod-lista">
-      ${resto.map(e=>`
+      ${resto.map((e,i)=>`
         <button class="pod-voce" data-pod="${e.id}">
-          <span class="pod-mini video"><img src="${thumb(e.yt)}" alt="" loading="lazy" width="320" height="180" decoding="async"></span>
+          <span class="pod-mini video"><img src="${thumb(e.yt)}" alt="" width="320" height="180" ${prioritaFoto(i+1,4,true)}></span>
           <span class="pod-testi">
             <b>${esc(e.t)}</b>
             <i>${esc(e.s)} \u00b7 ${dataBreve(e.data)}</i>
