@@ -12,7 +12,7 @@
 */
 
 import { CITTA } from '../configurazione.js';
-import { LANG, T, esc, offre, chiedi, ICONE, lenteAperta } from './nucleo.js';
+import { LANG, T, esc, offre, chiedi, ICONE, lenteAperta, prioritaFoto } from './nucleo.js';
 import { mostraTab, scriviHash } from './navigazione.js';
 
 let ARTICOLI = [], artCorrente = null, idCorrente = null;
