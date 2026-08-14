@@ -11,7 +11,7 @@
 */
 
 import { CITTA, TINTE, CONFIG } from '../configurazione.js';
-import { T, esc, elenco, offre, dataBreve, ICONE } from './nucleo.js';
+import { T, esc, elenco, offre, dataBreve, ICONE, prioritaFoto } from './nucleo.js';
 
 let PODCAST = [];
 let podCorrente = null, podTimer = null, podPerc = 0;

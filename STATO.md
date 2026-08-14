@@ -237,7 +237,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 23:36** — file toccato: `moduli/didattica.js`
+Ultimo salvataggio: **14/08/2026 alle 23:36** — file toccato: `moduli/ascolta.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
