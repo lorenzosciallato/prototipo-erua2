@@ -243,7 +243,7 @@ function contaHTML() {
 
   <nav class="idea-filtri" aria-label="${T('Categorie', 'Categories')}">
     <button class="chip" data-cat="" aria-pressed="${!filtroCategoria}">${T('Tutte', 'All')}</button>
-    ${BANDO.categorie.map(c => `
+    ${categorieUsate().map(c => `
       <button class="chip" data-cat="${esc(c.id)}" aria-pressed="${filtroCategoria === c.id}"
         style="--sf:var(${c.tinta});--sc:var(${c.tinta}-s)">${esc(c.nome)}</button>`).join('')}
   </nav>`;
