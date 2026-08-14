@@ -40,7 +40,7 @@ const MISURA_MINI='width="320" height="180" decoding="async"';
 function stCol(materia){const c=ST_COL[materia]||ST_COL.psych;return '--pf:var('+c[0]+');--ps:var('+c[1]+')';}
 
 function stCorsoHTML(c){
-  const dentroCover=c.cover?`<img src="${stThumb(c.cover)}" alt="" loading="lazy">`:`<b>${esc(c.arte||c.code)}</b>`;
+  const dentroCover=c.cover?`<img src="${stThumb(c.cover,true)}" alt="" loading="lazy" decoding="async">`:`<b>${esc(c.arte||c.code)}</b>`;
   const visita=stVisitaDi(c.id);
   const meta=visita
     ?T('Visitato il '+stVisitaData(c.id),'Visited on '+stVisitaData(c.id))
@@ -64,7 +64,7 @@ function stCorsoHTML(c){
 }
 function stDiveHTML(v){
   return `<button class="st-dive st-nasce" data-dive="${v.id}">
-    <span class="q"><img src="${stThumb(v.yt)}" alt="" loading="lazy"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="q"><img src="${stThumb(v.yt)}" alt="" loading="lazy" ${MISURA_MINI}><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
     <span class="testi">
       <span class="kick">${v.kick}</span>
       <span class="tit">${esc(v.tit)}</span>
@@ -169,7 +169,7 @@ function stFacciata(){
   const idThumb=dive?dive.yt:((l&&l.yt)||corso.cover);
   const cap=dive?dive.tit:('L'+(lezIdx+1)+' — '+l.t);
   const arte=`<span class="arte-p"><b>${esc(dive?'ERUA':(corso.arte||corso.code))}</b></span>`;
-  const sfondo=idThumb?`<img src="${stThumb(idThumb)}" alt="">`:arte;
+  const sfondo=idThumb?`<img src="${stThumb(idThumb,true)}" alt="" decoding="async">`:arte;
   p.innerHTML=`${sfondo}
     <button class="stsh-play" id="stsh-go" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></button>
     <div class="velo-t">${esc(cap)}</div>`;
@@ -368,7 +368,7 @@ addEventListener('keydown',e=>{if(e.key!=='Escape')return;const au=document.getE
 
 function stStudHTML(v){
   return `<button class="st-dive st-nasce" data-stud="${v.id}">
-    <span class="q"><img src="${stThumb(v.yt)}" alt="" loading="lazy"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="q"><img src="${stThumb(v.yt)}" alt="" loading="lazy" ${MISURA_MINI}><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
     <span class="testi">
       <span class="kick" style="color:var(--rosa-s)">${v.kick} <i class="st-segna">${T('segnaposto','placeholder')}</i></span>
       <span class="tit">${esc(v.tit)}</span>

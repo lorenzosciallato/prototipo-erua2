@@ -191,7 +191,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 17:24** — file toccato: `moduli/didattica.js`
+Ultimo salvataggio: **14/08/2026 alle 17:25** — file toccato: `moduli/didattica.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -199,7 +199,7 @@ Ultimo salvataggio: **14/08/2026 alle 17:24** — file toccato: `moduli/didattic
 | `configurazione.js` | 300 | 16K |
 | `index.html` | 395 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
-| `moduli/ascolta.js` | 170 | 8.0K |
+| `moduli/ascolta.js` | 173 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 463 | 24K |
 | `moduli/geometrie.js` | 155 | 8.0K |
