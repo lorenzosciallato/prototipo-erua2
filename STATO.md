@@ -254,7 +254,7 @@ Ultimo salvataggio: **14/08/2026 alle 23:32** — file toccato: `moduli/nucleo.j
 | `moduli/loghi-incorporati.js` | 35 | 64K |
 | `moduli/navigazione.js` | 124 | 8.0K |
 | `moduli/notizie.js` | 105 | 8.0K |
-| `moduli/nucleo.js` | 451 | 24K |
+| `moduli/nucleo.js` | 456 | 24K |
 | `moduli/rivista.js` | 294 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |

@@ -213,8 +213,13 @@ export function riusaFoto(contenitore) {
     const src = nuova.getAttribute('src');
     if (!src || src.startsWith('data:')) continue;
 
+    /* `isConnected` non è pignoleria: lo stesso indirizzo può comparire
+       due volte nella stessa pagina. Senza il controllo, la seconda
+       comparsa **sposterebbe** l'elemento già rimesso al posto della
+       prima, lasciando un buco dove prima c'era la fotografia. */
     const tenuta = fotoTenute.get(src);
-    if (tenuta && tenuta.complete && tenuta.naturalWidth && nuova.replaceWith) {
+    if (tenuta && tenuta.complete && tenuta.naturalWidth
+        && !tenuta.isConnected && nuova.replaceWith) {
       for (const att of Array.from(nuova.attributes)) {
         tenuta.setAttribute(att.name, att.value);
       }
