@@ -191,18 +191,18 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **13/08/2026 alle 21:56** — file toccato: `stile/ideathon.css`
+Ultimo salvataggio: **14/08/2026 alle 16:10** — file toccato: `moduli/geometrie.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `configurazione.js` | 300 | 16K |
-| `index.html` | 392 | 28K |
+| `index.html` | 393 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 170 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
 | `moduli/didattica.js` | 454 | 24K |
-| `moduli/ideathon.js` | 237 | 12K |
+| `moduli/ideathon.js` | 287 | 16K |
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/navigazione.js` | 124 | 8.0K |
 | `moduli/notizie.js` | 105 | 8.0K |
@@ -232,6 +232,7 @@ Ultimo salvataggio: **13/08/2026 alle 21:56** — file toccato: `stile/ideathon.
 | `stile/aula.css` | 457 | 32K |
 | `stile/base.css` | 270 | 16K |
 | `stile/didattica.css` | 163 | 12K |
+| `stile/ideathon.css` | 278 | 16K |
 | `stile/notizie.css` | 132 | 12K |
 | `stile/rivista.css` | 100 | 8.0K |
 | `stile/sociale.css` | 560 | 40K |
