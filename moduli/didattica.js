@@ -39,8 +39,13 @@ const stThumb=(id,grande)=>VIDEO.anteprime+'/vi/'+id+(grande?'/hqdefault.jpg':'/
 const MISURA_MINI='width="320" height="180" decoding="async"';
 function stCol(materia){const c=ST_COL[materia]||ST_COL.psych;return '--pf:var('+c[0]+');--ps:var('+c[1]+')';}
 
-function stCorsoHTML(c){
-  const dentroCover=c.cover?`<img src="${stThumb(c.cover,true)}" alt="" loading="lazy" decoding="async">`:`<b>${esc(c.arte||c.code)}</b>`;
+/* Le copertine dei primi corsi si vedono appena si entra in Learn:
+   `loading="lazy"` le manda in fondo alla coda proprio quando servono.
+   Dalla quarta in giù il differimento torna giusto — sono anteprime di
+   YouTube, stanno su un altro server e sono parecchie. */
+function stCorsoHTML(c, i = 0){
+  const quando = i < 3 ? 'decoding="async"' : 'loading="lazy" decoding="async"';
+  const dentroCover=c.cover?`<img src="${stThumb(c.cover,true)}" alt="" ${quando}>`:`<b>${esc(c.arte||c.code)}</b>`;
   const visita=stVisitaDi(c.id);
   const meta=visita
     ?T('Visitato il '+stVisitaData(c.id),'Visited on '+stVisitaData(c.id))
