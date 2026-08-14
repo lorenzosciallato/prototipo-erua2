@@ -273,10 +273,10 @@ document.addEventListener('click', async e => {
   if (st) { (await chiedi('storie')).apri(st.dataset.storia); return; }
 
   const cuore = e.target.closest('.cuore');
-  if (cuore) { const id = cuore.dataset.id; cuori[id] = !cuori[id]; renderFeed(); return; }
+  if (cuore) { const id = cuore.dataset.id; cuori[id] = !cuori[id]; aggiornaCuore(id); return; }
 
   const salva = e.target.closest('.salva');
-  if (salva) { const id = salva.dataset.id; salvati[id] = !salvati[id]; renderFeed(); return; }
+  if (salva) { const id = salva.dataset.id; salvati[id] = !salvati[id]; aggiornaSalvato(id); return; }
 
   const share = e.target.closest('.share');
   if (share) {
