@@ -352,6 +352,22 @@ function ridisegna() {
 
 /* ── comandi ───────────────────────────────────────────────────────── */
 document.addEventListener('click', e => {
+  /* Cambio del bando in evidenza. Si ridisegna solo quello che
+     dipende dal bando — banner, spiegazione, vincitori — e non le
+     squadre: quelle sono le stesse, e rifarle farebbe saltare la
+     pagina sotto le mani di chi sta leggendo. */
+  const nuovo = e.target.closest('#p-ideathon [data-bando]');
+  if (nuovo) {
+    const scelto = BANDI.find(b => b.id === nuovo.dataset.bando);
+    if (!scelto || scelto === BANDO) return;
+    BANDO = scelto;
+    document.getElementById('idea-scelta').innerHTML = selettoreHTML();
+    document.getElementById('idea-bando').innerHTML = bandoHTML();
+    document.getElementById('idea-spiega').innerHTML = spiegazioneHTML();
+    document.getElementById('idea-vincitori').innerHTML = vincitoriHTML();
+    return;
+  }
+
   const cat = e.target.closest('#p-ideathon [data-cat]');
   if (cat) {
     filtroCategoria = cat.dataset.cat || null;
