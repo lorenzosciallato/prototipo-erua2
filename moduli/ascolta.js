@@ -29,7 +29,7 @@ function renderPodcast(){
   box.innerHTML=`
     <article class="pod-hero">
       <button class="pod-cover video" data-pod="${uno.id}" aria-label="Play">
-        <img src="${thumb(uno.yt, true)}" alt="" loading="lazy" decoding="async">
+        <img src="${thumb(uno.yt, true)}" alt="" ${prioritaFoto(0)}>
         <span class="pod-velo" aria-hidden="true"></span>
         <span class="pod-play grande" aria-hidden="true">${ICONE.playPieno}</span>
       </button>

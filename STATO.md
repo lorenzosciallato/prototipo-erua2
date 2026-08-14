@@ -237,7 +237,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 23:35** — file toccato: `moduli/articolo.js`
+Ultimo salvataggio: **14/08/2026 alle 23:35** — file toccato: `moduli/ascolta.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
