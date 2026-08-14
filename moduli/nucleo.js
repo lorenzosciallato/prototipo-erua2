@@ -162,20 +162,67 @@ export function mescola(a) {
 /* ── quando chiedere una fotografia ────────────────────────────────
    `loading="lazy"` serve a non scaricare quello che sta sotto la piega.
    Sulle immagini che si vedono **subito** fa il danno opposto: il
-   browser le tratta come rimandabili e le mette in fondo alla coda. Le
-   fotografie in cima a una sezione restavano grigie per secondi mentre
-   i file — trenta o quaranta kilobyte l'uno — erano già pronti sul
-   server e arrivavano in mezzo secondo.
+   browser le tratta come rimandabili e le mette in fondo alla coda.
 
-   Quindi: le prime che stanno in schermo si chiedono subito, la prima
-   con priorità alta, e il differimento riprende da lì in giù, dove è
-   quello che deve essere.
+   E ne fa uno peggiore dentro una sezione nascosta. I pannelli non
+   attivi stanno a `display:none` (`stile/base.css`): un'immagine lazy
+   là dentro non ha riquadro, quindi non incrocia mai lo schermo, quindi
+   **non viene chiesta affatto**. La richiesta parte solo quando il
+   pannello si mostra — e se il ridisegno la ricrea mentre è ancora
+   nascosta, resta lo spazio bianco finché qualcosa non fa scorrere la
+   pagina.
 
-   @param {number} i        posizione nell'elenco, da zero
-   @param {number} inVista  quante ne sta in schermo senza scorrere */
-export function prioritaFoto(i, inVista = 3) {
+   Per questo il differimento ora si chiede, non si subisce. Le
+   fotografie nostre pesano 228 KB **in tutto**: rimandarle non fa
+   guadagnare niente e costa quel bianco. Le miniature di YouTube sono
+   un altro discorso — stanno su un altro server, sono decine, e lì il
+   differimento serve davvero: quelle passano `differibile`.
+
+   @param {number} i           posizione nell'elenco, da zero
+   @param {number} inVista     quante ne sta in schermo senza scorrere
+   @param {boolean} differibile se quelle sotto la piega vanno rimandate */
+export function prioritaFoto(i, inVista = 3, differibile = false) {
   if (i === 0) return 'fetchpriority="high" decoding="sync"';
-  return i < inVista ? 'decoding="async"' : 'loading="lazy" decoding="async"';
+  if (i < inVista) return 'decoding="async"';
+  return differibile ? 'loading="lazy" decoding="async"' : 'decoding="async"';
+}
+
+/* ── fotografie che sopravvivono al ridisegno ──────────────────────
+   Riscrivere `innerHTML` di un contenitore distrugge ogni `<img>` che
+   c'era dentro e ne crea di nuove: elementi diversi, che ripartono da
+   zero anche quando il file è già in memoria. Un clic su un cuore
+   faceva sparire e ricomparire tutte le fotografie del feed.
+
+   Qui le si tiene da parte per indirizzo. Quando un ridisegno rimette
+   in pagina lo stesso indirizzo, si reinserisce **l'elemento di
+   prima** — già scaricato e già decodificato — invece del segnaposto
+   appena creato. Gli attributi nuovi (proporzioni, priorità) si
+   copiano sopra, così l'impaginazione resta quella che il modulo ha
+   chiesto.
+
+   Non tocca le immagini incorporate nel codice (`data:`): quelle non
+   hanno niente da riscaricare, e come chiavi peserebbero decine di KB. */
+const fotoTenute = new Map();
+
+export function riusaFoto(contenitore) {
+  const box = typeof contenitore === 'string'
+    ? document.getElementById(contenitore) : contenitore;
+  if (!box || typeof box.querySelectorAll !== 'function') return;
+
+  for (const nuova of box.querySelectorAll('img[src]')) {
+    const src = nuova.getAttribute('src');
+    if (!src || src.startsWith('data:')) continue;
+
+    const tenuta = fotoTenute.get(src);
+    if (tenuta && tenuta.complete && tenuta.naturalWidth && nuova.replaceWith) {
+      for (const att of Array.from(nuova.attributes)) {
+        tenuta.setAttribute(att.name, att.value);
+      }
+      nuova.replaceWith(tenuta);
+    } else {
+      fotoTenute.set(src, nuova);
+    }
+  }
 }
 
 /* ── stemma di un ateneo ───────────────────────────────────────────
