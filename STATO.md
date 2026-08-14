@@ -222,13 +222,13 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 18:09** — file toccato: `index.html`
+Ultimo salvataggio: **14/08/2026 alle 18:10** — file toccato: `index.html`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `configurazione.js` | 300 | 16K |
-| `index.html` | 406 | 28K |
+| `index.html` | 408 | 28K |
 | `moduli/articolo.js` | 569 | 24K |
 | `moduli/ascolta.js` | 173 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
