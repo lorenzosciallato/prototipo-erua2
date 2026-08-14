@@ -377,6 +377,17 @@
   <button class="via" id="lente-via" aria-label="Chiudi">✕</button>
   <img id="lente-img" alt="">
 </div>
+<!-- Il foglio: una finestra che si apre sopra la pagina per un contenuto
+     lungo — la scheda di un bando, la storia di un progetto premiato.
+     La lente qui sopra serve alle fotografie e basta; questo serve al
+     testo, e sono due cose diverse abbastanza da non condividere una
+     scatola. Il contenuto lo scrive il modulo che lo apre. -->
+<div class="foglio" id="foglio" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="fg-scatola" role="document">
+    <button class="fg-via" id="foglio-via" aria-label="Chiudi">✕</button>
+    <div class="fg-dentro" id="foglio-dentro"></div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
 <!-- Il traduttore NON si carica da qui: lo carica `moduli/lingua.js`,
