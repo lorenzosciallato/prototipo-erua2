@@ -368,7 +368,7 @@ function corpoArticolo(a){
 
   if(restanti.length){
     out+='<div class="galleria">'+restanti.map(f=>
-      `<img class="scatto-art" src="${f.file}" alt="" loading="lazy"${propor(f)}>`).join('')+'</div>';
+      `<img class="scatto-art" src="${f.file}" alt="" decoding="async"${propor(f)}>`).join('')+'</div>';
   }
   return out;
 }
