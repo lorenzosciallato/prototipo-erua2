@@ -237,7 +237,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 19:22** — file toccato: `moduli/ideathon.js`
+Ultimo salvataggio: **14/08/2026 alle 19:35** — file toccato: `stile/base.css`
 
 | File | Righe | Peso |
 |:--|--:|--:|

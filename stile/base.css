@@ -283,7 +283,7 @@ html[data-tema="scuro"] .scheletro .sk::after{
 .foglio.aperto{display:flex}
 
 .fg-scatola{position:relative;width:100%;max-width:44rem;max-height:92vh;overflow-y:auto;
-  background:var(--carta);border-radius:22px 22px 0 0;
+  background:var(--sup);color:var(--testo);border-radius:22px 22px 0 0;
   padding:1.5rem 1.25rem 2.5rem;box-shadow:0 -8px 40px rgba(0,0,0,.28);
   animation:fg-sale .26s cubic-bezier(.16,1,.3,1)}
 @keyframes fg-sale{from{transform:translateY(22px);opacity:0}to{transform:none;opacity:1}}
