@@ -22,117 +22,174 @@
   --idea-grad-chiaro:linear-gradient(140deg,#A8E6C9 0%,#CFC4F7 54%,#FFC9A8 100%);
 }
 
-/* ── la voce nella navigazione ───────────────────────────────────────
-   Il fondo pieno non andava: una voce piena in mezzo a voci vuote
-   sembra **già selezionata**, e chi guarda non capisce dove si trova.
-   Qui il contorno è il gradiente e il dentro è la pagina — si nota
-   perché è l'unica colorata, non perché è l'unica piena. Quando la
-   selezioni, allora sì che si riempie: e allora vuol dire qualcosa. */
+/* ── la voce che pulsa ───────────────────────────────────────────────
+   Il verde acceso è quello del marchio nell'intestazione (#48F89B): non
+   un colore nuovo, il più vivo che il sito ha già.
+
+   **Come si fa pulsare una cosa senza infastidire.** Tre regole:
+   1. non si muove l'oggetto — se il pulsante cambia dimensione, l'occhio
+      lo insegue e non riesce a leggere il resto della pagina;
+   2. pulsa **un alone dietro**, che nasce dal bordo e si dissolve verso
+      fuori. Nessun contorno duro in movimento;
+   3. il respiro è lento (2,6 s) e la pausa è lunga quanto il battito.
+      Un lampeggio veloce è un allarme; questo è un battito cardiaco.
+
+   E si ferma del tutto per chi ha chiesto meno animazioni. */
 .tab-btn.acceso{
+  position:relative;
   background:linear-gradient(var(--sup),var(--sup)) padding-box,
              var(--idea-grad) border-box;
   border:1.5px solid transparent;
   padding:calc(.4rem - 1.5px) calc(.85rem - 1.5px);
   color:var(--lavanda-s);
 }
-.tab-btn.acceso svg{fill:currentColor;stroke:none}
-.tab-btn.acceso:hover{color:var(--menta-s)}
+.tab-btn.acceso svg{fill:#00C46A;stroke:none}
+
+/* l'alone: un secondo bordo che si allarga e svanisce */
+.tab-btn.acceso::after{
+  content:"";position:absolute;inset:-1.5px;border-radius:99px;
+  border:1.5px solid #48F89B;
+  animation:idea-battito 2.6s cubic-bezier(.4,0,.2,1) infinite;
+  pointer-events:none;
+}
+@keyframes idea-battito{
+  0%   {transform:scale(1);   opacity:.85}
+  38%  {transform:scale(1.22);opacity:0}
+  100% {transform:scale(1.22);opacity:0}
+}
 
 .tab-btn.acceso[aria-selected="true"]{
-  background:var(--idea-grad) border-box;
-  border-color:transparent;
-  color:#fff;
-}
-.tab-btn.acceso[aria-selected="true"] svg{fill:#fff}
+  background:var(--idea-grad) border-box;border-color:transparent;color:#fff}
+.tab-btn.acceso[aria-selected="true"] svg{fill:#48F89B}
+/* selezionata, il battito non serve più: sei già qui */
+.tab-btn.acceso[aria-selected="true"]::after{display:none}
 
 html[data-tema="scuro"] .tab-btn.acceso{
   background:linear-gradient(var(--bg),var(--bg)) padding-box,
-             var(--idea-grad-chiaro) border-box;
-  color:var(--lavanda-s);
-}
+             var(--idea-grad-chiaro) border-box;color:var(--menta-s)}
 html[data-tema="scuro"] .tab-btn.acceso[aria-selected="true"]{
   background:var(--idea-grad-chiaro) border-box;color:#12141A}
 
-/* ── il bando ────────────────────────────────────────────────────────
-   Deve rispondere in tre secondi: quanto si vince, entro quando, posso
-   partecipare io. Fondo scuro perché è l'unico blocco della pagina che
-   deve fermare l'occhio. */
-.idea-bando{background:var(--idea-grad);color:#fff;border-radius:var(--r);
-  padding:2rem 2.1rem 1.6rem;box-shadow:var(--ombra-alta);
-  position:relative;overflow:hidden;margin-bottom:1.8rem}
+@media (prefers-reduced-motion:reduce){
+  .tab-btn.acceso::after{animation:none;opacity:.5}
+}
 
-/* Due veli sopra il gradiente. Il primo lo scurisce dove va il testo,
-   così le lettere restano leggibili su tutte e tre le tinte — un testo
-   bianco su pesca chiaro non si legge. Il secondo è un alone caldo in
-   alto a destra, che dà profondità e toglie l'aria di fondale piatto. */
+/* ── il bando ────────────────────────────────────────────────────────
+   Tre taglie di carattere molto diverse, e non per capriccio: se tutto
+   è della stessa dimensione l'occhio non sa dove posarsi, e non si posa.
+   Qui l'ordine di lettura è imposto dalla tipografia — prima la frase
+   grande, poi la cifra enorme, poi il resto. */
+.idea-bando{background:var(--idea-grad);color:#fff;border-radius:var(--r);
+  padding:2.2rem 2.2rem 1.6rem;box-shadow:var(--ombra-alta);
+  position:relative;overflow:hidden;margin-bottom:2rem}
 .idea-bando::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,rgba(16,14,24,.62) 0%,rgba(16,14,24,.34) 52%,rgba(16,14,24,.16) 100%)}
-.idea-bando::after{content:"";position:absolute;top:-52%;right:-14%;
-  width:30rem;height:30rem;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(255,255,255,.22),transparent 64%)}
+  background:linear-gradient(115deg,rgba(14,12,20,.72) 0%,rgba(14,12,20,.42) 46%,rgba(14,12,20,.2) 100%)}
+.idea-bando::after{content:"";position:absolute;top:-58%;right:-12%;
+  width:32rem;height:32rem;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,255,255,.2),transparent 62%)}
 .idea-bando > *{position:relative;z-index:1}
 
-.ib-testa{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.9rem}
-.ib-ente{font-family:var(--font-mono);font-size:.62rem;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;background:rgba(255,255,255,.14);border-radius:5px;padding:.2rem .5rem}
-.ib-strand{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;
-  color:rgba(255,255,255,.62)}
+.ib-alto{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.ib-ente{font-family:var(--font-mono);font-size:.62rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.8)}
+/* il nome vero del bando: piccolo, ma non può mancare — è quello che si
+   cerca su internet dopo aver letto la frase grande */
+.ib-nome{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;
+  color:rgba(255,255,255,.55);border-left:1px solid rgba(255,255,255,.22);padding-left:.8rem}
+/* il segno che il bando è aperto: un punto che respira, piano */
+.ib-vivo{margin-left:auto;display:flex;align-items:center;gap:.42rem;
+  font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#48F89B;
+  background:rgba(72,248,155,.12);border-radius:99px;padding:.24rem .7rem}
+.ib-vivo i{width:6px;height:6px;border-radius:50%;background:#48F89B;
+  animation:idea-respiro 2.6s ease-in-out infinite}
+@keyframes idea-respiro{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.78)}}
+@media (prefers-reduced-motion:reduce){.ib-vivo i{animation:none}}
 
-.ib-tit{font-family:var(--font-display);font-size:1.85rem;font-weight:600;line-height:1.12;
-  letter-spacing:-.03em;margin:0 0 .55rem;max-width:26ch}
-/* l'occhiello: una riga che dice di cosa si tratta, prima del resto */
-.ib-occhiello{font-family:var(--font-lettura);font-size:1.02rem;line-height:1.55;
-  font-style:italic;color:rgba(255,255,255,.9);margin:0 0 1.3rem;max-width:52ch}
+/* la frase grande: è la promessa, e deve entrare da sola nella testa */
+.ib-tit{font-family:var(--font-display);
+  font-size:clamp(2rem,5.2vw,3.4rem);font-weight:600;line-height:1.03;
+  letter-spacing:-.035em;margin:0 0 1.6rem;max-width:15ch}
 
-/* la spiegazione lunga. In carattere da lettura, non da interfaccia:
-   sono cinque paragrafi che qualcuno deve davvero leggere. */
-.ib-lungo{max-width:64ch;margin-bottom:1.5rem}
-.ib-lungo p{font-family:var(--font-lettura);font-size:.9rem;line-height:1.72;
-  color:rgba(255,255,255,.82);margin:0 0 .85rem}
-.ib-lungo p:last-child{margin-bottom:0}
-.ib-lungo b{font-weight:700;color:#fff}
-/* le condizioni da non sbagliare: sottolineate come farebbe una matita,
-   non con la riga secca del collegamento */
-.ib-lungo u{text-decoration:none;
-  background:linear-gradient(180deg,transparent 62%,rgba(168,230,201,.42) 62%);
-  padding-bottom:.05em}
+.ib-corpo{display:flex;gap:2.6rem;flex-wrap:wrap;align-items:flex-start;
+  padding-bottom:1.5rem;margin-bottom:1.3rem;
+  border-bottom:1px solid rgba(255,255,255,.16)}
 
-/* i tre numeri che contano, in fila */
-.ib-numeri{display:flex;gap:2.2rem;flex-wrap:wrap;
-  padding:1.1rem 0;margin-bottom:1.1rem;
-  border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
-.ib-num{display:flex;flex-direction:column;gap:.15rem}
-.ib-num b{font-family:var(--font-display);font-size:1.5rem;font-weight:600;letter-spacing:-.02em;
-  line-height:1.1}
-.ib-num.grande b{font-size:2.1rem;color:var(--live-pieno)}
-.ib-num span{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.07em;
-  text-transform:uppercase;color:rgba(255,255,255,.55)}
+/* la cifra: enorme, e da sola. È il motivo per cui uno legge il resto */
+.ib-premio{flex:0 0 auto}
+.ib-premio b{display:block;font-family:var(--font-display);
+  font-size:clamp(3rem,8vw,4.6rem);font-weight:600;line-height:.92;
+  letter-spacing:-.045em;color:#48F89B}
+.ib-premio span{display:block;margin-top:.4rem;max-width:11rem;
+  font-family:var(--font-mono);font-size:.58rem;letter-spacing:.07em;
+  text-transform:uppercase;color:rgba(255,255,255,.6)}
 
-.ib-vantaggi{list-style:none;margin:0 0 1.3rem;padding:0;
-  display:flex;flex-wrap:wrap;gap:.45rem}
-.ib-vantaggi li{font-size:.74rem;line-height:1.4;color:rgba(255,255,255,.8);
-  background:rgba(255,255,255,.09);border-radius:99px;padding:.32rem .75rem}
+.ib-lato{flex:1 1 17rem;min-width:14rem}
+.ib-cosa{font-family:var(--font-lettura);font-size:1.02rem;line-height:1.58;
+  color:rgba(255,255,255,.88);margin:0 0 1.1rem;max-width:44ch}
+.ib-due{display:flex;gap:2rem;flex-wrap:wrap}
+.ib-due b{display:block;font-family:var(--font-display);font-size:1.35rem;font-weight:600;
+  letter-spacing:-.02em;line-height:1.1}
+.ib-due span{display:block;font-family:var(--font-mono);font-size:.56rem;letter-spacing:.07em;
+  text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:.15rem}
 
-.ib-piede{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap}
-.ib-vai{background:var(--live-pieno);color:#0B1F14;border-radius:99px;
-  padding:.62rem 1.25rem;font-size:.85rem;font-weight:700;text-decoration:none;white-space:nowrap;
-  transition:transform .15s ease}
-.ib-vai:hover{transform:translateY(-2px)}
-.ib-guida{font-size:.78rem;color:rgba(255,255,255,.72);text-decoration:underline;white-space:nowrap}
+.ib-piede{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.ib-vai{background:#48F89B;color:#07240F;border-radius:99px;
+  padding:.68rem 1.4rem;font-size:.88rem;font-weight:700;text-decoration:none;white-space:nowrap;
+  transition:transform .15s ease,box-shadow .15s ease}
+.ib-vai:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(72,248,155,.34)}
+.ib-guida{font-size:.8rem;color:rgba(255,255,255,.75);text-decoration:underline;white-space:nowrap}
 .ib-guida:hover{color:#fff}
-/* l'avvertenza sulle date: piccola ma sempre presente. Nessuno deve
-   perdere una scadenza per colpa di una nostra pagina. */
-.ib-avviso{font-family:var(--font-mono);font-size:.58rem;line-height:1.5;
-  letter-spacing:.03em;color:rgba(255,255,255,.5);margin-left:auto;max-width:22rem}
+.ib-avviso{font-family:var(--font-mono);font-size:.56rem;line-height:1.5;
+  color:rgba(255,255,255,.45);margin-left:auto;max-width:20rem}
+
+/* ── la striscia dei vincitori dentro al banner ───────────────────────
+   Come le schede della rivista: fotografie in fila che si scorrono col
+   dito. Servono a rendere concreto un premio che altrimenti resta una
+   cifra — «questo ha vinto» spiega più di qualunque descrizione. */
+.ib-vinti-eti{display:block;font-family:var(--font-mono);font-size:.58rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.7rem}
+.ib-striscia{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);
+  gap:.7rem;overflow-x:auto;padding-bottom:.4rem;
+  scroll-snap-type:x proximity;scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.3) transparent}
+.ibv{margin:0;scroll-snap-align:start}
+.ibv-img{display:block;aspect-ratio:3/2;border-radius:12px;overflow:hidden;
+  background:rgba(255,255,255,.08)}
+.ibv-img img,.ibv-img svg{width:100%;height:100%;object-fit:cover;display:block}
+.ibv figcaption{display:block;margin-top:.45rem;line-height:1.3}
+.ibv figcaption b{display:block;font-size:.76rem;font-weight:600;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ibv figcaption i{display:block;font-family:var(--font-mono);font-style:normal;
+  font-size:.55rem;letter-spacing:.05em;color:rgba(255,255,255,.5)}
+
+/* ── la spiegazione, fuori dal banner ───────────────────────────────── */
+.idea-spiega{max-width:62ch;margin:0 0 2.6rem}
+.idea-spiega p{font-family:var(--font-lettura);font-size:1rem;line-height:1.75;
+  color:var(--testo);margin:0 0 1rem}
+.idea-spiega p:first-child{font-size:1.12rem}
+.idea-spiega b{font-weight:700}
+.idea-spiega u{text-decoration:none;
+  background:linear-gradient(180deg,transparent 62%,var(--menta) 62%);padding-bottom:.05em}
 
 /* ── i tre numeri sotto: quante persone si sono già mosse ─────────────
    Servono a togliere la paura di essere il primo. */
-.idea-conta{display:flex;gap:2.4rem;flex-wrap:wrap;margin:0 0 1.2rem;padding:0 .2rem}
-.ic-voce{display:flex;flex-direction:column;gap:.1rem}
-.ic-voce b{font-family:var(--font-display);font-size:1.6rem;font-weight:600;
-  letter-spacing:-.02em;line-height:1;color:var(--testo)}
-.ic-voce span{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--testo2)}
+/* Numeri enormi, parole piccole sotto. Prima erano quasi della stessa
+   taglia e non li vedeva nessuno: un dato che ha lo stesso peso della
+   sua etichetta smette di essere un dato e diventa una riga di testo. */
+.idea-conta{display:flex;gap:clamp(1.6rem,6vw,4rem);flex-wrap:wrap;
+  margin:0 0 1.8rem;padding:1.4rem .2rem 1.5rem;
+  border-top:1px solid var(--bordo);border-bottom:1px solid var(--bordo)}
+.ic-voce{display:flex;flex-direction:column;gap:.25rem}
+.ic-voce b{font-family:var(--font-display);
+  font-size:clamp(2.6rem,7vw,3.6rem);font-weight:600;
+  letter-spacing:-.045em;line-height:.9;color:var(--testo)}
+.ic-voce span{font-family:var(--font-mono);font-size:.62rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--testo2)}
+/* l'ultimo numero è quello su cui si può agire: è gente che aspetta */
+.ic-voce.evidenza b{background:var(--idea-grad);-webkit-background-clip:text;
+  background-clip:text;color:transparent}
+.ic-voce.evidenza span{color:var(--lavanda-s)}
 
 .idea-filtri{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem}
 
@@ -164,6 +221,33 @@ html[data-tema="scuro"] .tab-btn.acceso[aria-selected="true"]{
   text-transform:uppercase;color:var(--menta-s)}
 .iv-sintesi{font-size:.79rem;line-height:1.55;color:var(--testo2);margin:.15rem 0 0}
 
+/* ── le schede dei vincitori, sotto ─────────────────────────────────
+   Grandi, con la copertina in alto: quattro hanno la fotografia vera
+   presa dal sito della Commissione, due hanno un disegno generato. La
+   differenza si vede appena, ed è voluta — un disegno geometrico accanto
+   a una fotografia non stona se il vocabolario è quello del Bauhaus, che
+   è poi il nome del bando. */
+.idea-vincitori{display:grid;gap:1rem;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin-bottom:1rem}
+.iv-scheda{background:var(--sup);border-radius:var(--r);box-shadow:var(--ombra);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:box-shadow .18s ease,transform .18s ease}
+.iv-scheda:hover{box-shadow:var(--ombra-alta);transform:translateY(-3px)}
+.iv-img{position:relative;display:block;aspect-ratio:3/2;overflow:hidden;background:var(--sup2)}
+.iv-img img,.iv-img svg{width:100%;height:100%;object-fit:cover;display:block}
+.iv-anno{position:absolute;top:.6rem;left:.6rem;
+  font-family:var(--font-mono);font-size:.6rem;font-weight:700;letter-spacing:.08em;
+  background:rgba(12,10,16,.66);color:#fff;border-radius:5px;padding:.18rem .45rem;
+  backdrop-filter:blur(3px)}
+.iv-testi{padding:.95rem 1.1rem 1.15rem;display:flex;flex-direction:column;gap:.22rem}
+.iv-cat{font-family:var(--font-mono);font-size:.55rem;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--menta-s)}
+.iv-tit{font-family:var(--font-display);font-size:1.08rem;font-weight:600;line-height:1.22;
+  letter-spacing:-.02em;color:var(--testo)}
+.iv-paese{font-family:var(--font-mono);font-size:.57rem;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--testo2)}
+.iv-sintesi{font-size:.81rem;line-height:1.58;color:var(--testo2);margin:.35rem 0 0}
+
 /* ── intestazioni di sezione ─────────────────────────────────────── */
 .idea-sezione{margin:2.4rem 0 1.1rem}
 .idea-sezione:first-child{margin-top:0}
@@ -184,11 +268,22 @@ html[data-tema="scuro"] .tab-btn.acceso[aria-selected="true"]{
   transition:box-shadow .18s ease,transform .18s ease}
 .idea-squadra:hover{box-shadow:var(--ombra-alta);transform:translateY(-2px)}
 
-.is-capo{display:flex;align-items:center;gap:.6rem}
-.is-cat{font-family:var(--font-mono);font-size:.57rem;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--tinta-s);background:var(--tinta);
-  border-radius:4px;padding:.16rem .45rem;line-height:1.3}
-.is-atenei{margin-left:auto;display:flex;gap:-.4rem}
+/* La copertina della squadra: un disegno geometrico nato dal titolo del
+   progetto. Serve a distinguerle a colpo d'occhio quando saranno venti e
+   non quattro — un elenco di riquadri bianchi non si scorre. Sopra ci
+   stanno la categoria e gli atenei, su una velatura scura perché il
+   disegno sotto può essere di qualunque colore. */
+.is-cop{position:relative;display:block;margin:-1.15rem -1.25rem .2rem;
+  aspect-ratio:2/1;overflow:hidden}
+.is-cop svg{width:100%;height:100%;display:block}
+.is-cop::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(12,10,16,.5) 0%,transparent 42%,transparent 100%)}
+.is-cat{position:absolute;top:.7rem;left:.8rem;z-index:1;max-width:calc(100% - 5.4rem);
+  font-family:var(--font-mono);font-size:.55rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:#fff;background:rgba(12,10,16,.5);
+  border-radius:5px;padding:.2rem .5rem;line-height:1.35;
+  backdrop-filter:blur(4px)}
+.is-atenei{position:absolute;top:.7rem;right:.8rem;z-index:1;display:flex}
 .is-logo{width:22px;height:22px;border-radius:50%;overflow:hidden;display:block;
   background:var(--sup2);margin-left:-.35rem;border:2px solid var(--sup)}
 .is-logo img{width:100%;height:100%;object-fit:cover;display:block}

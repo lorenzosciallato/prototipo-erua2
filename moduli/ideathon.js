@@ -29,6 +29,7 @@
 
 import { CITTA } from '../configurazione.js';
 import { T, esc, dati, offre, dataBreve, faccia, stemma } from './nucleo.js';
+import { copertina, QUANTE_TAVOLOZZE } from './geometrie.js';
 
 let BANDO = null, CONTA = null, SQUADRE = [], SOLI = [], NOTA = null;
 let filtroCategoria = null;
@@ -52,81 +53,102 @@ function conEnfasi(testo) {
     .replace(/__(.+?)__/g, '<u>$1</u>');
 }
 
-/* ── il bando, in cima ─────────────────────────────────────────────
-   Deve rispondere in tre secondi a: quanto si vince, entro quando, e
-   posso partecipare io. Tutto il resto viene dopo. */
+/* ── il bando ──────────────────────────────────────────────────────
+   Un blocco solo, che in due secondi deve dire: **quanto si vince**, che
+   è aperto, e che riguarda te. Tre informazioni, tre dimensioni di
+   carattere molto diverse — se sono tutte della stessa taglia, l'occhio
+   non sa dove posarsi e non si posa da nessuna parte.
+
+   La spiegazione lunga sta fuori di qui, sotto: dentro un banner
+   nessuno legge cinque paragrafi, e metterceli li rende invisibili
+   tutti e cinque. */
 function bandoHTML() {
   const b = BANDO;
   const giorni = Math.round((new Date(b.scadenza + 'T12:00:00Z') - Date.now()) / 86400000);
 
   return `<article class="idea-bando">
-    <div class="ib-testa">
+    <div class="ib-alto">
       <span class="ib-ente">${esc(b.ente)}</span>
-      <span class="ib-strand">${esc(b.sottotitolo)}</span>
+      <span class="ib-nome">${esc(b.titolo)}</span>
+      <span class="ib-vivo"><i></i>${T('Bando aperto', 'Call open')}</span>
     </div>
 
-    <h2 class="ib-tit">${esc(b.titolo)}</h2>
-    <p class="ib-occhiello">${esc(b.descrizione)}</p>
+    <h2 class="ib-tit">${esc(b.occhiello)}</h2>
 
-    <div class="ib-lungo">
-      ${(b.descrizioneLunga || []).map(p => `<p>${conEnfasi(p)}</p>`).join('')}
-    </div>
-
-    <div class="ib-numeri">
-      <div class="ib-num grande">
+    <div class="ib-corpo">
+      <div class="ib-premio">
         <b>${esc(b.premio)}</b>
-        <span>${esc(b.premioNota)}</span>
+        <span>${T('a chi vince, per categoria', 'to each winning entry')}</span>
       </div>
-      <div class="ib-num">
-        <b>${dataBreve(b.scadenza)}</b>
-        <span>${giorni > 0
-          ? T(`fra ${giorni} giorni`, `in ${giorni} days`)
-          : T('edizione chiusa', 'edition closed')}</span>
-      </div>
-      <div class="ib-num">
-        <b>≤ 30</b>
-        <span>${T('anni, tutti gli autori', 'years old, every author')}</span>
+      <div class="ib-lato">
+        <p class="ib-cosa">${esc(b.descrizione)}</p>
+        <div class="ib-due">
+          <div><b>${dataBreve(b.scadenza)}</b><span>${giorni > 0
+            ? T(`fra ${giorni} giorni`, `${giorni} days left`)
+            : T('edizione chiusa', 'edition closed')}</span></div>
+          <div><b>≤ 30</b><span>${T('anni, ogni autore', 'years old, every author')}</span></div>
+        </div>
       </div>
     </div>
-
-    <ul class="ib-vantaggi">
-      ${(b.vantaggi || []).map(v => `<li>${esc(v)}</li>`).join('')}
-    </ul>
 
     <div class="ib-piede">
       <a class="ib-vai" href="${esc(b.sito)}" target="_blank" rel="noopener">
-        ${T('Bando ufficiale', 'Official call')} →</a>
+        ${T('Vai al bando', 'Open the call')} →</a>
       <a class="ib-guida" href="${esc(b.sitoStrand)}" target="_blank" rel="noopener">
         ${T('Regole dello Strand B', 'Strand B rules')}</a>
       <span class="ib-avviso">${esc(b.scadenzaNota)}</span>
     </div>
+
+    <div class="ib-vinti">
+      <span class="ib-vinti-eti">${T('Hanno vinto con questo bando', 'These won this prize')}</span>
+      <div class="ib-striscia">
+        ${(b.vincitori || []).map((v, i) => `
+          <figure class="ibv" ${v.foto ? '' : 'data-disegno="1"'}>
+            <span class="ibv-img">${v.foto
+              ? `<img src="${esc(v.foto)}" alt="" loading="lazy">`
+              : copertina(v.titolo, { larghezza: 480, altezza: 320, tavolozza: i })}</span>
+            <figcaption>
+              <b>${esc(v.titolo)}</b>
+              <i>${esc(v.paese)} · ${esc(v.anno)}</i>
+            </figcaption>
+          </figure>`).join('')}
+      </div>
+    </div>
   </article>`;
 }
 
-/* ── chi ha vinto negli anni scorsi ────────────────────────────────
-   Sono progetti veri, premiati davvero. Stanno qui perché la domanda
-   che si fa chiunque legga un bando è «ma che cosa vince, di preciso?»,
-   e cinque esempi rispondono meglio di qualunque descrizione. Servono
-   anche a togliere soggezione: nessuno di questi era un'opera d'ingegno
-   irraggiungibile, erano idee chiare. */
+/* ── la spiegazione, e le idee che hanno vinto ─────────────────────
+   Il testo lungo sta qui e non nel banner: in un banner nessuno legge
+   tre paragrafi. Qui invece sì, perché chi è arrivato fin giù vuole
+   sapere come funziona. */
+function spiegazioneHTML() {
+  return `<div class="idea-spiega">
+      ${(BANDO.descrizioneLunga || []).map(p => `<p>${conEnfasi(p)}</p>`).join('')}
+    </div>`;
+}
+
 function vincitoriHTML() {
   const v = BANDO.vincitori || [];
   if (!v.length) return '';
   return `<div class="idea-sezione">
-      <h2 class="idea-titolo">${T('Idee che hanno vinto', 'Ideas that won')}</h2>
-      <p class="idea-sotto">${T('Progetti veri, premiati nelle edizioni precedenti dello stesso bando.',
-                                'Real projects, awarded in previous editions of this same prize.')}</p>
+      <h2 class="idea-titolo">${T('Cosa vince, di preciso', 'What actually wins')}</h2>
+      <p class="idea-sotto">${T('Progetti veri, premiati nelle edizioni precedenti. Nessuno era irraggiungibile: erano idee chiare.',
+                                'Real projects, awarded in previous editions. None of them was out of reach — they were clear ideas.')}</p>
     </div>
     <div class="idea-vincitori">
-      ${v.map(x => `
+      ${v.map((x, i) => `
         <article class="iv-scheda">
-          <header>
+          <span class="iv-img">${x.foto
+            ? `<img src="${esc(x.foto)}" alt="" loading="lazy">`
+            : copertina(x.titolo, { larghezza: 600, altezza: 400, tavolozza: i })}
             <span class="iv-anno">${esc(x.anno)}</span>
+          </span>
+          <div class="iv-testi">
+            <span class="iv-cat">${esc(x.categoria)}</span>
+            <b class="iv-tit">${esc(x.titolo)}</b>
             <span class="iv-paese">${esc(x.paese)}</span>
-          </header>
-          <b class="iv-tit">${esc(x.titolo)}</b>
-          <span class="iv-cat">${esc(x.categoria)}</span>
-          <p class="iv-sintesi">${esc(x.sintesi)}</p>
+            <p class="iv-sintesi">${esc(x.sintesi)}</p>
+          </div>
         </article>`).join('')}
     </div>`;
 }
@@ -136,10 +158,13 @@ function vincitoriHTML() {
    una persona guarda prima di decidere se vale la pena. */
 function contaHTML() {
   const c = CONTA;
+  /* Numeri enormi, parole piccole. Erano l'opposto e non li vedeva
+     nessuno: un numero in corpo 1,6 con l'etichetta della stessa taglia
+     è una riga di testo, non un dato. Qui il numero è il messaggio. */
   return `<div class="idea-conta">
-    <div class="ic-voce"><b>${c.rispostoAllaCall}</b><span>${T('hanno risposto alla call', 'answered the call')}</span></div>
-    <div class="ic-voce"><b>${c.squadreFormate}</b><span>${T('squadre già formate', 'teams already formed')}</span></div>
-    <div class="ic-voce"><b>${c.ancoraSoli}</b><span>${T('cercano ancora un gruppo', 'still looking for a team')}</span></div>
+    <div class="ic-voce"><b>${c.rispostoAllaCall}</b><span>${T('hanno risposto', 'answered the call')}</span></div>
+    <div class="ic-voce"><b>${c.squadreFormate}</b><span>${T('squadre formate', 'teams formed')}</span></div>
+    <div class="ic-voce evidenza"><b>${c.ancoraSoli}</b><span>${T('cercano un gruppo', 'looking for a team')}</span></div>
   </div>
 
   <nav class="idea-filtri" aria-label="${T('Categorie', 'Categories')}">
@@ -151,15 +176,19 @@ function contaHTML() {
 }
 
 /* ── le squadre già formate ────────────────────────────────────────── */
-function squadraHTML(s) {
+function squadraHTML(s, indice) {
   const cat = categoriaDi(s.categoria);
   const atenei = [...new Set(s.membri.map(m => m.uni))];
 
+  /* Ogni squadra ha una copertina geometrica sua, nata dal titolo del
+     progetto: sempre uguale per lo stesso progetto, diversa da tutte le
+     altre. Serve a distinguerle a colpo d'occhio quando saranno venti e
+     non quattro — un elenco di riquadri bianchi non si scorre. */
   return `<article class="idea-squadra" style="--tinta:var(${cat.tinta});--tinta-s:var(${cat.tinta}-s)">
-    <header class="is-capo">
+    <span class="is-cop">${copertina(s.progetto, { larghezza: 600, altezza: 300, tavolozza: indice })}
       <span class="is-cat">${esc(cat.nome)}</span>
       <span class="is-atenei">${atenei.map(u => stemma(u, 'is-logo')).join('')}</span>
-    </header>
+    </span>
 
     <h3 class="is-tit">${esc(s.progetto)}</h3>
     <p class="is-sintesi">${esc(s.sintesi)}</p>
@@ -193,7 +222,7 @@ function squadreHTML() {
                                 'Each of them still has room. Joining one is easier than starting from nothing.')}</p>
     </div>
     <div class="idea-griglia">${
-      lista.map(squadraHTML).join('') ||
+      lista.map((s, i) => squadraHTML(s, i)).join('') ||
       `<p class="idea-vuoto">${T('Nessuna squadra in questa categoria — sii il primo.',
                                  'No team in this category yet — be the first.')}</p>`}</div>`;
 }
@@ -238,6 +267,7 @@ function soliHTML() {
 
 function ridisegna() {
   document.getElementById('idea-bando').innerHTML = bandoHTML();
+  document.getElementById('idea-spiega').innerHTML = spiegazioneHTML();
   document.getElementById('idea-vincitori').innerHTML = vincitoriHTML();
   document.getElementById('idea-conta').innerHTML = contaHTML();
   document.getElementById('idea-squadre').innerHTML = squadreHTML();

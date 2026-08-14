@@ -133,11 +133,11 @@ const attese = [
   ['mag-ascolta',  'ascolta',   ['ERUA Podcast', 'pod-hero', 'i.ytimg.com']],
   ['st-gruppi',    'didattica', ['st-griglia', 'data-slot']],
   ['st-chips',     'didattica', ['data-f=']],
-  ['idea-bando',   'ideathon', ['New European Bauhaus', 'European Commission', 'ib-numeri']],
-  ['idea-squadre', 'ideathon', ['idea-squadra', 'is-tit', 'is-liberi']],
+  ['idea-bando',   'ideathon', ['New European Bauhaus', 'European Commission', 'ib-premio', 'ib-striscia']],
+  ['idea-squadre', 'ideathon', ['idea-squadra', 'is-tit', 'is-liberi', 'is-cop', '<svg']],
   ['idea-soli',    'ideathon', ['idea-solo', 'isl-interessi']],
   ['idea-conta',   'ideathon', ['data-cat']],
-  ['idea-vincitori','ideathon', ['iv-scheda', 'Pollino', 'Hydroscape']],
+  ['idea-vincitori','ideathon', ['iv-scheda', 'Urban MYCOskin', 'Pollino', 'immagini/ideathon/']],
 ];
 console.log('\ncontenuto prodotto:');
 for (const [id, sezione, frammenti] of attese) {
@@ -258,6 +258,31 @@ const prove2 = [
      return /INVENTAT/i.test(d.note) && js.includes("idea-nota");
    },
    'squadre e studenti sono finti: va scritto nella pagina, non solo nei dati'],
+  ['la voce Ideathon pulsa, ma con garbo',
+   () => {
+     const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');
+     /* l'alone deve pulsare dietro, non l'oggetto: se si muovesse il
+        pulsante, l'occhio lo inseguirebbe e non leggerebbe la pagina.
+        E deve fermarsi per chi ha chiesto meno animazioni. */
+     return css.includes('.tab-btn.acceso::after') &&
+            css.includes('@keyframes idea-battito') &&
+            /prefers-reduced-motion[\s\S]{0,200}tab-btn\.acceso::after\{animation:none/.test(css);
+   },
+   'deve pulsare un alone dietro, non il pulsante, e fermarsi su richiesta'],
+  ['le copertine si generano dal titolo',
+   () => {
+     const js = fs.readFileSync(path.join(REPO, 'moduli/ideathon.js'), 'utf8');
+     return js.includes("from './geometrie.js'") && js.includes('copertina(s.progetto');
+   },
+   'ogni squadra deve avere il suo disegno, sempre uguale per lo stesso progetto'],
+  ['i vincitori hanno foto vere',
+   () => {
+     const d = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/ideathon.json'), 'utf8'));
+     const conFoto = d.bando.vincitori.filter(v => v.foto);
+     return conFoto.length >= 4 && conFoto.every(v =>
+       fs.existsSync(path.join(REPO, v.foto)));
+   },
+   'le fotografie dei vincitori devono esistere davvero sul disco'],
   ['la voce Ideathon non sembra selezionata',
    () => {
      const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');

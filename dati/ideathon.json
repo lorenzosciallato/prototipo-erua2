@@ -2,12 +2,12 @@
  "versione": 1,
  "aggiornato": null,
  "fonte": "New European Bauhaus Prizes — European Commission",
- "note": "Il bando è reale: New European Bauhaus Prizes, Strand B «Rising Stars», Commissione europea. Categorie, premi, vincitori degli anni scorsi e sito ufficiale sono quelli veri. Le date sono quelle dell'edizione precedente e vanno verificate sul sito ufficiale prima di candidarsi. Squadre e studenti qui sopra sono INVENTATI per mostrare come funzionerebbe la sezione: nessuna di queste persone esiste.",
+ "note": "Il bando e le fotografie dei progetti vincitori sono reali e vengono dal sito della Commissione europea. Le date sono quelle dell'edizione precedente e vanno verificate sul sito ufficiale prima di candidarsi. Le squadre e gli studenti in cerca di gruppo sono INVENTATI, per mostrare come funzionerebbe la sezione: nessuna di quelle persone esiste. Le loro copertine sono disegni generati dal codice, non fotografie.",
  "bando": {
   "titolo": "New European Bauhaus Prizes — Rising Stars",
   "ente": "European Commission",
   "sottotitolo": "Strand B — for talents aged 30 or under",
-  "descrizione": "Ideas that make Europe more beautiful, sustainable and inclusive. Concepts can be at any stage, from a clear plan to a working prototype. Applications are submitted in English.",
+  "descrizione": "The European Commission's prize for people who make the green transition beautiful, not only efficient. Strand B is reserved for authors aged 30 or under.",
   "premio": "€15,000",
   "premioNota": "per each winning category · €5,000 for runners-up",
   "scadenza": "2027-03-22",
@@ -42,49 +42,61 @@
    }
   ],
   "descrizioneLunga": [
-   "The New European Bauhaus is the European Commission's attempt to make the green transition **something people actually want to live in** — not only efficient, but beautiful and shared. The Prizes reward the projects that show what that means in practice.",
-   "**Strand B is reserved for you.** Every listed author must be __30 years old or younger__ on the closing day. You are not competing against architecture firms or city councils: you compete against other young people with an idea.",
-   "An entry does not have to be a finished thing. Concepts are accepted __at any stage of development__ — from a clear plan on paper to a working prototype. What the jury looks for is whether the idea is **sustainable, beautiful and inclusive at the same time**: two out of three is not enough, and that is the hardest part.",
-   "Applications are submitted **in English**, on the official platform. Winning brings €15,000, but also a communication package from the Commission, a coaching and mentoring programme, and a __public vote across Europe__ that puts the project in front of thousands of people.",
-   "One practical note for this alliance: the ERUA rule that a team must span **at least two universities** is not required here — but a cross-border team is exactly what tends to win, because the New European Bauhaus is about places, and Europe has many of them."
+   "**Strand B is reserved for you.** Every listed author must be __30 years old or younger__ on the closing day. You are not competing against architecture firms or city councils - you compete against other young people with an idea.",
+   "An entry does not have to be finished. Concepts are accepted __at any stage__, from a plan on paper to a working prototype. What the jury looks for is whether the idea is **sustainable, beautiful and inclusive at once** - two out of three is not enough, and that is the hard part.",
+   "Winning brings EUR 15,000, a communication package from the Commission, a mentoring programme, and a __public vote across Europe__ that puts the project in front of thousands of people."
   ],
   "vincitori": [
+   {
+    "anno": "2024",
+    "titolo": "Urban MYCOskin",
+    "paese": "Portugal",
+    "categoria": "Rising Stars winner",
+    "foto": "immagini/ideathon/urban-mycoskin.png",
+    "sintesi": "Mushroom roots turned into a building material. Agricultural and textile waste becomes a mycelium skin for urban structures in Lisbon."
+   },
+   {
+    "anno": "2024",
+    "titolo": "Faget Forest Park",
+    "paese": "Romania",
+    "categoria": "Reconnecting with nature",
+    "foto": "immagini/ideathon/faget-forest-park.jpg",
+    "sintesi": "Cluj's green lung: a large forest park managed so that people can use it and the forest survives being used."
+   },
+   {
+    "anno": "2024",
+    "titolo": "Map4Water",
+    "paese": "Bosnia and Herzegovina",
+    "categoria": "Public vote winner",
+    "foto": "immagini/ideathon/map4water.jpg",
+    "sintesi": "One thousand fountains, mapped. Sarajevo's public water points found, documented and brought back into use with the people who drink from them."
+   },
+   {
+    "anno": "2024",
+    "titolo": "Yes We Camp",
+    "paese": "France",
+    "categoria": "Runner-up",
+    "foto": "immagini/ideathon/yes-we-camp.jpg",
+    "sintesi": "Empty spaces opened for free: community kitchens, family areas, greening, run with the people who need them most."
+   },
    {
     "anno": "2025",
     "titolo": "Pollino",
     "paese": "Hungary",
     "categoria": "Reconnecting with nature",
-    "sintesi": "Turns ordinary urban signage into habitats for pollinators — the same poles and panels a city already owns, redesigned to host insects."
+    "foto": null,
+    "sintesi": "Ordinary street signage redesigned to host pollinators - the poles and panels a city already owns, turned into habitat."
    },
    {
     "anno": "2025",
     "titolo": "Kopli Community Courtyard",
     "paese": "Estonia",
     "categoria": "Local democracy",
-    "sintesi": "Students and residents co-designed a shared courtyard, built out of recycled construction material from the neighbourhood itself."
-   },
-   {
-    "anno": "2024",
-    "titolo": "The Regenerative Agriculture Hub",
-    "paese": "Spain",
-    "categoria": "Public vote winner",
-    "sintesi": "Farming practices that rebuild soil and biodiversity instead of depleting them, gathered into one place people can learn from."
-   },
-   {
-    "anno": "2024",
-    "titolo": "Cultivating Companionship",
-    "paese": "Germany",
-    "categoria": "Reconnecting with nature",
-    "sintesi": "A research residency held inside a cornfield, putting architects and farmers in the same place to think about design that centres life."
-   },
-   {
-    "anno": "2024",
-    "titolo": "Hydroscape Lisbon",
-    "paese": "Portugal",
-    "categoria": "Runner-up",
-    "sintesi": "Water read as public space: how a city can use it for climate resilience and as somewhere people gather, at the same time."
+    "foto": null,
+    "sintesi": "Students and residents designed a shared courtyard together, built from construction material recovered in the neighbourhood."
    }
-  ]
+  ],
+  "occhiello": "Turn an idea into something Europe pays for."
  },
  "conta": {
   "rispostoAllaCall": 53,
