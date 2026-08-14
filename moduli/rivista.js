@@ -327,5 +327,6 @@ offre('rivista', {
   ordine: () => ORDINE,
   filtrati,
   salvati,
+  aggiornaSalvato,
   ridisegna: () => { if (avviata) renderFeed(); },
 });
