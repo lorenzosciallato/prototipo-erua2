@@ -143,7 +143,9 @@ function bandoHTML() {
     </div>
 
     <div class="ib-vinti">
-      <span class="ib-vinti-eti">${T('Hanno vinto con questo bando', 'These won this prize')}</span>
+      <span class="ib-vinti-eti">${b.vincitoriReali
+        ? T('Hanno vinto con questo bando', 'These won this call')
+        : T('Il genere di progetto che vince', 'The kind of project that wins')}</span>
       <div class="ib-striscia">
         ${(b.vincitori || []).map((v, i) => `
           <figure class="ibv" ${v.foto ? '' : 'data-disegno="1"'}>
