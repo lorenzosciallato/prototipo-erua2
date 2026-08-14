@@ -237,7 +237,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 19:38** — file toccato: `stile/ideathon.css`
+Ultimo salvataggio: **14/08/2026 alle 19:38** — file toccato: `stile/base.css`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -280,7 +280,7 @@ Ultimo salvataggio: **14/08/2026 alle 19:38** — file toccato: `stile/ideathon.
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
 | `stile/aula.css` | 457 | 32K |
-| `stile/base.css` | 306 | 20K |
+| `stile/base.css` | 311 | 20K |
 | `stile/didattica.css` | 163 | 12K |
 | `stile/ideathon.css` | 522 | 32K |
 | `stile/notizie.css` | 132 | 12K |

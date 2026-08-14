@@ -80,7 +80,12 @@ body{
 /* quando il lettore podcast e` agganciato in basso, il contenuto gli lascia spazio */
 body.pod-aperta{padding-bottom:9rem}
 ::selection{background:var(--testo);color:var(--sup)}
-button{font:inherit;cursor:pointer;color:inherit}
+/* Il pulsante parte nudo. `color:inherit` da solo era una trappola: il
+   pulsante prendeva il colore del testo intorno — bianco, dentro il
+   banner scuro — e teneva il fondo grigio di serie del browser, cioè
+   bianco su grigio. Ogni pulsante del sito si dipinge da sé, quindi il
+   fondo di serie non serve mai e nasconde solo gli errori. */
+button{font:inherit;cursor:pointer;color:inherit;background:none;border:0}
 input,select,textarea{font:inherit;color:var(--testo)}
 .display{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em}
 
