@@ -303,7 +303,7 @@ function corpoArticolo(a){
   const tonda = a.id==='editoriale';
   const mosaicoHTML = galleria ? `<div class="mosaico${tonda?' tonda':''}" style="--cols:${
       tonda ? Math.min(4,galleria.length) : colonneMosaico(galleria.length)}">`+
-      galleria.map(f=>`<img class="scatto-art" src="${f.file}" alt="" loading="lazy">`).join('')+`</div>` : '';
+      galleria.map((f,i)=>`<img class="scatto-art" src="${f.file}" alt="" ${prioritaFoto(i,4)}>`).join('')+`</div>` : '';
   let out = mosaicoHTML + indiceHTML(a,pezzi);
 
   capitoli.forEach((cap,ci)=>{
