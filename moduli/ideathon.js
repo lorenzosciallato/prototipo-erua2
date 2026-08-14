@@ -129,7 +129,7 @@ function bandoHTML() {
           <div><b>${dataBreve(b.scadenza)}</b><span>${giorni > 0
             ? T(`fra ${giorni} giorni`, `${giorni} days left`)
             : T('edizione chiusa', 'edition closed')}</span></div>
-          <div><b>≤ 30</b><span>${T('anni, ogni autore', 'years old, every author')}</span></div>
+          <div><b>${esc(b.eta)}</b><span>${esc(b.etaNota)}</span></div>
         </div>
       </div>
     </div>
