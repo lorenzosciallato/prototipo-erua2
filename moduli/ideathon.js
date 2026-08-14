@@ -69,6 +69,23 @@ function giorniA(scadenza) {
   return Math.round((new Date(scadenza + 'T12:00:00Z') - Date.now()) / 86400000);
 }
 
+/* ── enfasi nel testo del bando ────────────────────────────────────
+   Il testo lo scriviamo noi, ma passa comunque da `esc()` per primo:
+   la regola P3 non ha eccezioni per i contenuti «di casa», perché è
+   proprio l'eccezione che un giorno lascia passare qualcos'altro.
+   Solo dopo, su testo già innocuo, si riconoscono due segni:
+
+       **grassetto**      le parole che portano il senso
+       __sottolineato__   le condizioni da non sbagliare
+
+   Due e non di più: un linguaggio di marcatura completo dentro un file
+   di dati diventa un buco per cui nessuno si sente responsabile. */
+function conEnfasi(testo) {
+  return esc(testo)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/__(.+?)__/g, '<u>$1</u>');
+}
+
 /* ── il bando ──────────────────────────────────────────────────────
    Un blocco solo, che in due secondi deve dire: **quanto si vince**, che
    è aperto, e che riguarda te. Tre informazioni, tre dimensioni di
