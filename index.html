@@ -13,6 +13,24 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Prima che il browser chieda la prima fotografia deve arrivare in
+     fondo a una fila: questo file, poi `avvio.js` (che è un modulo, e i
+     moduli partono differiti), poi gli import del nucleo e della
+     navigazione, poi l'import dinamico della rivista, poi il file dei
+     dati — e solo allora esistono gli `<img>` da chiedere. Quando le
+     fotografie stavano dentro la pagina in base64 (813 KB, fino al
+     10/08) questa fila non c'era: erano già qui.
+
+     Non si può togliere la fila senza tornare al file unico, ma si
+     possono chiedere in anticipo i moduli che la compongono, invece di
+     scoprirli uno dopo l'altro. Solo quelli della prima schermata: gli
+     altri devono restare su richiesta (riferimento.md §2.4). -->
+<link rel="modulepreload" href="avvio.js">
+<link rel="modulepreload" href="moduli/nucleo.js">
+<link rel="modulepreload" href="moduli/navigazione.js">
+<link rel="modulepreload" href="moduli/lingua.js">
+<link rel="modulepreload" href="moduli/rivista.js">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 
 <!-- L'ordine di questi fogli è quello del file originale e non va
