@@ -179,6 +179,43 @@ function renderFeed(){
           'Nothing saved yet. Tap the bookmark on any story to keep it for later.')
       : T('Nessun articolo di questo ateneo in questo numero.',
           'No articles from this university in this issue.')}</div>`;
+  /* Le fotografie che c'erano già tornano al loro posto come elementi,
+     non come richieste nuove: vedi `riusaFoto` in `nucleo.js`. */
+  riusaFoto('feed-griglia');
+}
+
+/* ── ritocchi che non meritano un ridisegno ────────────────────────
+   Cuore e segnalibro cambiano un pulsante e un numero. Rifare tutto il
+   feed per quello voleva dire buttare via e ricreare ogni `<img>` della
+   pagina: le fotografie sparivano e tornavano a ogni clic. Qui si tocca
+   soltanto quello che cambia davvero. */
+function pulsantiPerArticolo(classe, id) {
+  const box = document.getElementById('feed-griglia');
+  if (!box || typeof box.querySelectorAll !== 'function') return [];
+  return Array.from(box.querySelectorAll('.' + classe))
+    .filter(b => b.dataset && b.dataset.id === id);
+}
+
+function aggiornaCuore(id) {
+  const a = ARTICOLI.find(x => x.id === id);
+  for (const b of pulsantiPerArticolo('cuore', id)) {
+    b.classList.toggle('on', !!cuori[id]);
+    const conta = b.parentElement && b.parentElement.querySelector('.f-conta');
+    if (conta && a) conta.textContent = a.voti + (cuori[id] ? 1 : 0);
+  }
+}
+
+/* Il segnalibro si accende anche dalla pagina di lettura, quindi questa
+   la offriamo fuori. Un caso solo obbliga al ridisegno: se stiamo
+   guardando i salvati e ne togliamo uno, quella scheda deve sparire —
+   e con lei il ritmo delle citazioni, che si conta sulle schede rimaste. */
+function aggiornaSalvato(id) {
+  if (!avviata) return;
+  if (soloSalvati && !salvati[id]) { renderFeed(); return; }
+  for (const b of pulsantiPerArticolo('salva', id)) {
+    b.classList.toggle('on', !!salvati[id]);
+  }
+  renderBarraFeed();
 }
 
 /* ── dai file dei numeri alla forma che il feed usa ────────────────
