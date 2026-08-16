@@ -16,7 +16,7 @@
 */
 
 import { ATENEI, CITTA, CONFIG } from '../configurazione.js';
-import { LANG, T, esc, dati, offre, chiedi, toast, stemma, filaAtenei, dataBreve } from './nucleo.js';
+import { LANG, T, esc, dati, offre, chiedi, toast, stemma, filaAtenei, dataBreve, foglio } from './nucleo.js';
 
 const VIDEO = CONFIG.serviziEsterni.video;
 
