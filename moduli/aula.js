@@ -778,8 +778,19 @@ function auStampa(titolo,dentroHTML){
      L'indirizzo va scritto per intero: questa finestra nasce vuota, e un
      percorso relativo non avrebbe niente a cui appoggiarsi. */
   const foglioCaratteri = new URL('stile/caratteri.css', location.href).href;
-  d.write('<html><head><title>'+esc(titolo)+' — ERUA connect</title><link rel="stylesheet" href="'+foglioCaratteri+'"></head><body style="margin:0;background:#fff">'+h+'<scr'+'ipt>onload=()=>setTimeout(()=>print(),450)</scr'+'ipt></body></html>');
-  d.close();setTimeout(()=>{try{document.body.removeChild(fr);}catch(e){}},15000);
+  d.write('<html><head><title>'+esc(titolo)+' — ERUA connect</title><link rel="stylesheet" href="'+foglioCaratteri+'"></head><body style="margin:0;background:#fff">'+h+'</body></html>');
+  d.close();
+
+  /* La stampa la comanda chi ha aperto la finestra, non un `<script>`
+     scritto dentro di essa. Era l'unico pezzo di codice in linea rimasto
+     in tutto il progetto, e §3.8 dice che una CSP vale davvero solo se
+     non ce n'e' nessuno: con `script-src 'self'` quel blocco non sarebbe
+     partito, e la stampa avrebbe smesso di funzionare senza dire perche'.
+
+     L'attesa serve lo stesso: i caratteri e le immagini devono essere
+     arrivati, o si stampa una pagina a meta'. */
+  setTimeout(()=>{try{fr.contentWindow.print();}catch(e){/* stampa negata */}},450);
+  setTimeout(()=>{try{document.body.removeChild(fr);}catch(e){}},15000);
 }
 auEl('bd-stampa').addEventListener('click',()=>{
   auSerializza();
