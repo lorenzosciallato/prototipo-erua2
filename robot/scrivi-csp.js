@@ -44,26 +44,37 @@ const CHIUDE = '<!-- fine CSP generata -->';
    sapere quali origini ci sono dentro. */
 const config = fs.readFileSync(path.join(RADICE, 'configurazione.js'), 'utf8');
 
-function origini(dopo) {
-  const i = config.indexOf(dopo);
+/* Si ritaglia con precisione, un campo per volta. Il primo tentativo
+   prendeva "duemila caratteri a partire da qui" e si portava dentro il
+   blocco successivo: ogni regola finiva per consentire anche YouTube,
+   compreso `font-src`. Una CSP più larga della realtà non protegge da
+   niente, e non lo dice — quindi qui si chiede il campo per nome. */
+function campo(nome) {
+  const m = config.match(new RegExp(nome + `:\\s*'(https://[a-z0-9.\\-/_]+)'`));
+  if (!m) return null;
+  return new URL(m[1]).origin;
+}
+
+function lista(nome) {
+  const i = config.indexOf(nome + ': [');
   if (i < 0) return [];
-  const pezzo = config.slice(i, i + 2000);
+  const pezzo = config.slice(i, config.indexOf(']', i));
   return [...new Set([...pezzo.matchAll(/'(https:\/\/[a-z0-9.-]+)'/g)].map(m => m[1]))];
 }
 
-const TRADUZIONE = origini('traduzione: {');
-const VIDEO = origini('video: {');
+const TRADUZIONE = lista('origini');
+const INCORPORA = campo('incorpora');
+const ANTEPRIME = campo('anteprime');
+const API_VIDEO = campo('api');
+const CODICE_PLAYER = campo('codicePlayer');
 
-if (!TRADUZIONE.length) {
-  console.error('Non ho trovato le origini della traduzione in configurazione.js.');
+const mancanti = Object.entries({ TRADUZIONE, INCORPORA, ANTEPRIME, API_VIDEO, CODICE_PLAYER })
+  .filter(([, v]) => !v || (Array.isArray(v) && !v.length)).map(([k]) => k);
+if (mancanti.length) {
+  console.error('Non ho trovato in configurazione.js:', mancanti.join(', '));
+  console.error('Meglio fermarsi che scrivere una regola incompleta: bloccherebbe qualcosa senza dire cosa.');
   process.exit(1);
 }
-
-/* Il traduttore incorpora anche immagini e scrive stili propri: se non
-   glieli si consente, la pagina tradotta si vede a pezzi. Sono gli stessi
-   indirizzi già dichiarati per il codice. */
-const VIDEO_INCORPORA = VIDEO.filter(u => u.includes('nocookie'));
-const VIDEO_IMMAGINI = VIDEO.filter(u => u.includes('ytimg'));
 
 const REGOLE = [
   ['default-src', ["'self'"]],
