@@ -30,8 +30,8 @@ export const CONFIG = {
   /* Il marchio in fondo alla pagina e sui documenti stampati. È lo
      stesso disegno usato nell'intestazione e nei PDF dell'aula. */
   marchio: {
-    file: 'immagini/loghi/erua.jpg',
-    simbolo: 'immagini/loghi/simbolo.jpg',
+    file: 'immagini/loghi/erua.webp',
+    simbolo: 'immagini/loghi/simbolo.webp',
     verde: '#1E7A54',
     inchiostro: '#20201D',
   },
@@ -44,14 +44,14 @@ export const CONFIG = {
      mostra accanto al titolo perché il lettore sappia, prima di
      cliccare, che cosa troverà. */
   atenei: [
-    { sigla: 'UNIMC',   citta: 'Macerata',          lingua: 'IT',    tinta: '#A8E6C9', logo: 'immagini/loghi/unimc.jpg' },
-    { sigla: 'MRU',     citta: 'Vilnius',           lingua: 'EN/LT', tinta: '#FFC9A8', logo: 'immagini/loghi/mru.jpg' },
-    { sigla: 'NBU',     citta: 'Sofia',             lingua: 'BG',    tinta: '#A9D3FF', logo: 'immagini/loghi/nbu.jpg' },
-    { sigla: 'EUV',     citta: 'Frankfurt (Oder)',  lingua: 'DE',    tinta: '#FFE1A8', logo: 'immagini/loghi/euv.jpg' },
-    { sigla: 'SWPS',    citta: 'Warsaw',            lingua: 'PL',    tinta: '#E4DED4', logo: 'immagini/loghi/swps.jpg' },
-    { sigla: 'ULPGC',   citta: 'Las Palmas',        lingua: 'ES',    tinta: '#B6E5F0', logo: 'immagini/loghi/ulpgc.jpg' },
-    { sigla: 'UAEGEAN', citta: 'Mytilene',          lingua: 'EL',    tinta: '#CFC4F7', logo: 'immagini/loghi/uaegean.jpg' },
-    { sigla: 'UP8',     citta: 'Saint-Denis',       lingua: 'FR',    tinta: '#FFC0CE', logo: 'immagini/loghi/up8.jpg' },
+    { sigla: 'UNIMC',   citta: 'Macerata',          lingua: 'IT',    tinta: '#A8E6C9', logo: 'immagini/loghi/unimc.webp' },
+    { sigla: 'MRU',     citta: 'Vilnius',           lingua: 'EN/LT', tinta: '#FFC9A8', logo: 'immagini/loghi/mru.webp' },
+    { sigla: 'NBU',     citta: 'Sofia',             lingua: 'BG',    tinta: '#A9D3FF', logo: 'immagini/loghi/nbu.webp' },
+    { sigla: 'EUV',     citta: 'Frankfurt (Oder)',  lingua: 'DE',    tinta: '#FFE1A8', logo: 'immagini/loghi/euv.webp' },
+    { sigla: 'SWPS',    citta: 'Warsaw',            lingua: 'PL',    tinta: '#E4DED4', logo: 'immagini/loghi/swps.webp' },
+    { sigla: 'ULPGC',   citta: 'Las Palmas',        lingua: 'ES',    tinta: '#B6E5F0', logo: 'immagini/loghi/ulpgc.webp' },
+    { sigla: 'UAEGEAN', citta: 'Mytilene',          lingua: 'EL',    tinta: '#CFC4F7', logo: 'immagini/loghi/uaegean.webp' },
+    { sigla: 'UP8',     citta: 'Saint-Denis',       lingua: 'FR',    tinta: '#FFC0CE', logo: 'immagini/loghi/up8.webp' },
   ],
 
   /* Atenei nominati nei contenuti ma non membri: compaiono come luogo,
@@ -111,6 +111,13 @@ export const CONFIG = {
       incorpora: 'https://www.youtube-nocookie.com',
       api: 'https://www.youtube.com/iframe_api',
       anteprime: 'https://i.ytimg.com',
+      /* L'API dei video non è un file solo: una volta partita si scarica
+         da sé il codice del lettore, e lo prende da qui. Non lo nomina
+         nessun modulo — lo fa il codice di YouTube — ma senza dichiararlo
+         la politica sui contenuti lo bloccherebbe, e il video resterebbe
+         fermo senza dire perché. Sta qui e non dentro la CSP perché le
+         origini si tengono in un posto solo (§3.7, §3.10). */
+      codicePlayer: 'https://s.ytimg.com',
     },
     /* I caratteri non stanno più qui: sono nel progetto, in `caratteri/`,
        e si rigenerano con `node robot/scarica-caratteri.js`. Erano

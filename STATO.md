@@ -391,14 +391,14 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 19:33** — file toccato: `robot/scrivi-csp.js`
+Ultimo salvataggio: **16/08/2026 alle 19:33** — file toccato: `configurazione.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 58 | 4.0K |
 | `collaudo/sonda.html` | 280 | 12K |
-| `configurazione.js` | 306 | 16K |
-| `index.html` | 453 | 32K |
+| `configurazione.js` | 313 | 16K |
+| `index.html` | 457 | 32K |
 | `moduli/articolo.js` | 574 | 28K |
 | `moduli/ascolta.js` | 173 | 8.0K |
 | `moduli/aula.js` | 851 | 44K |
@@ -432,6 +432,7 @@ Ultimo salvataggio: **16/08/2026 alle 19:33** — file toccato: `robot/scrivi-cs
 | `robot/notizie.js` | 150 | 8.0K |
 | `robot/ricevi.js` | 167 | 8.0K |
 | `robot/scarica-caratteri.js` | 212 | 12K |
+| `robot/scrivi-csp.js` | 183 | 12K |
 | `robot/studenti.js` | 87 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
