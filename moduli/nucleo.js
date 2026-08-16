@@ -47,6 +47,50 @@ export function dati(nome) {
   return inCorso.get(nome);
 }
 
+/* ── fogli di stile chiesti quando servono ─────────────────────────
+   Un `<link rel="stylesheet">` nella pagina blocca il primo disegno:
+   il browser non mostra niente finché non ha letto tutti i fogli, per
+   non far comparire il testo nudo e poi vestito. Giusto — ma solo per i
+   fogli che servono a quello che si vede subito.
+
+   `ideathon.css` e `aula.css` sono 31 KB l'uno e non servono alla prima
+   schermata: l'aula si apre da dentro un corso, l'ideathon è una sezione
+   in cui bisogna entrare. Chiederli qui li toglie dalla fila davanti al
+   primo disegno.
+
+   **Sull'ordine.** In `index.html` l'ordine dei fogli non va cambiato,
+   perché alcune regole si sovrascrivono a vicenda. Un foglio chiesto
+   così finisce in fondo alla cascata, quindi si può fare solo dove
+   quella posizione non cambia niente: `aula.css` era già l'ultimo, e
+   `ideathon.css` non condivide nemmeno un selettore con i due che
+   verrebbe a seguire (`didattica.css` e `aula.css`). Verificato, non
+   supposto — e c'è una prova nel collaudo che lo ricontrolla.
+
+   Chi chiama **aspetta** che il foglio sia applicato prima di disegnare:
+   il contrario si vedrebbe, ed è esattamente il difetto che i fogli
+   bloccanti esistono per evitare. */
+const fogliChiesti = new Map();
+
+export function foglio(nome) {
+  if (!fogliChiesti.has(nome)) {
+    fogliChiesti.set(nome, new Promise(fatto => {
+      const l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = `stile/${nome}.css`;
+      /* Anche se non arriva si va avanti: una sezione senza il suo
+         foglio si legge male, ma si legge. Fermarsi qui vorrebbe dire
+         non mostrarla affatto (§2.2). */
+      l.addEventListener('load', () => fatto(true), { once: true });
+      l.addEventListener('error', () => {
+        console.error(`stile/${nome}.css non caricato`);
+        fatto(false);
+      }, { once: true });
+      document.head.appendChild(l);
+    }));
+  }
+  return fogliChiesti.get(nome);
+}
+
 /* I file che i robot riscrivono hanno un involucro: numero di versione,
    quando sono stati aggiornati, da quale fonte, e poi gli elementi. Ma
    un file appena scritto e uno mai passato dai robot convivono, e al
