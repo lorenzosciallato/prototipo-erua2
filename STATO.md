@@ -289,7 +289,7 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 18:43** — file toccato: `robot/scarica-caratteri.js`
+Ultimo salvataggio: **16/08/2026 alle 18:44** — file toccato: `robot/scarica-caratteri.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -329,6 +329,7 @@ Ultimo salvataggio: **16/08/2026 alle 18:43** — file toccato: `robot/scarica-c
 | `robot/loghi.js` | 341 | 16K |
 | `robot/notizie.js` | 150 | 8.0K |
 | `robot/ricevi.js` | 167 | 8.0K |
+| `robot/scarica-caratteri.js` | 193 | 12K |
 | `robot/studenti.js` | 87 | 4.0K |
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |

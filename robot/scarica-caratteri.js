@@ -137,7 +137,7 @@ function umano(n) {
   let peso = 0, quanti = 0;
 
   for (const fam of FAMIGLIE) {
-    const blocchi = leggiBlocchi(await chiediFoglio(fam));
+    const blocchi = raggruppa(leggiBlocchi(await chiediFoglio(fam)));
     if (!blocchi.length) throw new Error(`${fam.nome}: nessun sottoinsieme utile trovato`);
 
     for (const b of blocchi) {
