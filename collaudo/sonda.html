@@ -240,11 +240,11 @@ function guarda() {
     }
   }
 
-  const inPagina = imgs.length;
-  verdetto.className = sparite ? 'male' : (inPagina ? 'bene' : '');
+  const inScena = corpo.children.length;
+  verdetto.className = sparite ? 'male' : (inScena ? 'bene' : '');
   verdetto.textContent = sparite
-    ? `${sparite} sparizioni. Il motivo è nel diario qui sotto.`
-    : `${inPagina} fotografie, nessuna sparizione finora.`;
+    ? `${sparite} sparizioni in scena. Il motivo è nel diario qui sotto.`
+    : `${inScena} fotografie in scena, nessuna sparizione finora.`;
 }
 
 /* Si aggancia appena la finestra dentro ha un corpo, e si riaggancia a
