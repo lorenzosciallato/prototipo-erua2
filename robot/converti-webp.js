@@ -69,6 +69,28 @@ try {
   process.exit(1);
 }
 
+/* La larghezza in pixel, letta dall'intestazione del file. `cwebp -resize`
+   ingrandirebbe volentieri un'immagine più piccola del limite: qui si
+   guarda prima, per ridurre soltanto. Se non si riesce a leggerla si
+   torna zero, cioè "non ridurre": nel dubbio si lascia com'è. */
+function larghezzaDi(file) {
+  try {
+    const d = fs.readFileSync(file);
+    if (d[0] === 0x89 && d[1] === 0x50) return d.readUInt32BE(16);       // PNG
+    if (d[0] === 0xFF && d[1] === 0xD8) {                                 // JPEG
+      let i = 2;
+      while (i < d.length - 9) {
+        if (d[i] !== 0xFF) { i++; continue; }
+        const m = d[i + 1];
+        if (m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC)
+          return d.readUInt16BE(i + 7);
+        i += 2 + d.readUInt16BE(i + 2);
+      }
+    }
+  } catch { /* illeggibile: si lascia la misura originale */ }
+  return 0;
+}
+
 const convertiti = [];   // [vecchio, nuovo]
 const saltati = [];
 
