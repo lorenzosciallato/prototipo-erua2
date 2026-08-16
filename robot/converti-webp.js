@@ -72,7 +72,7 @@ try {
 const convertiti = [];   // [vecchio, nuovo]
 const saltati = [];
 
-for (const cartella of CARTELLE) {
+for (const { dove: cartella, larghezzaMax } of CARTELLE) {
   const dir = path.join(RADICE, cartella);
   if (!fs.existsSync(dir)) continue;
 
