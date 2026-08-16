@@ -289,7 +289,7 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 18:45** — file toccato: `index.html`
+Ultimo salvataggio: **16/08/2026 alle 18:45** — file toccato: `moduli/aula.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -299,7 +299,7 @@ Ultimo salvataggio: **16/08/2026 alle 18:45** — file toccato: `index.html`
 | `index.html` | 442 | 32K |
 | `moduli/articolo.js` | 574 | 28K |
 | `moduli/ascolta.js` | 173 | 8.0K |
-| `moduli/aula.js` | 834 | 44K |
+| `moduli/aula.js` | 840 | 44K |
 | `moduli/didattica.js` | 468 | 24K |
 | `moduli/geometrie.js` | 155 | 8.0K |
 | `moduli/ideathon.js` | 514 | 24K |

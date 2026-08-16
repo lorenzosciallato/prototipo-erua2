@@ -772,7 +772,13 @@ function auStampa(titolo,dentroHTML){
   fr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
   document.body.appendChild(fr);
   const d=fr.contentWindow.document;d.open();
-  d.write('<html><head><title>'+esc(titolo)+' — ERUA connect</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&family=Source+Serif+4:ital@0;1&display=swap" rel="stylesheet"></head><body style="margin:0;background:#fff">'+h+'<scr'+'ipt>onload=()=>setTimeout(()=>print(),450)</scr'+'ipt></body></html>');
+  /* Anche il foglio da stampare prende i caratteri dal progetto: chiederli
+     a Google da qui sarebbe la stessa trasmissione dell'IP che §6.1
+     vieta, solo nascosta dentro una finestra che non si vede.
+     L'indirizzo va scritto per intero: questa finestra nasce vuota, e un
+     percorso relativo non avrebbe niente a cui appoggiarsi. */
+  const foglioCaratteri = new URL('stile/caratteri.css', location.href).href;
+  d.write('<html><head><title>'+esc(titolo)+' — ERUA connect</title><link rel="stylesheet" href="'+foglioCaratteri+'"></head><body style="margin:0;background:#fff">'+h+'<scr'+'ipt>onload=()=>setTimeout(()=>print(),450)</scr'+'ipt></body></html>');
   d.close();setTimeout(()=>{try{document.body.removeChild(fr);}catch(e){}},15000);
 }
 auEl('bd-stampa').addEventListener('click',()=>{
