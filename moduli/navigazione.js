@@ -43,14 +43,25 @@ const MODULI = {
   study:    () => import('./didattica.js'),
 };
 
+/* Le sezioni il cui foglio di stile non sta in `index.html`, perché non
+   serve alla prima schermata. Vedi `foglio()` in `nucleo.js`: là c'è
+   scritto perché si può fare solo per queste. */
+const FOGLI = { ideathon: 'ideathon' };
+
 const caricati = new Map();
 
-/* Carica il modulo di una sezione, una volta sola, e lo avvia. */
+/* Carica il modulo di una sezione, una volta sola, e lo avvia.
+   Modulo e foglio partono insieme e si aspettano entrambi: disegnare
+   prima che lo stile sia applicato vorrebbe dire far vedere la sezione
+   nuda per un istante. */
 export function caricaSezione(nome) {
   if (!MODULI[nome]) return Promise.resolve(null);
   if (!caricati.has(nome)) {
-    caricati.set(nome, MODULI[nome]()
-      .then(m => (m.avvia ? m.avvia().then(() => m) : m))
+    caricati.set(nome, Promise.all([
+      MODULI[nome](),
+      FOGLI[nome] ? foglio(FOGLI[nome]) : null,
+    ])
+      .then(([m]) => (m.avvia ? m.avvia().then(() => m) : m))
       .catch(err => {
         /* Se una sezione non si carica, le altre devono continuare a
            funzionare: è lo stesso principio per cui l'interruzione di un

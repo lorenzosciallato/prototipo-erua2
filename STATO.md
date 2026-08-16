@@ -351,7 +351,7 @@ Ultimo salvataggio: **16/08/2026 alle 19:01** — file toccato: `moduli/navigazi
 | `moduli/ideathon.js` | 514 | 24K |
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/loghi-incorporati.js` | 35 | 64K |
-| `moduli/navigazione.js` | 124 | 8.0K |
+| `moduli/navigazione.js` | 135 | 8.0K |
 | `moduli/notizie.js` | 105 | 8.0K |
 | `moduli/nucleo.js` | 500 | 24K |
 | `moduli/rivista.js` | 332 | 16K |
