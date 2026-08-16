@@ -367,7 +367,7 @@ Ultimo salvataggio: **16/08/2026 alle 19:10** — file toccato: `robot/converti-
 | `robot/comune/registro.js` | 77 | 4.0K |
 | `robot/comune/rete.js` | 102 | 8.0K |
 | `robot/comune/scrivi.js` | 95 | 4.0K |
-| `robot/converti-webp.js` | 149 | 8.0K |
+| `robot/converti-webp.js` | 155 | 8.0K |
 | `robot/costi.js` | 136 | 8.0K |
 | `robot/destinazioni.js` | 297 | 16K |
 | `robot/didattica.js` | 101 | 8.0K |

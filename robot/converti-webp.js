@@ -86,7 +86,13 @@ for (const { dove: cartella, larghezzaMax } of CARTELLE) {
     if (PROVA) { console.log(`  proverei  ${cartella}/${nome}  (${Math.round(prima / 1024)} KB)`); continue; }
 
     try {
-      execFileSync('cwebp', ['-q', String(QUALITA), '-quiet', daFare, '-o', fatto]);
+      /* `-resize L 0`: la larghezza la decidiamo noi, l'altezza la
+         ricava cwebp mantenendo la proporzione. Solo verso il basso —
+         un'immagine già più stretta del limite si lascia com'è, invece
+         di ingrandirla e farla sgranare. */
+      const misura = (larghezzaMax && larghezzaDi(daFare) > larghezzaMax)
+        ? ['-resize', String(larghezzaMax), '0'] : [];
+      execFileSync('cwebp', ['-q', String(QUALITA), ...misura, '-quiet', daFare, '-o', fatto]);
     } catch (e) {
       saltati.push(`${cartella}/${nome} — cwebp non è riuscito a convertirlo`);
       continue;
