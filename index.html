@@ -59,9 +59,20 @@
 <link rel="stylesheet" href="stile/notizie.css">
 <link rel="stylesheet" href="stile/sociale.css">
 <link rel="stylesheet" href="stile/storie.css">
-<link rel="stylesheet" href="stile/ideathon.css">
 <link rel="stylesheet" href="stile/didattica.css">
-<link rel="stylesheet" href="stile/aula.css">
+
+<!-- `ideathon.css` e `aula.css` non stanno più qui: 31 KB l'uno, e
+     nessuno dei due serve a quello che si vede appena si apre la pagina.
+     Ogni foglio dichiarato qui blocca il primo disegno finché non è
+     arrivato — anche per chi in un'aula non entra mai.
+
+     Adesso li chiede chi ne ha bisogno, e li aspetta prima di disegnare
+     (`foglio()` in `moduli/nucleo.js`). Si può fare solo con questi due
+     perché finire in fondo alla cascata non cambia il loro effetto:
+     `aula.css` era già l'ultimo, e `ideathon.css` non condivide nemmeno
+     un selettore con `didattica.css` e `aula.css`. Il collaudo lo
+     ricontrolla: se un giorno un selettore comparisse in due fogli, la
+     prova fallisce prima che si veda a schermo. -->
 </head>
 <body>
 <div class="macchie" aria-hidden="true">
