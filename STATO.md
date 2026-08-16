@@ -204,6 +204,62 @@ in un file che non è ancora stato scaricato.
 Il collaudo automatico ora copre tutti e quattro: simula i clic e l'ingresso
 in Learn con l'indirizzo già su `#study`.
 
+## L'avvio: cosa deve arrivare prima che si veda qualcosa
+
+Tre interventi, in ordine di resa. Il metro è sempre lo stesso: **quanto deve
+arrivare prima che il browser possa disegnare la prima schermata.**
+
+| | prima | adesso |
+|:--|:--|:--|
+| fogli di stile bloccanti | 10 file, 161 KB | 9 file, 104 KB |
+| foglio dei caratteri | 29 KB, da un server esterno | nessuno: sono nostri |
+| loghi incorporati | 61 KB | 33 KB |
+| attesa di `testi/en.json` | sì, prima della prima sezione | no |
+
+**L'attesa del file dei testi era inutile.** `avvio.js` aveva `await
+lingua.avvia()`, e la prima sezione non compariva finché `testi/en.json` non era
+arrivato. Ma la lingua originale *è* `en`, e in quel file ogni chiave vale sé
+stessa: esattamente il testo già scritto nel markup. Un giro in rete davanti a
+tutto il resto, per non cambiare niente di visibile. Ora si chiede e non si
+aspetta. Vale finché `CONFIG.lingue.originale` resta la lingua del markup — se
+cambiasse, si vedrebbe un istante di inglese e l'attesa andrebbe rimessa; sta
+scritto nel commento, accanto al codice.
+
+**`ideathon.css` e `aula.css` non stanno più in `index.html`.** Sono 31 KB
+l'uno e non servono a quello che si vede aprendo la pagina: nell'aula si entra
+da dentro un corso, nell'ideathon bisogna andarci. Ogni foglio dichiarato in
+pagina blocca il primo disegno finché non è arrivato, **anche per chi in
+un'aula non entra mai.** Adesso li chiede chi ne ha bisogno, e li aspetta prima
+di disegnare — il contrario si vedrebbe.
+
+Si può fare solo con questi due, e la ragione va tenuta a mente: un foglio
+chiesto a richiesta finisce **in fondo** alla cascata. `aula.css` era già
+l'ultimo, quindi non scavalca nessuno; `ideathon.css` scavalcherebbe
+`didattica.css` e `aula.css`, e con quei due non condivide nemmeno un selettore.
+Verificato, non supposto — e una prova nel collaudo lo ricontrolla a ogni giro:
+il giorno in cui qualcuno scrivesse una regola condivisa, l'aspetto cambierebbe
+in un punto solo e nessuno lo collegherebbe a questo. Meglio che fallisca prima.
+
+**I loghi pesavano il doppio del necessario.** Erano dieci JPEG larghi 230
+pixel, incorporati nel codice — e nel codice il peso conta il doppio, perché non
+sono file che il browser chiede quando servono: arrivano con la pagina, sempre,
+prima di tutto il resto. Ma un logo non compare mai sopra i 74 pixel, e dentro
+l'anello sta a una sessantina. Ridotti a 168 di larghezza e convertiti in WebP:
+45 KB → 24, e il modulo da 61 KB a 33. Restano al doppio abbondante di quanto
+servirebbe anche su uno schermo fitto.
+
+La scelta di incorporarli **resta giusta** e non è stata toccata: erano stati
+messi lì perché a ogni ridisegno il cerchio restava vuoto per un istante. Qui
+non si è tolto niente, si è alleggerito. `robot/converti-webp.js` adesso sa
+ridurre, ma solo dove glielo si dice: le fotografie no, perché si aprono a tutta
+larghezza dentro un articolo e ritagliarle vorrebbe dire deciderlo per sempre.
+
+Lo stesso script ora riscrive i riferimenti anche in `configurazione.js`, non
+solo in `dati/`: i loghi sono nominati lì, uno per ateneo, e lasciarli a puntare
+a file cancellati non avrebbe dato errore subito — `logoIncorporato()` cerca per
+nome senza estensione e li avrebbe trovati lo stesso. Si sarebbe visto molto
+dopo, il giorno in cui un logo non fosse più incorporato.
+
 ## I caratteri sono nel progetto
 
 **§6.1 è chiusa.** Era PRIORITÀ ALTA e restava aperta: la pagina chiedeva i
@@ -335,7 +391,7 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 19:11** — file toccato: `robot/converti-webp.js`
+Ultimo salvataggio: **16/08/2026 alle 19:26** — file toccato: `moduli/notizie.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -350,9 +406,9 @@ Ultimo salvataggio: **16/08/2026 alle 19:11** — file toccato: `robot/converti-
 | `moduli/geometrie.js` | 155 | 8.0K |
 | `moduli/ideathon.js` | 514 | 24K |
 | `moduli/lingua.js` | 164 | 8.0K |
-| `moduli/loghi-incorporati.js` | 35 | 64K |
+| `moduli/loghi-incorporati.js` | 35 | 36K |
 | `moduli/navigazione.js` | 135 | 8.0K |
-| `moduli/notizie.js` | 105 | 8.0K |
+| `moduli/notizie.js` | 115 | 8.0K |
 | `moduli/nucleo.js` | 500 | 24K |
 | `moduli/rivista.js` | 332 | 16K |
 | `moduli/sociale.js` | 237 | 12K |

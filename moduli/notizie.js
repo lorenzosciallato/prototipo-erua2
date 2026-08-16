@@ -14,11 +14,21 @@
    riscriverà quel file e questa sezione non se ne accorgerà.
 */
 
-import { CITTA, LINGUA_FONTE } from '../configurazione.js';
+import { CONFIG, CITTA, LINGUA_FONTE } from '../configurazione.js';
 import { T, esc, elenco, offre, dataBreve, stemma, filaAtenei } from './nucleo.js';
 
 let NEWS = [];
-let filtroNews = null, paginaNews = 1;
+
+/* Si entra sulle notizie dell'alleanza, non su tutte.
+   Senza filtro l'elenco è ordinato per data, e in cima finiva sempre
+   Sofia: NBU pubblica anche gli eventi in programma, che sono datati nei
+   mesi a venire e quindi stanno davanti a tutto. Sono date giuste — un
+   evento di novembre è di novembre — ma il risultato era che aprendo la
+   sezione si leggeva un ateneo solo, e per caso.
+
+   Il cerchio ERUA resta un filtro come gli altri: premendolo si torna a
+   vedere tutto, e siccome parte acceso si vede subito che un filtro c'è. */
+let filtroNews = CONFIG.siglaAlleanza, paginaNews = 1;
 const PER_PAGINA = 20;
 
 function renderChipsNews() {
