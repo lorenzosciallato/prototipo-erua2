@@ -21,7 +21,21 @@ document.querySelectorAll('[data-it]').forEach(el => {
   el.textContent = CONFIG.lingue.originale === 'it' ? el.dataset.it : el.dataset.en;
 });
 
-await lingua.avvia();
+/* Le stringhe dell'interfaccia si chiedono, ma non si aspettano.
+   Prima qui c'era `await`, e la prima sezione non compariva finché
+   `testi/en.json` non era arrivato: un giro in rete davanti a tutto il
+   resto. Per un file che, all'avvio, non cambia niente di visibile —
+   `originale` è `en`, e in `testi/en.json` ogni chiave vale sé stessa,
+   cioè esattamente il testo già scritto nel markup.
+
+   Vale finché la lingua originale è quella del markup. Se un giorno
+   `CONFIG.lingue.originale` diventasse un'altra, qui si vedrebbe un
+   istante di inglese prima del cambio: allora l'attesa andrebbe rimessa,
+   oppure il markup riscritto nella nuova lingua originale.
+
+   Le sezioni non ne dipendono: `T()` sceglie fra due stringhe scritte
+   nel codice, non legge `testi/`. */
+const testiPronti = lingua.avvia();
 
 /* Dove eravamo rimasti: l'indirizzo dice sia la sezione sia, se il caso,
    l'articolo aperto. Serve perché un collegamento a un pezzo preciso

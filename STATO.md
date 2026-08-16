@@ -204,6 +204,52 @@ in un file che non è ancora stato scaricato.
 Il collaudo automatico ora copre tutti e quattro: simula i clic e l'ingresso
 in Learn con l'indirizzo già su `#study`.
 
+## I caratteri sono nel progetto
+
+**§6.1 è chiusa.** Era PRIORITÀ ALTA e restava aperta: la pagina chiedeva i
+caratteri a `fonts.googleapis.com`, e ogni visita trasmetteva l'IP di chi
+guardava a un operatore extraeuropeo. Nel 2022 un tribunale tedesco ha
+riconosciuto per questo un risarcimento a un singolo visitatore, e un ateneo
+dell'alleanza è a Francoforte sull'Oder.
+
+Ora stanno in `caratteri/`: otto file, 528 KB, generati da
+`node robot/scarica-caratteri.js`, con la licenza SIL Open Font accanto in
+`caratteri/LICENZA.txt` come §6.1 richiede. Le origini di Google sono sparite
+anche da `configurazione.js`: da quell'elenco nasceranno le intestazioni di
+sicurezza (§3.8), e lasciarcele avrebbe voluto dire aprire un permesso verso un
+server che non usiamo — una regola più larga della realtà.
+
+**Cosa non si scarica più.** Il corsivo di Fraunces non era usato da nessuna
+parte: ogni `<i>` del progetto è riportato a `font-style:normal`. Erano 148 KB
+dichiarati per niente. Restano fuori anche cirillico, greco e vietnamita, che
+non servono; `latin-ext` invece resta, perché i nomi dei progetti premiati sono
+in ceco e in polacco («Díky že můžem volit») e senza finirebbero in un carattere
+di ripiego a metà parola.
+
+**Sull'attesa, il guadagno è un altro da quello che sembra.** I file pesano
+uguale ospitati qui. Quello che sparisce è il **giro verso un server esterno
+prima del primo disegno**: il foglio di Google andava chiesto, e finché non
+rispondeva la pagina non si disegnava. Adesso quel foglio — 4 KB — arriva
+insieme agli altri dieci, dalla stessa origine. E i due caratteri che servono
+subito (Inter per il testo, Fraunces per i titoli) si chiedono in anticipo con
+`rel="preload"`, invece di aspettare che il foglio sia stato letto.
+
+Nessun carattere si scarica finché non serve a disegnare del testo davvero
+presente: Source Serif 4 — il più pesante, 218 KB — arriva solo aprendo un
+articolo, l'aula o un foglio, e non all'avvio.
+
+**Anche il foglio da stampare dell'aula** se li chiedeva per conto suo, dentro
+una finestra che non si vede. Adesso prende gli stessi caratteri del sito. Lì il
+piè di pagina è in corsivo su Fraunces: non avendo più il file del corsivo, il
+browser lo inclina da sé. Su una riga stampata non si nota, ma è bene saperlo.
+
+Due prove nuove lo tengono chiuso, verificate anche al contrario: nessun
+riferimento a `fonts.googleapis.com` o `fonts.gstatic.com` nel codice che
+finisce nel browser (i commenti che spiegano perché non ci sono più vengono
+tolti prima di cercare, non riconosciuti a naso), e nessun `@font-face` che
+punti a un file mancante — perché quello non dà errore: cambia solo il
+carattere, in silenzio.
+
 ## Le fotografie: perché tardavano e perché sparivano
 
 Due sintomi diversi, tre cause, tutte nate dallo scorporo del 10 agosto —
@@ -289,11 +335,11 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 18:46** — file toccato: `configurazione.js`
+Ultimo salvataggio: **16/08/2026 alle 18:59** — file toccato: `avvio.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
-| `avvio.js` | 38 | 4.0K |
+| `avvio.js` | 52 | 4.0K |
 | `collaudo/sonda.html` | 280 | 12K |
 | `configurazione.js` | 306 | 16K |
 | `index.html` | 442 | 32K |
