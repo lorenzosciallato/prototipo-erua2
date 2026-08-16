@@ -206,13 +206,16 @@ function guarda() {
     if (!chiave || chiave.startsWith('data:')) continue;
     viste.add(chiave);
 
+    /* Una sezione lasciata alle spalle non è una sparizione. */
+    if (fuoriScena(img, finestra)) continue;
+
     const ora = stato(img, finestra);
     const prima = storia.get(chiave);
 
     if (aPosto(ora)) storia.set(chiave, ora);
     else if (prima && aPosto(prima)) {
       sparite++;
-      scrivi('SPARITA ' + nome(img) + ' — ' + perche(prima, ora), true);
+      scrivi('SPARITA ' + nome(img) + ' — ' + perche(prima, ora, img), true);
       storia.set(chiave, ora);
     }
 
