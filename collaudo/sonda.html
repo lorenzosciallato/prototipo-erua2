@@ -136,6 +136,38 @@ function nome(img) {
   return s.split('/').slice(-1)[0].split('?')[0].slice(0, 34) || s.slice(0, 34);
 }
 
+/* Una sezione che non è quella attiva sta a display:none, e tutto quello
+   che contiene misura 0×0. È il comportamento giusto, non un guasto: se
+   non lo si esclude, ogni cambio di sezione sembra una strage di
+   fotografie. Qui si guarda solo quello che è davvero in scena. */
+function fuoriScena(el, finestra) {
+  for (let n = el; n && n !== finestra.document.body; n = n.parentElement) {
+    if (n.hidden) return true;
+    if (finestra.getComputedStyle(n).display === 'none') return true;
+  }
+  return false;
+}
+
+/* Quando una fotografia perde il riquadro pur essendo in scena, la
+   domanda diventa: chi è collassato? L'immagine, il pulsante che la
+   contiene, la scheda, o la griglia? Si risale finché non si trova
+   qualcuno che un riquadro ce l'ha ancora: il guasto sta nell'anello
+   subito sotto. */
+function colpevole(img) {
+  const eti = n => n.tagName.toLowerCase()
+    + (n.id ? '#' + n.id : '')
+    + (n.className && typeof n.className === 'string'
+        ? '.' + n.className.trim().split(/\s+/)[0] : '');
+  let sotto = eti(img);
+  for (let n = img.parentElement; n && n.tagName !== 'BODY'; n = n.parentElement) {
+    const r = n.getBoundingClientRect();
+    if (r.width >= 1 && r.height >= 1)
+      return `<${sotto}> è a zero dentro <${eti(n)}> che misura ${Math.round(r.width)}×${Math.round(r.height)}`;
+    sotto = eti(n);
+  }
+  return `tutta la catena è a zero, fino a <${sotto}>`;
+}
+
 /* Le quattro condizioni, separate. Una fotografia si vede solo se le
    soddisfa tutte e quattro; quale delle quattro cade dice qual è il
    guasto. */

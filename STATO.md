@@ -289,12 +289,12 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 18:24** — file toccato: `collaudo/sonda.html`
+Ultimo salvataggio: **16/08/2026 alle 18:32** — file toccato: `collaudo/sonda.html`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
-| `collaudo/sonda.html` | 243 | 12K |
+| `collaudo/sonda.html` | 275 | 12K |
 | `configurazione.js` | 300 | 16K |
 | `index.html` | 427 | 32K |
 | `moduli/articolo.js` | 574 | 28K |
