@@ -289,7 +289,7 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 18:32** — file toccato: `collaudo/sonda.html`
+Ultimo salvataggio: **16/08/2026 alle 18:43** — file toccato: `robot/scarica-caratteri.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
