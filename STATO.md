@@ -335,7 +335,7 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 19:02** — file toccato: `index.html`
+Ultimo salvataggio: **16/08/2026 alle 19:10** — file toccato: `robot/converti-webp.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -367,7 +367,7 @@ Ultimo salvataggio: **16/08/2026 alle 19:02** — file toccato: `index.html`
 | `robot/comune/registro.js` | 77 | 4.0K |
 | `robot/comune/rete.js` | 102 | 8.0K |
 | `robot/comune/scrivi.js` | 95 | 4.0K |
-| `robot/converti-webp.js` | 130 | 8.0K |
+| `robot/converti-webp.js` | 149 | 8.0K |
 | `robot/costi.js` | 136 | 8.0K |
 | `robot/destinazioni.js` | 297 | 16K |
 | `robot/didattica.js` | 101 | 8.0K |

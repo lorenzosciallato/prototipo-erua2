@@ -34,10 +34,29 @@ const { execFileSync } = require('child_process');
 const RADICE = path.join(__dirname, '..');
 const PROVA = process.argv.includes('--prova');
 
-/* Le cartelle con le fotografie. I loghi non stanno qui: quelli sono
-   incorporati nel codice da `incorpora-loghi.js`, e convertirli
-   cambierebbe solo il tipo scritto dentro il data URI. */
-const CARTELLE = ['immagini/ideathon', 'immagini/rivista'];
+/* Le cartelle, e per ognuna la larghezza massima oltre la quale ridurre.
+   `null` vuol dire lasciare la misura originale.
+
+   **Le fotografie non si riducono.** Si aprono a tutta larghezza dentro
+   un articolo, e non sappiamo su che schermo: ritagliarle qui vorrebbe
+   dire deciderlo per sempre e senza poter tornare indietro.
+
+   **I loghi sì.** Non compaiono mai sopra i 74px — l'anello degli atenei
+   in `notizie.css` e `sociale.css`, e dentro l'anello il logo sta a una
+   sessantina di pixel. Erano larghi 230. A 168 restano al doppio abbondante
+   di quanto servirebbe anche su uno schermo fitto, e pesano il 39% in meno.
+
+   E per i loghi il peso conta il doppio: non sono file che il browser
+   chiede quando servono, sono scritti dentro `moduli/loghi-incorporati.js`
+   e arrivano con la pagina, ogni volta, prima di tutto il resto. Erano
+   stati messi lì apposta — vedi STATO.md — perché a ogni ridisegno il
+   cerchio restava vuoto per un istante. La scelta resta giusta: qui non
+   si toglie, si alleggerisce. */
+const CARTELLE = [
+  { dove: 'immagini/ideathon', larghezzaMax: null },
+  { dove: 'immagini/rivista',  larghezzaMax: null },
+  { dove: 'immagini/loghi',    larghezzaMax: 168 },
+];
 
 /* 82 su 100: sotto si comincia a vedere sulle superfici piatte, sopra
    il file cresce senza che si veda la differenza. */
