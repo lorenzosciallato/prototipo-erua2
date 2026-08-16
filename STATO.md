@@ -391,7 +391,7 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 19:31** — file toccato: `moduli/aula.js`
+Ultimo salvataggio: **16/08/2026 alle 19:33** — file toccato: `robot/scrivi-csp.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
