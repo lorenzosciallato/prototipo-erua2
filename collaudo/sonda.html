@@ -185,10 +185,10 @@ function stato(img, finestra) {
 }
 const aPosto = s => s.arrivata && s.inPagina && s.riquadro && s.visibile;
 
-function perche(prima, adesso) {
+function perche(prima, adesso, img) {
   if (prima.arrivata && !adesso.arrivata) return 'il browser ha scartato il file (2)';
   if (prima.inPagina && !adesso.inPagina) return 'qualcuno l\'ha tolta dalla pagina (1)';
-  if (prima.riquadro && !adesso.riquadro) return `il riquadro è andato a zero (3)`;
+  if (prima.riquadro && !adesso.riquadro) return 'riquadro a zero (3) — ' + colpevole(img);
   if (prima.visibile && !adesso.visibile) return `una regola la rende invisibile — opacità ${adesso.opacita} (4)`;
   return 'non si vede più, e non so dire perché';
 }
