@@ -120,6 +120,25 @@ function leggiBlocchi(css) {
   }).filter(b => b.url && SOTTOINSIEMI.includes(b.sottoinsieme));
 }
 
+/* Chiedendo più pesi di una stessa famiglia (`wght@400;500;600;700;800`)
+   Google risponde con una dichiarazione per peso — ma tutte puntano allo
+   stesso file, perché il carattere è variabile: un file solo che contiene
+   tutti i pesi. Tenerle tutte vorrebbe dire scaricare cinque volte la
+   stessa cosa. Qui si tiene un file solo, e i pesi diventano l'intervallo
+   che quel file copre davvero. */
+function raggruppa(blocchi) {
+  const per = new Map();
+  for (const b of blocchi) {
+    const chiave = b.url;
+    if (!per.has(chiave)) { per.set(chiave, { ...b, pesi: [] }); }
+    for (const p of b.peso.split(/\s+/)) per.get(chiave).pesi.push(Number(p));
+  }
+  return [...per.values()].map(b => {
+    const min = Math.min(...b.pesi), max = Math.max(...b.pesi);
+    return { ...b, peso: min === max ? String(min) : `${min} ${max}` };
+  });
+}
+
 async function scarica(url) {
   const r = await fetch(url, { headers: { 'User-Agent': BROWSER } });
   if (!r.ok) throw new Error(`file non scaricato (${r.status}): ${url}`);
