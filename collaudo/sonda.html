@@ -219,6 +219,8 @@ function guarda() {
       storia.set(chiave, ora);
     }
 
+    /* In tabella solo quello che è in scena: le sezioni lasciate alle
+       spalle riempirebbero l'elenco di zeri che non vogliono dire niente. */
     const cella = (v, testo) => `<td class="${v ? 'si' : 'no'}">${testo}</td>`;
     const tr = document.createElement('tr');
     tr.innerHTML = `<td class="file" title="${chiave}">${nome(img)}</td>`

@@ -294,7 +294,7 @@ Ultimo salvataggio: **16/08/2026 alle 18:32** — file toccato: `collaudo/sonda.
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
-| `collaudo/sonda.html` | 278 | 12K |
+| `collaudo/sonda.html` | 280 | 12K |
 | `configurazione.js` | 300 | 16K |
 | `index.html` | 427 | 32K |
 | `moduli/articolo.js` | 574 | 28K |
