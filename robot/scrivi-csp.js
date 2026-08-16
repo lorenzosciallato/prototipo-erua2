@@ -82,7 +82,11 @@ const REGOLE = [
   /* Il traduttore è codice di terzi che gira nella nostra pagina. È una
      scelta già presa e dichiarata (§7.4): qui la si scrive per esteso,
      invece di lasciarla implicita. */
-  ['script-src', ["'self'", ...TRADUZIONE]],
+  /* Due terze parti eseguono codice qui dentro, ed è bene che si veda:
+     il traduttore, e l'API dei video che l'aula carica per poter
+     comandare la riproduzione. Quest'ultima si scarica poi da sé il
+     codice del lettore, da un altro indirizzo ancora. */
+  ['script-src', ["'self'", ...TRADUZIONE, API_VIDEO, CODICE_PLAYER]],
 
   /* `'unsafe-inline'` qui e non su `script-src`: il progetto genera 69
      attributi `style=` con valori che cambiano da elemento a elemento —
