@@ -428,7 +428,11 @@ document.getElementById('st-atenei').addEventListener('click',e=>{
    degli appunti. Si scarica quando qualcuno apre davvero una lezione,
    non prima. */
 async function apriAula(o) {
-  const modulo = await import('./aula.js');
+  /* Anche il suo foglio di stile: 31 KB che prima stavano in
+     `index.html` e bloccavano il primo disegno di ogni visita, comprese
+     quelle di chi in un'aula non entra mai. Era già l'ultimo dei dieci,
+     quindi chiederlo qui non ne cambia la posizione nella cascata. */
+  const [modulo] = await Promise.all([import('./aula.js'), foglio('aula')]);
   await modulo.apri(o);
 }
 
