@@ -150,12 +150,25 @@ if (!convertiti.length) {
    Si riscrivono **prima** di togliere gli originali: se qualcosa va
    storto qui, il sito continua a funzionare sui file vecchi. */
 const cambi = new Map(convertiti.map(([v, n]) => [v, n]));
-const datiDir = path.join(RADICE, 'dati');
 let toccati = 0;
 
-for (const nome of fs.readdirSync(datiDir)) {
-  if (!nome.endsWith('.json')) continue;
-  const percorso = path.join(datiDir, nome);
+/* Non solo `dati/`: i loghi degli atenei sono nominati anche in
+   `configurazione.js`, uno per ateneo. Riscrivere solo i dati lascerebbe
+   là dentro dieci percorsi verso file cancellati — e non se ne
+   accorgerebbe nessuno subito, perché `logoIncorporato()` cerca per nome
+   senza estensione e continuerebbe a trovarli. Si accorgerebbe il
+   giorno in cui un logo non fosse più incorporato, e allora il percorso
+   di ripiego porterebbe nel vuoto. */
+const daRiscrivere = [
+  ...fs.readdirSync(path.join(RADICE, 'dati'))
+      .filter(n => n.endsWith('.json'))
+      .map(n => path.join('dati', n)),
+  'configurazione.js',
+];
+
+for (const relativo of daRiscrivere) {
+  const percorso = path.join(RADICE, relativo);
+  if (!fs.existsSync(percorso)) continue;
   let testo = fs.readFileSync(percorso, 'utf8');
   const originale = testo;
   for (const [vecchio, nuovo] of cambi) testo = testo.split(vecchio).join(nuovo);
