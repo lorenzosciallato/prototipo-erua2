@@ -112,10 +112,16 @@ export const CONFIG = {
       api: 'https://www.youtube.com/iframe_api',
       anteprime: 'https://i.ytimg.com',
     },
-    caratteri: {
-      nome: 'Google Fonts',
-      origini: ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
-    },
+    /* I caratteri non stanno più qui: sono nel progetto, in `caratteri/`,
+       e si rigenerano con `node robot/scarica-caratteri.js`. Erano
+       `fonts.googleapis.com` e `fonts.gstatic.com`, tolti perché §6.1
+       (PRIORITÀ ALTA) lo chiede: caricarli da fuori trasmette l'IP di
+       chi visita a un operatore extraeuropeo.
+
+       Vanno tolti anche da qui e non solo dalla pagina: da questo elenco
+       nascono le intestazioni di sicurezza (§3.8), e lasciarceli
+       vorrebbe dire aprire un permesso verso un server che non usiamo
+       — cioè scrivere una regola più larga della realtà. */
   },
 
   /* ── fonti dei processi automatici ─────────────────────────────────
