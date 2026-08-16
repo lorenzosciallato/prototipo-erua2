@@ -79,10 +79,8 @@ if (mancanti.length) {
 const REGOLE = [
   ['default-src', ["'self'"]],
 
-  /* Il traduttore è codice di terzi che gira nella nostra pagina. È una
-     scelta già presa e dichiarata (§7.4): qui la si scrive per esteso,
-     invece di lasciarla implicita. */
-  /* Due terze parti eseguono codice qui dentro, ed è bene che si veda:
+  /* Due terze parti eseguono codice qui dentro, ed è bene che si veda
+     scritto invece di restare implicito (§7.4):
      il traduttore, e l'API dei video che l'aula carica per poter
      comandare la riproduzione. Quest'ultima si scarica poi da sé il
      codice del lettore, da un altro indirizzo ancora. */
@@ -102,7 +100,7 @@ const REGOLE = [
      nessuno lo scambi per una regola pensata. */
   ['style-src', ["'self'", "'unsafe-inline'", ...TRADUZIONE]],
 
-  ['img-src', ["'self'", 'data:', ...VIDEO_IMMAGINI, ...TRADUZIONE]],
+  ['img-src', ["'self'", 'data:', ANTEPRIME, ...TRADUZIONE]],
 
   /* I caratteri sono nostri, e devono restare tali: §6.1. Nessuna
      origine esterna qui è anche il modo di accorgersene se qualcuno ne
@@ -112,7 +110,7 @@ const REGOLE = [
   ['connect-src', ["'self'", ...TRADUZIONE]],
 
   /* I video si vedono dentro un riquadro, dal dominio senza cookie. */
-  ['frame-src', VIDEO_INCORPORA],
+  ['frame-src', [INCORPORA]],
 
   /* Niente `<object>`, niente `<embed>`: non se ne usano, e sono una
      porta d'ingresso classica. */
