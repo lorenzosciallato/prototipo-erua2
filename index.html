@@ -11,8 +11,24 @@
      in `immagini/`. Prima era tutto in questo file, 813 KB.
      Vedi riferimento.md §2.4 e STATO.md. -->
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- I caratteri stanno nel progetto, non su un server di terzi.
+     riferimento.md §6.1 (PRIORITÀ ALTA): caricarli da fuori trasmette
+     l'IP di chi visita a un operatore extraeuropeo, e nel 2022 un
+     tribunale tedesco ha riconosciuto per questo un risarcimento — un
+     ateneo dell'alleanza è in Germania. Prima qui c'erano due
+     `preconnect` e un foglio chiesto a fonts.googleapis.com: un giro
+     verso l'esterno che bloccava il primo disegno finché non rispondeva.
+     Si rigenerano con:  node robot/scarica-caratteri.js -->
+<link rel="stylesheet" href="stile/caratteri.css">
+
+<!-- Le due che servono al primo disegno: Inter per il testo corrente,
+     Fraunces per i titoli. Chiederle qui vuol dire non aspettare che il
+     foglio di stile sia stato letto per scoprire che servivano.
+     `crossorigin` non è un refuso: i caratteri viaggiano sempre in
+     modalità CORS, anche quando sono nostri, e senza l'attributo il
+     browser scaricherebbe il file due volte. -->
+<link rel="preload" href="caratteri/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="caratteri/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <!-- Prima che il browser chieda la prima fotografia deve arrivare in
      fondo a una fila: questo file, poi `avvio.js` (che è un modulo, e i

@@ -289,14 +289,14 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 18:44** — file toccato: `robot/scarica-caratteri.js`
+Ultimo salvataggio: **16/08/2026 alle 18:45** — file toccato: `index.html`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 38 | 4.0K |
 | `collaudo/sonda.html` | 280 | 12K |
 | `configurazione.js` | 300 | 16K |
-| `index.html` | 427 | 32K |
+| `index.html` | 443 | 32K |
 | `moduli/articolo.js` | 574 | 28K |
 | `moduli/ascolta.js` | 173 | 8.0K |
 | `moduli/aula.js` | 834 | 44K |
