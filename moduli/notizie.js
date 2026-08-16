@@ -108,6 +108,10 @@ export async function avvia() {
   if (avviata) return;
   avviata = true;
   NEWS = (await elenco('notizie')).elementi;
+  /* Se l'alleanza non avesse pubblicato niente, entrare su un filtro
+     vuoto direbbe «non ci sono notizie» a chi ne ha centoquaranta
+     davanti. In quel caso si parte da tutte. */
+  if (!NEWS.some(n => n.u === filtroNews)) filtroNews = null;
   renderChipsNews();
   renderNews();
 }

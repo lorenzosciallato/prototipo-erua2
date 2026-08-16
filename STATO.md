@@ -408,7 +408,7 @@ Ultimo salvataggio: **16/08/2026 alle 19:26** — file toccato: `moduli/notizie.
 | `moduli/lingua.js` | 164 | 8.0K |
 | `moduli/loghi-incorporati.js` | 35 | 36K |
 | `moduli/navigazione.js` | 135 | 8.0K |
-| `moduli/notizie.js` | 115 | 8.0K |
+| `moduli/notizie.js` | 119 | 8.0K |
 | `moduli/nucleo.js` | 500 | 24K |
 | `moduli/rivista.js` | 332 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
