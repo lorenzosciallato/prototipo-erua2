@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Sonda — perché le fotografie spariscono</title>
+<!--
+  Questa pagina non fa parte dell'applicazione: è uno strumento di
+  collaudo. Tiene ERUA connect dentro una finestra e guarda, una volta al
+  secondo, che fine fanno le sue fotografie.
+
+  Serve perché il sintomo — "le vedo per un secondo, poi spariscono" —
+  da fuori è identico in quattro casi molto diversi:
+    1. qualcuno riscrive il contenitore e le porta via
+    2. il file non arriva, o arriva rotto
+    3. restano in pagina ma il loro riquadro va a zero
+    4. restano e hanno un riquadro, ma una regola le rende invisibili
+  Distinguerli leggendo il codice non riesce. Qui si vedono.
+
+  Va aperta dal server locale, non con un doppio clic sul file:
+  la finestra dentro deve stare sulla stessa origine per poter essere
+  guardata.  →  http://localhost:8765/collaudo/sonda.html
+-->
+<style>
+  :root{
+    --sup:#fbfaf7; --sup2:#f2efe9; --testo:#1c1b19; --testo2:#6b675f;
+    --bordo:#e2ded5; --male:#b3261e; --bene:#1e6b3a; --forse:#8a6d000;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font:14px/1.5 system-ui,sans-serif;background:var(--sup2);color:var(--testo);
+       display:grid;grid-template-columns:minmax(0,1fr) minmax(380px,460px);
+       height:100vh;overflow:hidden}
+  @media (max-width:900px){body{grid-template-columns:1fr;grid-template-rows:50vh 50vh}}
+
+  iframe{width:100%;height:100%;border:0;background:#fff}
+
+  aside{background:var(--sup);border-left:1px solid var(--bordo);
+        display:flex;flex-direction:column;overflow:hidden}
+  header{padding:.9rem 1rem;border-bottom:1px solid var(--bordo)}
+  h1{font-size:1rem;letter-spacing:-.01em}
+  header p{font-size:.78rem;color:var(--testo2);margin-top:.2rem}
+
+  .vai{display:flex;flex-wrap:wrap;gap:.35rem;padding:.7rem 1rem;
+       border-bottom:1px solid var(--bordo)}
+  .vai button{font:inherit;font-size:.76rem;font-weight:600;cursor:pointer;
+       background:var(--sup2);border:1px solid var(--bordo);border-radius:99px;
+       padding:.28rem .7rem;color:var(--testo)}
+  .vai button:hover{background:#e8e4db}
+
+  #verdetto{padding:.8rem 1rem;font-weight:700;font-size:.82rem;
+       border-bottom:1px solid var(--bordo);background:#fff}
+  #verdetto.male{color:var(--male)}
+  #verdetto.bene{color:var(--bene)}
+
+  .parte{overflow:auto;padding:.6rem 1rem}
+  .parte h2{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;
+       color:var(--testo2);margin:.5rem 0 .4rem}
+  #diario{flex:0 0 34%;border-bottom:1px solid var(--bordo)}
+  #diario div{font-family:ui-monospace,monospace;font-size:.72rem;
+       padding:.18rem 0;border-bottom:1px solid #f0ece4;word-break:break-word}
+  #diario .grave{color:var(--male);font-weight:700}
+  #tabella{flex:1 1 auto}
+  table{width:100%;border-collapse:collapse;font-size:.72rem}
+  th{text-align:left;font-weight:600;color:var(--testo2);
+     border-bottom:1px solid var(--bordo);padding:.25rem .3rem;
+     position:sticky;top:0;background:var(--sup)}
+  td{padding:.25rem .3rem;border-bottom:1px solid #f0ece4;
+     font-family:ui-monospace,monospace}
+  td.no{color:var(--male);font-weight:700}
+  td.si{color:var(--bene)}
+  .file{max-width:11rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<iframe id="app" src="../index.html" title="ERUA connect"></iframe>
+
+<aside>
+  <header>
+    <h1>Perché le fotografie spariscono</h1>
+    <p>Entra in una sezione qui a fianco e aspetta. Se una fotografia
+       compare e poi se ne va, sotto c'è scritto <b>che cosa</b> le è
+       successo.</p>
+  </header>
+
+  <div class="vai">
+    <button data-vai="magazine">Magazine</button>
+    <button data-vai="study">Learn</button>
+    <button data-vai="news">News</button>
+    <button data-vai="ideathon">Ideathon</button>
+    <button data-vai="social">Social</button>
+    <button id="ricarica">Ricarica</button>
+  </div>
+
+  <div id="verdetto">In ascolto…</div>
+
+  <div class="parte" id="diario">
+    <h2>Diario</h2>
+    <div id="righe"></div>
+  </div>
+
+  <div class="parte" id="tabella">
+    <h2>Stato di ogni fotografia</h2>
+    <table>
+      <thead><tr><th>file</th><th>arrivata</th><th>in pagina</th>
+                 <th>riquadro</th><th>opacità</th></tr></thead>
+      <tbody id="corpo"></tbody>
+    </table>
+  </div>
+</aside>
+
+<script>
+const app = document.getElementById('app');
+const righe = document.getElementById('righe');
+const corpo = document.getElementById('corpo');
+const verdetto = document.getElementById('verdetto');
+
+/* Lo stato migliore in cui abbiamo visto ogni fotografia. È il cuore
+   della sonda: "sparita" non vuol dire "assente", vuol dire **c'era e
+   adesso non c'è**. Senza memoria non si distingue una fotografia che
+   se ne va da una che non è mai arrivata. */
+const storia = new Map();
+let sparite = 0, osservo = null;
+
+function scrivi(testo, grave) {
+  const d = document.createElement('div');
+  if (grave) d.className = 'grave';
+  const ora = new Date().toLocaleTimeString('it-IT', { hour12: false });
+  d.textContent = ora + '  ' + testo;
+  righe.prepend(d);
+  while (righe.children.length > 80) righe.lastChild.remove();
+}
+
+function nome(img) {
+  const s = img.currentSrc || img.src || '';
+  if (s.startsWith('data:')) return '(incorporata)';
+  return s.split('/').slice(-1)[0].split('?')[0].slice(0, 34) || s.slice(0, 34);
+}
+
+/* Le quattro condizioni, separate. Una fotografia si vede solo se le
+   soddisfa tutte e quattro; quale delle quattro cade dice qual è il
+   guasto. */
+function stato(img, finestra) {
+  const r = img.getBoundingClientRect();
+  const s = finestra.getComputedStyle(img);
+  return {
+    arrivata: !!(img.complete && img.naturalWidth > 0),
+    inPagina: img.isConnected,
+    riquadro: r.width >= 1 && r.height >= 1,
+    visibile: s.opacity !== '0' && s.visibility !== 'hidden' && s.display !== 'none',
+    larghezza: Math.round(r.width), altezza: Math.round(r.height),
+    opacita: s.opacity,
+  };
+}
+const aPosto = s => s.arrivata && s.inPagina && s.riquadro && s.visibile;
+
+function perche(prima, adesso) {
+  if (prima.arrivata && !adesso.arrivata) return 'il browser ha scartato il file (2)';
+  if (prima.inPagina && !adesso.inPagina) return 'qualcuno l\'ha tolta dalla pagina (1)';
+  if (prima.riquadro && !adesso.riquadro) return `il riquadro è andato a zero (3)`;
+  if (prima.visibile && !adesso.visibile) return `una regola la rende invisibile — opacità ${adesso.opacita} (4)`;
+  return 'non si vede più, e non so dire perché';
+}
+
+function guarda() {
+  const doc = app.contentDocument, finestra = app.contentWindow;
+  if (!doc || !doc.body) return;
+
+  const imgs = [...doc.querySelectorAll('img')];
+  const viste = new Set();
+  corpo.textContent = '';
+
+  for (const img of imgs) {
+    const chiave = img.currentSrc || img.src;
+    if (!chiave || chiave.startsWith('data:')) continue;
+    viste.add(chiave);
+
+    const ora = stato(img, finestra);
+    const prima = storia.get(chiave);
+
+    if (aPosto(ora)) storia.set(chiave, ora);
+    else if (prima && aPosto(prima)) {
+      sparite++;
+      scrivi('SPARITA ' + nome(img) + ' — ' + perche(prima, ora), true);
+      storia.set(chiave, ora);
+    }
+
+    const cella = (v, testo) => `<td class="${v ? 'si' : 'no'}">${testo}</td>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="file" title="${chiave}">${nome(img)}</td>`
+      + cella(ora.arrivata, ora.arrivata ? 'sì' : 'NO')
+      + cella(ora.inPagina, ora.inPagina ? 'sì' : 'NO')
+      + cella(ora.riquadro, ora.larghezza + '×' + ora.altezza)
+      + cella(ora.visibile, ora.opacita);
+    corpo.appendChild(tr);
+  }
+
+  /* Una fotografia che era in pagina e adesso non compare più
+     nell'elenco è stata tolta: il caso 1, che la tabella da sola non
+     mostrerebbe perché la riga sparisce insieme all'immagine. */
+  for (const [chiave, prima] of storia) {
+    if (!viste.has(chiave) && aPosto(prima)) {
+      sparite++;
+      scrivi('TOLTA ' + chiave.split('/').slice(-1)[0] + ' — non è più nella pagina (1)', true);
+      storia.set(chiave, { ...prima, inPagina: false });
+    }
+  }
+
+  const inPagina = imgs.length;
+  verdetto.className = sparite ? 'male' : (inPagina ? 'bene' : '');
+  verdetto.textContent = sparite
+    ? `${sparite} sparizioni. Il motivo è nel diario qui sotto.`
+    : `${inPagina} fotografie, nessuna sparizione finora.`;
+}
+
+/* Si aggancia appena la finestra dentro ha un corpo, e si riaggancia a
+   ogni ricarica: l'osservatore muore insieme al documento che guardava. */
+function aggancia() {
+  const doc = app.contentDocument;
+  if (!doc || !doc.body) { requestAnimationFrame(aggancia); return; }
+
+  doc.addEventListener('error', e => {
+    if (e.target && e.target.tagName === 'IMG')
+      scrivi('NON ARRIVATA ' + nome(e.target), true);
+  }, true);
+
+  if (osservo) clearInterval(osservo);
+  osservo = setInterval(guarda, 1000);
+  scrivi('in ascolto sulla pagina.');
+}
+
+app.addEventListener('load', () => { storia.clear(); sparite = 0; aggancia(); });
+aggancia();
+
+document.querySelectorAll('[data-vai]').forEach(b => b.addEventListener('click', () => {
+  app.contentWindow.location.hash = b.dataset.vai;
+  scrivi('→ ' + b.dataset.vai);
+}));
+document.getElementById('ricarica').addEventListener('click', () => {
+  righe.textContent = ''; app.contentWindow.location.reload();
+});
+</script>
+</body>
+</html>

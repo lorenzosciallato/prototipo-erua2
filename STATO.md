@@ -204,6 +204,58 @@ in un file che non è ancora stato scaricato.
 Il collaudo automatico ora copre tutti e quattro: simula i clic e l'ingresso
 in Learn con l'indirizzo già su `#study`.
 
+## Le fotografie: perché tardavano e perché sparivano
+
+Due sintomi diversi, tre cause, tutte nate dallo scorporo del 10 agosto —
+non dall'ideathon, che è solo la sezione dove si vedevano meglio.
+
+**Prima le fotografie erano dentro la pagina.** Fino al 10 agosto `index.html`
+pesava 813 KB perché conteneva le 23 fotografie in base64. Non c'era niente da
+aspettare: arrivavano con l'HTML, già decodificate. Dallo scorporo sono file a
+parte, e la loro richiesta è l'ultimo anello di una catena: la pagina carica
+`avvio.js`, che è un modulo e quindi parte differito; `avvio.js` importa
+configurazione, lingua, nucleo e navigazione; aspetta il file dei testi; entra
+nella sezione; importa il modulo della sezione; ne chiede il file di dati; e
+soltanto allora esistono gli `<img>` da chiedere. Sei passi in fila prima del
+primo byte di fotografia. **Non si può togliere la catena senza tornare al file
+unico**, ma i moduli della prima schermata ora si chiedono in anticipo con
+`rel="modulepreload"` invece di scoprirsi uno dopo l'altro.
+
+**`loading="lazy"` dentro una sezione nascosta non rimanda: annulla.** I pannelli
+non attivi stanno a `display:none`. Un'immagine differita là dentro non ha
+riquadro, quindi non incrocia mai lo schermo, quindi non viene chiesta affatto:
+la richiesta parte solo quando il pannello si mostra. Le nostre fotografie
+pesano 228 KB **in tutto** — rimandarle non faceva guadagnare niente e costava
+quell'attesa. Ora `prioritaFoto()` non differisce più di sua iniziativa: il
+differimento va chiesto, e lo chiedono solo le miniature di YouTube, che stanno
+su un altro server e sono decine.
+
+**Un cuore ricostruiva tutto il feed.** `renderFeed()` riscrive l'`innerHTML`
+del feed: ogni `<img>` viene distrutta e ricreata, cioè riparte da zero anche
+quando il file è già in memoria. Lo chiamavano il cuore, il segnalibro, i
+filtri, e il segnalibro premuto dalla pagina di lettura — quest'ultimo mentre il
+magazine è nascosto sotto l'articolo, che è il caso peggiore: si tornava indietro
+e le fotografie non c'erano più. Cuore e segnalibro ora toccano solo il proprio
+pulsante e il proprio contatore. Dove il ridisegno serve davvero (un filtro, un
+altro bando in evidenza) `riusaFoto()` rimette in pagina **l'elemento di prima**,
+già scaricato, invece del segnaposto appena creato.
+
+Quattro prove nuove nel collaudo, verificate anche al contrario — rimettendo la
+regressione, falliscono: nessuna fotografia nostra differita, cuore e segnalibro
+che non riscrivono il feed (con una sentinella al posto del contenuto, perché
+confrontare l'HTML non basta: un contatore che cambia lascia il resto identico),
+e il riuso degli elementi immagine.
+
+**Resta da guardare a occhio**, perché il collaudo gira su una pagina finta e non
+ha un vero motore di rendering: che le fotografie compaiano subito entrando in
+ciascuna sezione, e che restino al loro posto uscendo da un articolo e
+rientrando nel magazine.
+
+**Resta anche una cosa non fatta:** `avvio.js` aspetta il file dei testi
+(`await lingua.avvia()`) *prima* di mostrare la prima sezione. È un anello della
+catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` e
+`data-en` — ma cambia cosa si vede nel primo istante, e va deciso guardandolo.
+
 ## Deciso durante lo scorporo
 
 - La **palette generale** è rimasta in `stile/base.css`, non nel file di
@@ -237,7 +289,7 @@ in Learn con l'indirizzo già su `#study`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **14/08/2026 alle 23:37** — file toccato: `index.html`
+Ultimo salvataggio: **16/08/2026 alle 18:24** — file toccato: `collaudo/sonda.html`
 
 | File | Righe | Peso |
 |:--|--:|--:|
