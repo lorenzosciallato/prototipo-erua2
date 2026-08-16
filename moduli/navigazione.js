@@ -10,7 +10,7 @@
    vede (§2.4).
 */
 
-import { scheletro } from './nucleo.js';
+import { scheletro, foglio } from './nucleo.js';
 
 export const TABS = ['social', 'news', 'ideathon', 'study', 'magazine', 'chat', 'profilo'];
 

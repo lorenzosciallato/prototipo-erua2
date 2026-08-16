@@ -335,7 +335,7 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 
 ## Registro automatico
 
-Ultimo salvataggio: **16/08/2026 alle 19:01** — file toccato: `moduli/nucleo.js`
+Ultimo salvataggio: **16/08/2026 alle 19:01** — file toccato: `moduli/navigazione.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
