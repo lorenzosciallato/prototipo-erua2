@@ -50,3 +50,9 @@ if (iniziale.startsWith('leggi/')) {
 } else {
   mostraTab(TABS.includes(iniziale) ? iniziale : 'social', false);
 }
+
+/* Adesso sì: la sezione è in scena, e questo non fa più aspettare
+   nessuno. Si aspetta comunque, invece di lasciare la promessa per
+   aria, perché un guasto qui deve comparire nella console e non
+   sparire in silenzio. */
+await testiPronti;
