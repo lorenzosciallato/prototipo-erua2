@@ -154,9 +154,16 @@ La dicitura sui marchi in fondo alla pagina **resta**: era dovuta comunque
    un riassunto o un occhiello, non dopo.
 1. **Base di dati e autorizzazione.** Prima le policy di riga con il collaudo che
    deve fallire (`riferimento.md` §3.2), poi le funzioni che le usano.
-2. **Intestazioni di sicurezza e CSP** (§3.8). Le origini da consentire sono già
-   raccolte in `configurazione.js` sotto `traduzione.origini` e
-   `serviziEsterni`: manca scrivere le intestazioni sul servizio che pubblica.
+2. **Le intestazioni che una `<meta>` non può dare** (§3.8). La CSP è **scritta e
+   attiva**: `robot/scrivi-csp.js` la ricava dalle origini già raccolte in
+   `configurazione.js` (`traduzione.origini` e `serviziEsterni`), la scrive nella
+   `<meta>` di `index.html` e lascia il riepilogo in `INTESTAZIONI.md`.
+   Restano fuori `frame-ancestors 'none'` e `Strict-Transport-Security` — due
+   delle quattro voci di §3.8 — perché una `<meta>` non le accetta e GitHub Pages
+   non permette di impostare intestazioni. Vanno messe sul servizio che
+   pubblicherà il sito, insieme a `X-Content-Type-Options`, `Referrer-Policy` e
+   `Permissions-Policy`. L'unica concessione rimasta dentro la politica è
+   `style-src 'unsafe-inline'`, per 69 attributi `style=` generati dal codice.
 3. **Documenti per l'attivazione** (§7.3), predisposti prima, pubblicati quando
    l'ente assume la titolarità. Fra questi l'informativa sui cookie, che deve
    nominare `googtrans` di Google Translate (§7.4).
@@ -386,6 +393,15 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
 - **Controllo dei segreti (P4):** gira prima di ogni salvataggio; se trova una
   credenziale nel codice, blocca commit e pubblicazione.
   Si lancia anche a mano: `.claude/hooks/cerca-segreti.sh`
+
+**Quello che il salvataggio automatico non vede.** Registra solo `.html`, `.css`
+e `.js`. Restano fuori i file di dati (`.json`, `.mjs`), i documenti (`.md`) e
+tutto ciò che è binario: caratteri, fotografie, loghi. Per un giro intero i
+caratteri e i loghi in WebP sono rimasti fuori dal repository mentre il codice
+che li nomina c'era già — chi avesse clonato il progetto avrebbe visto una pagina
+senza caratteri e con i cerchi vuoti, e nessun errore a dirlo. Dopo un lavoro che
+tocca `caratteri/`, `immagini/` o `dati/`, va fatto un commit a mano:
+`git status --short` e si vede subito.
 
 <!-- TIMBRO AUTOMATICO — aggiornato dal salvataggio automatico, non modificare a mano -->
 

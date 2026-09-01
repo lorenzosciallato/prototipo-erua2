@@ -204,6 +204,33 @@ for (const [nome, sel, ds, id, atteso] of prove) {
   } catch (e) { console.log(`  ${nome.padEnd(18)} ERRORE`); errori.push([nome, e]); }
 }
 
+/* ── cuore e segnalibro non devono ridisegnare il feed ──────────────
+   La prova guarda il feed prima e dopo il clic. Se il gestore torna a
+   chiamare `renderFeed()`, il contenuto viene riscritto da capo — e nel
+   browser vero e' li' che le fotografie sparivano. Serve anche a
+   prendere un'eccezione dentro l'aggiornamento mirato: se
+   `aggiornaCuore` solleva, il clic non fa piu' niente e da fuori si
+   vede un cuore che non si accende. */
+console.log('\ncuore e segnalibro, senza ridisegno:');
+for (const [nome, sel, ds] of [
+  ['cuore',      '.cuore', { id: 'editoriale' }],
+  ['segnalibro', '.salva', { id: 'editoriale' }],
+]) {
+  try {
+    /* Una sentinella al posto del feed: se il gestore chiama
+       `renderFeed()` la sovrascrive, e si vede. Confrontare l'HTML vero
+       prima e dopo non basterebbe — un cuore che cambia un contatore
+       lascia il resto identico, e la prova passerebbe lo stesso. */
+    const feed = creati.get('feed-griglia');
+    if (!feed || !String(feed.innerHTML || '')) throw new Error('il feed era gia\' vuoto prima del clic');
+    feed.innerHTML = '<!--sentinella-->';
+    await clicca(sel, ds);
+    const dopo = String((creati.get('feed-griglia') || {}).innerHTML || '');
+    if (dopo !== '<!--sentinella-->') throw new Error('il feed e\' stato riscritto: le foto ripartono da zero');
+    console.log(`  ${nome.padEnd(18)} feed intatto  ✓`);
+  } catch (e) { console.log(`  ${nome.padEnd(18)} ERRORE`); errori.push([nome, e]); }
+}
+
 /* ── la vetrina della didattica, a disegno finito ───────────────────── */
 {
   const h = [...perSelettore.entries()].filter(([s]) => s.includes('data-slot'))
@@ -512,13 +539,207 @@ const prove2 = [
      const p = prioritaFoto;
      const primaSubito = p(0).includes('fetchpriority="high"') && !p(0).includes('lazy');
      const vicineSubito = !p(1).includes('lazy') && !p(2).includes('lazy');
-     const lontaneDopo = p(3).includes('loading="lazy"') && p(9).includes('loading="lazy"');
+     /* Le fotografie nostre non si rimandano mai: pesano 228 KB in tutto,
+        e rimandarle dentro un pannello nascosto vuol dire non chiederle
+        affatto. Il differimento resta possibile, ma va chiesto — e lo
+        chiedono solo le miniature che stanno su un altro server. */
+     const nostreSubito = !p(3).includes('lazy') && !p(9).includes('lazy');
+     const esterneDopo = p(3, 3, true).includes('loading="lazy"');
      /* e le sezioni devono usarla, invece di scrivere lazy a mano */
      const usata = ['ideathon', 'rivista'].every(s =>
        fs.readFileSync(path.join(REPO, 'moduli', s + '.js'), 'utf8').includes('prioritaFoto('));
-     return primaSubito && vicineSubito && lontaneDopo && usata;
+     return primaSubito && vicineSubito && nostreSubito && esterneDopo && usata;
    },
-   'la prima foto in schermo va chiesta subito, quelle sotto la piega no'],
+   'la prima foto in schermo va chiesta subito, e le nostre non si rimandano mai'],
+
+  ['nessuna foto nostra e differita',
+   () => {
+     /* Un pannello non attivo sta a display:none: un'immagine lazy la'
+        dentro non ha riquadro, non incrocia mai lo schermo e non viene
+        chiesta. Se il ridisegno la ricrea mentre e' nascosta, resta lo
+        spazio bianco. Quindi: `loading="lazy"` scritto a mano e' ammesso
+        solo sulle anteprime di YouTube, mai sulle nostre fotografie. */
+     const sospetti = [];
+     for (const f of ['articolo.js', 'rivista.js', 'ideathon.js', 'storie.js']) {
+       const src = fs.readFileSync(path.join(REPO, 'moduli', f), 'utf8');
+       src.split('\n').forEach((riga, n) => {
+         if (riga.includes('loading="lazy"')) sospetti.push(`${f}:${n + 1}`);
+       });
+     }
+     if (sospetti.length) console.log('    foto differite:', sospetti.join(', '));
+     return sospetti.length === 0;
+   },
+   'una foto nostra differita dentro un pannello nascosto non viene chiesta affatto'],
+
+  ['un cuore non rifa tutto il feed',
+   () => {
+     /* Riscrivere innerHTML del feed distrugge e ricrea ogni <img>: le
+        fotografie sparivano e tornavano a ogni clic su un cuore o su un
+        segnalibro. Quei due comandi devono toccare solo il pulsante. */
+     const src = fs.readFileSync(path.join(REPO, 'moduli/rivista.js'), 'utf8');
+     const rigaCuore = src.split('\n').find(r => r.includes('cuori[id] = !cuori[id]'));
+     const rigaSalva = src.split('\n').find(r => r.includes('salvati[id] = !salvati[id]'));
+     const cuoreMirato = !!rigaCuore && rigaCuore.includes('aggiornaCuore(')
+       && !rigaCuore.includes('renderFeed()');
+     const salvaMirato = !!rigaSalva && rigaSalva.includes('aggiornaSalvato(')
+       && !rigaSalva.includes('renderFeed()');
+     /* e lo stesso segnalibro premuto dalla pagina di lettura */
+     const lettura = fs.readFileSync(path.join(REPO, 'moduli/articolo.js'), 'utf8');
+     const letturaMirata = lettura.includes('offerta.aggiornaSalvato(');
+     return cuoreMirato && salvaMirato && letturaMirata;
+   },
+   'cuore e segnalibro ricostruivano il feed intero, fotografie comprese'],
+
+  ['le notizie si aprono su quelle dell\'alleanza',
+   () => {
+     /* Senza filtro l'elenco e' ordinato per data, e in cima finiva
+        sempre Sofia: NBU pubblica anche gli eventi in programma, datati
+        nei mesi a venire. Date giuste, ma il risultato era che aprendo
+        la sezione si leggeva un ateneo solo, e per caso. */
+     const src = fs.readFileSync(path.join(REPO, 'moduli/notizie.js'), 'utf8');
+     const parteDaAlleanza = /let filtroNews = CONFIG\.siglaAlleanza/.test(src);
+     /* e non deve poter atterrare su un elenco vuoto */
+     const ripiego = /if \(!NEWS\.some\(n => n\.u === filtroNews\)\) filtroNews = null/.test(src);
+     /* i dati devono davvero avere notizie dell'alleanza, altrimenti il
+        ripiego scatterebbe sempre e questo non varrebbe niente */
+     const dati = JSON.parse(fs.readFileSync(path.join(REPO, 'dati/notizie.json'), 'utf8'));
+     const el = Array.isArray(dati) ? dati : dati.elementi;
+     const quante = el.filter(n => n.u === 'ERUA').length;
+     if (!quante) console.log('    nessuna notizia ERUA nei dati: si aprirebbe su tutte');
+     return parteDaAlleanza && ripiego && quante > 0;
+   },
+   'senza filtro iniziale la sezione si apre su un ateneo solo, e per caso'],
+
+  ['i fogli chiesti a richiesta non scavalcano nessuno',
+   () => {
+     /* `ideathon.css` e `aula.css` non stanno piu' in `index.html`: si
+        chiedono quando servono, e un foglio chiesto cosi' finisce in
+        fondo alla cascata. E' sicuro solo finche' quella posizione non
+        cambia niente — cioe' finche' non condividono selettori con i
+        fogli che verrebbero a seguire.
+
+        Il giorno in cui qualcuno scrivesse `.st-card` dentro
+        `ideathon.css`, o toccasse una regola di `didattica.css` da li',
+        l'aspetto cambierebbe in un punto solo e a nessuno verrebbe in
+        mente di collegarlo a questo. Meglio che fallisca qui. */
+     const selettori = (f) => {
+       const css = fs.readFileSync(path.join(REPO, 'stile', f), 'utf8')
+         .replace(/\/\*[\s\S]*?\*\//g, ' ');
+       const s = new Set();
+       for (const m of css.matchAll(/([^{}]+)\{/g)) {
+         for (const p of m[1].split(',')) {
+           const t = p.trim();
+           if (t && !t.startsWith('@') && t !== 'from' && t !== 'to' && !t.includes('%')) s.add(t);
+         }
+       }
+       return s;
+     };
+     /* L'ordine originale dei dieci fogli, quando stavano tutti in
+        `index.html`. Sta scritto qui perche' due di loro da li' sono
+        usciti, e senza questo elenco non si saprebbe piu' quale
+        posizione avevano. Conta solo chi un foglio **supera**: stare
+        dopo qualcuno che gia' stava davanti non cambia niente. */
+     const ORDINE = ['base.css', 'rivista.css', 'articolo.css', 'ascolta.css',
+       'notizie.css', 'sociale.css', 'storie.css', 'ideathon.css',
+       'didattica.css', 'aula.css'];
+     const aRichiesta = ['ideathon.css', 'aula.css'];
+
+     const html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
+     const inPagina = [...html.matchAll(/href="stile\/([a-z-]+)\.css"/g)].map(m => m[1] + '.css');
+
+     const guai = [];
+     for (const f of aRichiesta) {
+       if (inPagina.includes(f)) { guai.push(`${f} e' tornato in index.html`); continue; }
+       const mio = selettori(f);
+       /* Chi supera: tutti quelli che nell'ordine originale gli stavano
+          **dopo**. Fra i due chiesti a richiesta l'ordine dipende da chi
+          si apre prima, quindi contano in entrambi i versi. */
+       const superati = ORDINE.slice(ORDINE.indexOf(f) + 1)
+         .concat(aRichiesta.filter(x => x !== f))
+         .filter((x, i, a) => a.indexOf(x) === i);
+       for (const altro of superati) {
+         const comuni = [...selettori(altro)].filter(s => mio.has(s));
+         if (comuni.length) guai.push(`${f} supererebbe ${altro} e condividono ${comuni.slice(0, 3).join(', ')}`);
+       }
+     }
+     if (guai.length) console.log('    ' + guai.join('\n    '));
+     return guai.length === 0;
+   },
+   'un foglio chiesto a richiesta finisce in fondo: se condivide selettori, l\'aspetto cambia'],
+
+  ['nessun carattere chiesto a un server di terzi',
+   () => {
+     /* riferimento.md §6.1, PRIORITÀ ALTA. Caricare un carattere da
+        fuori trasmette l'IP di chi visita a un operatore extraeuropeo:
+        nel 2022 un tribunale tedesco ha riconosciuto per questo un
+        risarcimento a un singolo visitatore, e un ateneo dell'alleanza
+        e' in Germania.
+
+        La prova guarda tutto il codice che finisce nel browser, non
+        solo index.html: il foglio da stampare dell'aula se li chiedeva
+        per conto suo, dentro una finestra che non si vede. */
+     /* I commenti che spiegano perche' Google non c'e' piu' nominano
+        Google, ed e' giusto cosi'. Vanno tolti prima di cercare, non
+        riconosciuti a naso: un commento su piu' righe non si distingue
+        guardando una riga per volta. */
+     const senzaCommenti = (src, html) => src
+       .replace(/\/\*[\s\S]*?\*\//g, ' ')
+       .replace(html ? /<!--[\s\S]*?-->/g : /(?!)/g, ' ')
+       .replace(/^\s*\/\/.*$/gm, ' ');
+
+     const veri = [];
+     const guarda = (cartella, filtro) => {
+       for (const f of fs.readdirSync(path.join(REPO, cartella))) {
+         if (!filtro.test(f)) continue;
+         const p = path.join(cartella, f);
+         const src = senzaCommenti(fs.readFileSync(path.join(REPO, p), 'utf8'), f.endsWith('.html'));
+         if (/fonts\.(googleapis|gstatic)\.com/.test(src)) veri.push(p);
+       }
+     };
+     guarda('.', /^(index\.html|configurazione\.js|avvio\.js)$/);
+     guarda('moduli', /\.js$/);
+     guarda('stile', /\.css$/);
+
+     if (veri.length) console.log('    caratteri da fuori:', veri.join(', '));
+     return veri.length === 0;
+   },
+   'i caratteri vanno ospitati nel progetto: node robot/scarica-caratteri.js'],
+
+  ['i caratteri ospitati ci sono davvero',
+   () => {
+     /* Il foglio generato non deve dichiarare file che non esistono:
+        un `@font-face` che punta nel vuoto non da' errore, fa solo
+        comparire il testo in un carattere di ripiego — e non se ne
+        accorge nessuno finche' qualcuno non guarda bene. */
+     const foglio = path.join(REPO, 'stile/caratteri.css');
+     if (!fs.existsSync(foglio)) return false;
+     const css = fs.readFileSync(foglio, 'utf8');
+     const chiesti = [...css.matchAll(/url\('\.\.\/([^']+)'\)/g)].map(m => m[1]);
+     if (!chiesti.length) return false;
+     const mancanti = chiesti.filter(f => !fs.existsSync(path.join(REPO, f)));
+     if (mancanti.length) console.log('    file mancanti:', mancanti.join(', '));
+     /* e la licenza va conservata accanto ai file (§6.1) */
+     const licenza = fs.existsSync(path.join(REPO, 'caratteri/LICENZA.txt'));
+     if (!licenza) console.log('    manca caratteri/LICENZA.txt');
+     return mancanti.length === 0 && licenza;
+   },
+   'un @font-face che punta nel vuoto non da\' errore: cambia solo il carattere'],
+
+  ['le foto sopravvivono al ridisegno',
+   () => {
+     /* Quando il ridisegno serve davvero (un filtro, un altro bando), le
+        immagini gia' scaricate devono tornare in pagina come elementi,
+        non come richieste nuove. */
+     const nucleo = fs.readFileSync(path.join(REPO, 'moduli/nucleo.js'), 'utf8');
+     const esiste = nucleo.includes('export function riusaFoto(');
+     /* il caso dello stesso indirizzo due volte nella stessa pagina:
+        senza questo controllo la seconda comparsa sposta la prima */
+     const nonSposta = nucleo.includes('isConnected');
+     const usata = ['rivista.js', 'ideathon.js'].every(f =>
+       fs.readFileSync(path.join(REPO, 'moduli', f), 'utf8').includes('riusaFoto('));
+     return esiste && nonSposta && usata;
+   },
+   'senza riuso, ogni ridisegno riparte da zero e lascia il bianco'],
   ['la voce Ideathon non sembra selezionata',
    () => {
      const css = fs.readFileSync(path.join(REPO, 'stile/ideathon.css'), 'utf8');

@@ -2,16 +2,16 @@
  "numero": 3,
  "data": "04/2026",
  "loghi": {
-  "UNIMC": "immagini/loghi/unimc.jpg",
-  "MRU": "immagini/loghi/mru.jpg",
-  "NBU": "immagini/loghi/nbu.jpg",
-  "EUV": "immagini/loghi/euv.jpg",
-  "SWPS": "immagini/loghi/swps.jpg",
-  "ULPGC": "immagini/loghi/ulpgc.jpg",
-  "UAEGEAN": "immagini/loghi/uaegean.jpg",
-  "UP8": "immagini/loghi/up8.jpg",
-  "ERUA": "immagini/loghi/erua.jpg",
-  "SIMBOLO": "immagini/loghi/simbolo.jpg"
+  "UNIMC": "immagini/loghi/unimc.webp",
+  "MRU": "immagini/loghi/mru.webp",
+  "NBU": "immagini/loghi/nbu.webp",
+  "EUV": "immagini/loghi/euv.webp",
+  "SWPS": "immagini/loghi/swps.webp",
+  "ULPGC": "immagini/loghi/ulpgc.webp",
+  "UAEGEAN": "immagini/loghi/uaegean.webp",
+  "UP8": "immagini/loghi/up8.webp",
+  "ERUA": "immagini/loghi/erua.webp",
+  "SIMBOLO": "immagini/loghi/simbolo.webp"
  },
  "articoli": [
   {

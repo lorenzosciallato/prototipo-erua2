@@ -1,0 +1,22 @@
+I caratteri in questa cartella sono sotto SIL Open Font License 1.1.
+
+  Fraunces        — Undercase Type / Phaedra Charles, Flavia Zimbardi
+                    https://github.com/undercasetype/Fraunces
+  Inter           — Rasmus Andersson
+                    https://github.com/rsms/inter
+  JetBrains Mono  — JetBrains
+                    https://github.com/JetBrains/JetBrainsMono
+  Source Serif 4  — Adobe / Frank Grießhammer
+                    https://github.com/adobe-fonts/source-serif
+
+La licenza consente di usarli, modificarli e ridistribuirli, anche
+ospitandoli sul proprio server, a due condizioni: che i file mantengano
+questa licenza, e che non vengano venduti da soli.
+
+Il testo integrale della licenza:  https://openfontlicense.org
+
+Sono qui e non su un server di terzi per la ragione scritta in
+riferimento.md §6.1: caricarli da fuori trasmette l'IP di chi visita a
+un operatore extraeuropeo.
+
+Rigenerato da:  node robot/scarica-caratteri.js
