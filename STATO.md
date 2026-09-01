@@ -410,7 +410,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 17:39** — file toccato: `avvio.js`
+Ultimo salvataggio: **01/09/2026 alle 17:58** — file toccato: `collaudo/diagnosi.html`
 
 | File | Righe | Peso |
 |:--|--:|--:|

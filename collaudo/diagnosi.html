@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnosi — che cosa rallenta e che cosa sborda</title>
+<!--
+  Questa pagina non fa parte dell'applicazione: è uno strumento di
+  collaudo, come `sonda.html` accanto. La sonda guarda le fotografie;
+  questa guarda tre cose diverse, che a occhio si confondono fra loro:
+
+    1. QUANTO CI METTE  — quando compare lo scheletro, quando il
+       contenuto vero. "È lento" può voler dire che lo scheletro tarda
+       (colpa dell'avvio) o che tarda il contenuto (colpa dei dati).
+       Sono due guasti diversi con due rimedi diversi.
+
+    2. CHE COSA SBORDA  — quale elemento è più largo della finestra.
+       Basta uno, e tutta la pagina si può spostare di lato: la testata
+       sembra tagliata, la barra delle sezioni parte fuori schermo. Da
+       fuori sembra "il sito è rotto", ma il colpevole è un elemento
+       solo e si può nominare.
+
+    3. CHE COS'È QUELLA COSA GRANDE  — l'elemento che occupa più
+       superficie. Serve quando si vede una forma enorme che non
+       dovrebbe esserci e non si sa da dove esca.
+
+  In più raccoglie gli errori di JavaScript, che sono la spiegazione
+  più frequente di una sezione che resta vuota per sempre.
+
+  Va aperta da un server locale, non con un doppio clic sul file: la
+  finestra dentro deve stare sulla stessa origine per poter essere
+  guardata da qui.
+
+      python3 -m http.server 8765
+      →  http://localhost:8765/collaudo/diagnosi.html
+-->
+<style>
+  :root{--sup:#fbfaf7;--sup2:#f2efe9;--testo:#1c1b19;--testo2:#6b675f;
+        --bordo:#e2ded5;--male:#b3261e;--bene:#1e6b3a;--forse:#9a6b00}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font:14px/1.5 system-ui,sans-serif;background:var(--sup2);color:var(--testo);
+       display:grid;grid-template-columns:auto minmax(420px,1fr);height:100vh;overflow:hidden}
+  @media(max-width:1000px){body{grid-template-columns:1fr;grid-template-rows:45vh 55vh}}
+
+  .palco{display:grid;place-items:start center;overflow:auto;padding:1rem;background:#ddd8ce}
+  iframe{border:0;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.18);display:block}
+
+  aside{background:var(--sup);border-left:1px solid var(--bordo);
+        display:flex;flex-direction:column;overflow:hidden}
+  header{padding:.85rem 1rem;border-bottom:1px solid var(--bordo)}
+  h1{font-size:1rem;letter-spacing:-.01em}
+  header p{font-size:.78rem;color:var(--testo2);margin-top:.2rem}
+
+  .comandi{display:flex;flex-wrap:wrap;gap:.35rem;padding:.7rem 1rem;
+           border-bottom:1px solid var(--bordo);align-items:center}
+  .comandi button{font:inherit;font-size:.76rem;font-weight:600;cursor:pointer;
+       background:var(--sup2);border:1px solid var(--bordo);border-radius:99px;
+       padding:.28rem .7rem;color:var(--testo)}
+  .comandi button:hover{background:#e8e4db}
+  .comandi button.on{background:var(--testo);color:var(--sup);border-color:var(--testo)}
+  .comandi span.eti{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;
+       color:var(--testo2);font-weight:700;margin-right:.15rem}
+
+  #verdetto{padding:.75rem 1rem;font-weight:700;font-size:.82rem;background:#fff;
+       border-bottom:1px solid var(--bordo)}
+  #verdetto.male{color:var(--male)} #verdetto.bene{color:var(--bene)}
+  #verdetto.forse{color:var(--forse)}
+
+  .parti{overflow:auto;flex:1}
+  section.blocco{border-bottom:1px solid var(--bordo);padding:.7rem 1rem}
+  h2{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;
+     color:var(--testo2);margin-bottom:.45rem}
+  table{width:100%;border-collapse:collapse;font-size:.75rem}
+  td{padding:.22rem .3rem;border-bottom:1px solid #f0ece4;vertical-align:top;word-break:break-word}
+  td.n{text-align:right;font-family:ui-monospace,monospace;white-space:nowrap;color:var(--testo2)}
+  code{font-family:ui-monospace,monospace;font-size:.72rem}
+  .vuoto{color:var(--testo2);font-size:.76rem;font-style:italic}
+  .grave{color:var(--male);font-weight:700}
+  .ok{color:var(--bene);font-weight:700}
+  #copia{width:100%;margin-top:.5rem}
+  textarea{width:100%;height:9rem;font-family:ui-monospace,monospace;font-size:.7rem;
+     border:1px solid var(--bordo);border-radius:8px;padding:.5rem;background:#fff;color:var(--testo)}
+</style>
+</head>
+<body>
+
+<div class="palco"><iframe id="app" title="ERUA connect sotto osservazione"></iframe></div>
+
+<aside>
+  <header>
+    <h1>Diagnosi</h1>
+    <p>Quanto ci mette · che cosa sborda · che cos'è quella cosa grande</p>
+  </header>
+
+  <div class="comandi">
+    <span class="eti">Schermo</span>
+    <button data-w="360" data-h="740" class="on">telefono 360</button>
+    <button data-w="414" data-h="896">telefono 414</button>
+    <button data-w="820" data-h="900">tavoletta 820</button>
+    <button data-w="1440" data-h="900">schermo 1440</button>
+  </div>
+  <div class="comandi">
+    <span class="eti">Sezione</span>
+    <button data-h2="social" class="on">social</button>
+    <button data-h2="news">news</button>
+    <button data-h2="magazine">magazine</button>
+    <button data-h2="ideathon">ideathon</button>
+    <button data-h2="study">study</button>
+    <button data-h2="chat">chat</button>
+    <button data-h2="profilo">profilo</button>
+  </div>
+
+  <div id="verdetto">in attesa…</div>
+
+  <div class="parti">
+    <section class="blocco">
+      <h2>Errori di JavaScript</h2>
+      <div id="errori"><p class="vuoto">nessuno finora</p></div>
+    </section>
+
+    <section class="blocco">
+      <h2>Quanto ci mette</h2>
+      <table id="tempi"></table>
+    </section>
+
+    <section class="blocco">
+      <h2>Che cosa sborda a destra</h2>
+      <table id="sborda"></table>
+    </section>
+
+    <section class="blocco">
+      <h2>Gli elementi più grandi</h2>
+      <table id="grandi"></table>
+    </section>
+
+    <section class="blocco">
+      <h2>Da incollare nella conversazione</h2>
+      <textarea id="rapporto" readonly></textarea>
+      <button id="copia">copia il rapporto</button>
+    </section>
+  </div>
+</aside>
+
+<script>
+/* ── stato ───────────────────────────────────────────────────────── */
+const telaio = document.getElementById('app');
+let larghezza = 360, altezza = 740, sezione = 'social';
+let errori = [], tempi = [], t0 = 0, sbordanti = [], grandi = [];
+
+/* Un nome leggibile per un elemento: tag, id e classi. Senza questo il
+   rapporto dice "DIV" e non serve a niente. */
+function nome(el){
+  let s = el.tagName.toLowerCase();
+  if (el.id) s += '#' + el.id;
+  if (el.className && typeof el.className === 'string')
+    s += '.' + el.className.trim().split(/\s+/).slice(0,3).join('.');
+  return s;
+}
+
+/* ── avvio di un giro ────────────────────────────────────────────── */
+function riparti(){
+  errori = []; tempi = []; sbordanti = []; grandi = [];
+  disegna();
+  telaio.style.width = larghezza + 'px';
+  telaio.style.height = altezza + 'px';
+  t0 = performance.now();
+  /* la marca di tempo rende l'indirizzo unico: senza, tornare sulla
+     stessa sezione non ricaricherebbe niente e i tempi sarebbero finti */
+  telaio.src = '../index.html?diagnosi=' + Date.now() + '#' + sezione;
+  aggancia();
+}
+
+/* Gli errori vanno raccolti PRIMA che la pagina dentro esegua il suo
+   codice: se aspettassimo `load` avremmo già perso quelli dell'avvio,
+   che sono proprio quelli che lasciano una sezione vuota per sempre.
+   Quindi si guarda in continuazione se la finestra dentro esiste già,
+   e appena esiste le si attaccano gli ascoltatori. */
+function aggancia(){
+  let agganciato = false;
+  const prova = setInterval(() => {
+    let w;
+    try { w = telaio.contentWindow; } catch (e) { return; }
+    if (!w || agganciato) return;
+    try {
+      w.addEventListener('error', ev => {
+        errori.push({ q: Math.round(performance.now() - t0),
+          t: (ev.message || 'errore') + ' — ' + (ev.filename || '').split('/').pop() + ':' + ev.lineno });
+        disegna();
+      });
+      w.addEventListener('unhandledrejection', ev => {
+        errori.push({ q: Math.round(performance.now() - t0),
+          t: 'promessa non gestita: ' + (ev.reason && ev.reason.message || ev.reason) });
+        disegna();
+      });
+      agganciato = true;
+    } catch (e) { /* non ancora navigabile */ }
+  }, 4);
+  setTimeout(() => clearInterval(prova), 3000);
+}
+
+/* ── che cosa c'è dentro, un colpo d'occhio al secondo ───────────── */
+const TAPPE = [
+  ['testata',   d => d.querySelector('header')],
+  ['scheletro', d => d.querySelector('.scheletro')],
+  ['contenuto', d => {
+      const p = d.querySelector('.pannello.attivo');
+      if (!p) return null;
+      /* contenuto vero = qualcosa che non sia uno scheletro */
+      return [...p.querySelectorAll('article,.storia,.post,.sc-post,.st-corso,.news,.f-card,.tool,.bolla,.idea-bando')]
+        .find(el => !el.closest('.scheletro')) || null;
+    }],
+];
+const viste = {};
+
+function guarda(){
+  let d;
+  try { d = telaio.contentDocument; } catch (e) { return; }
+  if (!d || !d.body) return;
+  const q = Math.round(performance.now() - t0);
+
+  for (const [etichetta, trova] of TAPPE){
+    if (viste[etichetta]) continue;
+    let el = null;
+    try { el = trova(d); } catch (e) { el = null; }
+    if (el){ viste[etichetta] = q; tempi.push({ etichetta, q }); }
+  }
+
+  /* chi sborda: si misura contro la larghezza della finestra dentro,
+     non contro la nostra */
+  const w = telaio.contentWindow.innerWidth;
+  const fuori = [], area = [];
+  for (const el of d.querySelectorAll('body *')){
+    let r;
+    try { r = el.getBoundingClientRect(); } catch (e) { continue; }
+    if (!r.width || !r.height) continue;
+    const st = telaio.contentWindow.getComputedStyle(el);
+    if (st.display === 'none' || st.visibility === 'hidden') continue;
+    /* un elemento che scorre di suo (la barra delle sezioni, la fila
+       dei loghi) è largo apposta: non è lui a spostare la pagina */
+    const scorreDaSe = el.closest('[style*="overflow"],nav.tabs,.storie,.chips,.fila,.fg-scatola');
+    if (r.right > w + 1 && !scorreDaSe)
+      fuori.push({ n: nome(el), oltre: Math.round(r.right - w), largo: Math.round(r.width) });
+    area.push({ n: nome(el), a: Math.round(r.width * r.height / 1000),
+                l: Math.round(r.width), h: Math.round(r.height) });
+  }
+  sbordanti = fuori.sort((a,b) => b.oltre - a.oltre).slice(0, 8);
+  grandi = area.sort((a,b) => b.a - a.a).slice(0, 8);
+  disegna();
+}
+
+/* ── il quadro ───────────────────────────────────────────────────── */
+function riga(celle){ return '<tr>' + celle.map(c => c).join('') + '</tr>'; }
+
+function disegna(){
+  const boxE = document.getElementById('errori');
+  boxE.innerHTML = errori.length
+    ? '<table>' + errori.map(e => riga([
+        `<td class="n">${e.q} ms</td>`, `<td class="grave">${e.t}</td>`])).join('') + '</table>'
+    : '<p class="vuoto">nessuno finora</p>';
+
+  document.getElementById('tempi').innerHTML = tempi.length
+    ? tempi.map(t => riga([`<td>${t.etichetta}</td>`, `<td class="n">${t.q} ms</td>`])).join('')
+    : riga(['<td class="vuoto" colspan="2">niente ancora</td>']);
+
+  document.getElementById('sborda').innerHTML = sbordanti.length
+    ? sbordanti.map(s => riga([`<td><code>${s.n}</code></td>`,
+        `<td class="n">+${s.oltre}px<br>largo ${s.largo}</td>`])).join('')
+    : riga(['<td class="ok" colspan="2">niente sborda — la pagina sta dentro</td>']);
+
+  document.getElementById('grandi').innerHTML = grandi.length
+    ? grandi.map(g => riga([`<td><code>${g.n}</code></td>`,
+        `<td class="n">${g.l}×${g.h}</td>`])).join('')
+    : riga(['<td class="vuoto" colspan="2">niente ancora</td>']);
+
+  const v = document.getElementById('verdetto');
+  if (errori.length){ v.className = 'male'; v.textContent = errori.length + ' errore/i: una sezione può restare vuota per sempre'; }
+  else if (sbordanti.length){ v.className = 'forse'; v.textContent = 'qualcosa sborda di ' + sbordanti[0].oltre + 'px: è questo che taglia la pagina'; }
+  else if (viste.contenuto){ v.className = 'bene'; v.textContent = 'contenuto in ' + viste.contenuto + ' ms, niente sborda'; }
+  else { v.className = ''; v.textContent = 'in attesa del contenuto…'; }
+
+  document.getElementById('rapporto').value = rapporto();
+}
+
+function rapporto(){
+  const r = [];
+  r.push(`schermo ${larghezza}×${altezza} · sezione ${sezione}`);
+  r.push('tempi: ' + (tempi.map(t => `${t.etichetta} ${t.q}ms`).join(' · ') || 'nessuno'));
+  r.push('errori: ' + (errori.map(e => `[${e.q}ms] ${e.t}`).join(' | ') || 'nessuno'));
+  r.push('sborda: ' + (sbordanti.map(s => `${s.n} +${s.oltre}px (largo ${s.largo})`).join(' | ') || 'niente'));
+  r.push('più grandi: ' + grandi.map(g => `${g.n} ${g.l}×${g.h}`).join(' | '));
+  return r.join('\n');
+}
+
+/* ── comandi ─────────────────────────────────────────────────────── */
+document.querySelectorAll('.comandi button').forEach(b => {
+  b.addEventListener('click', () => {
+    const gruppo = b.parentElement;
+    gruppo.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    if (b.dataset.w){ larghezza = +b.dataset.w; altezza = +b.dataset.h; }
+    if (b.dataset.h2){ sezione = b.dataset.h2; }
+    for (const k in viste) delete viste[k];
+    riparti();
+  });
+});
+
+document.getElementById('copia').addEventListener('click', () => {
+  const t = document.getElementById('rapporto');
+  t.select();
+  try { document.execCommand('copy'); } catch (e) { /* si copia a mano */ }
+});
+
+setInterval(guarda, 500);
+riparti();
+</script>
+</body>
+</html>
