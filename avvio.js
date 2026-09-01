@@ -56,3 +56,11 @@ if (iniziale.startsWith('leggi/')) {
    aria, perché un guasto qui deve comparire nella console e non
    sparire in silenzio. */
 await testiPronti;
+
+/* La sezione dopo si scalda quando il browser non ha più niente da
+   fare — e questa riga sta **in fondo** apposta. Messa più in su
+   avrebbe messo le notizie in gara con la piazza sulla stessa
+   connessione: si guadagnava sulla seconda schermata rovinando la
+   prima, che è il contrario di quello che serve. Vedi `scaldaLeAltre()`
+   in `moduli/navigazione.js`: sa anche quando è meglio non farlo. */
+scaldaLeAltre();

@@ -552,7 +552,7 @@ Ultimo salvataggio: **01/09/2026 alle 18:39** — file toccato: `avvio.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
-| `avvio.js` | 58 | 4.0K |
+| `avvio.js` | 66 | 4.0K |
 | `collaudo/diagnosi.html` | 317 | 16K |
 | `collaudo/sonda.html` | 280 | 12K |
 | `configurazione.js` | 313 | 16K |
