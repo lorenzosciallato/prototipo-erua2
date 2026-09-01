@@ -239,7 +239,8 @@ nav.tabs::-webkit-scrollbar{display:none}
    foglio che arriva dopo. `display:none` è una condizione di partenza,
    non un effetto. Il foglio dell'aula continua a portarsi il resto —
    posizione, fondo, disposizione — e `.st-aula.on` lo riapre quando
-   serve, perché ha specificità maggiore e vince comunque. */
+   serve, perché ha specificità maggiore e vince comunque.
+
    `.ev-float` è il secondo caso, ed è stata la prova stessa a trovarlo
    dopo che il primo era stato corretto: sta anch'essa in `index.html`
    (riga 338) e anch'essa la nascondeva solo il foglio dell'aula. È il
