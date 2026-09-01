@@ -102,7 +102,24 @@ export function mostraTab(nome, aggiornaHash = true) {
   if (piu) piu.classList.toggle('mostra', nome === 'social');
 
   if (aggiornaHash) scriviHash(nome);
-  setTimeout(() => window.scrollTo(0, scrollMem[nome] || 0), 0);
+
+  /* Il salto in cima va fatto **di colpo**, non accompagnato.
+     `stile/base.css` mette `scroll-behavior:smooth` su tutta la pagina,
+     e quello vale anche per gli spostamenti chiesti dal codice: uno
+     `scrollTo` normale, qui, animava la risalita. Chi era in fondo alla
+     piazza e premeva «News» si vedeva scorrere all'indietro tutta la
+     piazza prima di arrivare — mezzo secondo in cui la sezione nuova
+     c'e' gia' ma non si vede, e sembra che il sito ci stia pensando.
+     Cambiare sezione non e' un movimento dentro la pagina: e' un
+     altrove, e l'occhio non ha niente da seguire.
+
+     Lo scorrimento accompagnato resta dov'e' utile — i collegamenti
+     interni e il ritorno in cima all'elenco delle notizie. */
+  setTimeout(() => {
+    const dove = scrollMem[nome] || 0;
+    try { window.scrollTo({ top: dove, left: 0, behavior: 'instant' }); }
+    catch (err) { window.scrollTo(0, dove); }
+  }, 0);
 
   /* prima gli scheletri, poi il caricamento: in quest'ordine, e senza
      aspettare niente in mezzo */
