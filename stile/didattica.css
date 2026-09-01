@@ -68,7 +68,28 @@
 .st-dive .kick{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--pesca-s)}
 .st-dive .tit{font-family:var(--font-display);font-weight:600;font-size:1rem;letter-spacing:-.015em;line-height:1.3;
   margin:.18rem 0 .08rem;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.st-dive .sub{font-size:.78rem;color:var(--testo2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* `display:block` non è decorazione: senza, le altre tre dichiarazioni
+   di questa riga non fanno niente.
+
+   Il markup qui è uno `<span>`, quindi inline — e su una scatola inline
+   `overflow` e `text-overflow` **si ignorano**, perché una riga di testo
+   non ha un riquadro proprio da ritagliare. Restava attivo solo
+   `white-space:nowrap`: il testo correva dritto fino a 357 pixel dentro
+   un contenitore da 134, sfondava la scheda e portava la larghezza della
+   pagina a 478 su uno schermo da 360.
+
+   Da lì il sintomo che sembrava tutt'altro: su telefono la pagina si
+   poteva trascinare di lato, e trascinandola la testata — che è
+   appiccicata in alto e larga quanto la finestra, non quanto il
+   documento — scorreva via lasciando il vuoto a destra. Sembrava «il
+   sito è tagliato male», ed era una riga di testo che non andava a capo
+   in una scheda dei corsi.
+
+   Vale la regola generale: i puntini di sospensione hanno bisogno di
+   una scatola. Se l'elemento è inline, `nowrap` da solo non ritaglia —
+   sfonda. */
+.st-dive .sub{display:block;font-size:.78rem;color:var(--testo2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .st-dive .d{font-family:var(--font-mono);font-size:.66rem;color:var(--testo2);flex:0 0 auto;
   border:1px solid var(--bordo2);border-radius:99px;padding:.28rem .6rem}
 
