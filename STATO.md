@@ -601,7 +601,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 19:25** — file toccato: `stile/base.css`
+Ultimo salvataggio: **01/09/2026 alle 19:27** — file toccato: `collaudo/misura.html`
 
 | File | Righe | Peso |
 |:--|--:|--:|

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>misura</title>
+<!--
+  Banco di misura per `collaudo/schermo.mjs`. Non è una pagina da
+  guardare: tiene ERUA connect dentro una finestra della larghezza
+  voluta, la misura, e scrive il risultato in fondo perché chi l'ha
+  aperta col browser senza interfaccia lo possa leggere.
+
+  Perché una finestra dentro invece della pagina intera: un `<iframe>`
+  ha un suo schermo, quindi le regole che valgono «sotto gli 820px»
+  scattano davvero, e si può provare un telefono senza avere un
+  telefono. La sezione e la misura si passano nell'indirizzo:
+
+      misura.html?w=360&h=740&sez=study
+-->
+<style>html,body{margin:0;background:#fff}iframe{border:0;display:block}</style>
+</head>
+<body>
+<iframe id="dentro"></iframe>
+<pre id="esito">in corso</pre>
+<script>
+const q = new URLSearchParams(location.search);
+const W = +q.get('w') || 360, H = +q.get('h') || 740, SEZ = q.get('sez') || 'social';
+
+const tel = document.getElementById('dentro');
+tel.style.width = W + 'px';
+tel.style.height = H + 'px';
+tel.src = '../index.html?misura=1#' + SEZ;
+
+/* Gli errori della pagina dentro vanno raccolti da qui: uno che scoppia
+   all'avvio è la spiegazione più frequente di una sezione che resta
+   vuota, e da fuori non si vede. */
+const guasti = [];
+function aggancia() {
+  try {
+    const w = tel.contentWindow;
+    if (!w) return false;
+    w.addEventListener('error', e => guasti.push('errore: ' + (e.message || '').slice(0, 120)));
+    w.addEventListener('unhandledrejection', e =>
+      guasti.push('promessa non gestita: ' + String(e.reason && e.reason.message || e.reason).slice(0, 120)));
+    return true;
+  } catch (e) { return false; }
+}
+const provaAggancio = setInterval(() => { if (aggancia()) clearInterval(provaAggancio); }, 5);
+setTimeout(() => clearInterval(provaAggancio), 3000);
+
+function misura() {
+  const d = tel.contentDocument, w = tel.contentWindow;
+  if (!d || !d.body) return { pronto: false };
+
+  const nome = el => {
+    let s = el.tagName.toLowerCase();
+    if (el.id) s += '#' + el.id;
+    if (typeof el.className === 'string' && el.className.trim())
+      s += '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.');
+    return s;
+  };
+
+  /* Chi sborda davvero. Un elemento più largo della finestra non è di
+     per sé un guaio: le file che scorrono di lato — la barra delle
+     sezioni, i cerchi degli atenei — sono larghe apposta, e stanno
+     dentro un contenitore che le ritaglia. Quelli che spostano la
+     pagina sono gli altri: quelli che nessun antenato ritaglia. */
+  const fuori = [];
+  for (const el of d.querySelectorAll('body *')) {
+    const r = el.getBoundingClientRect();
+    if (!r.width || !r.height || r.right <= W + 1) continue;
+    if (w.getComputedStyle(el).display === 'none') continue;
+    let a = el.parentElement, ritagliato = false;
+    while (a && a !== d.body) {
+      const cs = w.getComputedStyle(a);
+      if (cs.overflow !== 'visible' || cs.overflowX !== 'visible') { ritagliato = true; break; }
+      a = a.parentElement;
+    }
+    if (!ritagliato) fuori.push(nome(el) + ' +' + Math.round(r.right - W) + 'px');
+  }
+
+  const pan = d.querySelector('.pannello.attivo');
+  return {
+    pronto: true,
+    larghezzaDocumento: d.documentElement.scrollWidth,
+    finestra: W,
+    sezione: pan ? pan.id : '(nessun pannello attivo)',
+    /* quanto in basso comincia la sezione: se è a mille pixel, sopra c'è
+       qualcosa che non dovrebbe esserci */
+    inizioSezione: pan ? Math.round(pan.getBoundingClientRect().top + w.scrollY) : -1,
+    contenuto: pan ? pan.querySelectorAll(
+      'article,.sc-post,.news,.st-corso,.st-dive,.storia,.tool,.bolla,.idea-bando,.f-card').length : 0,
+    sborda: [...new Set(fuori)].slice(0, 5),
+    guasti: guasti.slice(0, 5),
+  };
+}
+
+/* Si misura quando la pagina dentro ha finito di muoversi: due letture
+   uguali di fila. Un'attesa a tempo fisso sarebbe o troppo corta su una
+   macchina lenta o sprecata su una veloce. */
+let precedente = null, uguali = 0, giri = 0;
+const battito = setInterval(() => {
+  giri++;
+  const m = misura();
+  const ora = JSON.stringify(m);
+  if (m.pronto && ora === precedente) uguali++; else uguali = 0;
+  precedente = ora;
+  if ((m.pronto && uguali >= 3) || giri > 60) {
+    clearInterval(battito);
+    document.getElementById('esito').textContent = 'ESITO ' + ora;
+  }
+}, 200);
+</script>
+</body>
+</html>
