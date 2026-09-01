@@ -53,6 +53,37 @@
 <link rel="modulepreload" href="moduli/loghi-incorporati.js">
 <link rel="modulepreload" href="moduli/navigazione.js">
 
+<!-- LA SEZIONE SU CUI SI ATTERRA NON È UNA SEZIONE COME LE ALTRE.
+
+     Le altre si caricano quando qualcuno ci entra, ed è giusto: chi
+     apre solo la rivista non deve scaricare la didattica (§2.4). Ma
+     nella piazza non ci si entra — ci si arriva aprendo il sito. Per
+     lei «su richiesta» vuol dire far aspettare tutti, sempre.
+
+     E l'attesa era peggiore di quanto sembra, perché i due pezzi che
+     mancavano il browser li scopriva **uno dopo l'altro, alla fine di
+     tutto**: prima doveva arrivare l'intero gruppo dei moduli, poi
+     `navigazione.js` chiedeva `sociale.js`, e solo quando quello era
+     arrivato ed eseguito partiva la richiesta di `dati/sociale.json`.
+     Due viaggi in rete in fila indiana, in fondo a una catena di sei
+     passi. Su un telefono in giro sono secondi, non millesimi.
+
+     Dichiarandoli qui partono col resto, in parallelo, dal primo
+     istante in cui il browser legge la pagina. Non si scarica niente
+     di più: si scarica prima, e insieme.
+
+     Fino al 10 agosto il problema non poteva esistere: i post stavano
+     scritti dentro `index.html`, che pesava 813 KB. Il file unico non
+     aspettava perché non chiedeva niente a nessuno. -->
+<link rel="modulepreload" href="moduli/sociale.js">
+<!-- `crossorigin` non è un refuso nemmeno qui, ed è l'opposto di quello
+     che sembra: serve a far combaciare questa richiesta con la `fetch()`
+     che partirà dal codice. Se le due non combaciano il file si scarica
+     **due volte** e il preavviso diventa un danno. Perciò `dati()` in
+     `moduli/nucleo.js` chiede `credentials:'omit'`: stessa modalità,
+     stessa richiesta, un solo scaricamento. -->
+<link rel="preload" href="dati/sociale.json" as="fetch" crossorigin>
+
 <!-- L'ordine di questi fogli è quello del file originale e non va
      cambiato: alcune regole si sovrascrivono a vicenda, e spostarne una
      più in su o più in giù cambia l'aspetto delle schede. -->
