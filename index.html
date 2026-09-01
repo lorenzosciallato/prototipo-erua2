@@ -353,14 +353,44 @@
 <!-- ============ SOCIAL ============ -->
 <section class="pannello attivo" id="p-social" role="tabpanel">
 
+  <!-- GLI SCHELETRI DI QUESTA SEZIONE SONO SCRITTI QUI DENTRO, A MANO.
+
+       Nelle altre sezioni li dipinge `moduli/navigazione.js` appena si
+       entra, e va benissimo: quando ci si entra, il codice gira già da
+       un pezzo. Ma sulla piazza non si entra — ci si arriva aprendo il
+       sito, e in quel momento JavaScript non ha ancora fatto niente.
+       Questi tre contenitori restavano vuoti per tutto il tempo che
+       serve alla pagina a leggere dieci fogli di stile e a mettere
+       insieme i moduli: schermo bianco, senza nemmeno un segno che
+       qualcosa stia arrivando.
+
+       Il vuoto, per chi guarda, è indistinguibile da un guasto: uno
+       pensa che il sito sia rotto e se ne va prima che i dati arrivino.
+       Scritti qui compaiono col primo disegno della pagina, senza
+       aspettare niente e senza chiedere niente a nessuno.
+
+       Le forme sono le stesse che `scheletro()` produce in
+       `moduli/nucleo.js` — cerchi e righe — e le misure stanno in un
+       posto solo, `stile/base.css`. Quando i dati veri arrivano, il
+       disegno scrive sopra: non c'è niente da togliere.
+       Una prova nel collaudo controlla che le due forme restino uguali. -->
+
   <!-- gli atenei, come nel magazine -->
-  <div class="storie" id="sc-atenei" role="group" aria-label="Filter by university"></div>
+  <div class="storie" id="sc-atenei" role="group" aria-label="Filter by university">
+    <div class="scheletro sk-cerchi" aria-hidden="true"><span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk"></span><span class="sk"></span></div>
+  </div>
 
   <!-- di cosa si parla -->
   <div class="fila sc-fila" id="sc-filtri" role="group" aria-label="Filter by topic"></div>
 
   <!-- i post -->
-  <div class="sc-lista" id="thread-lista"></div>
+  <div class="sc-lista" id="thread-lista">
+    <div class="scheletro sk-riga" aria-hidden="true"><span class="sk quad"></span><div class="corpo"><span class="sk tit"></span><span class="sk riga"></span><span class="sk corta"></span></div></div>
+    <div class="scheletro sk-riga" aria-hidden="true"><span class="sk quad"></span><div class="corpo"><span class="sk tit"></span><span class="sk riga"></span><span class="sk corta"></span></div></div>
+    <div class="scheletro sk-riga" aria-hidden="true"><span class="sk quad"></span><div class="corpo"><span class="sk tit"></span><span class="sk riga"></span><span class="sk corta"></span></div></div>
+    <div class="scheletro sk-riga" aria-hidden="true"><span class="sk quad"></span><div class="corpo"><span class="sk tit"></span><span class="sk riga"></span><span class="sk corta"></span></div></div>
+    <div class="scheletro sk-riga" aria-hidden="true"><span class="sk quad"></span><div class="corpo"><span class="sk tit"></span><span class="sk riga"></span><span class="sk corta"></span></div></div>
+  </div>
 
   <button class="sc-piu" id="btn-apri-scrivi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span translate="no" data-i18n="New post">New post</span></button>
 

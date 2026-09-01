@@ -499,7 +499,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 18:26** — file toccato: `moduli/nucleo.js`
+Ultimo salvataggio: **01/09/2026 alle 18:27** — file toccato: `index.html`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -507,7 +507,7 @@ Ultimo salvataggio: **01/09/2026 alle 18:26** — file toccato: `moduli/nucleo.j
 | `collaudo/diagnosi.html` | 317 | 16K |
 | `collaudo/sonda.html` | 280 | 12K |
 | `configurazione.js` | 313 | 16K |
-| `index.html` | 488 | 36K |
+| `index.html` | 518 | 36K |
 | `moduli/articolo.js` | 574 | 28K |
 | `moduli/ascolta.js` | 173 | 8.0K |
 | `moduli/aula.js` | 851 | 44K |
