@@ -71,8 +71,8 @@ function renderNews() {
           ${n.tipo === 'evento' ? `<span class="tipo-evento">${T('evento', 'event')}</span>` : ''}
           <span>${dataBreve(n.d)}</span>
         </div>
-        <b>${esc(n.t)}</b>
-        <p>${esc(n.s)}</p>
+        <b lang="${esc(codiceLingua(n.u))}">${esc(n.t)}</b>
+        <p lang="${esc(codiceLingua(n.u))}">${esc(n.s)}</p>
         <a href="${esc(n.l)}" target="_blank" rel="noopener">${T('Leggi la notizia', 'Read the story')} →</a>
       </div>
     </article>`).join('') ||
