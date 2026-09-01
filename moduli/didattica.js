@@ -464,7 +464,23 @@ offre('didattica', {
   lezioneDi: (c, i) => stLezDi(c, i),
   visitaSalva: (corsoId, lezIdx) => stVisitaSalva(corsoId, lezIdx),
   apriCorso: (id, lezIdx) => stApriCorso(id, lezIdx),
-  foglioAperto: () => stSheet.classList.contains(on),
+  /* `'on'` fra virgolette. Senza, `on` è una variabile che non esiste e
+     la chiamata lancia un ReferenceError — e non un errore qualsiasi:
+     uno che spezzava l'uscita dall'aula a metà.
+
+     La catena era questa. Entrando in un'aula il corpo della pagina
+     prende `st-blocco`, che è `overflow:hidden` (`stile/didattica.css`):
+     serve a non far scorrere la pagina sotto mentre la lezione occupa
+     lo schermo. Uscendo, `chiudiAula()` in `moduli/aula.js` toglie
+     l'aula e **poi**, all'ultima riga, chiede qui se il foglio del corso
+     è ancora sotto — per decidere se restituire lo scorrimento. Quella
+     domanda andava in errore, e l'ultima riga non veniva mai eseguita.
+
+     Risultato: l'aula spariva, ma il corpo restava bloccato. La pagina
+     non si muoveva più e sembrava tagliata male. Bastava ricaricare per
+     rimetterla a posto, il che rendeva il guasto difficile da attribuire
+     a Learn — che è dove nasceva. */
+  foglioAperto: () => stSheet.classList.contains('on'),
   colore: (materia) => stCol(materia),
   schedaCorso: (c) => stCorsoHTML(c),
   apriApprofondimento: (id) => stApriDive(id),
