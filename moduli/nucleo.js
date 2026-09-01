@@ -170,12 +170,15 @@ const FORME = {
         <span class="sk tit"></span><span class="sk riga"></span><span class="sk corta"></span>
       </div>
     </div>`,
+  /* Le misure delle tre barrette stavano qui, in attributi `style=`.
+     Adesso stanno in `stile/base.css`, sotto `.sk-riga`: lo stesso
+     scheletro è scritto anche dentro `index.html` — perché compaia
+     prima che questo file sia arrivato — e due copie di una misura
+     divergono sempre. Una sola, in un posto solo. */
   riga: `<div class="scheletro sk-riga">
       <span class="sk quad"></span>
       <div class="corpo">
-        <span class="sk tit" style="height:1.05rem;width:70%"></span>
-        <span class="sk riga" style="height:.75rem"></span>
-        <span class="sk corta" style="height:.75rem;width:38%"></span>
+        <span class="sk tit"></span><span class="sk riga"></span><span class="sk corta"></span>
       </div>
     </div>`,
   cerchi: `<div class="scheletro sk-cerchi">${'<span class="sk"></span>'.repeat(9)}</div>`,
