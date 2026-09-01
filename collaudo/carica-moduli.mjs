@@ -766,6 +766,69 @@ const prove2 = [
      return ['magazine:', 'news:', 'social:'].every(k => nav.includes(k)) && nav.includes('scheletro');
    },
    'la navigazione deve dipingere gli scheletri prima di caricare'],
+
+  ['il traduttore non si carica da solo',
+   () => {
+     /* Stesso principio di §6.1 sui caratteri: nessun contatto con un
+        operatore extraeuropeo prima che qualcuno l'abbia chiesto.
+        Prima `element.js` partiva all'import del modulo, cioe' a ogni
+        visita, anche per chi legge in inglese e non tocca la tendina.
+
+        La prova guarda la struttura, non l'aspetto. Un primo tentativo
+        controllava che la riga fosse rientrata: non provava niente,
+        perche' dentro un blocco `{ ... }` al primo livello — che si
+        esegue all'import — le righe sono rientrate uguale. Qui invece
+        si chiede che l'indirizzo stia **dentro il corpo di
+        `caricaTraduttore`**: dopo la sua riga di apertura e prima della
+        graffa che a colonna zero la chiude. */
+     const src = fs.readFileSync(path.join(REPO, 'moduli/lingua.js'), 'utf8')
+       .replace(/\/\*[\s\S]*?\*\//g, ' ');
+
+     const quante = (src.match(/translate_a\/element\.js/g) || []).length;
+     if (quante !== 1) {
+       console.log(`    element.js compare ${quante} volte, ne serve una sola`);
+       return false;
+     }
+     const apre = src.indexOf('export function caricaTraduttore');
+     if (apre < 0) { console.log('    manca caricaTraduttore()'); return false; }
+     const chiude = src.indexOf('\n}', apre);
+     const dove = src.indexOf('translate_a/element.js');
+     const dentroLaFunzione = dove > apre && dove < chiude;
+     const chiamataEsplicita = /caricaTraduttore\(\)\s*;/.test(src.slice(chiude));
+
+     if (!dentroLaFunzione) console.log('    element.js si carica fuori da caricaTraduttore(): parte all\'import');
+     if (!chiamataEsplicita) console.log('    nessuno chiama caricaTraduttore()');
+     return dentroLaFunzione && chiamataEsplicita;
+   },
+   'element.js va chiesto solo quando qualcuno sceglie una lingua (§6.1, §7.4)'],
+
+  ['chi torna tradotto vede ancora l\'avviso P7',
+   () => {
+     /* Il cookie `googtrans` sopravvive al ricaricamento e il traduttore
+        riscrive la pagina da se'. Se l'avvio non lo legge, la pagina e'
+        in tedesco ma il pulsante dice EN e l'avviso di traduzione
+        automatica resta nascosto: contenuto prodotto da una macchina,
+        non marcato come tale. P7 chiede che sia dichiarato sempre. */
+     const src = fs.readFileSync(path.join(REPO, 'moduli/lingua.js'), 'utf8');
+     const avvia = src.slice(src.indexOf('export async function avvia'));
+     return src.includes('function linguaDalCookie')
+         && avvia.includes('linguaDalCookie()')
+         && avvia.includes('segnalaLingua(');
+   },
+   'l\'avvio deve leggere googtrans e rimettere avviso ed etichetta (P7)'],
+
+  ['ogni notizia dichiara la lingua in cui e\' scritta',
+   () => {
+     /* Le notizie arrivano in otto lingue dentro una pagina sola. Senza
+        `lang`, un lettore di schermo legge il greco con la voce inglese.
+        E' anche il presupposto di qualunque traduzione seria: senza,
+        nessuno sa da che lingua partire. */
+     const src = fs.readFileSync(path.join(REPO, 'moduli/notizie.js'), 'utf8');
+     return src.includes('function codiceLingua')
+         && /<b lang="\$\{esc\(codiceLingua/.test(src)
+         && /<p lang="\$\{esc\(codiceLingua/.test(src);
+   },
+   'titolo e sommario delle notizie devono portare lang= (§7.12)'],
 ];
 for (const [nome, prova, perche] of prove2) {
   let ok = false;
