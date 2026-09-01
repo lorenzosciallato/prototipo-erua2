@@ -410,7 +410,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 17:59** — file toccato: `moduli/lingua.js`
+Ultimo salvataggio: **01/09/2026 alle 18:00** — file toccato: `moduli/notizie.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -428,7 +428,7 @@ Ultimo salvataggio: **01/09/2026 alle 17:59** — file toccato: `moduli/lingua.j
 | `moduli/lingua.js` | 238 | 12K |
 | `moduli/loghi-incorporati.js` | 35 | 36K |
 | `moduli/navigazione.js` | 135 | 8.0K |
-| `moduli/notizie.js` | 119 | 8.0K |
+| `moduli/notizie.js` | 134 | 8.0K |
 | `moduli/nucleo.js` | 500 | 24K |
 | `moduli/rivista.js` | 332 | 16K |
 | `moduli/sociale.js` | 237 | 12K |

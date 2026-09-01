@@ -38,6 +38,21 @@ function renderChipsNews() {
     filaAtenei('data-news', filtroNews, true);
 }
 
+/* In che lingua è scritta davvero questa notizia.
+   `LINGUA_FONTE` porta l'etichetta da mostrare — `EL`, `EN/LT` — che
+   serve all'occhio ma non al browser: lì dentro un codice come `EN/LT`
+   non vuol dire niente. Qui se ne ricava la forma che `lang=` accetta,
+   prendendo la prima delle due quando l'ateneo pubblica in due lingue.
+
+   Non è pignoleria da specifica. Un titolo greco dentro una pagina
+   dichiarata inglese viene letto da un lettore di schermo con la voce
+   inglese, e non si capisce niente. Con `lang` giusto la voce cambia. */
+function codiceLingua(u) {
+  const eti = LINGUA_FONTE[u];
+  if (!eti) return '';
+  return String(eti).split('/')[0].trim().toLowerCase();
+}
+
 function renderNews() {
   const lista = (filtroNews ? NEWS.filter(n => n.u === filtroNews) : NEWS)
     .slice().sort((a, b) => b.d.localeCompare(a.d));
