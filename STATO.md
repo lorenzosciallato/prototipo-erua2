@@ -394,14 +394,17 @@ catena che si potrebbe togliere — le stringhe del markup hanno già `data-it` 
   credenziale nel codice, blocca commit e pubblicazione.
   Si lancia anche a mano: `.claude/hooks/cerca-segreti.sh`
 
-**Quello che il salvataggio automatico non vede.** Registra solo `.html`, `.css`
-e `.js`. Restano fuori i file di dati (`.json`, `.mjs`), i documenti (`.md`) e
-tutto ciò che è binario: caratteri, fotografie, loghi. Per un giro intero i
-caratteri e i loghi in WebP sono rimasti fuori dal repository mentre il codice
-che li nomina c'era già — chi avesse clonato il progetto avrebbe visto una pagina
-senza caratteri e con i cerchi vuoti, e nessun errore a dirlo. Dopo un lavoro che
-tocca `caratteri/`, `immagini/` o `dati/`, va fatto un commit a mano:
-`git status --short` e si vede subito.
+**Il salvataggio si porta dietro i file di corredo.** Il gancio scatta solo su
+`.html`, `.css` e `.js`, e per un giro intero i caratteri e i loghi in WebP sono
+rimasti fuori dal repository mentre il codice che li nomina c'era già: chi avesse
+clonato il progetto avrebbe visto una pagina senza caratteri e coi cerchi vuoti,
+e nessun errore a dirlo. Adesso, quando scatta, aggiunge anche `caratteri/`,
+`immagini/`, `dati/`, `testi/` e i file `.json`, `.mjs` e `.md` — comprese le
+cancellazioni, che è il caso dei dieci `.jpg` sostituiti dai `.webp`. Il
+messaggio a fine salvataggio dice quanti ne sono saliti.
+
+Restano fuori apposta `.claude/` — gli automatismi si salvano a mano, apposta —
+e tutto ciò che sta in `.gitignore`.
 
 <!-- TIMBRO AUTOMATICO — aggiornato dal salvataggio automatico, non modificare a mano -->
 
