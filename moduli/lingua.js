@@ -84,12 +84,53 @@ window.googleTranslateElementInit = googleTranslateElementInit;
    online. Caricandolo qui, la funzione c'è già.
 
    Nel file unico il problema non poteva presentarsi: era tutto un
-   `<script>` solo, eseguito prima del traduttore. */
-{
+   `<script>` solo, eseguito prima del traduttore.
+
+   **Ma non si carica più a ogni visita.** Prima questo blocco girava
+   appena il modulo veniva importato, cioè sempre — anche per chi legge
+   in inglese e non tocca la tendina, che è la stragrande maggioranza.
+   Costava tre cose, tutte e tre serie:
+
+   - **Un contatto con Google a ogni apertura della pagina.** È
+     esattamente il motivo per cui §6.1 ha fatto togliere i caratteri da
+     `fonts.googleapis.com`: la richiesta trasmette l'IP di chi guarda a
+     un operatore extraeuropeo, e un ateneo dell'alleanza è a Francoforte
+     sull'Oder. Toglierlo dai caratteri e lasciarlo qui voleva dire non
+     averlo tolto. Adesso il contatto avviene **solo** se qualcuno chiede
+     una traduzione — che è una scelta sua, esplicita, e la tendina la
+     dichiara.
+   - **Peso e lavoro all'avvio.** `element.js` si tira dietro altro
+     codice da due origini e installa un osservatore su tutto il
+     documento, che poi resta a guardare ogni modifica del DOM per tutta
+     la visita. Le sezioni si ridisegnano a ogni filtro: quell'osservatore
+     lavorava a ogni clic, per niente.
+   - **Il cookie.** `googtrans` è un cookie di terzi (§7.4). Scriverlo a
+     chi non ha chiesto nulla è un consenso che nessuno ha dato.
+
+   Chi torna con la traduzione già accesa lo ritrova acceso: il cookie
+   c'è, `avvia()` lo legge e chiama questa funzione. */
+let traduttoreChiesto = false;
+
+export function caricaTraduttore() {
+  if (traduttoreChiesto) return;
+  traduttoreChiesto = true;
   const s = document.createElement('script');
   s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
   s.addEventListener('error', () => console.error('traduttore non raggiungibile'));
   document.head.appendChild(s);
+}
+
+/* Che lingua dice il cookie del traduttore. Vale `/en/de` — origine e
+   destinazione — e la seconda è quella che ci interessa. Se non c'è, o
+   se dice la lingua originale, non c'è nessuna traduzione in corso. */
+function linguaDalCookie() {
+  try {
+    const m = document.cookie.match(
+      new RegExp('(?:^|;\\s*)' + CONFIG.traduzione.cookie + '=([^;]*)'));
+    if (!m) return null;
+    const l = decodeURIComponent(m[1]).split('/')[2];
+    return (l && l !== ORIGINALE) ? l : null;
+  } catch (err) { return null; }
 }
 
 /* Il cookie che il traduttore legge per sapere in che lingua stare.

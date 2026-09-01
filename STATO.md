@@ -410,11 +410,12 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 17:58** — file toccato: `collaudo/diagnosi.html`
+Ultimo salvataggio: **01/09/2026 alle 17:59** — file toccato: `moduli/lingua.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
 | `avvio.js` | 58 | 4.0K |
+| `collaudo/diagnosi.html` | 317 | 16K |
 | `collaudo/sonda.html` | 280 | 12K |
 | `configurazione.js` | 313 | 16K |
 | `index.html` | 457 | 32K |
@@ -424,7 +425,7 @@ Ultimo salvataggio: **01/09/2026 alle 17:58** — file toccato: `collaudo/diagno
 | `moduli/didattica.js` | 472 | 24K |
 | `moduli/geometrie.js` | 155 | 8.0K |
 | `moduli/ideathon.js` | 514 | 24K |
-| `moduli/lingua.js` | 164 | 8.0K |
+| `moduli/lingua.js` | 205 | 12K |
 | `moduli/loghi-incorporati.js` | 35 | 36K |
 | `moduli/navigazione.js` | 135 | 8.0K |
 | `moduli/notizie.js` | 119 | 8.0K |
