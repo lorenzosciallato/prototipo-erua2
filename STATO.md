@@ -145,6 +145,55 @@ Che cosa resta e che cosa no:
 La dicitura sui marchi in fondo alla pagina **resta**: era dovuta comunque
 (§6.4) e prima mancava.
 
+## L'atterraggio: perché la piazza restava vuota
+
+**Era una regressione dello scorporo, ed è tornata a funzionare come nel
+file unico.** Fino al 10 agosto i post stavano scritti dentro
+`index.html` (813 KB, riga 2444) e si disegnavano tutti in un colpo alla
+riga 2901: la pagina non aspettava perché non chiedeva niente a nessuno.
+
+Dopo lo scorporo, per far comparire la piazza servivano **due viaggi in
+rete uno dopo l'altro**, e il browser li scopriva alla fine di tutto:
+prima doveva arrivare l'intero gruppo dei moduli, poi `navigazione.js`
+chiedeva `sociale.js`, e solo quando quello era arrivato **ed eseguito**
+partiva la richiesta di `dati/sociale.json`. Due viaggi in fila indiana
+in fondo a una catena di sei passi. Su un telefono in giro sono secondi.
+
+E per tutto quel tempo il pannello era **vuoto**: la piazza non ha
+niente nel markup, lo disegna tutto il codice. Nessun segno che qualcosa
+stesse arrivando — e il vuoto, per chi guarda, è indistinguibile da un
+guasto.
+
+Tre correzioni:
+
+- `moduli/sociale.js` e `dati/sociale.json` sono **dichiarati in
+  `index.html`**: partono col resto, in parallelo, dal primo istante in
+  cui il browser legge la pagina. Non si scarica niente di più — si
+  scarica prima, e insieme. Le altre sezioni restano su richiesta, ed è
+  giusto (§2.4): in quelle si *entra*, e chi apre solo la rivista non
+  deve scaricare la didattica. Nella piazza non si entra: ci si arriva.
+- `dati()` chiede `credentials:'omit'`, perché la sua richiesta combaci
+  con quella dichiarata nella pagina. Se non combaciano il file si
+  scarica **due volte** e il preavviso diventa un danno — e non se ne
+  accorge nessuno, perché la pagina funziona lo stesso.
+- Gli **scheletri della piazza sono scritti a mano in `index.html`**.
+  Compaiono col primo disegno, senza aspettare niente. Le misure stanno
+  in un posto solo (`stile/base.css`, sotto `.sk-riga`): erano scritte
+  a mano dentro `nucleo.js` in attributi `style=`, e con due copie della
+  stessa misura le due forme sarebbero divergute — facendo saltare la
+  pagina proprio nel momento in cui gli scheletri servono a non farla
+  saltare.
+
+Due prove nuove, verificate anche al contrario: togliendo il preavviso,
+togliendo `credentials:'omit'`, o togliendo gli scheletri dal markup,
+falliscono.
+
+**Resta da fare, sullo stesso fronte:** chi atterra su `#news` non ha lo
+stesso trattamento — modulo e dati delle notizie si chiedono ancora al
+momento. Va deciso se dichiarare anche quelli (costa a tutti) o se
+scaldarli quando la piazza ha finito di disegnarsi (non costa a nessuno,
+ma arriva più tardi).
+
 ## Lo scorrimento su telefono, e Google che si presentava senza invito
 
 Segnalati dall'uso vero su Android: sezioni che tardano, scorrimento a

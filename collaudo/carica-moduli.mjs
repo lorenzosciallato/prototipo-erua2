@@ -817,6 +817,63 @@ const prove2 = [
    },
    'l\'avvio deve leggere googtrans e rimettere avviso ed etichetta (P7)'],
 
+  ['la sezione d\'atterraggio non aspetta due viaggi in fila',
+   () => {
+     /* Nella piazza non si entra: ci si arriva aprendo il sito. Prima
+        il browser scopriva i due pezzi che le mancano — il modulo e i
+        dati — uno dopo l'altro e in fondo a tutto: l'intero gruppo dei
+        moduli, poi `sociale.js`, e solo quando quello era arrivato ed
+        eseguito partiva la richiesta di `dati/sociale.json`. Due viaggi
+        in rete in fila indiana. Dichiarati nella pagina partono col
+        resto, in parallelo.
+
+        La prova controlla anche `credentials:'omit'`: senza, la
+        richiesta del codice non combacia con il preavviso e il file si
+        scarica DUE volte — il preavviso diventa un danno, e non se ne
+        accorge nessuno perche' la pagina funziona lo stesso. */
+     const html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
+     const nucleo = fs.readFileSync(path.join(REPO, 'moduli/nucleo.js'), 'utf8');
+     const modulo = /rel="modulepreload"\s+href="moduli\/sociale\.js"/.test(html);
+     const dato = /rel="preload"\s+href="dati\/sociale\.json"\s+as="fetch"\s+crossorigin/.test(html);
+     const combacia = /fetch\(`dati\/\$\{nome\}\.json`,\s*\{\s*credentials:\s*'omit'\s*\}\)/.test(nucleo);
+     if (!modulo) console.log('    manca il modulepreload di moduli/sociale.js');
+     if (!dato) console.log('    manca il preload di dati/sociale.json');
+     if (!combacia) console.log('    dati() non chiede credentials:\'omit\': il file si scarica due volte');
+     return modulo && dato && combacia;
+   },
+   'la sezione su cui si atterra non puo\' essere «su richiesta»'],
+
+  ['lo scheletro della piazza c\'e\' prima di JavaScript',
+   () => {
+     /* Il pannello della piazza e' vuoto nel markup: tutto lo disegna
+        il codice. Finche' il codice non gira — dieci fogli di stile e
+        il gruppo dei moduli — non c'era NIENTE. Schermo bianco, senza
+        un segno che qualcosa stia arrivando.
+
+        E le due forme devono restare uguali: quella scritta a mano in
+        `index.html` e quella che `scheletro()` produce. Se divergono,
+        al momento in cui il codice riscrive sopra la pagina fa un
+        salto, ed e' proprio quello che gli scheletri servono a evitare. */
+     const html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
+     const nucleo = fs.readFileSync(path.join(REPO, 'moduli/nucleo.js'), 'utf8');
+
+     const piazza = html.slice(html.indexOf('id="p-social"'), html.indexOf('id="p-chat"'));
+     const cerchi = /id="sc-atenei"[^>]*>\s*<div class="scheletro sk-cerchi"/.test(piazza);
+     const righe = (piazza.match(/<div class="scheletro sk-riga"/g) || []).length;
+
+     /* stesse classi da una parte e dall'altra, nessun `style=` a mano */
+     const senzaStile = !/class="sk (tit|riga|corta)"[^>]*style=/.test(piazza)
+                     && !/class="sk (tit|riga|corta)"[^>]*style=/.test(nucleo);
+     const misureNelCss = fs.readFileSync(path.join(REPO, 'stile/base.css'), 'utf8')
+       .includes('.sk-riga .sk.tit{');
+
+     if (!cerchi) console.log('    manca lo scheletro dei cerchi dentro #sc-atenei');
+     if (righe !== 5) console.log(`    righe scheletro nel markup: ${righe}, ne servono 5 come in navigazione.js`);
+     if (!senzaStile || !misureNelCss) console.log('    le misure dello scheletro non stanno in un posto solo');
+     return cerchi && righe === 5 && senzaStile && misureNelCss;
+   },
+   'sulla sezione d\'atterraggio il vuoto si vede, e sembra un guasto'],
+
   ['niente sfocatura appiccicata su telefono',
    () => {
      /* Testata e barra delle sezioni sfocano quello che ci scorre
