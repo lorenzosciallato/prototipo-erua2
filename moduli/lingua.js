@@ -159,17 +159,30 @@ function applicaLingua(l, tentativi) {
   return false;
 }
 
+/* Il pulsante, la spunta nella tendina e l'avviso P7: le tre cose che
+   dicono in che lingua siamo. Stanno insieme perché devono cambiare
+   insieme — un avviso che manca mentre la pagina è tradotta è una
+   violazione di P7, non un difetto estetico. */
+function segnalaLingua(l) {
+  const eti = document.getElementById('lang-label');
+  if (eti) eti.textContent = (l === 'zh-CN' ? 'ZH' : l.toUpperCase());
+  document.querySelectorAll('#lang-menu button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.lang === l)));
+  avvisoTraduzione(l);
+}
+
 export async function traduci(l) {
   const testi = await caricaTesti(l);
   if (testi) { UILANG = l; TESTI = testi; applicaTesti(); }
 
-  document.getElementById('lang-label').textContent = (l === 'zh-CN' ? 'ZH' : l.toUpperCase());
-  document.querySelectorAll('#lang-menu button').forEach(b =>
-    b.setAttribute('aria-pressed', b.dataset.lang === l));
-
-  avvisoTraduzione(l);
+  segnalaLingua(l);
   scriviCookieLingua(l);
-  applicaLingua(l, 0);
+
+  /* Il traduttore si chiede adesso, non all'avvio: è qui che qualcuno
+     l'ha voluto. Tornando all'originale non serve chiamarlo se non è
+     mai stato caricato — non c'è niente da riportare indietro. */
+  if (l !== ORIGINALE) caricaTraduttore();
+  if (traduttoreChiesto) applicaLingua(l, 0);
 }
 
 /* ── comandi ───────────────────────────────────────────────────────── */
