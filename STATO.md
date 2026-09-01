@@ -188,11 +188,64 @@ Due prove nuove, verificate anche al contrario: togliendo il preavviso,
 togliendo `credentials:'omit'`, o togliendo gli scheletri dal markup,
 falliscono.
 
-**Resta da fare, sullo stesso fronte:** chi atterra su `#news` non ha lo
-stesso trattamento — modulo e dati delle notizie si chiedono ancora al
-momento. Va deciso se dichiarare anche quelli (costa a tutti) o se
-scaldarli quando la piazza ha finito di disegnarsi (non costa a nessuno,
-ma arriva più tardi).
+**Le altre sezioni si scaldano dopo.** Dichiarare anche le notizie in
+`index.html` sarebbe stato sbagliato: 104 KB in gara con quello che
+serve *adesso*, sulla connessione di chi sta aprendo il sito — si
+guadagnava sulla seconda schermata rovinando la prima. Invece
+`scaldaLeAltre()` carica notizie e rivista **quando il browser non ha
+più niente da fare**, una per volta e non insieme (due sezioni in
+parallelo si rubano la banda a vicenda e non arriva prima nessuna delle
+due). La chiamata è l'ultima riga di `avvio.js`, e una prova controlla
+che ci resti.
+
+Due limiti, e sono i limiti a rendere onesta l'idea: non si scalda
+niente a chi ha acceso **«risparmia dati»** — l'ha chiesto, e questo è
+esattamente ciò che ha chiesto di non fare — né su una **connessione
+2G**, dove rubare banda alla sezione che si guarda è peggio del
+problema che si risolve.
+
+**`chat` e `profilo` non sono nell'elenco, e non è una dimenticanza:**
+non hanno né modulo né dati. Sono scritte dentro `index.html` e ci sono
+già. Sono il caso migliore, non uno da sistemare.
+
+### «E quando le sezioni diventeranno dinamiche, questo funzionerà?»
+
+Risposta onesta: **due correzioni su tre sì, una no** — e quella che non
+regge non darà errore, il che è la ragione per cui va scritto qui.
+
+| | regge? | perché |
+|:--|:--|:--|
+| Scheletri nel markup | **sì, e servirà di più** | non dipendono da dove arrivano i dati. Con una base di dati l'attesa sarà più lunga, non più corta |
+| `modulepreload` del modulo | **sì** | il codice resta un file fermo: cambia da dove arrivano i *contenuti*, non il modulo che li disegna |
+| `preload` di `dati/sociale.json` | **no, va rifatto** | vedi sotto |
+
+Il preavviso dei dati funziona perché oggi `dati/sociale.json` è un file
+**fermo, pubblico, allo stesso indirizzo per tutti**. Quando i contenuti
+arriveranno da un'interfaccia con le policy di riga (§3.2) niente di
+tutto questo sarà più vero: la risposta dipenderà da **chi** la chiede,
+e una risposta che cambia da persona a persona non si può annunciare in
+una pagina uguale per tutti — né tenere in cache.
+
+E c'è una trappola precisa, scritta anche accanto al codice in
+`moduli/nucleo.js`: oggi `dati()` chiede `credentials:'omit'`, cioè
+manda la richiesta **senza identità**. È giusto per un file pubblico. Il
+giorno delle policy di riga, lasciarlo com'è farebbe arrivare la
+richiesta anonima — e la risposta sarebbe vuota, o quella del pubblico
+invece che quella dell'utente. **Non darebbe errore: darebbe la risposta
+sbagliata**, che è il guasto peggiore.
+
+Quel giorno vanno cambiate **due cose insieme** — `credentials:'same-origin'`
+in `nucleo.js` e `crossorigin="use-credentials"` in `index.html` — e
+cambiarne una sola riporta al doppio scaricamento. La prova nel collaudo
+non pretende una forma fissa: controlla che le due **combacino**, quindi
+passa già oggi e passerà anche dopo, ma fallisce se qualcuno ne cambia
+una sola. Verificata in tutti e tre gli stati.
+
+Le strade per allora, quando ci si arriverà: la prima schermata scritta
+dal server dentro l'HTML (come faceva il file unico, ed è il motivo per
+cui era istantaneo), oppure un'interfaccia che risponda abbastanza
+in fretta da rendere il preavviso inutile. È una decisione da prendere
+insieme alla base di dati, non prima.
 
 ## Lo scorrimento su telefono, e Google che si presentava senza invito
 

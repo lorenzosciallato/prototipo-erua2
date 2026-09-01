@@ -832,16 +832,68 @@ const prove2 = [
         scarica DUE volte — il preavviso diventa un danno, e non se ne
         accorge nessuno perche' la pagina funziona lo stesso. */
      const html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
-     const nucleo = fs.readFileSync(path.join(REPO, 'moduli/nucleo.js'), 'utf8');
+     const nucleo = fs.readFileSync(path.join(REPO, 'moduli/nucleo.js'), 'utf8')
+       .replace(/\/\*[\s\S]*?\*\//g, ' ');
      const modulo = /rel="modulepreload"\s+href="moduli\/sociale\.js"/.test(html);
-     const dato = /rel="preload"\s+href="dati\/sociale\.json"\s+as="fetch"\s+crossorigin/.test(html);
-     const combacia = /fetch\(`dati\/\$\{nome\}\.json`,\s*\{\s*credentials:\s*'omit'\s*\}\)/.test(nucleo);
+     const preavviso = html.match(/<link rel="preload" href="dati\/sociale\.json"[^>]*>/);
      if (!modulo) console.log('    manca il modulepreload di moduli/sociale.js');
-     if (!dato) console.log('    manca il preload di dati/sociale.json');
-     if (!combacia) console.log('    dati() non chiede credentials:\'omit\': il file si scarica due volte');
-     return modulo && dato && combacia;
+     if (!preavviso) { console.log('    manca il preload di dati/sociale.json'); return false; }
+
+     /* Le due richieste devono essere della STESSA specie, non di una
+        specie fissata. Oggi sono file pubblici e vanno senza identita';
+        il giorno della base di dati (§3.2) dovranno portarla, e allora
+        cambiano tutte e due — `credentials:'same-origin'` di qua,
+        `crossorigin="use-credentials"` di la'. Se se ne cambia una sola
+        il file si scarica DUE volte, e non se ne accorge nessuno perche'
+        la pagina funziona lo stesso. La prova guarda l'accoppiata. */
+     const conIdentita = /crossorigin="use-credentials"/.test(preavviso[0]);
+     const chiede = nucleo.match(/fetch\(`dati\/\$\{nome\}\.json`,\s*\{\s*credentials:\s*'([a-z-]+)'/);
+     if (!chiede) { console.log('    dati() non dichiara `credentials`: non puo\' combaciare'); return false; }
+
+     const attesa = conIdentita ? 'same-origin' : 'omit';
+     const combacia = chiede[1] === attesa
+       && (conIdentita || /\scrossorigin(\s|>)/.test(preavviso[0]));
+     if (!combacia) {
+       console.log(`    preavviso e richiesta non combaciano: la pagina dice ${conIdentita ? 'use-credentials' : 'anonimo'}, dati() dice '${chiede[1]}'`);
+       console.log('    il file si scarica due volte, e il preavviso diventa un danno');
+     }
+     return modulo && combacia;
    },
    'la sezione su cui si atterra non puo\' essere «su richiesta»'],
+
+  ['le altre sezioni si scaldano dopo, non insieme',
+   () => {
+     /* Chi tocca «News» due secondi dopo l'atterraggio deve trovarla
+        pronta. Ma chiederla SUBITO vorrebbe dire mettere 104 KB in gara
+        con quello che serve adesso, sulla connessione di chi sta
+        aprendo il sito: si guadagna sulla seconda schermata rovinando
+        la prima. Quindi si scalda quando il browser non ha piu' niente
+        da fare, e la chiamata sta in fondo ad avvio.js.
+
+        E si rispetta chi ha chiesto di non farlo: `saveData` acceso
+        vuol dire «non scaricare roba che forse non guardo», ed e'
+        esattamente questo. */
+     const nav = fs.readFileSync(path.join(REPO, 'moduli/navigazione.js'), 'utf8');
+     const avv = fs.readFileSync(path.join(REPO, 'avvio.js'), 'utf8')
+       .replace(/\/\*[\s\S]*?\*\//g, ' ');
+
+     const esiste = /export function scaldaLeAltre/.test(nav);
+     const rispettaDati = /saveData/.test(nav);
+     const rispettaRete = /effectiveType/.test(nav);
+     const conCalma = /requestIdleCallback/.test(nav);
+
+     /* in fondo: dopo l'ultima cosa che serve alla prima schermata */
+     const righe = avv.split('\n').map(r => r.trim()).filter(Boolean);
+     const inFondo = righe[righe.length - 1].startsWith('scaldaLeAltre()');
+
+     if (!esiste) console.log('    manca scaldaLeAltre()');
+     if (!rispettaDati) console.log('    non guarda saveData: scarica a chi ha chiesto di non farlo');
+     if (!rispettaRete) console.log('    non guarda la velocita\' della connessione');
+     if (!conCalma) console.log('    non aspetta che il browser sia libero');
+     if (!inFondo) console.log('    la chiamata non e\' l\'ultima cosa di avvio.js: gareggia con la prima schermata');
+     return esiste && rispettaDati && rispettaRete && conCalma && inFondo;
+   },
+   'scaldare la sezione dopo non deve rallentare quella di adesso'],
 
   ['lo scheletro della piazza c\'e\' prima di JavaScript',
    () => {
