@@ -309,6 +309,14 @@ html[data-tema="scuro"] .scheletro .sk::after{
   display:flex;gap:.95rem;align-items:center;padding:1rem 1.1rem}
 .sk-riga .sk.quad{width:52px;height:52px;border-radius:50%;flex:0 0 auto}
 .sk-riga .corpo{flex:1;display:flex;flex-direction:column;gap:.5rem;min-width:0}
+/* Le misure delle tre barrette stavano scritte a mano dentro
+   `moduli/nucleo.js`, in attributi `style=`. Da quando lo stesso
+   scheletro è scritto anche dentro `index.html` — per farlo comparire
+   prima che JavaScript parta — le copie sono due, e due copie di una
+   misura divergono sempre. Qui è una sola, e vale per entrambe. */
+.sk-riga .sk.tit{height:1.05rem;width:70%}
+.sk-riga .sk.riga{height:.75rem}
+.sk-riga .sk.corta{height:.75rem;width:38%}
 
 /* i cerchi degli atenei in cima alle sezioni */
 .sk-cerchi{display:flex;gap:1.1rem;padding:.2rem 0 .4rem}

@@ -499,7 +499,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 18:26** — file toccato: `moduli/nucleo.js`
+Ultimo salvataggio: **01/09/2026 alle 18:26** — file toccato: `stile/base.css`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -546,7 +546,7 @@ Ultimo salvataggio: **01/09/2026 alle 18:26** — file toccato: `moduli/nucleo.j
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
 | `stile/aula.css` | 457 | 32K |
-| `stile/base.css` | 351 | 20K |
+| `stile/base.css` | 359 | 20K |
 | `stile/caratteri.css` | 92 | 4.0K |
 | `stile/didattica.css` | 163 | 12K |
 | `stile/ideathon.css` | 522 | 32K |
