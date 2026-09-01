@@ -212,7 +212,27 @@ document.addEventListener('click', e => {
 
 /* ── avvio ─────────────────────────────────────────────────────────── */
 export async function avvia() {
-  TESTI = (await caricaTesti(ORIGINALE)) || {};
+  /* Chi torna con la traduzione accesa. Il cookie `googtrans` sopravvive
+     al ricaricamento, e il traduttore, quando c'è, lo legge e riscrive
+     la pagina da sé.
+
+     Qui non si tratta solo di riaccenderlo. Prima l'avvio ignorava il
+     cookie: la pagina si ritrovava tradotta in tedesco, ma il pulsante
+     diceva «EN» e **l'avviso P7 restava nascosto** — contenuto prodotto
+     da una macchina, non marcato come tale. Era una violazione, non un
+     dettaglio: P7 chiede che sia dichiarato sempre, non solo nel momento
+     in cui lo si sceglie. */
+  const tornato = linguaDalCookie();
+
+  TESTI = (await caricaTesti(tornato || ORIGINALE)) || {};
   applicaTesti();
-  avvisoTraduzione(ORIGINALE);
+
+  if (tornato) {
+    UILANG = tornato;
+    segnalaLingua(tornato);
+    caricaTraduttore();
+    applicaLingua(tornato, 0);
+  } else {
+    segnalaLingua(ORIGINALE);
+  }
 }
