@@ -857,8 +857,13 @@ const prove2 = [
          const classe = sel.slice(1);
          /* la usa il markup della pagina? */
          if (!new RegExp(`class="[^"]*\\b${classe}\\b`).test(html)) continue;
-         /* un foglio sempre presente la nasconde anche lui? */
-         const coperta = new RegExp(`\\.${classe}\\s*\\{[^}]*display\\s*:\\s*none`).test(sempre);
+         /* Un foglio sempre presente la nasconde anche lui?
+            `[,{]` e non solo `{`: le due classi coperte stanno in un
+            selettore unico separato da virgola, e cercare solo la
+            graffa avrebbe dato per scoperta una classe gia' coperta —
+            una prova che fallisce su codice giusto e' peggio di
+            nessuna prova. */
+         const coperta = new RegExp(`\\.${classe}\\s*[,{][^}]*display\\s*:\\s*none`).test(sempre);
          if (!coperta) colpevoli.push(`${sel} (solo in stile/${n}.css)`);
        }
      }
