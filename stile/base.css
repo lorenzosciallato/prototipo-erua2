@@ -215,6 +215,33 @@ nav.tabs::-webkit-scrollbar{display:none}
    ma il gesto che finisce dove non doveva. */
 .storie,.chips,nav.tabs{overscroll-behavior-x:contain}
 
+/* L'AULA STA CHIUSA ANCHE QUANDO IL SUO FOGLIO NON È ARRIVATO
+   ============================================================
+   `#st-aula` è scritta dentro `index.html` (riga 277) e la nasconde
+   `stile/aula.css` — che però dal 16/08 si carica **solo quando si
+   entra in una lezione**, per non far pesare 31 KB su chi in un'aula
+   non entra mai.
+
+   Le due decisioni, prese separatamente, erano giuste tutt'e due.
+   Insieme facevano questo: finché nessuno apriva un'aula, l'aula
+   restava **aperta** in mezzo alla pagina, alta 4828 pixel, coi due
+   disegni del tutorial spalmati a 1440×1440 — e spingeva tutte le
+   sezioni sotto cinquemila pixel più giù. Chi apriva il sito vedeva
+   una forma verde enorme e sotto il vuoto: i contenuti c'erano, ma
+   fuori schermo. Sembrava «non carica», ed era «non ci arrivi».
+
+   Perché nessuno se n'era accorto: chi entra una volta in un'aula si
+   porta dietro `aula.css` per tutta la visita, e da quel momento il
+   sito è a posto. Il guasto si vedeva **solo alla prima apertura**, e
+   spariva appena si andava a guardare.
+
+   Da qui la regola: quello che nasconde una cosa non può stare in un
+   foglio che arriva dopo. `display:none` è una condizione di partenza,
+   non un effetto. Il foglio dell'aula continua a portarsi il resto —
+   posizione, fondo, disposizione — e `.st-aula.on` lo riapre quando
+   serve, perché ha specificità maggiore e vince comunque. */
+.st-aula{display:none}
+
 /* PANNELLI */
 .pannello{display:none;max-width:1600px;margin:0 auto;padding:1.1rem 1rem 3rem}
 .pannello.attivo{display:block;animation:entra .18s ease}
