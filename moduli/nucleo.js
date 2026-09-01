@@ -39,7 +39,14 @@ export function esc(t) {
 const inCorso = new Map();
 export function dati(nome) {
   if (!inCorso.has(nome)) {
-    inCorso.set(nome, fetch(`dati/${nome}.json`).then(r => {
+    /* `credentials:'omit'` non è una precauzione: è quello che fa
+       combaciare questa richiesta con il `<link rel="preload" as="fetch"
+       crossorigin>` dichiarato in `index.html` per la sezione su cui si
+       atterra. Se le due non combaciano il browser non riusa il file già
+       chiesto e lo scarica una seconda volta — e il preavviso, invece di
+       far guadagnare tempo, ne fa perdere. Sono file pubblici sulla
+       nostra stessa origine: non c'è nessuna credenziale da mandare. */
+    inCorso.set(nome, fetch(`dati/${nome}.json`, { credentials: 'omit' }).then(r => {
       if (!r.ok) throw new Error(`dati/${nome}.json: ${r.status}`);
       return r.json();
     }));
