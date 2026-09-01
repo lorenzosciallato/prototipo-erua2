@@ -131,6 +131,56 @@ export function mostraTab(nome, aggiornaHash = true) {
 
 export const sezioneAttiva = () => tabAttiva;
 
+/* ── scaldare la sezione dopo ──────────────────────────────────────
+   Sulla sezione d'atterraggio il preavviso sta in `index.html`: parte
+   col primo byte della pagina. Ma un preavviso scritto lì può nominare
+   una sezione sola, e sarebbe sbagliato nominarne di più — chiedere
+   subito anche le notizie vorrebbe dire mettere 104 KB in gara con
+   quello che serve *adesso*, sulla connessione di chi sta aprendo il
+   sito. Si guadagnerebbe sulla seconda schermata rovinando la prima.
+
+   Quindi le altre si scaldano **dopo**, quando la prima ha finito e il
+   browser non ha più niente da fare. Chi tocca «News» due secondi dopo
+   l'ha già in mano; chi non ci va mai ha pagato la fetta di rete che
+   avanzava, non quella che serviva.
+
+   Due limiti, e sono i limiti a rendere onesta l'idea:
+
+   - **`saveData`** — chi ha detto al telefono «risparmia dati» l'ha
+     detto sul serio. Scaricare in anticipo roba che forse non guarderà
+     è esattamente ciò che ha chiesto di non fare.
+   - **connessione lenta** — su 2G o 3G la rete è già il collo di
+     bottiglia: scaldare vorrebbe dire rubare banda alla sezione che si
+     sta guardando. Meglio far aspettare due secondi chi cambia sezione
+     che rallentare tutti.
+
+   `chat` e `profilo` non compaiono qui e non è una dimenticanza: non
+   hanno né modulo né dati. Sono scritte dentro `index.html` e ci sono
+   già — sono il caso migliore, non uno da sistemare. */
+const DA_SCALDARE = ['news', 'magazine'];
+
+export function scaldaLeAltre() {
+  const rete = navigator.connection;
+  if (rete) {
+    if (rete.saveData) return;
+    if (/(^|-)2g$/.test(rete.effectiveType || '')) return;
+  }
+
+  const quandoCalmo = window.requestIdleCallback
+    || (f => setTimeout(() => f({ timeRemaining: () => 50 }), 1200));
+
+  /* Una per volta, non tutte insieme: due sezioni che si scaricano in
+     parallelo si rubano la banda a vicenda, e nessuna delle due arriva
+     prima di quando sarebbe arrivata da sola. */
+  const coda = DA_SCALDARE.filter(n => n !== tabAttiva && !caricati.has(n));
+  const prossima = () => {
+    const n = coda.shift();
+    if (!n) return;
+    caricaSezione(n).then(() => quandoCalmo(prossima));
+  };
+  quandoCalmo(prossima);
+}
+
 /* ── comandi ───────────────────────────────────────────────────────── */
 document.querySelectorAll('.tab-btn').forEach(b =>
   b.addEventListener('click', () => mostraTab(b.dataset.tab)));

@@ -548,7 +548,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 18:27** — file toccato: `index.html`
+Ultimo salvataggio: **01/09/2026 alle 18:39** — file toccato: `moduli/navigazione.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -565,7 +565,7 @@ Ultimo salvataggio: **01/09/2026 alle 18:27** — file toccato: `index.html`
 | `moduli/ideathon.js` | 514 | 24K |
 | `moduli/lingua.js` | 238 | 12K |
 | `moduli/loghi-incorporati.js` | 35 | 36K |
-| `moduli/navigazione.js` | 152 | 8.0K |
+| `moduli/navigazione.js` | 202 | 12K |
 | `moduli/notizie.js` | 134 | 8.0K |
 | `moduli/nucleo.js` | 510 | 28K |
 | `moduli/rivista.js` | 332 | 16K |
