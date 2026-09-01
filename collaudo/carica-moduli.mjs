@@ -817,6 +817,51 @@ const prove2 = [
    },
    'l\'avvio deve leggere googtrans e rimettere avviso ed etichetta (P7)'],
 
+  ['niente sfocatura appiccicata su telefono',
+   () => {
+     /* Testata e barra delle sezioni sfocano quello che ci scorre
+        sotto. Su telefono il browser rifa' due sfocature a tutta
+        larghezza a ogni fotogramma dello scorrimento: e' la causa
+        principale dello scorrimento a scatti.
+
+        La prova cerca la regola che le spegne sotto gli 820px. Se un
+        giorno qualcuno la togliesse, lo scorrimento tornerebbe a
+        scatti e nessuno collegherebbe le due cose. */
+     const css = fs.readFileSync(path.join(REPO, 'stile/base.css'), 'utf8');
+     const blocchi = css.match(/@media\s*\(\s*max-width:\s*819[^)]*\)\s*\{[\s\S]*?\n\}/g) || [];
+     const spegne = blocchi.some(b =>
+       /header\s*,\s*nav\.tabs/.test(b) && /backdrop-filter:\s*none/.test(b));
+     if (!spegne) console.log('    manca la regola che spegne backdrop-filter sotto gli 820px');
+     return spegne;
+   },
+   'due backdrop-filter appiccicati costano una sfocatura a fotogramma (telefono)'],
+
+  ['le macchie non si muovono su telefono',
+   () => {
+     /* Tre forme sfocate di 40px che si muovono e si ingrandiscono:
+        la sfocatura va rifatta a ogni fotogramma. Ferme si vedono
+        uguali. */
+     const css = fs.readFileSync(path.join(REPO, 'stile/base.css'), 'utf8');
+     const blocchi = css.match(/@media\s*\(\s*max-width:\s*820px\s*\)\s*\{[\s\S]*?\n\}/g) || [];
+     const ferme = blocchi.some(b => /\.m1\s*,\s*\.m2\s*,\s*\.m3/.test(b) && /animation:\s*none/.test(b));
+     if (!ferme) console.log('    le macchie si animano anche su telefono');
+     return ferme;
+   },
+   'animare una forma sfocata costa una sfocatura a fotogramma'],
+
+  ['cambiare sezione non accompagna la risalita',
+   () => {
+     /* `scroll-behavior:smooth` vale anche per gli spostamenti chiesti
+        dal codice. Senza `behavior:'instant'`, chi era in fondo a una
+        sezione vedeva scorrere all'indietro tutta la pagina prima di
+        arrivare in cima a quella nuova. */
+     const nav = fs.readFileSync(path.join(REPO, 'moduli/navigazione.js'), 'utf8');
+     const ha = /behavior:\s*'instant'/.test(nav);
+     if (!ha) console.log('    mostraTab risale con lo scorrimento accompagnato');
+     return ha;
+   },
+   'il cambio di sezione e\' un altrove, non un movimento da seguire'],
+
   ['ogni notizia dichiara la lingua in cui e\' scritta',
    () => {
      /* Le notizie arrivano in otto lingue dentro una pagina sola. Senza

@@ -145,6 +145,95 @@ Che cosa resta e che cosa no:
 La dicitura sui marchi in fondo alla pagina **resta**: era dovuta comunque
 (§6.4) e prima mancava.
 
+## Lo scorrimento su telefono, e Google che si presentava senza invito
+
+Segnalati dall'uso vero su Android: sezioni che tardano, scorrimento a
+scatti, la fila dei loghi che «scappa». Quattro cause distinte, tutte
+nel codice, tutte corrette.
+
+**Google Translate si caricava a ogni visita.** `element.js` partiva
+all'import di `moduli/lingua.js`, cioè sempre — anche per chi legge in
+inglese e non tocca la tendina. Tre costi, e il primo è quello che
+conta: **è lo stesso problema di §6.1**, la richiesta trasmette l'IP di
+chi guarda a un operatore extraeuropeo. Aver tolto i caratteri da
+`fonts.googleapis.com` e aver lasciato questo voleva dire non averlo
+tolto. In più `element.js` installa un osservatore su tutto il documento
+e lo tiene per tutta la visita: le sezioni si ridisegnano a ogni filtro,
+e quel lavoro avveniva a ogni clic per niente. E scriveva `googtrans` —
+cookie di terzi (§7.4) — a chi non aveva chiesto nulla. Ora lo chiede
+`caricaTraduttore()`, e lo chiama solo chi sceglie una lingua diversa
+dall'originale.
+
+**Violazione di P7 corretta.** Il cookie `googtrans` sopravvive al
+ricaricamento e il traduttore riscriveva la pagina da sé, ma l'avvio non
+lo leggeva: la pagina era in tedesco, il pulsante diceva «EN» e l'avviso
+di traduzione automatica **restava nascosto**. Contenuto prodotto da una
+macchina, non marcato come tale — e P7 chiede che sia dichiarato sempre,
+non solo nell'istante in cui lo si sceglie. Ora `avvia()` legge il
+cookie e rimette etichetta, spunta e avviso insieme.
+
+**Due vetri smerigliati appiccicati in alto.** Testata e barra delle
+sezioni sfocavano entrambe quello che ci passava sotto. Mentre si
+scorre, il contenuto sotto cambia in continuazione: il browser rifaceva
+due sfocature a tutta larghezza **a ogni fotogramma**. Sotto gli 820px
+ora sono opache — `--vetro` era già all'86% e dello stesso colore della
+pagina, quindi si perde un velo che quasi non si vede.
+
+**Tre macchie sfocate che si muovevano.** Sfocare costa una volta;
+sfocare qualcosa che si muove e si ingrandisce costa a ogni fotogramma.
+Su schermo grande ora stanno ognuna sul proprio piano (`will-change`),
+così la sfocatura si fa una volta sola e poi si sposta il piano già
+fatto; su telefono si fermano, perché tre piani grandi quanto lo schermo
+costano memoria, e la memoria è la cosa che finisce per prima.
+
+**Cambiare sezione accompagnava la risalita.** `scroll-behavior:smooth`
+vale anche per gli spostamenti chiesti dal codice: chi era in fondo alla
+piazza e premeva «News» si vedeva scorrere all'indietro tutta la piazza
+prima di arrivare. Mezzo secondo in cui la sezione nuova c'è già ma non
+si vede. Ora il salto è di colpo; lo scorrimento accompagnato resta dove
+serve.
+
+**La fila dei loghi passava il gesto alla pagina.** Arrivata in fondo,
+trascinando di lato partiva lo scorrimento verticale. Non era lentezza:
+era il gesto che finiva dove non doveva (`overscroll-behavior-x`).
+
+Sei prove nuove nel collaudo, verificate anche al contrario.
+
+### Quello che resta aperto su questo fronte
+
+Tre cose segnalate non sono ancora spiegate, e non le tocco a
+indovinare:
+
+1. **Una forma verde enorme** occupa lo schermo su schermo grande,
+   mentre le sezioni sono vuote. Non è una delle macchie: quelle sono
+   sfocate e piccole, questa ha il bordo netto ed è larga quanto la
+   finestra.
+2. **Il sito resta tagliato di lato** dopo essere entrati e usciti da
+   Learn: la testata parte fuori schermo. Vuol dire che un elemento è
+   più largo della finestra, ma va nominato.
+3. **La modalità Learn su telefono** è da rifare, non da aggiustare.
+
+Per i primi due serve guardare il DOM. C'è
+`collaudo/diagnosi.html`: apre l'applicazione in una finestra della
+larghezza scelta e dice quanto ci mette a comparire il contenuto, quale
+elemento sborda e di quanto, e qual è l'elemento più grande. Si apre da
+un server locale, non con un doppio clic:
+
+    python3 -m http.server 8765
+    →  http://localhost:8765/collaudo/diagnosi.html
+
+**La traduzione delle notizie non è un guasto da correggere.** Google
+Translate traduce una pagina *da una lingua sola* — qui `en`. Le notizie
+arrivano in otto lingue diverse dentro quella stessa pagina, e quelle
+che non sono inglesi gli passano davanti intatte. Non è una regolazione
+sbagliata: un traduttore di pagina non sa fare pagine plurilingui. Le
+strade vere sono due, ed è una decisione, non un rimedio — tradurre i
+titoli nel robot che li raccoglie, marcandoli `origine.generato` come
+chiede §6.5, oppure dire in chiaro che i titoli restano nella lingua
+dell'ateneo. Intanto ogni notizia dichiara la sua lingua con `lang=`:
+serve comunque, perché senza un lettore di schermo legge il greco con la
+voce inglese.
+
 ## Cosa manca, in ordine
 
 0. **Trasparenza sui contenuti generati: termine già scaduto.** §6.5
