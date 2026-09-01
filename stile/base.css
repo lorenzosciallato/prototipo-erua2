@@ -188,6 +188,33 @@ nav.tabs::-webkit-scrollbar{display:none}
   .tab-btn svg{width:18px;height:18px}
 }
 
+/* IL VETRO SMERIGLIATO, SU TELEFONO, SI PAGA A OGNI FOTOGRAMMA
+   Testata e barra delle sezioni sono due strisce appiccicate in alto,
+   larghe quanto lo schermo, e tutte e due sfocano quello che ci passa
+   sotto. Mentre si scorre, il contenuto sotto cambia in continuazione:
+   il browser deve rifare due volte la sfocatura a ogni fotogramma, su
+   tutta la larghezza. E' il motivo per cui lo scorrimento su telefono
+   e' a scatti.
+
+   Il fondo `--vetro` e' gia' opaco all'86% e ha lo stesso colore della
+   pagina: togliendo la sfocatura si perde un velo che quasi non si
+   vede, e si guadagnano due strisce che non costano piu' niente.
+   Sopra gli 820px la sfocatura resta: li' c'e' potenza da spendere e la
+   testata si vede sopra contenuti piu' larghi. */
+@media(max-width:819.98px){
+  header,nav.tabs{
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+    background:var(--bg);
+  }
+}
+
+/* La fila dei loghi scorre di lato dentro una pagina che scorre in su e
+   in giu'. Senza questo, arrivata in fondo la fila passa il gesto alla
+   pagina: si trascina di lato e la pagina parte in verticale. E' quello
+   che rende lo scorrimento dei loghi «macchinoso» — non la lentezza,
+   ma il gesto che finisce dove non doveva. */
+.storie,.chips,nav.tabs{overscroll-behavior-x:contain}
+
 /* PANNELLI */
 .pannello{display:none;max-width:1600px;margin:0 auto;padding:1.1rem 1rem 3rem}
 .pannello.attivo{display:block;animation:entra .18s ease}
