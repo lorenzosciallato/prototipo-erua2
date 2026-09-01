@@ -4,8 +4,16 @@
 # Scatta dopo ogni Write/Edit su un file .html, .css o .js del progetto e:
 #   1. cerca segreti (P4) — se ne trova uno, non salva e non pubblica nulla;
 #   2. aggiorna il timbro in fondo a STATO.md;
-#   3. registra un commit;
+#   3. registra un commit, insieme ai file di corredo rimasti indietro;
 #   4. lo manda su GitHub.
+#
+# Il punto 3 dice "insieme" per una ragione precisa. Il gancio scatta solo
+# sul codice, ma un lavoro vero tocca anche caratteri, fotografie, file di
+# dati e documenti. Lasciati fuori non danno errore da nessuna parte: il
+# codice li nomina e loro non ci sono — è successo con i caratteri e i loghi
+# in WebP, rimasti fuori dal repository mentre il codice che li chiamava era
+# già pubblicato. Perciò salgono insieme al file che ha fatto scattare il
+# salvataggio, e il messaggio finale dice quanti sono.
 #
 # RIFERIMENTO.md §2.11 (ogni modifica passa dal controllo di versione),
 # §5.2 (la ricerca dei segreti precede l'invio a sistemi esterni).
@@ -65,17 +73,36 @@ sed -i "/$MARCA/,\$d" STATO.md
   printf '\n<!-- fine timbro automatico -->\n'
 } >> STATO.md
 
-# ─── 4. Commit ─────────────────────────────────────────────────────────────
+# ─── 4. Commit, coi compagni di viaggio ────────────────────────────────────
 git add -- "$REL" STATO.md 2>/dev/null
+
+# Tutto ciò che il gancio non vede da sé ma che il codice presuppone.
+# -A perché contano anche le cancellazioni: dieci .jpg sostituiti da dieci
+# .webp sono dieci file che devono sparire, non solo dieci che compaiono.
+# .gitignore vale lo stesso, e .claude/ resta fuori perché non è nell'elenco.
+CORREDO="caratteri immagini dati testi *.json *.mjs *.md"
+# STATO.md fuori dal conto: lo tocca il timbro qui sopra a ogni giro, quindi
+# risulterebbe "di corredo" sempre, e il numero non direbbe più niente.
+# shellcheck disable=SC2086
+RESTATI="$(git status --porcelain -- $CORREDO ':!STATO.md' 2>/dev/null | grep -c . )"
+# shellcheck disable=SC2086
+git add -A -- $CORREDO 2>/dev/null
+
 if git diff --cached --quiet 2>/dev/null; then
   exit 0   # niente di nuovo da salvare
 fi
-git commit -q -m "$REL — salvataggio automatico $(date '+%d/%m/%Y %H:%M')" || exit 0
+
+if [ "${RESTATI:-0}" -gt 0 ]; then
+  CODA=" (+$RESTATI di corredo)"
+else
+  CODA=""
+fi
+git commit -q -m "$REL — salvataggio automatico $(date '+%d/%m/%Y %H:%M')$CODA" || exit 0
 BREVE="$(git rev-parse --short HEAD)"
 
 # ─── 5. Pubblicazione su GitHub ────────────────────────────────────────────
 if timeout 60 git push -q origin HEAD 2>/dev/null; then
-  printf '{"systemMessage":"Salvato e pubblicato: %s (commit %s)","suppressOutput":true}\n' "$REL" "$BREVE"
+  printf '{"systemMessage":"Salvato e pubblicato: %s%s (commit %s)","suppressOutput":true}\n' "$REL" "$CODA" "$BREVE"
 else
   printf '{"systemMessage":"Commit %s registrato in locale, ma il push è fallito. Da terminale: git push origin main","suppressOutput":true}\n' "$BREVE"
 fi
