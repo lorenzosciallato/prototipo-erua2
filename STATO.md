@@ -548,7 +548,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 18:39** — file toccato: `avvio.js`
+Ultimo salvataggio: **01/09/2026 alle 18:39** — file toccato: `moduli/nucleo.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -567,7 +567,7 @@ Ultimo salvataggio: **01/09/2026 alle 18:39** — file toccato: `avvio.js`
 | `moduli/loghi-incorporati.js` | 35 | 36K |
 | `moduli/navigazione.js` | 202 | 12K |
 | `moduli/notizie.js` | 134 | 8.0K |
-| `moduli/nucleo.js` | 510 | 28K |
+| `moduli/nucleo.js` | 524 | 28K |
 | `moduli/rivista.js` | 332 | 16K |
 | `moduli/sociale.js` | 237 | 12K |
 | `moduli/storie.js` | 100 | 8.0K |

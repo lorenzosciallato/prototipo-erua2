@@ -45,7 +45,21 @@ export function dati(nome) {
        atterra. Se le due non combaciano il browser non riusa il file già
        chiesto e lo scarica una seconda volta — e il preavviso, invece di
        far guadagnare tempo, ne fa perdere. Sono file pubblici sulla
-       nostra stessa origine: non c'è nessuna credenziale da mandare. */
+       nostra stessa origine: non c'è nessuna credenziale da mandare.
+
+       ── ATTENZIONE, IL GIORNO DELLA BASE DI DATI ──────────────────
+       `credentials:'omit'` è giusto **finché** questi sono file fermi e
+       pubblici. Quando i contenuti arriveranno da un'interfaccia con
+       le policy di riga (§3.2), ogni richiesta dovrà portare con sé chi
+       la fa: `omit` la manderebbe **senza identità**, e la risposta
+       sarebbe vuota — o, peggio, quella del pubblico invece che quella
+       dell'utente. Non darebbe errore: darebbe la risposta sbagliata.
+
+       Chi tocca questa funzione allora deve cambiare **due cose
+       insieme**, qui e nel `<link rel="preload">` di `index.html`:
+       `credentials:'same-origin'` di qua, `crossorigin="use-credentials"`
+       di là. Se se ne cambia una sola si torna al doppio scaricamento.
+       C'è una prova nel collaudo che le tiene appaiate. */
     inCorso.set(nome, fetch(`dati/${nome}.json`, { credentials: 'omit' }).then(r => {
       if (!r.ok) throw new Error(`dati/${nome}.json: ${r.status}`);
       return r.json();
