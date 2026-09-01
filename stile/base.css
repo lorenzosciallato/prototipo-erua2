@@ -64,6 +64,19 @@ html[data-tema="scuro"] .macchie svg{opacity:.26}
 .m2{top:24rem;right:-12rem;width:36rem;height:36rem;animation:vaga 27s ease-in-out infinite reverse}
 .m3{bottom:-14rem;left:18%;width:32rem;height:32rem;animation:vaga 31s ease-in-out infinite}
 @keyframes vaga{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(2rem,-1.5rem) scale(1.08)}}
+/* Queste tre macchie muovono e ingrandiscono una forma sfocata di 40px.
+   Uno sfondo sfocato costa una volta sola; uno sfondo sfocato **che si
+   muove** costa a ogni fotogramma, perche' la sfocatura va rifatta ogni
+   volta che la forma cambia. Con `will-change` il browser mette ognuna
+   su un piano suo: sfoca una volta e poi sposta il piano gia' fatto. */
+.m1,.m2,.m3{will-change:transform}
+/* Su telefono nemmeno quello basta: tre piani grandi quanto lo schermo
+   costano memoria, e la memoria su un telefono di fascia bassa e' la
+   cosa che finisce per prima. Ferme si vedono uguali — sono macchie di
+   colore sfocate, non un'animazione che qualcuno guarda. */
+@media (max-width:820px){
+  .m1,.m2,.m3{animation:none;will-change:auto}
+}
 header,nav.tabs,.pannello,footer,.lettore,.lente,.storie-viewer,.sc-foglio,.sc-piu,.toast{position:relative;z-index:1}
 
 *{margin:0;padding:0;box-sizing:border-box}
