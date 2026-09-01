@@ -548,7 +548,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 18:39** — file toccato: `moduli/navigazione.js`
+Ultimo salvataggio: **01/09/2026 alle 18:39** — file toccato: `avvio.js`
 
 | File | Righe | Peso |
 |:--|--:|--:|

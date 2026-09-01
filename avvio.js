@@ -12,7 +12,7 @@
 
 import { CONFIG } from './configurazione.js';
 import * as lingua from './moduli/lingua.js';
-import { mostraTab, TABS } from './moduli/navigazione.js';
+import { mostraTab, TABS, scaldaLeAltre } from './moduli/navigazione.js';
 
 /* I testi scritti direttamente nel markup portano la traduzione in due
    lingue negli attributi `data-it` e `data-en`: la pagina parte in
