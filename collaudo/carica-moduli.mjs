@@ -817,6 +817,94 @@ const prove2 = [
    },
    'l\'avvio deve leggere googtrans e rimettere avviso ed etichetta (P7)'],
 
+  ['cio\' che nasconde non sta in un foglio che arriva dopo',
+   () => {
+     /* IL GUASTO PIU' CARO DI QUESTO PROGETTO, e la prova che lo tiene
+        chiuso.
+
+        `#st-aula` e' scritta dentro `index.html`, e la nascondeva solo
+        `stile/aula.css` — che dal 16/08 si carica su richiesta, per non
+        far pesare 31 KB su chi in un'aula non entra mai. Le due
+        decisioni erano giuste separatamente. Insieme facevano che, alla
+        prima apertura del sito, l'aula restasse APERTA in mezzo alla
+        pagina, alta 4828 pixel, spingendo tutte le sezioni cinquemila
+        pixel piu' giu'. Sembrava «non carica», ed era «non ci arrivi».
+
+        Era invisibile a ogni prova esistente e spariva da se': chi
+        entrava una volta in un'aula si portava dietro il foglio per
+        tutta la visita, e da quel momento il sito era a posto.
+
+        La regola generale: `display:none` e' una condizione di
+        partenza, non un effetto. Se un foglio a richiesta nasconde
+        qualcosa che sta gia' nel markup, quel qualcosa deve essere
+        nascosto anche da un foglio sempre presente. */
+     const html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf8');
+     const sempre = ['base', 'rivista', 'articolo', 'ascolta', 'notizie',
+                     'sociale', 'storie', 'didattica']
+       .map(n => fs.readFileSync(path.join(REPO, `stile/${n}.css`), 'utf8')).join('\n');
+
+     /* i fogli che NON sono dichiarati in index.html: arrivano dopo */
+     const aRichiesta = ['aula', 'ideathon']
+       .filter(n => !html.includes(`stile/${n}.css`));
+
+     const colpevoli = [];
+     for (const n of aRichiesta) {
+       const css = fs.readFileSync(path.join(REPO, `stile/${n}.css`), 'utf8');
+       /* regole di primo livello che nascondono una classe intera */
+       for (const m of css.matchAll(/(^|\n)(\.[a-z][\w-]*)\s*\{([^}]*)\}/g)) {
+         const [, , sel, corpo] = m;
+         if (!/display\s*:\s*none/.test(corpo)) continue;
+         const classe = sel.slice(1);
+         /* la usa il markup della pagina? */
+         if (!new RegExp(`class="[^"]*\\b${classe}\\b`).test(html)) continue;
+         /* un foglio sempre presente la nasconde anche lui? */
+         const coperta = new RegExp(`\\.${classe}\\s*\\{[^}]*display\\s*:\\s*none`).test(sempre);
+         if (!coperta) colpevoli.push(`${sel} (solo in stile/${n}.css)`);
+       }
+     }
+     if (colpevoli.length) {
+       console.log('    scoperti finche\' il loro foglio non arriva:');
+       colpevoli.forEach(c => console.log('      ' + c));
+     }
+     return colpevoli.length === 0;
+   },
+   'display:none e\' una condizione di partenza, non un effetto'],
+
+  ['nessun nome di classe senza virgolette',
+   () => {
+     /* `stSheet.classList.contains(on)` — `on` senza virgolette e' una
+        variabile che non esiste, e la chiamata lancia un
+        ReferenceError. Non un errore qualsiasi: spezzava l'uscita
+        dall'aula a meta'. Il corpo della pagina prende `st-blocco`
+        (`overflow:hidden`) entrando in una lezione, e la riga che lo
+        toglie stava DOPO la chiamata che andava in errore. L'aula
+        spariva e la pagina restava bloccata: sembrava tagliata male, e
+        nessuno la collegava a Learn.
+
+        La prova segnala ogni nome passato a `classList` che non sia fra
+        virgolette e non risulti dichiarato nel file. Le variabili vere
+        restano ammesse — ma devono esistere. */
+     const sospetti = [];
+     for (const f of fs.readdirSync(path.join(REPO, 'moduli'))) {
+       if (!f.endsWith('.js')) continue;
+       const src = fs.readFileSync(path.join(REPO, 'moduli', f), 'utf8')
+         .replace(/\/\*[\s\S]*?\*\//g, ' ');
+       for (const m of src.matchAll(/classList\.(?:add|remove|toggle|contains|replace)\(\s*([A-Za-z_$][\w$]*)\s*[,)]/g)) {
+         const nome = m[1];
+         const dichiarato = new RegExp(
+           `(const|let|var|function)\\s+${nome}\\b|\\b${nome}\\s*=>|\\(\\s*[^)]*\\b${nome}\\b[^)]*\\)\\s*=>`
+         ).test(src);
+         if (!dichiarato) sospetti.push(`moduli/${f}: classList...(${nome})`);
+       }
+     }
+     if (sospetti.length) {
+       console.log('    nomi che non esistono — probabili virgolette dimenticate:');
+       sospetti.forEach(s => console.log('      ' + s));
+     }
+     return sospetti.length === 0;
+   },
+   'un nome di classe senza virgolette lancia ReferenceError e spezza cio\' che segue'],
+
   ['la sezione d\'atterraggio non aspetta due viaggi in fila',
    () => {
      /* Nella piazza non si entra: ci si arriva aprendo il sito. Prima

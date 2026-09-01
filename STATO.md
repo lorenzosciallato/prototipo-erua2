@@ -601,7 +601,7 @@ e tutto ciò che sta in `.gitignore`.
 
 ## Registro automatico
 
-Ultimo salvataggio: **01/09/2026 alle 19:16** — file toccato: `moduli/didattica.js`
+Ultimo salvataggio: **01/09/2026 alle 19:19** — file toccato: `stile/base.css`
 
 | File | Righe | Peso |
 |:--|--:|--:|
@@ -648,7 +648,7 @@ Ultimo salvataggio: **01/09/2026 alle 19:16** — file toccato: `moduli/didattic
 | `stile/articolo.css` | 132 | 12K |
 | `stile/ascolta.css` | 129 | 12K |
 | `stile/aula.css` | 457 | 32K |
-| `stile/base.css` | 386 | 24K |
+| `stile/base.css` | 391 | 24K |
 | `stile/caratteri.css` | 92 | 4.0K |
 | `stile/didattica.css` | 184 | 16K |
 | `stile/ideathon.css` | 522 | 32K |

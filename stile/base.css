@@ -240,7 +240,12 @@ nav.tabs::-webkit-scrollbar{display:none}
    non un effetto. Il foglio dell'aula continua a portarsi il resto —
    posizione, fondo, disposizione — e `.st-aula.on` lo riapre quando
    serve, perché ha specificità maggiore e vince comunque. */
-.st-aula{display:none}
+   `.ev-float` è il secondo caso, ed è stata la prova stessa a trovarlo
+   dopo che il primo era stato corretto: sta anch'essa in `index.html`
+   (riga 338) e anch'essa la nascondeva solo il foglio dell'aula. È il
+   motivo per cui la prova cerca la **categoria** invece del singolo
+   nome — cercare `#st-aula` avrebbe chiuso un caso e lasciato l'altro. */
+.st-aula,.ev-float{display:none}
 
 /* PANNELLI */
 .pannello{display:none;max-width:1600px;margin:0 auto;padding:1.1rem 1rem 3rem}
